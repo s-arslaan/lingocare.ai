@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lingocare — Nursing Education, Reimagined</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAF7F2;
+  --card: #FFFFFF;
+  --orange: #F4722B;
+  --orange-light: rgba(244,114,43,0.09);
+  --dark: #1A1208;
+  --mid: #5C4A38;
+  --muted: #9B8B7A;
+  --border: #EBE0D0;
+  --border-light: #F2EBE0;
+  --green: #2D8C5E;
+  --green-light: rgba(45,140,94,0.10);
+  --red: #DC3C28;
+  --red-light: rgba(220,60,40,0.09);
+  --purple: #7C3AED;
+  --font-d: 'Instrument Serif', Georgia, serif;
+  --font-b: 'Outfit', sans-serif;
+  --s-sm: 0 1px 4px rgba(28,20,16,0.06),0 2px 8px rgba(28,20,16,0.04);
+  --s-md: 0 4px 16px rgba(28,20,16,0.08),0 2px 6px rgba(28,20,16,0.05);
+  --s-lg: 0 8px 32px rgba(28,20,16,0.10),0 2px 8px rgba(28,20,16,0.06);
+  --r: 14px; --r-sm: 8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--bg);color:var(--dark);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* ── TYPE ── */
+h1{font-family:var(--font-d);font-size:clamp(40px,5.5vw,68px);font-weight:400;line-height:1.08;letter-spacing:-0.025em;color:var(--dark)}
+h2{font-family:var(--font-d);font-size:clamp(30px,3.8vw,50px);font-weight:400;line-height:1.14;letter-spacing:-0.02em;color:var(--dark)}
+h3{font-family:var(--font-b);font-size:20px;font-weight:600;line-height:1.3;color:var(--dark)}
+.accent{color:var(--orange);font-style:italic}
+.eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+.subline{font-size:17px;color:var(--mid);line-height:1.7;font-weight:300;margin-top:16px}
+
+/* ── ANNOUNCE ── */
+.announce{background:var(--dark);color:#FAF7F2;text-align:center;padding:11px 24px;font-size:13px}
+.announce span{color:var(--orange);font-weight:600}
+.announce a{color:inherit;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:200;background:rgba(250,247,242,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border-light);padding:0 52px;height:58px;display:flex;align-items:center;justify-content:space-between;transition:transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s}
+nav.hidden{transform:translateY(-100%)}
+nav.scrolled{box-shadow:0 2px 20px rgba(28,20,16,.08)}
+
+.nav-logo{display:flex;align-items:center;gap:1px;text-decoration:none}
+.nav-logo img{height:32px;width:auto;display:block}
+.nav-logo .dot{color:var(--orange)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:14px;font-weight:400;color:var(--mid);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--dark)}
+.nav-r{display:flex;align-items:center;gap:14px}
+.lang-pill{display:flex;align-items:center;gap:2px;background:var(--border-light);border-radius:20px;padding:3px}
+.lang-pill button{background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:16px;font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--muted);transition:all .2s}
+.lang-pill button.active{background:var(--card);color:var(--dark);box-shadow:var(--s-sm)}
+.btn-nav{background:var(--orange);color:#fff;border:none;border-radius:20px;padding:8px 20px;font-family:var(--font-b);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-nav:hover{background:#E05A1A;transform:translateY(-1px)}
+
+/* ── BUTTONS ── */
+.btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;border:none;border-radius:26px;padding:14px 30px;font-family:var(--font-b);font-size:15px;font-weight:600;cursor:pointer;transition:all .25s;text-decoration:none}
+.btn-p:hover{background:#E05A1A;transform:translateY(-2px);box-shadow:0 6px 22px rgba(244,114,43,.35)}
+.btn-p .arr{transition:transform .2s}
+.btn-p:hover .arr{transform:translateX(4px)}
+.btn-g{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--dark);border:1.5px solid var(--border);border-radius:26px;padding:13px 26px;font-family:var(--font-b);font-size:15px;font-weight:500;cursor:pointer;transition:all .25s;text-decoration:none}
+.btn-g:hover{border-color:var(--orange);color:var(--orange);background:var(--orange-light)}
+.btn-sm{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--orange);border:1.5px solid var(--orange);border-radius:20px;padding:8px 18px;font-family:var(--font-b);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-sm:hover{background:var(--orange);color:#fff}
+
+/* ── REVEAL ── */
+.rev{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.rev.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+
+/* ══════════════════════
+   HERO
+══════════════════════ */
+.hero{padding:88px 52px 0;max-width:1200px;margin:0 auto;text-align:center}
+.hero h1{max-width:800px;margin:0 auto}
+.hero .subline{max-width:460px;margin:20px auto 40px;font-size:18px}
+.hero-ctas{display:flex;justify-content:center;gap:12px;margin-bottom:20px}
+
+/* Rotating trust line */
+.trust-line{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mid);font-weight:500;margin-bottom:64px;height:22px;overflow:hidden;display:flex;justify-content:center;align-items:center;position:relative}
+.trust-rotate{display:flex;flex-direction:column;align-items:center;animation:trustCycle 7.5s ease-in-out infinite}
+.trust-rotate span{display:block;line-height:22px;white-space:nowrap;padding:0 4px}
+@keyframes trustCycle{
+  0%,22%{transform:translateY(0)}
+  30%,52%{transform:translateY(-22px)}
+  60%,82%{transform:translateY(-44px)}
+  90%,100%{transform:translateY(-66px)}
+}
+
+/* Hero dashboard */
+.hero-db-wrap{position:relative;max-width:900px;margin:0 auto;padding-bottom:60px}
+.hero-db{background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:var(--s-lg),0 40px 80px rgba(28,20,16,.07);overflow:hidden;transform:perspective(1400px) rotateX(5deg);transform-origin:center top;transition:transform .1s linear}
+.db-bar{background:#F5F0E8;border-bottom:1px solid var(--border);padding:10px 18px;display:flex;align-items:center;justify-content:space-between}
+.db-dots{display:flex;gap:5px}
+.db-dot{width:9px;height:9px;border-radius:50%}
+.db-title-bar{font-size:12px;font-weight:600;color:var(--mid)}
+.db-badge{background:var(--orange-light);color:var(--orange);font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px}
+.db-body{display:grid;grid-template-columns:200px 1fr 185px}
+.db-col{padding:14px;border-right:1px solid var(--border-light)}
+.db-col:last-child{border:none}
+.db-lbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.risk-tag{display:inline-flex;align-items:center;gap:4px;background:var(--red-light);color:var(--red);border-radius:6px;padding:2px 7px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}
+.rr{background:var(--bg);border-radius:7px;padding:7px 9px;margin-bottom:5px;border-left:3px solid transparent}
+.rr.w{border-left-color:var(--orange)}.rr.a{border-left-color:var(--red)}.rr.ai{border-left-color:var(--purple)}
+.rr-n{font-size:11px;font-weight:600}.rr-s{font-size:10px;color:var(--muted);margin-top:1px;line-height:1.3}
+.mini-chart{width:100%;height:68px;overflow:visible}
+.chart-lbl{font-size:9px;color:var(--muted);margin-bottom:3px}
+.chart-leg{display:flex;gap:10px;margin-top:5px}
+.leg-i{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--muted)}
+.leg-d{width:8px;height:8px;border-radius:50%}
+.sg{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:8px}
+.sc{width:20px;height:20px;border-radius:3px;background:var(--border-light)}
+.sc.g{background:#2D8C5E}.sc.o{background:var(--orange)}.sc.y{background:#E8D0A0}
+.sn{font-size:9px;color:var(--muted);line-height:1.7}
+.db-foot{background:#F5F0E8;border-top:1px solid var(--border);padding:8px 18px;display:flex;align-items:center;justify-content:space-between}
+.db-foot-t{font-size:11px;color:var(--mid)}
+.db-foot-p{background:var(--orange-light);color:var(--orange);border-radius:6px;padding:2px 8px;font-size:10px;font-weight:600}
+/* Floating chips */
+.f-chip{position:absolute;display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:6px 12px;font-size:11px;font-weight:600;box-shadow:var(--s-md);white-space:nowrap;animation:flt 3.5s ease-in-out infinite}
+.f-chip.c1{background:#E8F5EE;color:var(--green);top:10px;left:-20px;animation-delay:0s}
+.f-chip.c2{background:#FEF0E7;color:var(--orange);top:10px;right:-10px;animation-delay:1.2s}
+.f-chip.c3{background:var(--red-light);color:var(--red);bottom:80px;left:40%;transform:translateX(-50%);animation-delay:2.4s}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.f-chip.c3{animation-name:flt3}
+@keyframes flt3{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
+
+/* draw-on SVG */
+.dr{stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 1.6s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ══════════════════════
+   TRUST / PARTNERS
+══════════════════════ */
+.trust-sec{padding:52px 52px 64px;max-width:1200px;margin:0 auto;text-align:center}
+.trust-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);background:var(--orange-light);border:1px solid rgba(244,114,43,.2);border-radius:20px;padding:5px 14px;margin-bottom:20px}
+.trust-sec h2{margin-bottom:12px}
+.trust-sub{font-size:15px;color:var(--muted);margin-bottom:40px}
+.logo-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px}
+.logo-b{background:var(--card);border:1px solid var(--border);border-radius:var(--r-sm);padding:13px 22px;font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.02em;transition:all .25s;cursor:default;min-width:100px;text-align:center}
+.logo-b:hover{color:var(--dark);border-color:var(--orange);box-shadow:var(--s-md);transform:translateY(-2px)}
+
+/* ══════════════════════
+   ONE SYSTEM / THREE ROLES
+══════════════════════ */
+.sys-sec{padding:96px 52px;max-width:1200px;margin:0 auto;text-align:center}
+.sys-sec .subline{max-width:580px;margin:16px auto 72px;text-align:center}
+.sys-diagram{position:relative;height:340px;display:flex;align-items:flex-start;justify-content:space-between;max-width:720px;margin:0 auto 48px}
+.sys-svg{position:absolute;top:0;left:50%;transform:translateX(-50%);width:100%;height:340px;pointer-events:none;z-index:1}
+.sys-cards{display:flex;align-items:flex-start;justify-content:space-between;width:100%;position:relative;z-index:2}
+.sys-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 18px;width:164px;box-shadow:var(--s-md);transition:all .3s;cursor:default}
+.sys-card:hover{transform:translateY(-8px);box-shadow:var(--s-lg)}
+.sys-card.learner{width:184px;border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-light),var(--s-md)}
+.sys-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px}
+.sys-icon.s{background:#FEF0E7}.sys-icon.l{background:linear-gradient(135deg,#F4722B,#E85D9A)}.sys-icon.e{background:#E8F5EE}
+.sys-card h3{font-size:15px;margin-bottom:4px}.sys-card p{font-size:12px;color:var(--muted);line-height:1.4}
+.sys-hub{position:absolute;bottom:0;left:50%;transform:translateX(-50%);background:var(--card);border:1.5px solid var(--border);border-radius:var(--r);padding:12px 28px;box-shadow:var(--s-lg);z-index:3;text-align:center;animation:hubP 3.5s ease-in-out infinite}
+.sys-hub-name{font-family:var(--font-d);font-size:20px;display:flex;align-items:center;justify-content:center;gap:1px}
+.sys-hub-name .dot{color:var(--orange)}
+.sys-hub-sub{font-size:10px;color:var(--muted);margin-top:3px;letter-spacing:.04em}
+@keyframes hubP{0%,100%{box-shadow:var(--s-lg),0 0 0 0 rgba(244,114,43,0)}50%{box-shadow:var(--s-lg),0 0 0 10px rgba(244,114,43,.06)}}
+
+/* ══════════════════════
+   SCROLL FEATURE SECTIONS
+══════════════════════ */
+.feat-scroll-wrap{position:relative}
+.feat-sec{padding:96px 52px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.feat-sec.flip{direction:rtl}.feat-sec.flip>*{direction:ltr}
+.feat-copy{padding-top:8px}
+.feat-copy .subline{max-width:420px;margin-top:16px;margin-bottom:32px}
+.feat-sep{border:none;border-top:1px solid var(--border-light);margin:0 52px}
+/* Scroll indicator pill */
+.scroll-ind{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:10px;opacity:0;transition:opacity .4s;pointer-events:none}
+.scroll-ind.show{opacity:1}
+.si-pip{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;cursor:pointer;pointer-events:all}
+.si-pip.active{background:var(--orange);transform:scale(1.4)}
+
+/* Card cluster */
+.cc-wrap{position:relative;height:500px}
+.cc{position:absolute;background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--s-md);padding:14px;overflow:hidden;transition:all .25s}
+.cc:hover{box-shadow:var(--s-lg);z-index:10}
+.cc-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cc-t{font-size:11px;font-weight:700;color:var(--dark);letter-spacing:.02em}
+.badge{font-size:9px;font-weight:700;letter-spacing:.04em;padding:2px 7px;border-radius:9px;text-transform:uppercase}
+.bg{background:var(--green-light);color:var(--green)}.bo{background:var(--orange-light);color:var(--orange)}.br{background:var(--red-light);color:var(--red)}.bp{background:rgba(139,92,246,.10);color:var(--purple)}.bk{background:var(--border-light);color:var(--muted)}
+/* bar */
+.cb-row{margin:5px 0}.cb-ll{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:2px}.cb{height:5px;background:var(--border-light);border-radius:3px;overflow:hidden}.cb-f{height:100%;border-radius:3px;background:var(--orange)}
+/* sched */
+.sr{padding:6px 0;border-bottom:1px solid var(--border-light);display:flex;gap:8px;align-items:center}.sr:last-child{border:none}
+.st{font-size:10px;font-weight:700;color:var(--orange);min-width:36px}.si{flex:1}.stt{font-size:11px;font-weight:600;color:var(--dark)}.swho{font-size:10px;color:var(--muted)}
+/* chat */
+.ch-h{display:flex;align-items:center;gap:7px;margin-bottom:10px}
+.ch-online{width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.ch-name{font-size:12px;font-weight:700}.ch-sub{font-size:10px;color:var(--muted)}
+.bbl{border-radius:10px 10px 10px 2px;padding:8px 10px;font-size:11px;line-height:1.45;margin-bottom:6px;max-width:95%}
+.bbl.u{background:var(--orange);color:#fff;border-radius:10px 10px 2px 10px;margin-left:auto}
+.bbl.ai{background:var(--bg);color:var(--dark);border:1px solid var(--border)}
+.ch-acts{display:flex;gap:5px;margin-top:4px;flex-wrap:wrap}
+.ch-btn{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:4px 8px;font-size:10px;font-weight:600;color:var(--orange);cursor:pointer}
+/* hw rows */
+.hwr{padding:5px 0;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:7px}.hwr:last-child{border:none}
+.hw-d{display:flex;gap:2px}.hw-dot{width:5px;height:5px;border-radius:50%}.hw-dot.f{background:var(--orange)}.hw-dot.e{background:var(--border)}
+/* content library */
+.lib-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:4px}
+.lib-pill{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:7px 9px;font-size:10px;font-weight:600;color:var(--mid);display:flex;align-items:center;gap:5px;cursor:pointer;transition:all .2s}
+.lib-pill:hover{border-color:var(--orange);color:var(--orange)}
+/* glossary */
+.gloss-wrap{background:var(--bg);border-radius:8px;padding:10px;margin-top:8px}
+.gloss-row{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid var(--border-light)}
+.gloss-row:last-child{border:none}
+.gloss-term{font-size:11px;font-weight:700;color:var(--dark);min-width:90px}
+.gloss-arrow{font-size:10px;color:var(--muted)}
+.gloss-trans{font-size:11px;color:var(--green);font-weight:600}
+.gloss-flag{font-size:12px}
+
+/* ══════════════════════
+   THREE STEPS — FULLSCREEN
+══════════════════════ */
+.steps-outer{height:500vh;position:relative}
+.steps-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg)}
+/* Phase elements */
+.steps-head-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;text-align:center;width:100%;transition:opacity .4s,transform .4s;pointer-events:none}
+.steps-eyebrow-sticky{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.steps-h2-full{font-family:var(--font-d);font-size:clamp(30px,3.8vw,50px);font-weight:400;line-height:1.14;letter-spacing:-0.02em;color:var(--dark);text-align:center}
+.steps-h2-full .accent-step{color:var(--orange);font-style:italic}
+.steps-head-left{position:absolute;top:52px;left:10%;opacity:0;transform:translateX(0);transition:opacity .5s,transform .5s}
+.steps-head-right{position:absolute;top:52px;right:10%;opacity:0;transform:translateX(0);transition:opacity .5s,transform .5s;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.steps-path-wrap{position:absolute;top:0;left:50%;transform:translateX(-50%);width:2px;height:100vh;pointer-events:none;opacity:0;transition:opacity .4s}
+.steps-content{position:absolute;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:0}
+.step-card{position:absolute;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px 36px;box-shadow:var(--s-lg);max-width:380px;opacity:0;pointer-events:none;transition:opacity .5s,transform .5s}
+.step-card.s1{left:52%;top:24%;transform:translateX(40px)}
+.step-card.s2{right:52%;top:42%;transform:translateX(-40px)}
+.step-card.s3{left:52%;top:60%;transform:translateX(40px)}
+.step-card.show{opacity:1;transform:translateX(0);pointer-events:all}
+.step-n{font-family:var(--font-d);font-size:72px;color:rgba(244,114,43,.08);line-height:1;margin-bottom:-12px}
+.step-title{font-size:20px;font-weight:600;margin-bottom:8px;color:var(--dark)}
+.step-body{font-size:15px;color:var(--mid);line-height:1.65}
+/* Dot on path */
+.path-dot{position:absolute;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:var(--bg);border:2.5px solid var(--orange);transition:background .3s;z-index:2}
+.path-dot.active{background:var(--orange)}
+/* SVG path */
+.steps-svg{position:absolute;top:0;left:50%;transform:translateX(-50%);width:100px;height:100vh}
+
+/* ══════════════════════
+   TEAM
+══════════════════════ */
+.team-sec{padding:96px 52px;max-width:1200px;margin:0 auto;text-align:center}
+.team-sec .subline{max-width:520px;margin:16px auto 52px;text-align:center}
+.team-row{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;margin-bottom:44px}
+.tm{position:relative;cursor:pointer;padding:10px}
+.t-av{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;transition:all .2s;border:3px solid var(--bg)}
+.tm:hover .t-av{transform:scale(1.18);box-shadow:var(--s-md)}
+.team-row:hover .tm:not(:hover) .t-av{opacity:.4;filter:saturate(.2)}
+.t-card{position:absolute;bottom:-46px;left:50%;transform:translateX(-50%) translateY(4px);background:var(--card);border:1px solid var(--border);border-radius:8px;padding:6px 11px;font-size:11px;font-weight:600;white-space:nowrap;opacity:0;transition:all .2s;box-shadow:var(--s-md);pointer-events:none;line-height:1.5}
+.tm:hover .t-card{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ══════════════════════
+   FOOTER
+══════════════════════ */
+footer{background:var(--dark);color:rgba(250,247,242,.65);padding:64px 52px 32px}
+.ft-inner{max-width:1200px;margin:0 auto}
+.ft-top{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:48px;margin-bottom:56px}
+.ft-logo{font-family:var(--font-d);font-size:24px;color:#FAF7F2;margin-bottom:10px}
+.ft-logo .dot{color:var(--orange)}
+.ft-tag{font-size:13px;line-height:1.6;max-width:220px}
+.ft-col-h{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(250,247,242,.35);margin-bottom:16px}
+.ft-links{list-style:none}
+.ft-links li{margin-bottom:10px}
+.ft-links a{font-size:14px;color:rgba(250,247,242,.6);text-decoration:none;transition:color .2s;position:relative}
+.ft-links a::after{content:'';position:absolute;bottom:-1px;left:0;width:0;height:1px;background:var(--orange);transition:width .2s}
+.ft-links a:hover{color:#FAF7F2}
+.ft-links a:hover::after{width:100%}
+.ft-bot{display:flex;align-items:center;justify-content:space-between;padding-top:32px;border-top:1px solid rgba(250,247,242,.07)}
+.ft-copy{font-size:12px;color:rgba(250,247,242,.28)}
+.soc{display:flex;gap:10px}
+.soc-i{width:32px;height:32px;border-radius:8px;background:rgba(250,247,242,.06);border:1px solid rgba(250,247,242,.09);display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;transition:all .2s}
+.soc-i:hover{background:var(--orange);border-color:var(--orange);color:#fff;transform:translateY(-2px)}
+
+/* ── misc helpers ── */
+.w100{width:100%}
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .hero{padding:48px 20px 0}
+  .hero-db{transform:none!important}
+  .trust-sec,.sys-sec,.feat-sec,.team-sec{padding:64px 20px}
+  .feat-sec{grid-template-columns:1fr}
+  .cc-wrap{height:auto;position:static}
+  .cc{position:static!important;transform:none!important;width:100%!important;margin-bottom:12px}
+  .ft-top{grid-template-columns:1fr 1fr}
+  .sys-cards{flex-direction:column;align-items:center;gap:12px}
+  .sys-svg{display:none}
+  .sys-diagram{height:auto}
+  .steps-outer{height:auto}
+  .steps-sticky{position:static;height:auto;padding:64px 20px}
+  .step-card{position:static!important;opacity:1!important;transform:none!important;margin-bottom:20px}
+  .steps-path-wrap,.steps-svg,.steps-head-left,.steps-head-right{display:none}
+  .steps-head-wrap{position:static;transform:none;margin-bottom:40px}
+}
+</style>
+</head>
+<body>
+
+<!-- ════ i18n ════ -->
+<script>
+const T = {
+de:{
+  ann:'Wir starten bald — <span>Jetzt Pilotpartner werden</span> und die Pflegeausbildung neu gestalten.',
+  nw:'Was ist Lingocare', nf:'Für wen', nt:'Unser Team', nc:'Kontakt', ncta:'Demo vereinbaren',
+  h_eye:'Noch nicht gestartet — aber bereit zum Starten mit Ihnen',
+  h1:'Die <em class="accent">personalisierte</em> Lernplattform für die Pflegeausbildung.',
+  h_sub:'Ein System für besseres Lernen, reibungsloseren Unterricht und klarere Schulorganisation.',
+  cta1:'Demo vereinbaren', cta2:'Pilotpartner werden',
+  trust_prefix:'Gebaut von',
+  tr1:'Schulen · für Schulen', tr2:'Lehrende · für Lehrende', tr3:'Lernende · für Lernende',
+  // dashboard
+  dbt:'Schulübersicht', dbs:'Kurs BKE-2024', dbsch:'Schüler suchen…',
+  drl:'⚠ Risiko erkannt',
+  dr1n:'Leonie Bauer', dr1s:'Kein Login seit 6 Tagen',
+  dr2n:'Klasse B – Abfall 7%', dr2s:'3 Einheiten diese Woche verpasst',
+  dr3n:'Lingo AI:', dr3s:'Übungen zu Wundversorgung für 4 Schüler empfohlen',
+  dcl:'Lehrplanfortschritt – Klasse A & B',
+  dla:'Klasse A', dlb:'Klasse B', dxokt:'Okt', dxnov:'Nov', dxdez:'Dez', dxjan:'Jan', dxfeb:'Feb',
+  dsl:'Mitarbeitereinsatz – Feb.',
+  ds1:'M. Krause', ds2:'T. Hoffmann', ds3:'S. Weber', ds4:'A. Fischer',
+  fc1:'89% Kursabschluss ↑4%', fc2:'Lehrplan 09/12 Einheiten', fc3:'KI-Warnung: 2 bei Risiko',
+  dfn:'Nächste: Mo. 08:00 — Hygiene & Infektionsschutz', dfp:'Montag',
+  // trust
+  tt:'KI unterstützt — Lehrende entscheiden',
+  th_de:'Vertraut dort, wo Bildung am meisten zählt.',
+  tsub:'Von Pflegeschulen, Bildungsverbänden und Gesundheitseinrichtungen in Deutschland begleitet.',
+  // sys
+  s_h:'Ein System, drei Perspektiven, gemeinsamer Fortschritt.',
+  s_sub:'Auch wenn jede Gruppe Lingocare unterschiedlich erlebt, arbeiten alle in einer gemeinsamen, sicheren Infrastruktur.',
+  s_hub_sub:'Die intelligente Verbindungsschicht der Pflegeausbildung',
+  pc_n:'Schulen', pc_s:'Transparenz ohne Komplexität',
+  pl_n:'Lernende', pl_s:'Gleiches Ziel, individueller Weg',
+  pe_n:'Lehrende', pe_s:'Struktur ohne Reibung',
+  // schools feat
+  f1_eye:'Für Schulen',
+  f1_h:'Schulen, die mit <em class="accent">Struktur</em> arbeiten.',
+  f1_sub:'Volle Transparenz, verlässliche Planung und Curriculums-Compliance, ohne zusätzliche Systeme.',
+  f1_cta:'Für Schulen entdecken',
+  // schools cards
+  c_curr:'Lehrplanfortschritt KW09/12', c_curr_ok:'Auf Kurs ✓',
+  c_units:'Einheiten 71/89',
+  c_alert:'⚠ Warnungen', c_alert_new:'3 Neu',
+  c_lb_lbl:'Inhaltsbibliothek', c_lb_new:'Neu',
+  c_lb1:'Grundpflege', c_lb2:'Hygiene', c_lb3:'Anatomie', c_lb4:'Kommunikation', c_lb5:'Wundversorgung', c_lb6:'Prüfungsvorbereitung',
+  c_lb_hint:'Bereit zum Einsatz · anpassbar im System',
+  chat_name:'Lingo AI',
+  chat_sch_u:'Schulleiterin: Frau Weber ist die gesamte nächste Woche krank. Wer kann ihre Klassen übernehmen?',
+  chat_sch_ai:'Ich habe 6 geplante Stunden von Frau Weber nächste Woche gefunden. Basierend auf Fachbereich, Verfügbarkeit und Klassenkontinuität könnten 3 Lehrkräfte einspringen. Prüfen Sie die Optionen unten, um die Stunden neu zuzuweisen.',
+  chat_b1:'Optionen prüfen', chat_b2:'Plan erstellen',
+  sched_title:'Stundenplan — Montag',
+  sched_t1:'08:00', sched_l1:'Grundpflege — R. 3', sched_w1:'M. Krause',
+  sched_t2:'10:00', sched_l2:'Hygiene & Infektionsschutz', sched_w2:'T. Hoffmann',
+  sched_t3:'13:00', sched_l3:'Patientenkommunikation', sched_w3:'S. Weber',
+  staff_t:'Mitarbeitereinsatz', staff_m:'Feb',
+  staff1:'M.Krause', staff2:'T.Hoffmann', staff3:'S.Weber', staff4:'A.Fischer',
+  // educators feat
+  f2_eye:'Für Lehrende',
+  f2_h:'Unterrichten, das sich <em class="accent">jedem Niveau</em> anpasst.',
+  f2_sub:'Lingocare schafft Klarheit in Vorbereitung, Lernfortschritt und Unterstützung, damit Lehrkräfte sich auf wirksamen Unterricht konzentrieren können.',
+  f2_cta:'Für Lehrende entdecken',
+  hw_title:'Hausaufgaben — Klasse B', hw_ai:'KI-generiert',
+  hw1:'Leonie B.', hw1s:'Wundversorgung Mod. 2', hw2:'Marco S.', hw2s:'Hygiene Auffrischung', hw3:'Jana F.', hw3s:'Infektionsschutz Quiz',
+  hw_count:'12 Aufgaben diese Woche',
+  edu_chat_u:'Bereite mich auf den Unterricht am Donnerstag vor.',
+  edu_chat_sub:'Donnerstag · 10:00 Uhr',
+  edu_chat_ai:'Am Donnerstag um 10:00 Uhr haben Sie Infektionsprävention geplant. Ich habe einen Unterrichtsablauf vorbereitet — kurze Wiederholung, eine Kerneinheit und zwei differenzierte Übungsaufgaben nach Lernniveau. Sie können alles vor dem Unterricht anpassen.',
+  edu_b1:'Unterrichtsplan öffnen', edu_b2:'Bibliothek durchsuchen',
+  perf_t:'Klassenleistung KW09', p1l:'Hausaufgaben', p2l:'Kursleistung',
+  // learners feat
+  f3_eye:'Für Lernende',
+  f3_h:'<em class="accent">Personalisiertes</em> Lernen für jede lernende Person.',
+  f3_sub:'Lingocare verbindet Sprachunterstützung, Lernen in der App, Prüfungsvorbereitung und KI-Hilfe auf Abruf zu einem personalisierten Lernerlebnis.',
+  f3_cta:'Für Lernende entdecken',
+  lc1t:'Personalisierte Hausaufgaben', lc1b:'KI-generierte Aufgaben, die deine Schwachstellen gezielt stärken — und täglich angepasst werden.',
+  lc2t:'Interaktive Lernszenarien', lc2b:'Schritt-für-Schritt durch klinische Situationen. Üben, verstehen, anwenden.',
+  lc3t:'Gemeinsam lernen', lc3b:'Gruppenlernen mit deiner Kohorte — schneller, klarer, zuversichtlicher.',
+  daily_title:'Tägliche Übungseinheiten',
+  daily_g:'Guten Morgen, Leonie 👋',
+  daily_d:'Montag, 10. März',
+  daily_t1:'Hygiene & Infektionsschutz', daily_t1s:'Modul 3 · 12 Min',
+  daily_t2:'Prüfungsvorbereitung', daily_t2s:'Wundversorgung · 8 Fragen',
+  daily_wk:'Diese Woche: 4 von 5 Tagen',
+  streak:'🔥 14 Tage in Folge',
+  // learner AI
+  l_chat_u:'Hilf mir, mich auf meine Prüfung nächste Woche vorzubereiten.',
+  l_chat_ai:'Deine Prüfung umfasst Infektionsprävention, Patientenkommunikation und Vitalzeichen. Ich habe einen Lernplan für diese Woche erstellt — tägliche Kurzübungen, ein Schwerpunktthema für heute und ein Quiz zum Fortschritt.',
+  l_b1:'Lernplan anzeigen', l_b2:'Quiz starten', l_b3:'Heute beginnen', l_b4:'Glossar',
+  // glossary
+  gloss_lbl:'Glossar — Übersetzt für dich',
+  g1t:'Dekubitus', g1r:'Pressure sore', g2t:'Infektion', g2r:'Infection', g3t:'Wundversorgung', g3r:'Wound care',
+  // progress chart
+  prog_t:'Dein Lernfortschritt — WS 24/25',
+  pstat1:'47 Aufgaben', pstat2:'Ø 23 Min/Tag', pstat3:'Top 15% der Klasse',
+  // steps
+  st_eye:'Einfaches Onboarding',
+  st_h:'Lingocare in nur <span class="accent-step">drei</span> Schritten einrichten.',
+  st_cta:'Pilotpartner werden',
+  st1t:'Ein Gespräch vereinbaren', st1b:'Wir verstehen Ihre Lehrplanstruktur, Kohortengröße, Sprachprofil und bestehenden Systeme.',
+  st2t:'Ihr Pilotprojekt definieren', st2b:'Gemeinsam stimmen wir die Pflegeausbildung ab und legen Rollen, Berechtigungen und Prüfungsszenarien fest.',
+  st3t:'In echten Klassen starten', st3b:'Von Unterricht und Lehrmaterialien bis zum Schulmanagement, Lingocare unterstützt all das.',
+  // team
+  tm_h:'Gebaut von denen,<br>die es selbst gelebt haben.',
+  tm_sub:'Lingocare vereint Expertise aus Bildung, Produktentwicklung, Design und Technologie.',
+  tm_cta:'Unser Team',
+  // footer
+  ft_tag:'Love to Learn',
+  fc1h:'Für', fc1a:'Schulen', fc1b:'Lehrende', fc1c:'Lernende',
+  fc2h:'Unternehmen', fc2a:'Datenschutzerklärung', fc2b:'Support', fc2c:'Nutzungsbedingungen', fc2d:'Impressum',
+  fc3h:'Schnelllinks', fc3a:'Demo vereinbaren', fc3b:'Pilotpartner werden', fc3c:'Über uns', fc3d:'Kontakt',
+  copy:'© 2025 Lingocare. Alle Rechte vorbehalten.'
+},
+en:{
+  ann:'Launching soon — <span>Become a pilot partner</span> and reshape nursing education.',
+  nw:'What is Lingocare', nf:'For Who', nt:'Our Team', nc:'Contact', ncta:'Book a Demo',
+  h_eye:'Not yet launched — but ready to start with you',
+  h1:'The <em class="accent">personalised</em> learning platform for nursing education.',
+  h_sub:'A single system for better learning, smoother teaching, and clearer school operations.',
+  cta1:'Book a Demo', cta2:'Become a Pilot Partner',
+  trust_prefix:'Built by',
+  tr1:'schools · for schools', tr2:'teachers · for teachers', tr3:'learners · for learners',
+  // dashboard
+  dbt:'School Overview', dbs:'Course BKE-2024', dbsch:'Search students…',
+  drl:'⚠ Risk Detected',
+  dr1n:'Leonie Bauer', dr1s:'No login in 6 days',
+  dr2n:'Class B – 7% drop', dr2s:'3 sessions missed this week',
+  dr3n:'Lingo AI:', dr3s:'Practice tasks on wound care recommended for 4 students',
+  dcl:'Curriculum Progress – Class A & B',
+  dla:'Class A', dlb:'Class B', dxokt:'Oct', dxnov:'Nov', dxdez:'Dec', dxjan:'Jan', dxfeb:'Feb',
+  dsl:'Staff Allocation – Feb',
+  ds1:'M. Krause', ds2:'T. Hoffmann', ds3:'S. Weber', ds4:'A. Fischer',
+  fc1:'89% Course Completion ↑4%', fc2:'Curriculum 09/12 Units', fc3:'AI Alert: 2 at risk',
+  dfn:'Next: Mon 08:00 — Hygiene & Infection Control', dfp:'Monday',
+  // trust
+  tt:'AI supports — educators decide',
+  th_de:'Trusted where education matters most.',
+  tsub:'Backed by nursing schools, education associations and healthcare institutions across Germany.',
+  // sys
+  s_h:'One System, Three Perspectives, Shared Progress.',
+  s_sub:'While each group experiences Lingocare differently, everyone works within one secure infrastructure.',
+  s_hub_sub:'The intelligent layer connecting nursing education',
+  pc_n:'Schools', pc_s:'Visibility without complexity',
+  pl_n:'Learners', pl_s:'Same destination, personalized journey',
+  pe_n:'Educators', pe_s:'Structure without friction',
+  // schools feat
+  f1_eye:'For Schools',
+  f1_h:'Schools that work with <em class="accent">structure.</em>',
+  f1_sub:'Full visibility, reliable planning and curriculum compliance without additional systems.',
+  f1_cta:'Explore For Schools',
+  // schools cards
+  c_curr:'Curriculum Progress W09/12', c_curr_ok:'On Track ✓',
+  c_units:'Units 71/89',
+  c_alert:'⚠ Alerts', c_alert_new:'3 New',
+  c_lb_lbl:'Content Library', c_lb_new:'New',
+  c_lb1:'Basic Care', c_lb2:'Hygiene', c_lb3:'Anatomy', c_lb4:'Communication', c_lb5:'Wound Care', c_lb6:'Exam Prep',
+  c_lb_hint:'Ready to use · customisable inside the app',
+  chat_name:'Lingo AI',
+  chat_sch_u:'Director: Ms. Weber is on leave all next week. Who can cover her classes?',
+  chat_sch_ai:'I found 6 scheduled classes assigned to Ms. Weber next week. Based on subject match, availability, and class continuity, 3 teachers could take over. Review the options below to reassign the classes.',
+  chat_b1:'Review options', chat_b2:'Create schedule',
+  sched_title:'Schedule — Monday',
+  sched_t1:'08:00', sched_l1:'Basic Care — Room 3', sched_w1:'M. Krause',
+  sched_t2:'10:00', sched_l2:'Hygiene & Infection Control', sched_w2:'T. Hoffmann',
+  sched_t3:'13:00', sched_l3:'Patient Communication', sched_w3:'S. Weber',
+  staff_t:'Staff Allocation', staff_m:'Feb',
+  staff1:'M.Krause', staff2:'T.Hoffmann', staff3:'S.Weber', staff4:'A.Fischer',
+  // educators feat
+  f2_eye:'For Educators',
+  f2_h:'Teaching that <em class="accent">adapts to every level.</em>',
+  f2_sub:'Lingocare brings clarity to preparation, progress, and support, so educators can focus on teaching that makes a difference.',
+  f2_cta:'Explore For Educators',
+  hw_title:'Homework — Class B', hw_ai:'AI-generated',
+  hw1:'Leonie B.', hw1s:'Wound Care Mod. 2', hw2:'Marco S.', hw2s:'Hygiene Refresher', hw3:'Jana F.', hw3s:'Infection Control Quiz',
+  hw_count:'12 assignments this week',
+  edu_chat_u:'Teacher: Prepare me for Thursday\'s class.',
+  edu_chat_sub:'Thursday · 10:00 AM',
+  edu_chat_ai:'You have Infection Prevention scheduled on Thursday at 10:00. I prepared a lesson flow with a short recap, one core explanation, and two differentiated practice tasks based on learner level. You can review and adjust it before class.',
+  edu_b1:'Open lesson plan', edu_b2:'Browse library',
+  perf_t:'Class Performance W09', p1l:'Homework', p2l:'Course Performance',
+  // learners feat
+  f3_eye:'For Learners',
+  f3_h:'<em class="accent">Personalized</em> learning for every learner.',
+  f3_sub:'Lingocare combines language support, in-app learning, exam preparation and on-demand AI to create a personalized learning experience.',
+  f3_cta:'Explore For Learners',
+  lc1t:'Personalised Homework', lc1b:'AI-generated tasks that target your specific gaps — updated daily to match your progress.',
+  lc2t:'Interactive Learning Scenarios', lc2b:'Step-by-step through real clinical situations. Practise, understand, apply.',
+  lc3t:'Learn in Groups', lc3b:'Study with your cohort — faster, clearer, and with more confidence.',
+  daily_title:'Daily Practice Sessions',
+  daily_g:'Good morning, Leonie 👋',
+  daily_d:'Monday, 10 March',
+  daily_t1:'Hygiene & Infection Control', daily_t1s:'Module 3 · 12 min',
+  daily_t2:'Exam Preparation', daily_t2s:'Wound Care · 8 questions',
+  daily_wk:'This week: 4 of 5 days',
+  streak:'🔥 14-day streak',
+  // learner AI
+  l_chat_u:'Learner: Help me prepare for my exam next week.',
+  l_chat_ai:'Your next exam includes Infection Prevention, Patient Communication, and Vital Signs. I prepared a study plan for this week with short daily practice, one priority topic for today, and a quiz to check your progress.',
+  l_b1:'View study plan', l_b2:'Start quiz', l_b3:'Today\'s topic', l_b4:'Glossary',
+  // glossary
+  gloss_lbl:'Glossary — Translated for you',
+  g1t:'Dekubitus', g1r:'Pressure sore', g2t:'Infektion', g2r:'Infection', g3t:'Wundversorgung', g3r:'Wound care',
+  // progress chart
+  prog_t:'Your learning progress — WS 24/25',
+  pstat1:'47 tasks done', pstat2:'Avg 23 min/day', pstat3:'Top 15% of class',
+  // steps
+  st_eye:'Simple Onboarding',
+  st_h:'Setup Lingocare in just <span class="accent-step">three</span> steps.',
+  st_cta:'Become a Pilot Partner',
+  st1t:'Book a Conversation', st1b:'We understand your curriculum structure, cohort size, language profile and existing systems.',
+  st2t:'Define Your Pilot Setup', st2b:'Together we align the nursing curriculum, map theory and exam scenarios, and configure roles and permissions.',
+  st3t:'Launch in Real Classrooms', st3b:'From classroom learning to teaching materials and school management, Lingocare supports it all.',
+  // team
+  tm_h:'Built by the people<br>who\'ve lived it.',
+  tm_sub:'Lingocare brings together expertise from education, product, design, and technology.',
+  tm_cta:'Our Team',
+  // footer
+  ft_tag:'Love to Learn',
+  fc1h:'For', fc1a:'Schools', fc1b:'Educators', fc1c:'Learners',
+  fc2h:'Company', fc2a:'Privacy Policy', fc2b:'Support', fc2c:'Terms of Service', fc2d:'Legal Notice / Imprint',
+  fc3h:'Quick Links', fc3a:'Book a Demo', fc3b:'Become a Pilot Partner', fc3c:'About', fc3d:'Contact',
+  copy:'© 2025 Lingocare. All Rights Reserved.'
+}};
+let lang='de';
+function t(k){return T[lang][k]||k}
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-t]').forEach(el=>{const k=el.dataset.t;if(T[lang][k]!==undefined)el.innerHTML=T[lang][k]});
+  document.querySelectorAll('.lang-pill button').forEach(b=>b.classList.toggle('active',b.dataset.l===lang));
+  const pfx=document.getElementById('trust-prefix');
+  if(pfx)pfx.textContent=T[lang].trust_prefix||'';
+}
+function switchLang(l){
+  lang=l;
+  document.querySelectorAll('[data-t]').forEach(el=>{el.style.opacity='0';el.style.transition='opacity .15s'});
+  setTimeout(()=>{applyLang();document.querySelectorAll('[data-t]').forEach(el=>{el.style.opacity='1'})},160);
+  setTimeout(()=>initChats(),400);
+}
+</script>
+
+<!-- ANNOUNCE -->
+<div class="announce" data-t="ann"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><img src="data:image/png;base64,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2QjLe1pPfktMvWrMxqHid5fIDk4k5ryU6Nuy0BQnu2nEoiIv2vyiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIt1hy6ijf0E5PQuOYPySpVPDS11OGTMZNEd7SDw7iFXayKWtqqY/sJ3s7Adyiy0207babFSYqjZbsuFwpczDtpa/aInfv+CXblsHmmo6XN2xBTsG4KFm+XLZy6fLtyWHU1VRUO2p5nyHtK8/JpHn/I5fvyhjPQasu/XJ1xq9oZiFm6NvUOtZ+GbsyACkqXZMJ8hx5dij6KS6FrmbHBR2yua/b4qyJo4KqDop4mTxHeM+XcVr2WC0Nl2+gld1ML9yiVLca2mGUNQ9rerPcvaW9XKRuyalwH/TuUUU0rTZrtykmojdvc3epnJUUdG+GkOzHtENZFHyz5lfi6j/ZlT9GVAuml6US9I4yA57RO9ZEl0uEkbo31UjmuGRBPFfTRkEEFBV7iCEsvxrTfSBTa4/FlX9EVX8b3RvD2OLXNOYI5LKkudfJEYn1UjmO3EE7ivWaAyODgdF5RTBjS0jVYa9KeZ8EzZY3FrmnMFeaKSo6nVnukFdCBtBsoGTmnmvlVYrZUybZjfE48ejO4+pQdjnMdtNcWnrBWfDeLjEMm1LiO3eoRpXNN43WUwVLXC0gupdb7VQULxJTxF0g4Pecz6gsW/wB4jooXRQSB9S8ZZg/A6z3qMz3WvmGT6l+XUNywiSTmTmV9ZSku2pDdfH1A2dlgshJJJJzJXxEUxRERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERF//9k=" alt="Lingocare" style="height:30px;width:auto"></a>
+  <div class="nav-links">
+    <a href="#" data-t="nw"></a>
+    <a href="#" data-t="nf"></a>
+    <a href="#" data-t="nt"></a>
+    <a href="#" data-t="nc"></a>
+  </div>
+  <div class="nav-r">
+    <div class="lang-pill">
+      <button data-l="de" onclick="switchLang('de')">DE</button>
+      <button data-l="en" onclick="switchLang('en')">EN</button>
+    </div>
+    <button class="btn-nav" data-t="ncta"></button>
+  </div>
+</nav>
+
+<!-- ════════════════════════
+     HERO
+════════════════════════ -->
+<div class="hero">
+  <h1 class="rev" data-t="h1"></h1>
+  <p class="subline rev d1" data-t="h_sub"></p>
+  <div class="hero-ctas rev d2">
+    <a href="#" class="btn-p"><span data-t="cta1"></span><span class="arr">→</span></a>
+    <a href="#" class="btn-g"><span data-t="cta2"></span></a>
+  </div>
+  <!-- Rotating trust line -->
+  <div class="trust-line rev d3">
+    <span id="trust-prefix" style="margin-right:6px;color:var(--muted)"></span>
+    <div class="trust-rotate" id="trust-rot">
+      <span data-t="tr1"></span>
+      <span data-t="tr2"></span>
+      <span data-t="tr3"></span>
+      <span data-t="tr1"></span>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="hero-db-wrap rev d4">
+    <div class="f-chip c1">✓ <span data-t="fc1"></span></div>
+    <div class="f-chip c2">⬡ <span data-t="fc2"></span></div>
+    <div class="f-chip c3">⚡ <span data-t="fc3"></span></div>
+    <div class="hero-db" id="hero-db">
+      <!-- top bar -->
+      <div class="db-bar">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="db-dots">
+            <div class="db-dot" style="background:#EF4444"></div>
+            <div class="db-dot" style="background:#F59E0B"></div>
+            <div class="db-dot" style="background:#22C55E"></div>
+          </div>
+          <span class="db-title-bar"><b data-t="dbt"></b> — <span data-t="dbs"></span></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:7px;padding:5px 11px;font-size:11px;color:var(--muted)">🔍 <span data-t="dbsch"></span></div>
+          <div style="position:relative;width:26px;height:26px;background:var(--card);border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px">🔔<div style="position:absolute;top:-3px;right:-3px;width:11px;height:11px;background:var(--orange);border-radius:50%;border:2px solid var(--bg);font-size:7px;color:#fff;display:flex;align-items:center;justify-content:center">3</div></div>
+          <div class="db-badge" data-t="dbt"></div>
+        </div>
+      </div>
+      <!-- body -->
+      <div class="db-body">
+        <!-- risk -->
+        <div class="db-col">
+          <div class="db-lbl" data-t="drl"></div>
+          <div class="risk-tag">⚠ AKTIV</div>
+          <div class="rr w"><div class="rr-n" data-t="dr1n"></div><div class="rr-s" data-t="dr1s"></div></div>
+          <div class="rr a"><div class="rr-n" data-t="dr2n"></div><div class="rr-s" data-t="dr2s"></div></div>
+          <div class="rr ai"><div class="rr-n" style="color:var(--purple)" data-t="dr3n"></div><div class="rr-s" data-t="dr3s"></div></div>
+        </div>
+        <!-- chart -->
+        <div class="db-col">
+          <div class="db-lbl" data-t="dcl"></div>
+          <svg class="mini-chart" viewBox="0 0 280 65" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F4722B" stop-opacity=".14"/><stop offset="100%" stop-color="#F4722B" stop-opacity="0"/></linearGradient>
+              <linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8B8A8" stop-opacity=".09"/><stop offset="100%" stop-color="#C8B8A8" stop-opacity="0"/></linearGradient>
+            </defs>
+            <path d="M0,52 Q60,46 90,40 T180,28 T280,10 L280,65 L0,65Z" fill="url(#ga)"/>
+            <path d="M0,56 Q50,52 90,48 T180,40 T280,26 L280,65 L0,65Z" fill="url(#gb)"/>
+            <path class="dr" d="M0,56 Q50,52 90,48 T180,40 T280,26" stroke="#C8B8A8" stroke-width="1.5" fill="none" style="animation-delay:.4s;stroke-dasharray:500;stroke-dashoffset:500"/>
+            <path class="dr" d="M0,52 Q60,46 90,40 T180,28 T280,10" stroke="#F4722B" stroke-width="2" fill="none" style="stroke-dasharray:500;stroke-dashoffset:500"/>
+            <circle cx="160" cy="33" r="3" fill="#F4722B" opacity=".7"/>
+            <text x="0" y="64" font-size="7" fill="#9B8B7A" data-t="dxokt">Okt</text>
+            <text x="52" y="64" font-size="7" fill="#9B8B7A" data-t="dxnov">Nov</text>
+            <text x="108" y="64" font-size="7" fill="#9B8B7A" data-t="dxdez">Dez</text>
+            <text x="164" y="64" font-size="7" fill="#9B8B7A" data-t="dxjan">Jan</text>
+            <text x="220" y="64" font-size="7" fill="#9B8B7A" data-t="dxfeb">Feb</text>
+          </svg>
+          <div class="chart-leg">
+            <div class="leg-i"><div class="leg-d" style="background:var(--orange)"></div><span data-t="dla"></span></div>
+            <div class="leg-i"><div class="leg-d" style="background:var(--muted)"></div><span data-t="dlb"></span></div>
+          </div>
+        </div>
+        <!-- staff -->
+        <div class="db-col">
+          <div class="db-lbl" data-t="dsl"></div>
+          <div class="sg">
+            <div class="sc g"></div><div class="sc g"></div><div class="sc g"></div><div class="sc g"></div><div class="sc g"></div>
+            <div class="sc g"></div><div class="sc g"></div><div class="sc o"></div><div class="sc g"></div><div class="sc y"></div>
+            <div class="sc g"></div><div class="sc g"></div><div class="sc g"></div><div class="sc g"></div><div class="sc g"></div>
+            <div class="sc g"></div><div class="sc y"></div><div class="sc g"></div><div class="sc g"></div><div class="sc"></div>
+          </div>
+          <div class="sn"><span data-t="ds1"></span><br><span data-t="ds2"></span><br><span data-t="ds3"></span><br><span data-t="ds4"></span></div>
+        </div>
+      </div>
+      <!-- foot -->
+      <div class="db-foot">
+        <span class="db-foot-t">📅 <span data-t="dfn"></span></span>
+        <div class="db-foot-p" data-t="dfp"></div>
+      </div>
+    </div>
+  </div>
+</div><!-- /hero -->
+
+
+<!-- ════════════════════════
+     TRUST / PARTNERS
+════════════════════════ -->
+<div class="trust-sec">
+  <div class="trust-tag rev" data-t="tt"></div>
+  <h2 class="rev d1" data-t="th_de"></h2>
+  <p class="trust-sub rev d2" data-t="tsub"></p>
+  <div class="logo-row rev d3">
+    <div class="logo-b">BND · ONE · R4S</div>
+    <div class="logo-b">WI≡Bank</div>
+    <div class="logo-b">igp</div>
+    <div class="logo-b">Care Act</div>
+    <div class="logo-b">Fed. Ministry</div>
+    <div class="logo-b">AHC</div>
+    <div class="logo-b">Unterricht Global</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════
+     ONE SYSTEM
+════════════════════════ -->
+<section class="sys-sec">
+  <h2 class="rev" data-t="s_h"></h2>
+  <p class="subline rev d1" data-t="s_sub"></p>
+
+  <div class="sys-diagram rev d2">
+    <!-- SVG connectors -->
+    <svg class="sys-svg" viewBox="0 0 720 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path id="lS" d="M130,95 C130,190 360,200 360,270" stroke="#C8B8A8" stroke-width="1.5" stroke-dasharray="5 6" fill="none"/>
+      <path id="lL" d="M360,100 L360,270" stroke="#F4722B" stroke-width="2" fill="none"/>
+      <path id="lE" d="M590,95 C590,190 360,200 360,270" stroke="#C8B8A8" stroke-width="1.5" stroke-dasharray="5 6" fill="none"/>
+      <circle cx="130" cy="95" r="4.5" fill="#C8B8A8" class="sys-dot" style="opacity:0"/>
+      <circle cx="360" cy="100" r="5" fill="#F4722B" class="sys-dot" style="opacity:0"/>
+      <circle cx="590" cy="95" r="4.5" fill="#C8B8A8" class="sys-dot" style="opacity:0"/>
+    </svg>
+    <div class="sys-cards">
+      <div class="sys-card rev">
+        <div class="sys-icon s">🏫</div>
+        <h3 data-t="pc_n"></h3><p data-t="pc_s"></p>
+      </div>
+      <div class="sys-card learner rev d1">
+        <div class="sys-icon l" style="color:#fff;font-size:16px;font-weight:700">✦</div>
+        <h3 data-t="pl_n"></h3><p data-t="pl_s"></p>
+      </div>
+      <div class="sys-card rev d2">
+        <div class="sys-icon e">🔍</div>
+        <h3 data-t="pe_n"></h3><p data-t="pe_s"></p>
+      </div>
+    </div>
+    <div class="sys-hub">
+      <div class="sys-hub-name">Lingo<span class="dot">.</span>care</div>
+      <div class="sys-hub-sub" data-t="s_hub_sub"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════
+     SCROLL FEATURE SECTIONS
+════════════════════════ -->
+<!-- Scroll position indicator -->
+<div class="scroll-ind" id="scroll-ind">
+  <div class="si-pip active" data-target="sec-schools" onclick="scrollToSec('sec-schools')"></div>
+  <div class="si-pip" data-target="sec-educators" onclick="scrollToSec('sec-educators')"></div>
+  <div class="si-pip" data-target="sec-learners" onclick="scrollToSec('sec-learners')"></div>
+</div>
+
+<!-- ── SCHOOLS ── -->
+<div id="sec-schools" class="feat-scroll-wrap">
+  <div class="feat-sec">
+    <!-- copy -->
+    <div class="feat-copy">
+      <div class="eyebrow rev" data-t="f1_eye"></div>
+      <h2 class="rev d1" data-t="f1_h"></h2>
+      <p class="subline rev d2" data-t="f1_sub"></p>
+      <a href="#" class="btn-sm rev d3"><span data-t="f1_cta"></span> <span>→</span></a>
+    </div>
+    <!-- cluster -->
+    <div class="cc-wrap rev d1">
+      <!-- Curriculum Progress -->
+      <div class="cc" style="top:0;right:0;width:220px;transform:rotate(1.5deg)">
+        <div class="cc-h">
+          <span class="cc-t" data-t="c_curr"></span>
+          <span class="badge bg" data-t="c_curr_ok"></span>
+        </div>
+        <svg viewBox="0 0 180 52" width="100%" height="52">
+          <defs><linearGradient id="cf1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F4722B" stop-opacity=".12"/><stop offset="100%" stop-color="#F4722B" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0,44 Q40,36 70,28 T140,14 T180,6 L180,52 L0,52Z" fill="url(#cf1)"/>
+          <path class="dr" d="M0,44 Q40,36 70,28 T140,14 T180,6" stroke="#F4722B" stroke-width="2" fill="none" style="animation-delay:.5s;stroke-dasharray:400;stroke-dashoffset:400"/>
+          <text x="0" y="51" font-size="7" fill="#9B8B7A">Okt</text><text x="42" y="51" font-size="7" fill="#9B8B7A">Nov</text><text x="88" y="51" font-size="7" fill="#9B8B7A">Dez</text><text x="132" y="51" font-size="7" fill="#9B8B7A">Jan</text>
+        </svg>
+        <div class="cb-row"><div class="cb-ll"><span data-t="c_units"></span><span style="color:var(--orange);font-weight:700">79%</span></div><div class="cb"><div class="cb-f" style="width:79%"></div></div></div>
+      </div>
+
+      <!-- Content Library -->
+      <div class="cc" style="top:130px;left:0;width:198px;transform:rotate(-1.5deg)">
+        <div class="cc-h">
+          <span class="cc-t" data-t="c_lb_lbl"></span>
+          <span class="badge bp" data-t="c_lb_new"></span>
+        </div>
+        <div class="lib-grid">
+          <div class="lib-pill">📚 <span data-t="c_lb1"></span></div>
+          <div class="lib-pill">🧼 <span data-t="c_lb2"></span></div>
+          <div class="lib-pill">🦴 <span data-t="c_lb3"></span></div>
+          <div class="lib-pill">💬 <span data-t="c_lb4"></span></div>
+          <div class="lib-pill">🩹 <span data-t="c_lb5"></span></div>
+          <div class="lib-pill">📝 <span data-t="c_lb6"></span></div>
+        </div>
+        <div style="font-size:10px;color:var(--muted);margin-top:8px" data-t="c_lb_hint"></div>
+      </div>
+
+      <!-- Lingo AI Chat — MANAGERIAL -->
+      <div class="cc" style="top:70px;left:50%;transform:translateX(-46%) rotate(0.3deg);width:238px;z-index:5">
+        <div class="ch-h">
+          <div class="ch-online"></div>
+          <div><div class="ch-name" data-t="chat_name"></div><div class="ch-sub">Live platform data</div></div>
+        </div>
+        <div class="bbl u" data-t="chat_sch_u"></div>
+        <div class="bbl ai" id="chat-sch-ai"></div>
+        <div class="ch-acts">
+          <div class="ch-btn" data-t="chat_b1"></div>
+          <div class="ch-btn" data-t="chat_b2"></div>
+        </div>
+      </div>
+
+      <!-- Schedule -->
+      <div class="cc" style="bottom:40px;right:10px;width:202px;transform:rotate(-1deg)">
+        <div class="cc-h"><span class="cc-t" data-t="sched_title"></span></div>
+        <div class="sr"><div class="st" data-t="sched_t1"></div><div class="si"><div class="stt" data-t="sched_l1"></div><div class="swho"><span data-t="sched_w1"></span> <span class="badge bg">✓</span></div></div></div>
+        <div class="sr"><div class="st" data-t="sched_t2"></div><div class="si"><div class="stt" data-t="sched_l2"></div><div class="swho"><span data-t="sched_w2"></span> <span class="badge bo">Vertretung</span></div></div></div>
+        <div class="sr"><div class="st" data-t="sched_t3"></div><div class="si"><div class="stt" data-t="sched_l3"></div><div class="swho"><span data-t="sched_w3"></span> <span class="badge bg">✓</span></div></div></div>
+      </div>
+
+      <!-- Staff grid -->
+      <div class="cc" style="bottom:30px;left:20px;width:178px;transform:rotate(2deg)">
+        <div class="cc-h"><span class="cc-t" data-t="staff_t"></span><span class="badge bk" data-t="staff_m"></span></div>
+        <div class="sg">
+          <div class="sc g"></div><div class="sc g"></div><div class="sc g"></div><div class="sc g"></div><div class="sc g"></div>
+          <div class="sc g"></div><div class="sc g"></div><div class="sc o"></div><div class="sc g"></div><div class="sc y"></div>
+          <div class="sc g"></div><div class="sc g"></div><div class="sc g"></div><div class="sc g"></div><div class="sc g"></div>
+          <div class="sc g"></div><div class="sc y"></div><div class="sc g"></div><div class="sc g"></div><div class="sc"></div>
+        </div>
+        <div class="sn"><span data-t="staff1"></span> · <span data-t="staff2"></span><br><span data-t="staff3"></span> · <span data-t="staff4"></span></div>
+        <div style="display:flex;gap:8px;margin-top:6px"><span style="font-size:9px;color:var(--green)">■ <span data-t="staff_m"></span></span><span style="font-size:9px;color:var(--orange)">■ Sub</span></div>
+      </div>
+    </div><!-- /cc-wrap -->
+  </div>
+</div>
+
+<hr class="feat-sep">
+
+<!-- ── EDUCATORS ── -->
+<div id="sec-educators" class="feat-scroll-wrap">
+  <div class="feat-sec flip">
+    <!-- cluster -->
+    <div class="cc-wrap rev">
+      <!-- Edu AI Chat -->
+      <div class="cc" style="top:50px;left:50%;transform:translateX(-50%) rotate(0.3deg);width:242px;z-index:5">
+        <div class="ch-h">
+          <div class="ch-online"></div>
+          <div><div class="ch-name" data-t="chat_name"></div><div class="ch-sub" id="edu-chat-sub"></div></div>
+        </div>
+        <div class="bbl u" data-t="edu_chat_u"></div>
+        <div class="bbl ai" id="chat-edu-ai"></div>
+        <div class="ch-acts">
+          <div class="ch-btn" data-t="edu_b1"></div>
+          <div class="ch-btn" data-t="edu_b2"></div>
+        </div>
+      </div>
+
+      <!-- HW Card -->
+      <div class="cc" style="top:10px;left:0;width:196px;transform:rotate(-2deg)">
+        <div class="cc-h"><span class="cc-t" data-t="hw_title"></span><span class="badge bp" data-t="hw_ai"></span></div>
+        <div class="hwr"><div style="flex:1"><div style="font-size:11px;font-weight:600" data-t="hw1"></div><div style="font-size:10px;color:var(--muted)" data-t="hw1s"></div></div><div class="hw-d"><div class="hw-dot f"></div><div class="hw-dot f"></div><div class="hw-dot f"></div><div class="hw-dot e"></div><div class="hw-dot e"></div></div></div>
+        <div class="hwr"><div style="flex:1"><div style="font-size:11px;font-weight:600" data-t="hw2"></div><div style="font-size:10px;color:var(--muted)" data-t="hw2s"></div></div><div class="hw-d"><div class="hw-dot f"></div><div class="hw-dot f"></div><div class="hw-dot e"></div><div class="hw-dot e"></div><div class="hw-dot e"></div></div></div>
+        <div class="hwr"><div style="flex:1"><div style="font-size:11px;font-weight:600" data-t="hw3"></div><div style="font-size:10px;color:var(--muted)" data-t="hw3s"></div></div><div class="hw-d"><div class="hw-dot f"></div><div class="hw-dot f"></div><div class="hw-dot f"></div><div class="hw-dot f"></div><div class="hw-dot e"></div></div></div>
+        <div style="font-size:10px;color:var(--muted);margin-top:6px" data-t="hw_count"></div>
+      </div>
+
+      <!-- Perf card -->
+      <div class="cc" style="bottom:60px;right:0;width:198px;transform:rotate(-1deg)">
+        <div class="cc-h"><span class="cc-t" data-t="perf_t"></span></div>
+        <div class="cb-row"><div class="cb-ll"><span data-t="p1l"></span><span style="font-weight:700;color:var(--green)">84%</span></div><div class="cb"><div class="cb-f" style="width:84%;background:var(--green)"></div></div></div>
+        <div class="cb-row"><div class="cb-ll"><span data-t="p2l"></span><span style="font-weight:700;color:var(--orange)">77%</span></div><div class="cb"><div class="cb-f" style="width:77%"></div></div></div>
+        <div style="font-size:10px;color:var(--muted);margin-top:8px">Class A &gt; B ↑</div>
+      </div>
+
+      <!-- Student scores -->
+      <div class="cc" style="bottom:20px;left:10px;width:184px;transform:rotate(1.5deg)">
+        <div class="cc-h"><span class="cc-t">Scores</span><span class="badge bk">Ø 78%</span></div>
+        <svg viewBox="0 0 150 72" width="100%" height="60">
+          <rect x="0" y="4" width="110" height="9" rx="3" fill="#F4722B" opacity=".85"/><text x="114" y="13" font-size="8" fill="#5C4A38" font-weight="600">82%</text>
+          <rect x="0" y="20" width="86" height="9" rx="3" fill="#F4722B" opacity=".5"/><text x="90" y="29" font-size="8" fill="#5C4A38">65%</text>
+          <rect x="0" y="36" width="123" height="9" rx="3" fill="#F4722B"/><text x="127" y="45" font-size="8" fill="#5C4A38" font-weight="600">91%</text>
+          <rect x="0" y="52" width="98" height="9" rx="3" fill="#F4722B" opacity=".65"/><text x="102" y="61" font-size="8" fill="#5C4A38">74%</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- copy -->
+    <div class="feat-copy">
+      <div class="eyebrow rev" data-t="f2_eye"></div>
+      <h2 class="rev d1" data-t="f2_h"></h2>
+      <p class="subline rev d2" data-t="f2_sub"></p>
+      <a href="#" class="btn-sm rev d3"><span data-t="f2_cta"></span> <span>→</span></a>
+    </div>
+  </div>
+</div>
+
+<hr class="feat-sep">
+
+<!-- ── LEARNERS ── -->
+<div id="sec-learners" class="feat-scroll-wrap">
+  <div style="padding:96px 52px 48px;max-width:1200px;margin:0 auto;text-align:center">
+    <div class="eyebrow rev" data-t="f3_eye"></div>
+    <h2 class="rev d1" data-t="f3_h" style="max-width:600px;margin:0 auto"></h2>
+    <p class="subline rev d2" data-t="f3_sub" style="max-width:520px;margin:16px auto 40px;text-align:center"></p>
+    <a href="#" class="btn-sm rev d3"><span data-t="f3_cta"></span> <span>→</span></a>
+  </div>
+
+  <!-- Three feature cards -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1200px;margin:0 auto 64px;padding:0 52px">
+    <!-- Card 1 — HW -->
+    <div class="cc rev" style="position:static;transform:none;width:100%">
+      <div style="height:3px;background:var(--orange);border-radius:2px;width:48px;margin-bottom:18px;transition:width .5s" class="feat-bar"></div>
+      <div style="font-size:22px;margin-bottom:10px">📝</div>
+      <h3 style="margin-bottom:8px" data-t="lc1t"></h3>
+      <p style="font-size:14px;color:var(--mid);line-height:1.55;margin-bottom:16px" data-t="lc1b"></p>
+      <div style="background:var(--bg);border-radius:8px;padding:10px">
+        <div class="hwr"><div style="flex:1;font-size:11px;font-weight:600" data-t="daily_t1"></div><span class="badge bo">Heute</span></div>
+        <div class="hwr"><div style="flex:1;font-size:11px;font-weight:600" data-t="daily_t2"></div><span class="badge bk">Mi.</span></div>
+        <div style="font-size:10px;color:var(--muted);margin-top:5px" data-t="hw_ai"></div>
+      </div>
+    </div>
+
+    <!-- Card 2 — Scenario + AI exam prep -->
+    <div class="cc rev d1" style="position:static;transform:none;width:100%">
+      <div style="height:3px;background:linear-gradient(90deg,#F4722B,#E85D9A);border-radius:2px;width:48px;margin-bottom:18px;transition:width .5s" class="feat-bar"></div>
+      <div style="font-size:22px;margin-bottom:10px">🏥</div>
+      <h3 style="margin-bottom:8px" data-t="lc2t"></h3>
+      <p style="font-size:14px;color:var(--mid);line-height:1.55;margin-bottom:16px" data-t="lc2b"></p>
+      <!-- Lingo AI exam prep -->
+      <div class="ch-h" style="margin-bottom:8px">
+        <div class="ch-online"></div>
+        <div><div class="ch-name" data-t="chat_name"></div><div class="ch-sub" data-t="f3_eye"></div></div>
+      </div>
+      <div class="bbl u" data-t="l_chat_u"></div>
+      <div class="bbl ai" id="chat-learn-ai"></div>
+      <div class="ch-acts" style="flex-wrap:wrap;margin-top:6px">
+        <div class="ch-btn" data-t="l_b1"></div>
+        <div class="ch-btn" data-t="l_b2"></div>
+        <div class="ch-btn" data-t="l_b3"></div>
+        <div class="ch-btn" data-t="l_b4"></div>
+      </div>
+    </div>
+
+    <!-- Card 3 — Groups + Glossary -->
+    <div class="cc rev d2" style="position:static;transform:none;width:100%">
+      <div style="height:3px;background:var(--green);border-radius:2px;width:48px;margin-bottom:18px;transition:width .5s" class="feat-bar"></div>
+      <div style="font-size:22px;margin-bottom:10px">👥</div>
+      <h3 style="margin-bottom:8px" data-t="lc3t"></h3>
+      <p style="font-size:14px;color:var(--mid);line-height:1.55;margin-bottom:16px" data-t="lc3b"></p>
+      <!-- Glossary -->
+      <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px" data-t="gloss_lbl"></div>
+      <div class="gloss-wrap">
+        <div class="gloss-row"><span class="gloss-term" data-t="g1t"></span><span class="gloss-arrow">→</span><span class="gloss-flag">🇬🇧</span><span class="gloss-trans" data-t="g1r"></span></div>
+        <div class="gloss-row"><span class="gloss-term" data-t="g2t"></span><span class="gloss-arrow">→</span><span class="gloss-flag">🇬🇧</span><span class="gloss-trans" data-t="g2r"></span></div>
+        <div class="gloss-row"><span class="gloss-term" data-t="g3t"></span><span class="gloss-arrow">→</span><span class="gloss-flag">🇬🇧</span><span class="gloss-trans" data-t="g3r"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daily + Progress row -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:1200px;margin:0 auto;padding:0 52px 96px">
+    <!-- Daily Practice -->
+    <div class="cc rev" style="position:static;transform:none;width:100%">
+      <div class="cc-h"><span class="cc-t" data-t="daily_title"></span><span class="badge bo">Live</span></div>
+      <div style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:2px" data-t="daily_g"></div>
+      <div style="font-size:28px;font-weight:700;color:var(--orange);font-variant-numeric:tabular-nums;margin-bottom:2px" id="live-clock">08:14</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:12px" data-t="daily_d"></div>
+      <div style="background:var(--bg);border-radius:8px;padding:9px 10px;margin-bottom:7px;display:flex;align-items:center;gap:9px">
+        <div style="font-size:16px">📖</div>
+        <div><div style="font-size:11px;font-weight:600" data-t="daily_t1"></div><div style="font-size:10px;color:var(--muted)" data-t="daily_t1s"></div></div>
+        <div style="margin-left:auto;font-size:10px;color:var(--orange);font-weight:600;cursor:pointer">→</div>
+      </div>
+      <div style="background:var(--bg);border-radius:8px;padding:9px 10px;margin-bottom:12px;display:flex;align-items:center;gap:9px">
+        <div style="font-size:16px">🧠</div>
+        <div><div style="font-size:11px;font-weight:600" data-t="daily_t2"></div><div style="font-size:10px;color:var(--muted)" data-t="daily_t2s"></div></div>
+        <div style="margin-left:auto;font-size:10px;color:var(--orange);font-weight:600;cursor:pointer">→</div>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:5px" data-t="daily_wk"></div>
+      <div style="display:flex;gap:4px;margin-bottom:10px">
+        <div style="width:28px;height:6px;border-radius:3px;background:var(--orange)"></div>
+        <div style="width:28px;height:6px;border-radius:3px;background:var(--orange)"></div>
+        <div style="width:28px;height:6px;border-radius:3px;background:var(--orange)"></div>
+        <div style="width:28px;height:6px;border-radius:3px;background:var(--orange)"></div>
+        <div style="width:28px;height:6px;border-radius:3px;background:var(--border)"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--orange)" data-t="streak"></div>
+    </div>
+
+    <!-- Progress chart -->
+    <div class="cc rev d1" style="position:static;transform:none;width:100%">
+      <div class="cc-h"><span class="cc-t" data-t="prog_t"></span></div>
+      <svg viewBox="0 0 240 100" width="100%" height="100" style="overflow:visible">
+        <defs><linearGradient id="prf" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F4722B" stop-opacity=".18"/><stop offset="100%" stop-color="#F4722B" stop-opacity="0"/></linearGradient></defs>
+        <path class="dr" d="M0,72 Q40,68 80,64 T160,54 T240,46" stroke="#C8B8A8" stroke-width="1.5" stroke-dasharray="4 4" fill="none" style="animation-delay:.4s;stroke-dasharray:400;stroke-dashoffset:400"/>
+        <path d="M0,76 Q30,68 60,58 T120,44 T160,56 T200,32 T240,18 L240,100 L0,100Z" fill="url(#prf)"/>
+        <path class="dr" d="M0,76 Q30,68 60,58 T120,44 T160,56 T200,32 T240,18" stroke="#F4722B" stroke-width="2.5" fill="none" style="stroke-dasharray:500;stroke-dashoffset:500"/>
+        <circle cx="138" cy="50" r="4" fill="#F4722B"/>
+        <rect x="96" y="34" width="84" height="13" rx="4" fill="#1A1208" opacity=".85"/>
+        <text x="138" y="44" font-size="7" fill="white" text-anchor="middle">Prüfungsphase</text>
+        <circle cx="240" cy="18" r="4" fill="#2D8C5E"/>
+        <text x="0" y="99" font-size="7" fill="#9B8B7A">Okt</text><text x="40" y="99" font-size="7" fill="#9B8B7A">Nov</text><text x="80" y="99" font-size="7" fill="#9B8B7A">Dez</text><text x="120" y="99" font-size="7" fill="#9B8B7A">Jan</text><text x="162" y="99" font-size="7" fill="#9B8B7A">Feb</text><text x="202" y="99" font-size="7" fill="#9B8B7A">Mär</text>
+      </svg>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px">
+        <div style="background:var(--bg);border-radius:7px;padding:7px;text-align:center"><div style="font-size:14px;font-weight:700;color:var(--dark)" data-count="47" id="c47">47</div><div style="font-size:9px;color:var(--muted);margin-top:1px" data-t="pstat1"></div></div>
+        <div style="background:var(--bg);border-radius:7px;padding:7px;text-align:center"><div style="font-size:14px;font-weight:700;color:var(--dark)">Ø 23</div><div style="font-size:9px;color:var(--muted);margin-top:1px" data-t="pstat2"></div></div>
+        <div style="background:var(--bg);border-radius:7px;padding:7px;text-align:center"><div style="font-size:14px;font-weight:700;color:var(--green)">15%</div><div style="font-size:9px;color:var(--muted);margin-top:1px" data-t="pstat3"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════
+     THREE STEPS — FULLSCREEN STICKY
+════════════════════════ -->
+<div class="steps-outer" id="steps-outer">
+  <div class="steps-sticky" id="steps-sticky">
+    <!-- Phase 0: full centered heading -->
+    <div class="steps-head-wrap" id="steps-head-full">
+      <div class="steps-eyebrow-sticky" data-t="st_eye"></div>
+      <div class="steps-h2-full" data-t="st_h"></div>
+    </div>
+
+    <!-- Phase 1+: heading splits -->
+    <div class="steps-head-left" id="steps-head-left">
+      <div class="steps-h2-full" style="text-align:left" data-t="st_h"></div>
+    </div>
+    <div class="steps-head-right" id="steps-head-right">
+      <a href="#" class="btn-p" style="font-size:14px;padding:11px 24px"><span data-t="st_cta"></span><span class="arr">→</span></a>
+    </div>
+
+    <!-- Central SVG path -->
+    <div class="steps-path-wrap" id="steps-path-wrap">
+      <svg class="steps-svg" id="steps-svg" viewBox="0 0 100 900" preserveAspectRatio="none">
+        <path id="sp-base" d="M50,0 C50,80 30,140 50,220 C70,300 70,380 50,460 C30,540 50,620 50,900" stroke="#EBE0D0" stroke-width="2" fill="none"/>
+        <path id="sp-prog" d="M50,0 C50,80 30,140 50,220 C70,300 70,380 50,460 C30,540 50,620 50,900" stroke="#F4722B" stroke-width="2" fill="none" stroke-dasharray="1000" stroke-dashoffset="1000"/>
+      </svg>
+      <!-- dots at each step level -->
+      <div class="path-dot" id="pd1" style="top:calc(24% - 5px)"></div>
+      <div class="path-dot" id="pd2" style="top:calc(50% - 5px)"></div>
+      <div class="path-dot" id="pd3" style="top:calc(76% - 5px)"></div>
+    </div>
+
+    <!-- Step cards -->
+    <div class="step-card s1" id="sc1">
+      <div class="step-n">1</div>
+      <div class="step-title" data-t="st1t"></div>
+      <div class="step-body" data-t="st1b"></div>
+    </div>
+    <div class="step-card s2" id="sc2">
+      <div class="step-n">2</div>
+      <div class="step-title" data-t="st2t"></div>
+      <div class="step-body" data-t="st2b"></div>
+    </div>
+    <div class="step-card s3" id="sc3">
+      <div class="step-n">3</div>
+      <div class="step-title" data-t="st3t"></div>
+      <div class="step-body" data-t="st3b"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════
+     TEAM
+════════════════════════ -->
+<section class="team-sec">
+  <h2 class="rev" data-t="tm_h"></h2>
+  <p class="subline rev d1" data-t="tm_sub"></p>
+  <div class="team-row rev d2">
+    <div class="tm"><div class="t-av" style="background:linear-gradient(135deg,#F4722B,#E85D9A)">B</div><div class="t-card">Belinda Kleinhans</div></div>
+    <div class="tm"><div class="t-av" style="background:linear-gradient(135deg,#2D8C5E,#1A6B48)">A</div><div class="t-card">Arslaan Shaikh</div></div>
+    <div class="tm"><div class="t-av" style="background:linear-gradient(135deg,#7C3AED,#5B21B6)">P</div><div class="t-card">Petra Rahn</div></div>
+    <div class="tm"><div class="t-av" style="background:linear-gradient(135deg,#1C7EAA,#0F5E8A)">S</div><div class="t-card">Sara Kukovec</div></div>
+    <div class="tm"><div class="t-av" style="background:linear-gradient(135deg,#D97706,#B45309)">E</div><div class="t-card">Esther Fintelmann</div></div>
+    <div class="tm"><div class="t-av" style="background:linear-gradient(135deg,#059669,#047857)">M</div><div class="t-card">Merle Krumb</div></div>
+  </div>
+  <a href="#" class="btn-g rev d3"><span data-t="tm_cta"></span> <span>→</span></a>
+</section>
+
+
+<!-- ════════════════════════
+     FOOTER
+════════════════════════ -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div>
+        <div class="ft-logo"><img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCADYAXADASIAAhEBAxEB/8QAHAABAAIDAQEBAAAAAAAAAAAAAAYHBAUIAwEC/8QAURAAAQMCAgYFBQwGBwYHAAAAAQACAwQFBhEHCBIhMUETUWFxdCI2N4HBFBYyNVJyc5GhscLRFRcjJJOUGEJUVpKy4SUzNFViYydERlNkgrP/xAAbAQEAAwEBAQEAAAAAAAAAAAAABAYHBQMBAv/EADkRAAEDAgMEBQoGAwEAAAAAAAEAAgMEEQUGMRIhQXETNFGRsRQiMjM1YXKBocEVFlLR4fAjQoJD/9oADAMBAAIRAxEAPwDjJEREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREX0Ak5DeiL4i/Ww/wCQ76l8II4jJEXxEREREREREREREG/gveGjq5jlDSzSfNYSvhIGq+gXXgi3tFhHEVWA6K1zhp5vGyPtW+tmjqqJD7pVsgb8iPynHsz4KPJWQR+k4L2ZTSvO5qhFPDLUStihjdI93BrRmVMbJhdtKBPcQ182WbYuIb39amFDabfaotigpxGeBkcc3u7zyX5liLngDfmcly5sTMnmx7h2roRUGx5z95VYYqpo6W+TxxNDWHJwA5ZjNatbbF07ajENU9hza12wPVuWpXajvsC65clto2RERftfhERERERERERERERERERERERERERERERERERERERERERERERERERERFMNDMENTpJs8NREyWN04Ba4Zg+pQ9TTQj6ULJ4gKHiBIpZbfpPgpNHvqGX7R4rq8We0jd+jKL+A38lpcS4Bwrf6R0FZaoInH4MsLdhzT6lKM0KxCKuqIX7bJCDzK1GSlhkbsuYLLjvSfgqswXfTSSu6all8qnmHBze3tUSXTus3RQz6PmVrmDpaaqYGOy3gOzBC5iWxYDiD6+ibK/0tD8lm+LUbaOqdG3TUIiIuyuaisLR5o0rb/Ey5XJzqS3E+Tu8uXuHV2rC0P4U99GKGMnbnRUo6WftA4N9a6VdCyKNsULGxxsaGsY0ZAAKr4/jpoiIIvTOp7F38HwoVP+WQeaPqofbMJWCzwiOitkGfy5G7bj6ysp8TIxlHHGz5jQ1bmaPisGePiqaKyWZ209xKsvk0cYs1tlp5w455uP1rAmj4jJbmpjy47u9amsqaSEnpqqCLLjtyABTYXOdoFFkAGq1s8fYtFie5Q2e2vqHOHTvGzCzmT1piLGtnoA5lI8V1Ry2PgDvPNVhebnV3asdVVcm048ByaOoBWfDqCR5D5BYeK4VbWMaC1huVhvc57y9xzc45kr4iKzLhIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIppoS9KFk8QFC1M9CfpPsniAoeI9Ul+E+Ck0fWI+Y8V16iIsGWsKtdZP0Yz+Kh+8rlldS6yZ/wDDObxUX3lctLWsm+zf+j9ln2Zeu/IIiIrWq+ujNWi2siwbWXDL9pU1BYTlvyaP9VZFb0cMb5JnsjY0Zuc7cAqe0I47sOHcA1tPdanYmgnMjIh8KQEcB61BdIOkS94urH08T5KegLso6aPi7v61nVTglXiGJyuPmsvqeXDtVzgxWno6CMDe62g+6svGOlWxWt8lNbWuuNS3dmw5Rg9/P1Ksr7pOxNcnFsM0dDEf6sLd/wBZ3rZYC0QYjxE5lTXMNsoTv6SUeW4djVjabcJWvB15t9utnSua+m25HyOzL3Z8exdygp8JgqBTR+fJbeddPouXVzYjLCZ3+azu/lRGsv16q/8AibpVy/OlKwHyySHN8j3HtOa+wQzTvEcEUkrzwaxpJP1KUWbRzjO7BrqSw1QY7g+QbA+1WJ8kFOLvIaPkFxmslmNmguPeomitC46E8UUGH6i61NTRbcEZkdAxxJ2Rx35ZZqL4JwHiLFs2VspMoAcn1Eh2WN9fNR48To5I3StkGy3U33L1dQ1LHhhYbnQKLouhbJq/2yNjXXi9VEz+bIGBo+srdnQZgss2Qa8H5XTb/uXIlzdhkbrBxPILosy7XOF9kDmVy+ivrEmgBnRPlw/eHF4zLYalu4//AGCpvE2HbxhuvNFeKKSml5EjyXdoPNdShxejr/UPuezQ9ygVeHVNJ61th28FqURF0lCRFs8PWG73+tFJaKGaql5hg3DvPJW1hzQDXzxNlvt3jpCRmYoG7bh2ZncufW4pSUXr3ge7j3KZTUFRVeqaT4KkkXTdJoJwfFGOmnuFQ4cSZA0H6gvtVoJwfKwiKe4QOPwSJNr71x/zhht9T3Lpfluutew71zGivm4avmcgNvxENg8RNDmR9S9aTV7pwAavEbyeYjgy+9STmfCw2/S/Q/svAYFXE22PqFQKK4dLmiy0YPwlHdKGtq5pxMGP6XLJwPdwVPLqUNdDXRdLCbt07lBqqWSlk6OUWKIi96Kkqa2pZTUkEk80hyaxjcySpRIAuVHAvuC8EVs4S0G4jubGz3ieK0wuyya4bchHcNwU8t2gTC0Mf77X3Cpk6wWsC4VVmXDqZxY6S5HYL/wurBgdbMNoMsPfuXNSLp+fQZguRuUbrhEcuImz+8KM3zV+HRufZr7m/fsx1LOPrC8Yc14ZKbbduYXrLl+tjF9m/IqhkUhxbgzEeFpdi8W6SJmfkyt8qN3rCjysEUrJWh8ZuDxC48kb43bLxYoiIvRfhERERERERERERFM9CXpPsniAoYpnoS9J9k8QFDxHqkvwnwUmi6xHzHiuvURFgy1lVnrJ+jSXxMX3lctrqXWT9Gc3iovvXLS1rJvs3/o/ZZ7mXrvyCIiK1qvr3oKSeurYaOmjMk0zwxjRzJXUmi3RfacM0ENXcaaOqurwHPfIMxF2Dq71UWrfaIrlpAbUTNDm0ULpWg8NrgF1Gcln+cMWljeKSI2Frm275K4Zbw6N7TUSC++wQcMt27gAub9ajzwt3g/xFdILm/Wo877d4P8AEVxMne0x8JXTzH1E8wp/q30NF+r6GsNJCah1RIDIWAu3Zc1aJ45clW2rh6M6fxMvsVk81zsfe44jMCf9ipuENaKOO3YF51UEVVTy007NuKVhY9vWCvG1W+itdDHQ2+nZT08QyYxo3BZR4r8yPZFG6SR7Y2NGZc45ALlCSQt6MHd2KeWM2ts6r6vuS1EeJsOyT9Cy9290meWyJxnmtu0tLQWkEHeCDmCvskEkfptI5hfGSsk9E3QrQ43wrbMWWaS33GJpdkehlA8qN3Xmt+vi+wTSU8gkjNiF8liZKwseLgriLFNlrMPX2qtNawtlgeRn8ocis7R9hWsxdiOG1UoLWHyppMtzGcyrO1qbRHFXWu8xtAdM0wyZDiRvHtUn1ZrDHQ4QlvL2Dp66UtDjxDG8B6z9y1aox8swcVjfTcLDn/d6oEOEB2JGmPojf8v7uVg4Rw1asMWqO32umZEGtAfJl5Uh6yeO871ue9Fh3u5UlntVRc6+To6enYXvd7Flb3y1Ut3XLye9X9rY6eOw3NCzOSFc34n07X2orHsslNBSUwOTHPbtPd29i/OG9O2IaWra28U9PWUxI2thuy8DsKsf5PxHo9uwvbS+/wDZcU5kotvZ327bbl0kV8Wuw5eaHEFmp7rbpOkp525t6weYPaFslVpI3RuLHixGq7rHtkaHNNwVWGsv6OB4pi5dXVGsfTyT6NZnsbmIZ2Pd2BcsAEkADMngtayeR+GjmVn2ZARWnkFtcKWC44kvMNrtsRfLId55MHMldV6OsAWbB1AwQRMnr3AGWpe3N2fMDqHctToHwdHhzCkdfUxNFwrmiR7iN7Wcm+1WNyVVzNmCSpmdTQmzG624n9l38DwhsEYmkF3HT3fynJF8WvvF8s9mj27pcqak5gSSAE+pVFkb5XbLBc+5WFz2xi7jYLY5L4o5b8d4Rr5uhp79ROkJyAMmWakbS1wDmEOad4IOYK/U1NLAbSNI5iy/Mc0cvoOB5LwuNFSXGiko66njqIJBk5kjQQubtM+i1+G3uvFkY+W1uOcjOJhP5LpleNdSwVtHNSVUbZIZmFj2uG4grrYPjM2GygtN28RwIUHEsMiroyCPOGhXCiKVaUcLyYTxbU27ZPudx6SncebDwUVWyQTMnjbIw3BFws0ljdE8sdqEREXqvNERERERERFM9CXpPsniAoYpnoT9J9k8QFDxHqkvwnwUmi6xHzHiuvURFgy1lVprJ+jObxUX3rlpdS6yfo0m8TF95XLS1rJvs3/o/ZZ7mXrvyCIiK1qvq49VbzsuPhPaujuS5x1V/O24+E9q6O5LJM4+0z8IWh5b6kOZQcVzdrT+eFv8J+JdIjiubtabzwt/hPxJk72k3k5MydRPMKyNXD0aQeIk9isk8VWurf6NYPESexWUeK5mO+0Z/iKnYV1KLkF9A3rmHT1jq43XE9TZKOqkht1G4xlsbsukdzJyXTjvgnLqK4lxkScWXUk5n3XJ/mKsOSqWOWofI8XLRuv2niuRmid8cLGNO46rVBzg7aBIPXmrs1d8eXI3tmF7lUOqKaoH7u6Q5ujcOQPUVSSmGhkkaTLJkcv3gfcr1jFLHU0cjJBfcSPcbKp4bUPgqWOYeIXYCIUWGrVFTmtSB71bYct4q/wlS7Qa5h0Y2jY5RkHv2iolrUealu8X+Erz1YMRMqbHVYemlHTUz+lhaeJYeP1FXN9O+XLjHN/1cT8rkfdVpszY8acHf7Nt91c6rrWKbWP0Z1XuXa2RLGZsvkZ81YqxrnQ01yt89BWwiWnnYWPYeYVaw6qFLVRzuFw03XcrIDUQPjBtcWXC6K9sQ6AZ3VskljvETYHElsc7Dm3szHFfmxav9SKtj71eYegafKZTtJLuzMrWfzNhnR7fS/LfdZ5+B123sbHhZS7VnZM3R1nKHBjqp5jz6t2fqVn8lhWO10dmtUFtoIRDTQN2WNCzclk+JVYq6qSZo3OJK0KhgNNTsiJ3gWUO0z7H6sryJOHQH681zBo5tbbzja1W54zZLUNDh2Zq+9ZS/wAVvwYLO2Qe6a948gHfsA7yqi1f42v0m2/a/qhzh35K+5dbJS4LLNoTtEfIWVSxlzJ8Tjj1tYHvXWEbWxxtjYNlrAA0DkBuC+oizQ79VdgovpRxVHhHCU9xGTql/wCzp2Hm8jj7VyNfbxcb3XvrbnVSVEzznm455dg6ldWthUSj9B028RkSSHqJzy9ioZa1lOhjhomzW853H3cAs+zFVvlqjFfzWr6CQcwSCOYV0av+kKthvMWGrvUumpag7NO+Q5mN3V3FUssyyzy013o6iFxbJHM1zSORzXbxKhirad0Ugvu3e4rlUNU+lmbIwruRF+YiXRMceJAK/SwkrVlS+tPZxNZLdeo2DbglMUjuZa7h9q53XV+sNG1+i+tLss2yxkfWuUFr2UZnSYa0HgSByWd5jjDK0kcQCiIis64SIiIiIiIiKZ6EvSfZPEBQxTTQl6T7J4gKHiPVJfhPgpNH1iPmPFdeIiLBlrCgmnm1VF10b10VK0vkgcybZaMyQ3j9i5KXeDmsc0sc0Oa4ZOaRuIVWYp0I4bu1e+so6me3OkcXPZGAWknqB4K9ZZzBT0MRp6jcL3B58CqvjuDTVUgmh3m1iFzEi6F/o+2zP4+qcvowqa0iYfiwvi+tscNQ6oZTFoEjhkTm0H2q7UONUdfIY4HXIF9CqtV4ZU0jA+VtgdysLVW87bj4T2ro/kucdVbzuuPhD966O5LOc4+0z8IVzy31Icyg4rm7Wn88Lf4T8S6RHFc3a0/nfbvCfiTJ3tJvJyZk6ieYVj6t/o0g8RJ7FZXNVtq3+jSDxMvsVk8wuZjntGb4ip+E9Si5BfDwd3FcS4x867r4uT/MV20eDu4riXGPnVdPFyf5irRkX05uQ+64Oa/Qj+a1KmGhn0mWTxA+5Q9S/Q16TLJ4gK+V3VpPhPgqlS+vZzHiuwSiFFgi1pU7rU+adt8Z+AqhsKX2uw3fKe7W9+zNC7eDwcOYKvnWp807b4z8BXPVsoqi5XCChpIzJPO8MY0cyVreVmMdhAbIN3nX71nuPOc3ESWa7rLr7R3je04ytolo5AyrjaDPTni09Y7FKlEdGOCKDBtkZDGwPrpWg1MxG8nmO4KVVMraenlqJD5EbC93cBms0r2QGpc2lvsX3X/unYrxSOm6Brqj0rb7L09SKl3afbWyplifZ59ljy0OD+OR4r8VGsBbGtJgsk73cg54CnjLGKHd0Xgof47Q29Z9D+yutR7G+L7NhO2vq7jUs6XI9HADm956vrVD4i054lr9pltgp7dGebRtO+sqs7rc6+61Tqq4VUtTM45lz3Zru4bkuYvDqtwDewa9/BcqtzPGGltMLntK2eO8UV+Lb/LdK524+TFGODG8gFs9C9a2h0kWiV7g1rptgk9u5Q1e1FUSUlZDUxEh8Tw9pHWCr/JSMNMados21voqiyoeJxM43N7rupFosBX6nxHhaiukEgc58YbKObXgb81vlhE0ToZHRvFiDZatFI2Vge3QqqtZLDs13wlDc6WN0k1veXOa3/2zxOS5jXd8rI5YnRysa+N7S1zXDcQqgxnoLtdzrZKux1pt7nnN0D27TM+zqV7yzmKCmh8mqDYDQ8N/AqrY5gss8nTw776j7rm9TDRDhubEmNqGnETnU0MglqHZbg0b1YVv1fKszj3ffoWxA7+ijJcQrgwThKzYRtvuO1Q7O1l0krt7pD1krrYxmmljgcymdtPO4dg991zcNwCoklDphstG/fxW+REy3rKlflVuszcGUuAGUZdlJVVIDR1gbyuYVa2sjieK84qjtVLIH09uaWkjgXniqpWz5apHUuHMa7U7+/8AhZpjdQJ6xxboN3ciIi7y5KIiIiIiIiKaaEvShZPEBQtSjRTcaS04/tNfWyiKninBe88AOtRK9pdSyBuuyfBSKRwbOwnS48V2Tmma0oxZhh28YgtmXiW/mvvvrwz/AHhtn8y381h3kVT+g9xWp+Uw/rHeFud6b1pvfXhj+8Ns/mm/mvvvqwyP/UFs/mW/mvvkVT+g9xTyiH9Y71uOtckaevSrePnR/wD5tXTvvswxwOILZn4lv5rlzTZV01bpLutTR1EdRA9zNmSN200+Q0birhkuCWOteXtI83iPeFW8zTRvpmBpB3/YqX6q3ndcfCe1dHLmXVpudvtmKq6S41sFIx9KWtdK8NBOfDMroH304Zy+P7Z/NN/NRs3U00mIksaSLDgvfLs0bKMBzgN5W5C5u1qPPG3+E/Er499WGP7wWz+Zb+a581lblb7liyhlt9bBVsbS5OdC8OAO12L5lGmmjxAF7SBY8PcvuYZ430RDXAm4VpauHozg8RL7FZSqPV+v9koNHsNNW3aipphUPJZLMGnI5cirE99WGc/j+2fzLfzXNxuknfiMxaw22jwKm4XURNo4wXDQcVt3cHdx+5cS4w86rp4qT/MV2E7FWGcnH3wWzgf/ADLfzXHWKpY5sS3KWJ7XxvqZC1zTmCNo71ZskwSRPl22kaajmuHmiVj2R7JvqtYpfoa9Jlk8QFEFKtE1VT0WkKz1NVMyGFlQC97zkGjtKu9aCaaQDsPgqtSm0zCe0eK7HJTMrT++vDP/AD+2/wAy38099eGf+f23+Zb+aw7yKp/Qe4rVPKYf1jvVaa1PmnbfGfhKq/QDHFJpRtYkaHZbbmg/KDTkrB1lr1aLlhe3xW+50lVI2rzLYZQ4gbJ37lTOCay52/FFBW2iCSesimDo42DMu7FpuBU73YI6I+aSHa7lRsVmaMUEg3gbOi7XSRrHxuje0Oa5pa4HmCvC2zzVVup6iop3000kYc+Jx3sJ4he6ysgxutxCvwIcFW1foUwXV1ktT0VXEZHFxZHLk0Z9S8P1GYL/APn/AMf/AEVo70yXVGPYkNwmcoH4TRHeYgqu/UZgvrr/AON/osSu0C4YlZ+6V9dTu6yQ4K3PWnrX6bmDE2uuJj81+XYPRO3dEFzHjPQpf7NDJV2uVlzp2DMhgykA7ufqVWyxyQyOjlY5j2nJzXDIgru7mqO1kMD0xoffXbYBHKxwbWNYMg4Hg7JXDAM1PqZRT1VrnQ6d6rmL4A2CMzQaDUKD6EcfuwpdxQV7ybXVOAk/7Z+UupKWogqqZlTSzMmhkaHMew5ghcJqdaOdJl7wg9tO13uu3l2bqeQ8B/0nkpeYcteXE1FPuk4+/wDlR8GxzyUdDN6Pb2fwutyhUEwppXwjfY2B1e2gqDuMVSdnf38FMqavoqqISU1XTysPNkgIWbVNFUUzi2ZhaeSu0FVDONqNwIWQi/JliAzMjAPnBaW84vwzaI3Pr73RxbPFokDnfUF4RQSynZY0k+4L9vmZGLvIC3qrjTLpEpcLWuS30MjJbrO0hrQf90DzPsChmPtOnSRPo8K07mk5g1Uo3j5oVH19XU11XJVVk75ppDtPe85klXrAsqSF4mrBZo0b281V8WzCwMMVMbk6n9l5zyyTzvmleXyPcXOceJJX4RFowFlSkREREREREREREREREREREREREREREREREREREREREREREREREzKIiIi6f0A4Io7NhyC+1UTZLjXM22ucN8bDwA7+K5hZltDPhnvXbODHxyYRtD4iCw0cWWXzQqbnSqkipWRs0cd/7KzZYp2SVDnu1aNy2/Yq90145r8E2uiktsEUk9VIW5ygkNA7ArCWjxphWz4ttX6Pu8Je1h2o5GHZcw9YKzzDJKeOqY+pF2DUfL7FXGuZM+BzYDZ3Aqgv184u/stt/hH80/Xzi7+y27+GfzUjr9XthkcaHERazk2WHM/WMljf0eq3PfiOmy+gP5rQmz5aIuA3uKp5ixwG13d4Wni09YsbIHPo7c9oO9uwRn9qvDRpixmMcMR3ZsHueTbMcrBwDhxy71W1t1fKRkzXXHEEksYIzZDFsk+sq3MLWG24as8VqtUJjgj37zmXHrPWVXsfnwZ0IbRt88HhcCy7GERYm2Qmpd5tuJuVtOS0OkOjbXYHvFLJwfSP+wLfclFtLFzZadH13qnva1zoHRszPwnO3BVvD2vdVxBmtx4rtVjmineXaWK43REW8LJkXvBV1UBzhqZo/mvIXgi+EA6r6DbRZkt0uUrdmSvqnjqMrj7ViOc5xzc4k9ZK+IgaG6BC4nVERF9XxERERERERERERERERERERZFBST1tQ2CBm08/YpXQ4ct8DQaovqJOYB2Wg+1MLUjae3ibLKSbeTzy5LzxHe30T/clGQJcv2knyewKA+WSSTYjO4KayNkbNuTVbI2m1bORtjAOsE5rWXHDNLMxzrfI6OTLdG85g9gKj0d1uLJOkFXLnnnvcpVZLxFXQfvEsUM7fhFxyB7e9fHsnhG0DdfWvhlOyRZQueKSGV0UrS17TkQeSyLXb6i41Ahgb85x4ALeY1hpX9BVQzxSTO8h4Y8HPqK2thpBR26ONrRtyAOeeZPHJeslTsxh1t5Xkyn2pNm+4Lxo8P2unYOma+qk5knZb6lkS2e0SMIdQdGPlMcQftWBiG+uo5XUlHsmVvw5DvyPUFoGXq5sl6QVkhPME5g+peTI53jaLrL1dJCw7Ibdbeowxs1kRp3umpnPAeCMnN71lV9jtcdDPJHFK17Iy5pL8wvawXgXBhZJlHUsH9XcHj81lXT4tqfo3LzdLKHhrjovRsURYXNCg9shZUXCCGT4D3gHuUtmw5b5aeVtJBL04aSzy88yFFbJ8bU30gU/jz2x5Wz1u6l7VUr2PGyV5U0bXtO0Fpbdhujp2B1cXTTc2A5Nb3rTYvpKejvBipY+jjMbXbOeeRI3rPuGKJGVDmUMMYY05bT27RKxbYZb5fBUVpDgxubshuyHAL9R9K0l8h3L8P6NwDGDev1ZcOvqom1FZI6GF3wQB5Tv9FIILNaYm5MoOly5vcSSv3cqxlHRuqZACGjJresqH1t7uFTJtGd0bRwazcAvJpmqLkGwXq4RQWBFypVUWS0TAtNK6A8nRuUavtkmtuUrH9NTk5B44jsI5L9WzEFZTyBs7zPFzDuI7lL29FU02y4B8E7OfUhfLA4bRuF8DI5x5osVW66F1fNIdHJbosLXedsE8P8Awsj3ZNePkntVBXCndS1s1O7PyHEb+peDHOY4Oa4tcDmCDvC+YnhsWJU/RScwewr5Q1slDN0jPmO1d4DeN2Rz4EIuTsIaWsV4fiZTmobXUzdwjqN5A7DxVi2nWAtz2tFzs08Tv6xheHDt4rNqvKGIQu/xgPHuP2NldqfMVHKBtnZP94q7E3qsafTfgqUZvfWwnqdEvc6acDAZisqj2dAuacBxIbuhcpwxeiP/AKBWPx4pw4Kqa3TthGIEQU9dORwyYAFFL7p+rHtcyzWeOHPMCSZ+0fqUmHLGJyut0dveTb+9y8JcdoYxfbvyV8XKvo7bRPrK6pjp4IwS573ZLmHTbpDOLa9lvt5c210ziW/913yiopirF+IMTTmS63CSVue6MHJg9S0CvGBZYZh7ummO0/6Dkqti2OurG9FGLN+pRERWxV5ERERERERERERERERERERERERERERF9bvcB2r4g3FEVi25obTQNHAABQO6OL7jUOdx6Q/eptZZxNboJGk5ho+sKJ4kpH0t0lJB2JTtsPXmudRmz3NOqn1QuxpC1iItlabNU3GJ0sbmMY05Zv5qe5waLlQWtLjYLDoxtVcQO8F4Vjw/71p6gT9ihFys89pZDUyzRPDn5ANO/cpjQztkjimbvDmgqBWODtlw0U6lBbtNOqrypcX1EjnHMlxJXmtjiCgkobg8OaejedpjstxBWuU9pDgCFBcCDYrPsDi270+R4vAPcpjdPi2p+iP3KN4Tt8k9X7rcCIod+fWVJLr8W1P0RUCqcDK0KfTNIiJUMsfxtTfSBTiuJbbqpw4iF2Sg1k+Nqb6QKb3L4rq/oivtV61v94r803q3KvFJsEtH7y7nkAoyt9g2cMrJISfht8nvUmpBMRso9ObSBSWto4K2JsVQ1zmh20ADksQWC2c6Z/8AjK+4jZUuthkpJHNfE7aOyciQoh+kK7+1zf4yocEUj2Xa6ylzSMa6zmqYfoK1cPcjv8ZWdFE2KJkUTC1jG5AZ5qBx11xfI1jKqcuccgA471uGWnEbgCKg5nkZ96/UlO61nvX5ZM292MWJjIAX2QjLe1pPfktMvWrMxqHid5fIDk4k5ryU6Nuy0BQnu2nEoiIv2vyiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIt1hy6ijf0E5PQuOYPySpVPDS11OGTMZNEd7SDw7iFXayKWtqqY/sJ3s7Adyiy0207babFSYqjZbsuFwpczDtpa/aInfv+CXblsHmmo6XN2xBTsG4KFm+XLZy6fLtyWHU1VRUO2p5nyHtK8/JpHn/I5fvyhjPQasu/XJ1xq9oZiFm6NvUOtZ+GbsyACkqXZMJ8hx5dij6KS6FrmbHBR2yua/b4qyJo4KqDop4mTxHeM+XcVr2WC0Nl2+gld1ML9yiVLca2mGUNQ9rerPcvaW9XKRuyalwH/TuUUU0rTZrtykmojdvc3epnJUUdG+GkOzHtENZFHyz5lfi6j/ZlT9GVAuml6US9I4yA57RO9ZEl0uEkbo31UjmuGRBPFfTRkEEFBV7iCEsvxrTfSBTa4/FlX9EVX8b3RvD2OLXNOYI5LKkudfJEYn1UjmO3EE7ivWaAyODgdF5RTBjS0jVYa9KeZ8EzZY3FrmnMFeaKSo6nVnukFdCBtBsoGTmnmvlVYrZUybZjfE48ejO4+pQdjnMdtNcWnrBWfDeLjEMm1LiO3eoRpXNN43WUwVLXC0gupdb7VQULxJTxF0g4Pecz6gsW/wB4jooXRQSB9S8ZZg/A6z3qMz3WvmGT6l+XUNywiSTmTmV9ZSku2pDdfH1A2dlgshJJJJzJXxEUxRERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERF//9k=" alt="Lingocare" style="height:36px;width:auto;filter:brightness(0) invert(1)"></div>
+        <p class="ft-tag" data-t="ft_tag"></p>
+      </div>
+      <div>
+        <div class="ft-col-h" data-t="fc1h"></div>
+        <ul class="ft-links"><li><a href="#" data-t="fc1a"></a></li><li><a href="#" data-t="fc1b"></a></li><li><a href="#" data-t="fc1c"></a></li></ul>
+      </div>
+      <div>
+        <div class="ft-col-h" data-t="fc2h"></div>
+        <ul class="ft-links"><li><a href="#" data-t="fc2a"></a></li><li><a href="#" data-t="fc2b"></a></li><li><a href="#" data-t="fc2c"></a></li><li><a href="#" data-t="fc2d"></a></li></ul>
+      </div>
+      <div>
+        <div class="ft-col-h" data-t="fc3h"></div>
+        <ul class="ft-links"><li><a href="#" data-t="fc3a"></a></li><li><a href="#" data-t="fc3b"></a></li><li><a href="#" data-t="fc3c"></a></li><li><a href="#" data-t="fc3d"></a></li></ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span class="ft-copy" data-t="copy"></span>
+      <div class="soc">
+        <div class="soc-i">in</div>
+        <div class="soc-i">𝕏</div>
+        <div class="soc-i">▶</div>
+        <div class="soc-i">📷</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+// ════ HIDE-ON-SCROLL NAV ════
+let lastScrollY = window.scrollY;
+let navHideTimer;
+const navEl = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  const curr = window.scrollY;
+  if (curr > lastScrollY && curr > 80) {
+    // scrolling down — hide nav
+    navEl.classList.add('hidden');
+    navEl.classList.remove('scrolled');
+  } else {
+    // scrolling up — show nav
+    navEl.classList.remove('hidden');
+    if (curr > 10) navEl.classList.add('scrolled');
+    else navEl.classList.remove('scrolled');
+  }
+  lastScrollY = curr;
+}, { passive: true });
+
+// ════ INIT ════
+applyLang();
+
+// ════ REVEAL ON SCROLL ════
+const ro = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+},{threshold:0.12});
+document.querySelectorAll('.rev').forEach(el=>ro.observe(el));
+// Fire items already in viewport
+document.querySelectorAll('.rev').forEach(el=>{
+  if(el.getBoundingClientRect().top<window.innerHeight*.9)el.classList.add('in');
+});
+
+// ════ AI CHAT TYPEWRITER ════
+function typeText(el,text,speed=14){
+  el.textContent='';
+  let i=0;
+  // show typing indicator
+  el.textContent='●  ●  ●';
+  el.style.color='var(--muted)';
+  setTimeout(()=>{
+    el.textContent='';
+    el.style.color='';
+    function tick(){if(i<text.length){el.textContent+=text[i++];setTimeout(tick,speed);}}
+    tick();
+  },900);
+}
+function initChats(){
+  const schEl=document.getElementById('chat-sch-ai');
+  const eduEl=document.getElementById('chat-edu-ai');
+  const learnEl=document.getElementById('chat-learn-ai');
+  const eduSub=document.getElementById('edu-chat-sub');
+  if(schEl)typeText(schEl,T[lang].chat_sch_ai);
+  if(eduEl)typeText(eduEl,T[lang].edu_chat_ai);
+  if(learnEl)typeText(learnEl,T[lang].l_chat_ai);
+  if(eduSub)eduSub.textContent=T[lang].edu_chat_sub||'';
+}
+initChats();
+
+// ════ HERO PARALLAX ════
+const heroDb=document.getElementById('hero-db');
+window.addEventListener('scroll',()=>{
+  if(!heroDb)return;
+  const y=window.scrollY;
+  heroDb.style.transform=`perspective(1400px) rotateX(${Math.max(0,5-y*.01)}deg) translateY(${y*.05}px)`;
+},{passive:true});
+
+// ════ SVG CONNECTOR LINES (sys section) ════
+const sysPaths=['lS','lL','lE'];
+const sysDots=document.querySelectorAll('.sys-dot');
+const sysSection=document.querySelector('.sys-diagram');
+const sysObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){
+    const lengths=[400,280,400];
+    sysPaths.forEach((id,i)=>{
+      const p=document.getElementById(id);
+      if(!p)return;
+      p.style.strokeDasharray=lengths[i];
+      p.style.strokeDashoffset=lengths[i];
+      setTimeout(()=>{
+        p.style.transition=`stroke-dashoffset ${i===1?.7:.9}s ease-out`;
+        p.style.strokeDashoffset='0';
+      },i*200);
+    });
+    sysDots.forEach((d,i)=>{
+      setTimeout(()=>{d.style.transition='opacity .3s';d.style.opacity='1';},i*200+700);
+    });
+    sysObs.disconnect();
+  }
+},{threshold:.3});
+if(sysSection)sysObs.observe(sysSection);
+
+// ════ FEATURE ACCENT BAR HOVER ════
+document.querySelectorAll('.cc').forEach(card=>{
+  const bar=card.querySelector('.feat-bar');
+  if(!bar)return;
+  card.addEventListener('mouseenter',()=>bar.style.width='100%');
+  card.addEventListener('mouseleave',()=>bar.style.width='48px');
+});
+
+// ════ SCROLL INDICATOR ════
+const featSecs=['sec-schools','sec-educators','sec-learners'];
+const scrollInd=document.getElementById('scroll-ind');
+function updateScrollInd(){
+  const pips=scrollInd.querySelectorAll('.si-pip');
+  let active=0;
+  featSecs.forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight/2)active=i;
+  });
+  pips.forEach((p,i)=>p.classList.toggle('active',i===active));
+  const inRange=featSecs.some(id=>{
+    const el=document.getElementById(id);
+    if(!el)return false;
+    const r=el.getBoundingClientRect();
+    return r.top<window.innerHeight && r.bottom>0;
+  });
+  scrollInd.classList.toggle('show',inRange);
+}
+function scrollToSec(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'})}
+window.addEventListener('scroll',updateScrollInd,{passive:true});
+
+// ════ STEPS STICKY ANIMATION ════
+const stepsOuter=document.getElementById('steps-outer');
+const stepsHeadFull=document.getElementById('steps-head-full');
+const stepsHeadL=document.getElementById('steps-head-left');
+const stepsHeadR=document.getElementById('steps-head-right');
+const stepsPathWrap=document.getElementById('steps-path-wrap');
+const spProg=document.getElementById('sp-prog');
+const stepCards=[document.getElementById('sc1'),document.getElementById('sc2'),document.getElementById('sc3')];
+const pathDots=[document.getElementById('pd1'),document.getElementById('pd2'),document.getElementById('pd3')];
+
+function animateSteps(){
+  if(!stepsOuter)return;
+  const r=stepsOuter.getBoundingClientRect();
+  const totalH=stepsOuter.offsetHeight-window.innerHeight;
+  const scrolled=Math.max(0,-r.top);
+  const p=Math.min(1,scrolled/totalH); // 0→1 through whole section
+
+  // Phase 0→0.12: heading fully centered, fade in
+  const headOpacity=Math.min(1,p/0.08);
+  stepsHeadFull.style.opacity=headOpacity;
+
+  // Phase 0.12→0.22: head splits
+  const splitP=Math.max(0,Math.min(1,(p-0.12)/0.10));
+  stepsHeadL.style.opacity=splitP;
+  stepsHeadL.style.transform=`translateX(${(1-splitP)*-40}px)`;
+  stepsHeadR.style.opacity=splitP;
+  stepsHeadR.style.transform=`translateX(${(1-splitP)*40}px)`;
+  // Full head fades out as split happens
+  if(p>0.12)stepsHeadFull.style.opacity=Math.max(0,1-splitP*2);
+
+  // Path shows after split
+  stepsPathWrap.style.opacity=splitP>0.5?1:0;
+
+  // Path progress fill: 0.22→1.0 maps to 0→1000
+  const pathP=Math.max(0,Math.min(1,(p-0.22)/0.78));
+  if(spProg)spProg.style.strokeDashoffset=1000*(1-pathP);
+
+  // Step 1: p=0.30→0.40
+  const s1p=Math.max(0,Math.min(1,(p-0.30)/0.10));
+  stepCards[0].style.opacity=s1p;
+  stepCards[0].style.transform=`translateX(${(1-s1p)*50}px)`;
+  stepCards[0].style.pointerEvents=s1p>.5?'all':'none';
+  pathDots[0].classList.toggle('active',p>0.35);
+
+  // Step 2: p=0.55→0.65
+  const s2p=Math.max(0,Math.min(1,(p-0.55)/0.10));
+  stepCards[1].style.opacity=s2p;
+  stepCards[1].style.transform=`translateX(${(1-s2p)*-50}px)`;
+  stepCards[1].style.pointerEvents=s2p>.5?'all':'none';
+  pathDots[1].classList.toggle('active',p>0.60);
+
+  // Step 3: p=0.78→0.88
+  const s3p=Math.max(0,Math.min(1,(p-0.78)/0.10));
+  stepCards[2].style.opacity=s3p;
+  stepCards[2].style.transform=`translateX(${(1-s3p)*50}px)`;
+  stepCards[2].style.pointerEvents=s3p>.5?'all':'none';
+  pathDots[2].classList.toggle('active',p>0.83);
+}
+window.addEventListener('scroll',animateSteps,{passive:true});
+animateSteps();
+
+// ════ LIVE CLOCK ════
+function tick(){
+  const el=document.getElementById('live-clock');
+  if(!el)return;
+  const n=new Date();
+  el.textContent=n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0');
+}
+tick();setInterval(tick,30000);
+
+// ════ COUNT-UP ════
+const cu=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target,target=parseInt(el.dataset.count),dur=800;
+    let s=0;const step=target/(dur/16);
+    const t=setInterval(()=>{s+=step;if(s>=target){el.textContent=target;clearInterval(t);return;}el.textContent=Math.floor(s);},16);
+    cu.unobserve(el);
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>cu.observe(el));
+
+// ════ TRUST ROTATE — keep in sync on lang switch ════
+// The CSS animation handles it; just re-apply text on switch.
+// Override switchLang to also re-init chats
+const _origSwitch=window.switchLang;
+window.switchLang=function(l){_origSwitch(l);setTimeout(initChats,400)};
+</script>
+</body>
+</html>
