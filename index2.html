@@ -136,46 +136,6 @@ nav.scrolled{box-shadow:0 2px 20px rgba(28,20,16,.08)}
 .f-chip.c3{animation-name:flt3}
 @keyframes flt3{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
 
-/* ── HERO DASHBOARD SWITCHER ─────────────────────── */
-.db-panel{position:absolute;top:0;left:0;width:100%;opacity:0;transition:opacity .7s ease;pointer-events:none}
-.db-panel.active{opacity:1;position:relative;pointer-events:all}
-.db-panels-wrap{position:relative;min-height:200px}
-/* staff grid new */
-.sg7{display:grid;grid-template-columns:60px repeat(5,1fr);gap:2px;font-size:9px}
-.sg7-lbl{color:var(--muted);padding:2px 0;display:flex;align-items:center}
-.sg7-hdr{color:var(--muted);font-weight:700;text-align:center;padding:2px 0}
-.sg7-cell{width:20px;height:20px;border-radius:3px;background:var(--border-light)}
-.sg7-cell.gd{background:#1A6B3A}.sg7-cell.gm{background:#2D8C5E}.sg7-cell.gl{background:#A8D4B8}.sg7-cell.gy{background:#D4ECD8}
-/* hw list */
-.hw-list-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border-light)}
-.hw-list-row:last-child{border:none}
-.hw-mod{font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;background:var(--orange-light);color:var(--orange);white-space:nowrap}
-.hw-mod.m2{background:#E8F0FE;color:#3B5BDB}
-.hw-mod.m4{background:#FFF0E0;color:#D97706}
-.hw-mod.m5{background:#E8F5EE;color:#2D8C5E}
-.hw-assignee{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--muted);margin-top:2px}
-.hw-avatar{width:12px;height:12px;border-radius:50%;background:var(--orange);display:inline-flex;align-items:center;justify-content:center;font-size:7px;color:#fff;font-weight:700}
-/* exam prep */
-.exam-stat{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-light);font-size:11px}
-.exam-val{font-weight:700;color:var(--dark)}
-/* donut chart */
-.donut-wrap{display:flex;align-items:center;justify-content:center;padding:6px 0}
-/* radar chart polygon */
-.radar-wrap{position:relative;width:80px;height:80px}
-/* mat tiles */
-.mat-tile{border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:6px}
-.mat-img{height:44px;display:flex;align-items:center;justify-content:center;font-size:22px;position:relative}
-.mat-badge{position:absolute;top:3px;left:5px;font-size:8px;font-weight:700;padding:2px 5px;border-radius:4px;color:#fff}
-.mat-badge.pub{background:var(--green)}.mat-badge.unl{background:var(--muted)}
-.mat-body{padding:6px 8px}
-.mat-tag{display:inline-block;font-size:8px;padding:1px 5px;border-radius:4px;margin-right:3px;margin-top:3px}
-.mat-tag.cs{background:var(--orange-light);color:var(--orange)}
-.mat-tag.lec{background:#E8F0FE;color:#3B5BDB}
-.mat-tag.lv{background:var(--green-light);color:var(--green)}
-/* chip sets */
-.chip-set{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity .7s}
-.chip-set.active{opacity:1}
-
 /* draw-on SVG */
 .dr{stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 1.6s ease-out forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
@@ -375,55 +335,8 @@ de:{
   dla:'Klasse A', dlb:'Klasse B', dxokt:'Okt', dxnov:'Nov', dxdez:'Dez', dxjan:'Jan', dxfeb:'Feb',
   dsl:'Mitarbeitereinsatz – Feb.',
   ds1:'M. Krause', ds2:'T. Hoffmann', ds3:'S. Weber', ds4:'A. Fischer',
-  // Schools chips
-  s_fc1:'89% Kursabschluss ↑4%', s_fc2:'Lehrplan 09/12 Einheiten', s_fc3:'KI-Warnung: 2 bei Risiko',
-  // Educators chips
-  e_fc1:'84% Hausaufgaben erledigt', e_fc2:'Klassen-Materialien: 3 neu', e_fc3:'2 Module im Rückstand',
-  // Learners chips
-  l_fc1:'89% Prüfungsbereitschaft', l_fc2:'12 Tage bis zur Prüfung', l_fc3:'Top-Kandidat ↑',
+  fc1:'89% Kursabschluss ↑4%', fc2:'Lehrplan 09/12 Einheiten', fc3:'KI-Warnung: 2 bei Risiko',
   dfn:'Nächste: Mo. 08:00 — Hygiene & Infektionsschutz', dfp:'Montag',
-
-  // ─ SCHOOLS DASHBOARD ─
-  s_dbt:'Schulübersicht', s_dbs:'Zuletzt aktualisiert: vor 14 Min',
-  s_risk_lbl:'Risiko erkannt', s_risk_badge:'4 Neu',
-  s_r1:'Geringe Beteiligung', s_r1s:'Klasse A2  ·  vor 1 Std.',
-  s_r2:'Anwesenheitsabfall um 21%', s_r2s:'Lehrkräfte  ·  vor 1 Std.',
-  s_r3:'Herr Schmidt arbeitet 52 Std. diese Woche', s_r3s:'Abteilung B2  ·  vor 3 Std.',
-  s_chart_t:'Klassen-Lehrplanfortschritt',
-  s_leg_plan:'Geplant', s_leg_a2:'Klasse A2', s_leg_b1:'Klasse B1', s_leg_b2:'Klasse B2',
-  s_staff_t:'Mitarbeitereinsatz & Tracking',
-  s_col_m:'M', s_col_t:'D', s_col_w:'M', s_col_th:'D', s_col_f:'F',
-  s_n1:'Schmidt', s_n2:'Sarah', s_n3:'Brown', s_n4:'James', s_n5:'Adams', s_n6:'Charlie', s_n7:'Jessica',
-
-  // ─ EDUCATORS DASHBOARD ─
-  e_dbt:"Lehrkräfte-Dashboard", e_dbs:'Zuletzt aktualisiert: vor 14 Min',
-  e_hw_t:'Personalisierte Hausaufgaben zur Stärkung der Schülerfähigkeiten.',
-  e_hw1:'Ethische Praxis', e_hw1m:'Modul 2', e_hw1d:'20 Min', e_hw1a:'Sara Kukovec',
-  e_hw2:'Grundhygiene', e_hw2m:'Modul 5', e_hw2d:'10 Min', e_hw2a:'Ether Brown',
-  e_hw3:'Infektionskontrolle', e_hw3m:'Modul 4',
-  e_mat_t:'Unterrichtsmaterialien', e_mat_btn:'Material erstellen',
-  e_mat1_t:'Hygiene-Beurteilung', e_mat1_d:'Standard-Verfahren für neue Patientenaufnahmen.', e_mat1_tags:'Fallstudie · Niveau C1',
-  e_mat2_t:'Körper-Analogie', e_mat2_d:'Standard-Verfahren für neue Patientenaufnahmen.', e_mat2_tags:'Vortrag · Niveau B2',
-  e_mat3_t:'Seniorenpflege', e_mat3_d:'Standard-Verfahren für neue Patientenaufnahmen.', e_mat3_tags:'Fallstudie · Niveau A2',
-  e_mat_read:'5 Min Lesen',
-  e_scores_t:'Schülernoten',
-  e_sc_a:'Anatomie', e_sc_m:'Mikrobiologie', e_sc_p:'Physiologie',
-
-  // ─ LEARNERS DASHBOARD ─
-  l_dbt:'Lernbereich', l_dbs:'Zuletzt aktualisiert: vor 14 Min',
-  l_hw_t:'Personalisierte Hausaufgaben zur Stärkung deiner Prüfungsfähigkeiten.',
-  l_hw1:'Ethische Praxis', l_hw1m:'Modul 2', l_hw1d:'20 Min', l_hw1a:'Sara Kukovec',
-  l_hw2:'Grundhygiene', l_hw2m:'Modul 5', l_hw2d:'10 Min', l_hw2a:'Ether Brown',
-  l_hw3:'Infektionskontrolle', l_hw3m:'Modul 4',
-  l_exam_t:'Prüfungsvorbereitung',
-  l_exam_time:'Verbleibende Zeit', l_exam_time_v:'12 Tage',
-  l_exam_cov:'Abgedecktes Material', l_exam_cov_v:'65%',
-  l_exam_tgt:'Zielergebnis', l_exam_tgt_v:'85%',
-  l_exam_btn1:'Themen wiederholen', l_exam_btn2:'Probeprüfung üben',
-  l_ready_t:'Berufliche Bereitschaft',
-  l_skill1:'Soziale Kompetenzen', l_skill1_v:'78%',
-  l_skill2:'Klinische Fähigkeiten', l_skill2_v:'92%',
-  l_placement:'Bereit für Praktika', l_placement_v:'Top-Kandidat',
   // trust
   tt:'KI unterstützt — Lehrende entscheiden',
   th_de:'Vertraut dort, wo Bildung am meisten zählt.',
@@ -470,25 +383,6 @@ de:{
   edu_chat_ai:'Am Donnerstag um 10:00 Uhr haben Sie Infektionsprävention geplant. Ich habe einen Unterrichtsablauf vorbereitet — kurze Wiederholung, eine Kerneinheit und zwei differenzierte Übungsaufgaben nach Lernniveau. Sie können alles vor dem Unterricht anpassen.',
   edu_b1:'Unterrichtsplan öffnen', edu_b2:'Bibliothek durchsuchen',
   perf_t:'Klassenleistung KW09', p1l:'Hausaufgaben', p2l:'Kursleistung',
-  // educators extra cards
-  lib_t:'Unterrichtsmaterialien', lib_published:'Veröffentlicht', lib_unlisted:'Unveröffentlicht',
-  lib1_title:'Hygiene-Beurteilung', lib1_desc:'Standard-Verfahren für neue Patientenaufnahmen.',
-  lib1_tags:'Fallstudie · Niveau C1',
-  lib2_title:'Körper-Analogie', lib2_desc:'Standard-Verfahren für neue Patientenaufnahmen.',
-  lib2_tags:'Vortrag · Niveau B2',
-  lib3_title:'Seniorenpflege', lib3_desc:'Standard-Verfahren für neue Patientenaufnahmen.',
-  lib3_tags:'Fallstudie · Niveau A2',
-  lib_read:'5 Min Lesen',
-  alerts_t:'Warnungen', alerts_new:'3 Neu',
-  alert1:'Lehrplan-Unterricht hinter dem Zeitplan', alert1s:'2 Module verzögert',
-  alert2:'Bevorstehendes Lehrertreffen',
-  alert3:'Aktionspunkte vom letzten Treffen',
-  curr_prog_t:'Lehrplanfortschritt', curr_planned:'Geplant', curr_actual:'Tatsächlich',
-  curr_ahead:'+40% Voraus',
-  scores_t:'Schülernoten',
-  scores_a:'Anatomie', scores_m:'Mikrobiologie', scores_p:'Physiologie',
-  perf_stat_t:'Leistungsstatistik',
-  perf_low:'Schwache Leistung', perf_avg:'Durchschnittliche Leistung', perf_high:'Starke Leistung',
   // learners feat
   f3_eye:'Für Lernende',
   f3_h:'<em class="accent">Personalisiertes</em> Lernen für jede lernende Person.',
@@ -496,10 +390,6 @@ de:{
   f3_cta:'Für Lernende entdecken',
   lc1t:'Personalisierte Hausaufgaben', lc1b:'KI-generierte Aufgaben, die deine Schwachstellen gezielt stärken — und täglich angepasst werden.',
   lc2t:'Interaktive Lernszenarien', lc2b:'Schritt-für-Schritt durch klinische Situationen. Üben, verstehen, anwenden.',
-  sc1_title:'Patientenaufnahme', sc1_desc:'Patienten in einer belebten Krankenhausumgebung einschätzen und priorisieren.', sc1_time:'18 Min', sc1_tag:'Grundlagen',
-  sc2_title:'Hygienepflege', sc2_desc:'Wesentliche Hygienepflegepraktiken, einschließlich persönlicher Pflege.', sc2_time:'30 Min', sc2_tag:'Grundlagen',
-  sc3_title:'Infektionskontrolle', sc3_desc:'Schwerpunkt auf Infektionsprävention durch Schutzprotokolle.', sc3_time:'20 Min', sc3_tag:'Fortgeschritten',
-  sc_btn:'Szenario starten',
   lc3t:'Gemeinsam lernen', lc3b:'Gruppenlernen mit deiner Kohorte — schneller, klarer, zuversichtlicher.',
   daily_title:'Tägliche Übungseinheiten',
   daily_g:'Guten Morgen, Leonie 👋',
@@ -531,7 +421,7 @@ de:{
   tm_cta:'Unser Team',
   // footer
   ft_tag:'Love to Learn',
-  fc1h:'Für', fc1a:'Schulen', fc1b:'Lehrkräfte', fc1c:'Lernende',
+  fc1h:'Für', fc1a:'Schulen', fc1b:'Lehrende', fc1c:'Lernende',
   fc2h:'Unternehmen', fc2a:'Datenschutzerklärung', fc2b:'Support', fc2c:'Nutzungsbedingungen', fc2d:'Impressum',
   fc3h:'Schnelllinks', fc3a:'Demo vereinbaren', fc3b:'Pilotpartner werden', fc3c:'Über uns', fc3d:'Kontakt',
   copy:'© 2025 Lingocare. Alle Rechte vorbehalten.'
@@ -555,55 +445,8 @@ en:{
   dla:'Class A', dlb:'Class B', dxokt:'Oct', dxnov:'Nov', dxdez:'Dec', dxjan:'Jan', dxfeb:'Feb',
   dsl:'Staff Allocation – Feb',
   ds1:'M. Krause', ds2:'T. Hoffmann', ds3:'S. Weber', ds4:'A. Fischer',
-  // Schools chips
-  s_fc1:'89% Course Completion ↑4%', s_fc2:'Curriculum 09/12 Units', s_fc3:'AI Alert: 2 at risk',
-  // Educators chips
-  e_fc1:'84% Homework completed', e_fc2:'Class Materials: 3 new', e_fc3:'2 Modules behind',
-  // Learners chips
-  l_fc1:'89% Exam Readiness', l_fc2:'12 days to exam', l_fc3:'Top Candidate ↑',
+  fc1:'89% Course Completion ↑4%', fc2:'Curriculum 09/12 Units', fc3:'AI Alert: 2 at risk',
   dfn:'Next: Mon 08:00 — Hygiene & Infection Control', dfp:'Monday',
-
-  // ─ SCHOOLS DASHBOARD ─
-  s_dbt:'School Dashboard', s_dbs:'Last updated: 14 mins ago',
-  s_risk_lbl:'Risk Detected', s_risk_badge:'4 New',
-  s_r1:'Low engagement', s_r1s:'Class A2  ·  1h ago',
-  s_r2:'Attendance drop by 21%', s_r2s:'Teachers  ·  1h ago',
-  s_r3:'Mr. Smith is working 52hrs this week', s_r3s:'Department B2  ·  3h ago',
-  s_chart_t:'Class Curriculum Progress',
-  s_leg_plan:'Planned', s_leg_a2:'Class A2', s_leg_b1:'Class B1', s_leg_b2:'Class B2',
-  s_staff_t:'Staff Allocation & Tracking',
-  s_col_m:'M', s_col_t:'T', s_col_w:'W', s_col_th:'T', s_col_f:'F',
-  s_n1:'Smith', s_n2:'Sarah', s_n3:'Brown', s_n4:'James', s_n5:'Adams', s_n6:'Charlie', s_n7:'Jessica',
-
-  // ─ EDUCATORS DASHBOARD ─
-  e_dbt:"Educator's Dashboard", e_dbs:'Last updated: 14 mins ago',
-  e_hw_t:"Personalized homework designed to strengthen student's skills.",
-  e_hw1:'Ethical Practice', e_hw1m:'Module 2', e_hw1d:'20 min', e_hw1a:'Sara Kukovec',
-  e_hw2:'Basic Hygiene', e_hw2m:'Module 5', e_hw2d:'10 min', e_hw2a:'Ether Brown',
-  e_hw3:'Infection Control', e_hw3m:'Module 4',
-  e_mat_t:'Class Materials', e_mat_btn:'Create Material',
-  e_mat1_t:'Hygiene Assessment', e_mat1_d:'Standard operating procedure for new patient admissions.', e_mat1_tags:'Case Study · Level C1',
-  e_mat2_t:'Body Analogy', e_mat2_d:'Standard operating procedure for new patient admissions.', e_mat2_tags:'Lecture · Level B2',
-  e_mat3_t:'Senior Care', e_mat3_d:'Standard operating procedure for new patient admissions.', e_mat3_tags:'Case Study · Level A2',
-  e_mat_read:'5 min read',
-  e_scores_t:'Student Scores',
-  e_sc_a:'Anatomy', e_sc_m:'Microbiology', e_sc_p:'Physiology',
-
-  // ─ LEARNERS DASHBOARD ─
-  l_dbt:"Learner's Workspace", l_dbs:'Last updated: 14 mins ago',
-  l_hw_t:'Personalized homework designed to strengthen your skills for exam.',
-  l_hw1:'Ethical Practice', l_hw1m:'Module 2', l_hw1d:'20 min', l_hw1a:'Sara Kukovec',
-  l_hw2:'Basic Hygiene', l_hw2m:'Module 5', l_hw2d:'10 min', l_hw2a:'Ether Brown',
-  l_hw3:'Infection Control', l_hw3m:'Module 4',
-  l_exam_t:'Exam Preparation',
-  l_exam_time:'Time Left', l_exam_time_v:'12 days',
-  l_exam_cov:'Material Covered', l_exam_cov_v:'65%',
-  l_exam_tgt:'Target Score', l_exam_tgt_v:'85%',
-  l_exam_btn1:'Review Topics', l_exam_btn2:'Practise Mock Exam',
-  l_ready_t:'Work Readiness',
-  l_skill1:'Soft Skills Score', l_skill1_v:'78%',
-  l_skill2:'Clinical Skills', l_skill2_v:'92%',
-  l_placement:'Ready for Placements', l_placement_v:'Top Candidate',
   // trust
   tt:'AI supports — educators decide',
   th_de:'Trusted where education matters most.',
@@ -650,25 +493,6 @@ en:{
   edu_chat_ai:'You have Infection Prevention scheduled on Thursday at 10:00. I prepared a lesson flow with a short recap, one core explanation, and two differentiated practice tasks based on learner level. You can review and adjust it before class.',
   edu_b1:'Open lesson plan', edu_b2:'Browse library',
   perf_t:'Class Performance W09', p1l:'Homework', p2l:'Course Performance',
-  // educators extra cards
-  lib_t:'Class Materials', lib_published:'Published', lib_unlisted:'Unlisted',
-  lib1_title:'Hygiene Assessment', lib1_desc:'Standard operating procedure for new patient admissions.',
-  lib1_tags:'Case Study · Level C1',
-  lib2_title:'Body Analogy', lib2_desc:'Standard operating procedure for new patient admissions.',
-  lib2_tags:'Lecture · Level B2',
-  lib3_title:'Senior Care', lib3_desc:'Standard operating procedure for new patient admissions.',
-  lib3_tags:'Case Study · Level A2',
-  lib_read:'5 min read',
-  alerts_t:'Alerts', alerts_new:'3 New',
-  alert1:'Curriculum Teaching Behind Schedule', alert1s:'2 Modules delayed',
-  alert2:'Upcoming Teachers Meeting',
-  alert3:'Action Items from Last Meeting',
-  curr_prog_t:'Curriculum Progress', curr_planned:'Planned', curr_actual:'Actual',
-  curr_ahead:'+40% Ahead of Plan',
-  scores_t:'Student Scores',
-  scores_a:'Anatomy', scores_m:'Microbiology', scores_p:'Physiology',
-  perf_stat_t:'Performance Statistics',
-  perf_low:'Low Performer', perf_avg:'Average Performer', perf_high:'High Performer',
   // learners feat
   f3_eye:'For Learners',
   f3_h:'<em class="accent">Personalized</em> learning for every learner.',
@@ -676,10 +500,6 @@ en:{
   f3_cta:'Explore For Learners',
   lc1t:'Personalised Homework', lc1b:'AI-generated tasks that target your specific gaps — updated daily to match your progress.',
   lc2t:'Interactive Learning Scenarios', lc2b:'Step-by-step through real clinical situations. Practise, understand, apply.',
-  sc1_title:'Patient Assessment', sc1_desc:'Assess and prioritize patients in a busy hospital setting.', sc1_time:'18 Min', sc1_tag:'Basic',
-  sc2_title:'Hygiene Care', sc2_desc:'Covers essential hygiene care practices, including personal care.', sc2_time:'30 Min', sc2_tag:'Basic',
-  sc3_title:'Infection Control', sc3_desc:'Focuses on infection prevention through protection protocols.', sc3_time:'20 Min', sc3_tag:'Advanced',
-  sc_btn:'Start Scenario',
   lc3t:'Learn in Groups', lc3b:'Study with your cohort — faster, clearer, and with more confidence.',
   daily_title:'Daily Practice Sessions',
   daily_g:'Good morning, Leonie 👋',
@@ -775,321 +595,80 @@ function switchLang(l){
     </div>
   </div>
 
-  <!-- HERO DASHBOARDS — 3 panels, cross-fade on trust rotation -->
-  <div class="hero-db-wrap rev d4" style="position:relative">
-
-    <!-- Floating chip sets — one per audience -->
-    <div class="chip-set active" id="chips-schools">
-      <div class="f-chip c1">✓ <span data-t="s_fc1"></span></div>
-      <div class="f-chip c2">⬡ <span data-t="s_fc2"></span></div>
-      <div class="f-chip c3">⚡ <span data-t="s_fc3"></span></div>
-    </div>
-    <div class="chip-set" id="chips-educators">
-      <div class="f-chip c1">✓ <span data-t="e_fc1"></span></div>
-      <div class="f-chip c2">⬡ <span data-t="e_fc2"></span></div>
-      <div class="f-chip c3">⚡ <span data-t="e_fc3"></span></div>
-    </div>
-    <div class="chip-set" id="chips-learners">
-      <div class="f-chip c1">✓ <span data-t="l_fc1"></span></div>
-      <div class="f-chip c2">⬡ <span data-t="l_fc2"></span></div>
-      <div class="f-chip c3">⚡ <span data-t="l_fc3"></span></div>
-    </div>
-
-    <!-- WRAPPER: stacks panels for cross-fade -->
-    <div class="db-panels-wrap">
-
-    <!-- ═══ PANEL 1: SCHOOLS ═══ -->
-    <div class="db-panel active hero-db" id="db-schools">
+  <!-- DASHBOARD -->
+  <div class="hero-db-wrap rev d4">
+    <div class="f-chip c1">✓ <span data-t="fc1"></span></div>
+    <div class="f-chip c2">⬡ <span data-t="fc2"></span></div>
+    <div class="f-chip c3">⚡ <span data-t="fc3"></span></div>
+    <div class="hero-db" id="hero-db">
+      <!-- top bar -->
       <div class="db-bar">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#F4722B,#E85D9A);display:flex;align-items:center;justify-content:center;font-size:14px">🏫</div>
-          <div><div class="db-title-bar" data-t="s_dbt"></div><div style="font-size:10px;color:var(--muted)" data-t="s_dbs"></div></div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="db-dots">
+            <div class="db-dot" style="background:#EF4444"></div>
+            <div class="db-dot" style="background:#F59E0B"></div>
+            <div class="db-dot" style="background:#22C55E"></div>
+          </div>
+          <span class="db-title-bar"><b data-t="dbt"></b> — <span data-t="dbs"></span></span>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <div style="background:var(--card);border:1px solid var(--border);border-radius:7px;padding:5px 11px;font-size:11px;color:var(--muted)">🔍 <span data-t="dbsch"></span></div>
           <div style="position:relative;width:26px;height:26px;background:var(--card);border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px">🔔<div style="position:absolute;top:-3px;right:-3px;width:11px;height:11px;background:var(--orange);border-radius:50%;border:2px solid var(--bg);font-size:7px;color:#fff;display:flex;align-items:center;justify-content:center">3</div></div>
+          <div class="db-badge" data-t="dbt"></div>
         </div>
       </div>
+      <!-- body -->
       <div class="db-body">
-        <!-- Risk Detected -->
+        <!-- risk -->
         <div class="db-col">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-            <div class="db-lbl" style="margin:0" data-t="s_risk_lbl"></div>
-            <span style="background:var(--red-light);color:var(--red);font-size:9px;font-weight:700;padding:2px 7px;border-radius:8px" data-t="s_risk_badge"></span>
-          </div>
-          <div class="rr a">
-            <div style="color:var(--red);font-size:11px;font-weight:600" data-t="s_r1"></div>
-            <div style="font-size:10px;color:var(--muted)" data-t="s_r1s"></div>
-          </div>
-          <div class="rr a">
-            <div style="color:var(--red);font-size:11px;font-weight:600" data-t="s_r2"></div>
-            <div style="font-size:10px;color:var(--muted)" data-t="s_r2s"></div>
-          </div>
-          <div class="rr a">
-            <div style="color:var(--red);font-size:11px;font-weight:600" data-t="s_r3"></div>
-            <div style="font-size:10px;color:var(--muted)" data-t="s_r3s"></div>
-          </div>
+          <div class="db-lbl" data-t="drl"></div>
+          <div class="risk-tag">⚠ AKTIV</div>
+          <div class="rr w"><div class="rr-n" data-t="dr1n"></div><div class="rr-s" data-t="dr1s"></div></div>
+          <div class="rr a"><div class="rr-n" data-t="dr2n"></div><div class="rr-s" data-t="dr2s"></div></div>
+          <div class="rr ai"><div class="rr-n" style="color:var(--purple)" data-t="dr3n"></div><div class="rr-s" data-t="dr3s"></div></div>
         </div>
-        <!-- Curriculum Progress chart — sine waves -->
+        <!-- chart -->
         <div class="db-col">
-          <div class="db-lbl" data-t="s_chart_t"></div>
-          <!-- legend -->
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px">
-            <div class="leg-i"><div style="width:12px;height:1px;background:var(--muted);border-top:1px dashed var(--muted);margin-top:4px"></div><span data-t="s_leg_plan"></span></div>
-            <div class="leg-i"><div class="leg-d" style="background:#F4722B"></div><span data-t="s_leg_a2"></span></div>
-            <div class="leg-i"><div class="leg-d" style="background:#2D8C5E"></div><span data-t="s_leg_b1"></span></div>
-            <div class="leg-i"><div class="leg-d" style="background:#3B82F6"></div><span data-t="s_leg_b2"></span></div>
-          </div>
-          <svg viewBox="0 0 280 80" width="100%" height="75" style="overflow:visible">
-            <!-- Y labels -->
-            <text x="0" y="8" font-size="7" fill="#9B8B7A">80%</text>
-            <text x="0" y="28" font-size="7" fill="#9B8B7A">60%</text>
-            <text x="0" y="48" font-size="7" fill="#9B8B7A">40%</text>
-            <text x="0" y="68" font-size="7" fill="#9B8B7A">20%</text>
-            <!-- grid lines -->
-            <line x1="20" y1="5" x2="280" y2="5" stroke="#F0EBE0" stroke-width="1"/>
-            <line x1="20" y1="25" x2="280" y2="25" stroke="#F0EBE0" stroke-width="1"/>
-            <line x1="20" y1="45" x2="280" y2="45" stroke="#F0EBE0" stroke-width="1"/>
-            <line x1="20" y1="65" x2="280" y2="65" stroke="#F0EBE0" stroke-width="1"/>
-            <!-- Planned — diagonal dashed -->
-            <line x1="20" y1="68" x2="280" y2="12" stroke="#C8B8A8" stroke-width="1.5" stroke-dasharray="4 3"/>
-            <!-- Class A2 — orange sine wave -->
-            <path d="M20,40 Q55,20 90,40 T160,40 T230,40 T280,35" stroke="#F4722B" stroke-width="2" fill="none"/>
-            <!-- Class B1 — green larger sine -->
-            <path d="M20,45 Q50,10 90,40 T150,68 T210,25 T280,42" stroke="#2D8C5E" stroke-width="2" fill="none"/>
-            <!-- Class B2 — blue medium sine -->
-            <path d="M20,50 Q60,62 100,38 T170,28 T240,55 T280,40" stroke="#3B82F6" stroke-width="2" fill="none"/>
-            <!-- X labels -->
-            <text x="20" y="79" font-size="7" fill="#9B8B7A">W1</text>
-            <text x="55" y="79" font-size="7" fill="#9B8B7A">W2</text>
-            <text x="90" y="79" font-size="7" fill="#9B8B7A">W3</text>
-            <text x="125" y="79" font-size="7" fill="#9B8B7A">W4</text>
-            <text x="160" y="79" font-size="7" fill="#9B8B7A">W5</text>
-            <text x="195" y="79" font-size="7" fill="#9B8B7A">W6</text>
-            <text x="230" y="79" font-size="7" fill="#9B8B7A">W7</text>
-            <text x="260" y="79" font-size="7" fill="#9B8B7A">W8</text>
+          <div class="db-lbl" data-t="dcl"></div>
+          <svg class="mini-chart" viewBox="0 0 280 65" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F4722B" stop-opacity=".14"/><stop offset="100%" stop-color="#F4722B" stop-opacity="0"/></linearGradient>
+              <linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8B8A8" stop-opacity=".09"/><stop offset="100%" stop-color="#C8B8A8" stop-opacity="0"/></linearGradient>
+            </defs>
+            <path d="M0,52 Q60,46 90,40 T180,28 T280,10 L280,65 L0,65Z" fill="url(#ga)"/>
+            <path d="M0,56 Q50,52 90,48 T180,40 T280,26 L280,65 L0,65Z" fill="url(#gb)"/>
+            <path class="dr" d="M0,56 Q50,52 90,48 T180,40 T280,26" stroke="#C8B8A8" stroke-width="1.5" fill="none" style="animation-delay:.4s;stroke-dasharray:500;stroke-dashoffset:500"/>
+            <path class="dr" d="M0,52 Q60,46 90,40 T180,28 T280,10" stroke="#F4722B" stroke-width="2" fill="none" style="stroke-dasharray:500;stroke-dashoffset:500"/>
+            <circle cx="160" cy="33" r="3" fill="#F4722B" opacity=".7"/>
+            <text x="0" y="64" font-size="7" fill="#9B8B7A" data-t="dxokt">Okt</text>
+            <text x="52" y="64" font-size="7" fill="#9B8B7A" data-t="dxnov">Nov</text>
+            <text x="108" y="64" font-size="7" fill="#9B8B7A" data-t="dxdez">Dez</text>
+            <text x="164" y="64" font-size="7" fill="#9B8B7A" data-t="dxjan">Jan</text>
+            <text x="220" y="64" font-size="7" fill="#9B8B7A" data-t="dxfeb">Feb</text>
           </svg>
+          <div class="chart-leg">
+            <div class="leg-i"><div class="leg-d" style="background:var(--orange)"></div><span data-t="dla"></span></div>
+            <div class="leg-i"><div class="leg-d" style="background:var(--muted)"></div><span data-t="dlb"></span></div>
+          </div>
         </div>
-        <!-- Staff Allocation & Tracking -->
+        <!-- staff -->
         <div class="db-col">
-          <div class="db-lbl" data-t="s_staff_t"></div>
-          <div class="sg7">
-            <!-- header row -->
-            <div class="sg7-hdr"></div>
-            <div class="sg7-hdr" data-t="s_col_m"></div><div class="sg7-hdr" data-t="s_col_t"></div>
-            <div class="sg7-hdr" data-t="s_col_w"></div><div class="sg7-hdr" data-t="s_col_th"></div>
-            <div class="sg7-hdr" data-t="s_col_f"></div>
-            <!-- Smith -->
-            <div class="sg7-lbl" data-t="s_n1"></div>
-            <div class="sg7-cell"></div><div class="sg7-cell gd"></div><div class="sg7-cell"></div><div class="sg7-cell gd"></div><div class="sg7-cell gd"></div>
-            <!-- Sarah -->
-            <div class="sg7-lbl" data-t="s_n2"></div>
-            <div class="sg7-cell gl"></div><div class="sg7-cell gm"></div><div class="sg7-cell"></div><div class="sg7-cell"></div><div class="sg7-cell gd"></div>
-            <!-- Brown -->
-            <div class="sg7-lbl" data-t="s_n3"></div>
-            <div class="sg7-cell"></div><div class="sg7-cell gd"></div><div class="sg7-cell"></div><div class="sg7-cell gm"></div><div class="sg7-cell"></div>
-            <!-- James -->
-            <div class="sg7-lbl" data-t="s_n4"></div>
-            <div class="sg7-cell gm"></div><div class="sg7-cell"></div><div class="sg7-cell gl"></div><div class="sg7-cell gm"></div><div class="sg7-cell gm"></div>
-            <!-- Adams -->
-            <div class="sg7-lbl" data-t="s_n5"></div>
-            <div class="sg7-cell gd"></div><div class="sg7-cell gd"></div><div class="sg7-cell"></div><div class="sg7-cell gd"></div><div class="sg7-cell gd"></div>
-            <!-- Charlie -->
-            <div class="sg7-lbl" data-t="s_n6"></div>
-            <div class="sg7-cell"></div><div class="sg7-cell gm"></div><div class="sg7-cell"></div><div class="sg7-cell"></div><div class="sg7-cell"></div>
-            <!-- Jessica -->
-            <div class="sg7-lbl" data-t="s_n7"></div>
-            <div class="sg7-cell gl"></div><div class="sg7-cell gm"></div><div class="sg7-cell"></div><div class="sg7-cell"></div><div class="sg7-cell"></div>
+          <div class="db-lbl" data-t="dsl"></div>
+          <div class="sg">
+            <div class="sc g"></div><div class="sc g"></div><div class="sc g"></div><div class="sc g"></div><div class="sc g"></div>
+            <div class="sc g"></div><div class="sc g"></div><div class="sc o"></div><div class="sc g"></div><div class="sc y"></div>
+            <div class="sc g"></div><div class="sc g"></div><div class="sc g"></div><div class="sc g"></div><div class="sc g"></div>
+            <div class="sc g"></div><div class="sc y"></div><div class="sc g"></div><div class="sc g"></div><div class="sc"></div>
           </div>
-          <!-- legend -->
-          <div style="display:flex;gap:8px;margin-top:6px">
-            <div class="leg-i"><div style="width:8px;height:8px;border-radius:2px;background:#1A6B3A"></div><span style="font-size:9px;color:var(--muted)">Active</span></div>
-            <div class="leg-i"><div style="width:8px;height:8px;border-radius:2px;background:#A8D4B8"></div><span style="font-size:9px;color:var(--muted)">Part</span></div>
-          </div>
+          <div class="sn"><span data-t="ds1"></span><br><span data-t="ds2"></span><br><span data-t="ds3"></span><br><span data-t="ds4"></span></div>
         </div>
       </div>
-    </div><!-- /db-schools -->
-
-    <!-- ═══ PANEL 2: EDUCATORS ═══ -->
-    <div class="db-panel hero-db" id="db-educators">
-      <div class="db-bar">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#2D8C5E,#1A6B48);display:flex;align-items:center;justify-content:center;font-size:14px">🔍</div>
-          <div><div class="db-title-bar" data-t="e_dbt"></div><div style="font-size:10px;color:var(--muted)" data-t="e_dbs"></div></div>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:7px;padding:5px 11px;font-size:11px;color:var(--muted)">🔍 <span data-t="dbsch"></span></div>
-          <div style="position:relative;width:26px;height:26px;background:var(--card);border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px">🔔<div style="position:absolute;top:-3px;right:-3px;width:11px;height:11px;background:var(--orange);border-radius:50%;border:2px solid var(--bg);font-size:7px;color:#fff;display:flex;align-items:center;justify-content:center">2</div></div>
-        </div>
+      <!-- foot -->
+      <div class="db-foot">
+        <span class="db-foot-t">📅 <span data-t="dfn"></span></span>
+        <div class="db-foot-p" data-t="dfp"></div>
       </div>
-      <div class="db-body" style="grid-template-columns:185px 1fr 220px">
-        <!-- HW list -->
-        <div class="db-col">
-          <div style="font-size:11px;font-weight:600;color:var(--dark);line-height:1.4;margin-bottom:10px" data-t="e_hw_t"></div>
-          <div class="hw-list-row">
-            <div><div style="font-size:11px;font-weight:600;color:var(--dark)" data-t="e_hw1"></div><div class="hw-assignee"><div class="hw-avatar">S</div><span data-t="e_hw1a"></span></div></div>
-            <div style="text-align:right"><div class="hw-mod m2" data-t="e_hw1m"></div><div style="font-size:9px;color:var(--muted);margin-top:2px" data-t="e_hw1d"></div></div>
-          </div>
-          <div class="hw-list-row">
-            <div><div style="font-size:11px;font-weight:600;color:var(--dark)" data-t="e_hw2"></div><div class="hw-assignee"><div class="hw-avatar">E</div><span data-t="e_hw2a"></span></div></div>
-            <div style="text-align:right"><div class="hw-mod m5" data-t="e_hw2m"></div><div style="font-size:9px;color:var(--muted);margin-top:2px" data-t="e_hw2d"></div></div>
-          </div>
-          <div class="hw-list-row" style="opacity:.5">
-            <div><div style="font-size:11px;font-weight:600;color:var(--dark)" data-t="e_hw3"></div></div>
-            <div class="hw-mod m4" data-t="e_hw3m"></div>
-          </div>
-        </div>
-        <!-- Class Materials -->
-        <div class="db-col">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-            <div class="db-lbl" style="margin:0" data-t="e_mat_t"></div>
-            <span style="font-size:10px;font-weight:600;color:var(--orange);cursor:pointer" data-t="e_mat_btn"></span>
-          </div>
-          <!-- 3 tiles in a row -->
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
-            <div class="mat-tile">
-              <div class="mat-img" style="background:linear-gradient(135deg,#D4C4A8,#BCA888)">🧼<span class="mat-badge pub" data-t="lib_published"></span></div>
-              <div class="mat-body">
-                <div style="font-size:10px;font-weight:700;color:var(--dark);margin-bottom:3px" data-t="e_mat1_t"></div>
-                <div style="font-size:9px;color:var(--muted);line-height:1.3;margin-bottom:4px" data-t="e_mat1_d"></div>
-                <span class="mat-tag cs">Case Study</span><span class="mat-tag lv">C1</span>
-                <div style="font-size:9px;color:var(--muted);margin-top:4px">⏱ <span data-t="e_mat_read"></span></div>
-              </div>
-            </div>
-            <div class="mat-tile">
-              <div class="mat-img" style="background:linear-gradient(135deg,#C8D4E8,#A8B8D0)">🦴<span class="mat-badge unl" data-t="lib_unlisted"></span></div>
-              <div class="mat-body">
-                <div style="font-size:10px;font-weight:700;color:var(--dark);margin-bottom:3px" data-t="e_mat2_t"></div>
-                <div style="font-size:9px;color:var(--muted);line-height:1.3;margin-bottom:4px" data-t="e_mat2_d"></div>
-                <span class="mat-tag lec">Lecture</span><span class="mat-tag lv">B2</span>
-                <div style="font-size:9px;color:var(--muted);margin-top:4px">⏱ <span data-t="e_mat_read"></span></div>
-              </div>
-            </div>
-            <div class="mat-tile">
-              <div class="mat-img" style="background:linear-gradient(135deg,#D8E8D0,#B8D0A8)">👴</div>
-              <div class="mat-body">
-                <div style="font-size:10px;font-weight:700;color:var(--dark);margin-bottom:3px" data-t="e_mat3_t"></div>
-                <div style="font-size:9px;color:var(--muted);line-height:1.3;margin-bottom:4px" data-t="e_mat3_d"></div>
-                <span class="mat-tag cs">Case Study</span><span class="mat-tag lv">A2</span>
-                <div style="font-size:9px;color:var(--muted);margin-top:4px">⏱ <span data-t="e_mat_read"></span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Student Scores -->
-        <div class="db-col">
-          <div class="db-lbl" data-t="e_scores_t"></div>
-          <!-- stat chips -->
-          <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap">
-            <div class="leg-i"><div class="leg-d" style="background:#F4722B"></div><span data-t="e_sc_a"></span> <b>78</b></div>
-            <div class="leg-i"><div class="leg-d" style="background:#2D8C5E"></div><span data-t="e_sc_m"></span> <b>85</b></div>
-            <div class="leg-i"><div class="leg-d" style="background:#3B82F6"></div><span data-t="e_sc_p"></span> <b>92</b></div>
-          </div>
-          <!-- bars for 9 students -->
-          <svg viewBox="0 0 190 108" width="100%" height="100">
-            <text x="0" y="9" font-size="7" fill="#9B8B7A">Sarah</text> <rect x="38" y="2" width="120" height="7" rx="2" fill="#F4722B" opacity=".85"/>
-            <text x="0" y="21" font-size="7" fill="#9B8B7A">John</text>  <rect x="38" y="14" width="90" height="7" rx="2" fill="#F4722B" opacity=".7"/>
-            <text x="0" y="33" font-size="7" fill="#9B8B7A">Macy</text>  <rect x="38" y="26" width="75" height="7" rx="2" fill="#F4722B" opacity=".6"/>
-            <text x="0" y="45" font-size="7" fill="#9B8B7A">Oliver</text><rect x="38" y="38" width="60" height="7" rx="2" fill="#F4722B" opacity=".5"/>
-            <text x="0" y="57" font-size="7" fill="#9B8B7A">Kiara</text> <rect x="38" y="50" width="145" height="7" rx="2" fill="#F4722B"/>
-            <text x="0" y="69" font-size="7" fill="#9B8B7A">Mike</text>  <rect x="38" y="62" width="50" height="7" rx="2" fill="#F4722B" opacity=".4"/>
-            <text x="0" y="81" font-size="7" fill="#9B8B7A">Alice</text> <rect x="38" y="74" width="100" height="7" rx="2" fill="#F4722B" opacity=".75"/>
-            <text x="0" y="93" font-size="7" fill="#9B8B7A">Ethan</text> <rect x="38" y="86" width="40" height="7" rx="2" fill="#F4722B" opacity=".35"/>
-            <text x="0" y="105" font-size="7" fill="#9B8B7A">Sophia</text><rect x="38" y="98" width="80" height="7" rx="2" fill="#F4722B" opacity=".65"/>
-          </svg>
-        </div>
-      </div>
-    </div><!-- /db-educators -->
-
-    <!-- ═══ PANEL 3: LEARNERS ═══ -->
-    <div class="db-panel hero-db" id="db-learners">
-      <div class="db-bar">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#F4722B,#E85D9A);display:flex;align-items:center;justify-content:center;font-size:14px">📚</div>
-          <div><div class="db-title-bar" data-t="l_dbt"></div><div style="font-size:10px;color:var(--muted)" data-t="l_dbs"></div></div>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="background:var(--card);border:1px solid var(--border);border-radius:7px;padding:5px 11px;font-size:11px;color:var(--muted)">🔍 <span data-t="dbsch"></span></div>
-          <div style="position:relative;width:26px;height:26px;background:var(--card);border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px">🔔<div style="position:absolute;top:-3px;right:-3px;width:11px;height:11px;background:var(--orange);border-radius:50%;border:2px solid var(--bg);font-size:7px;color:#fff;display:flex;align-items:center;justify-content:center">1</div></div>
-        </div>
-      </div>
-      <div class="db-body" style="grid-template-columns:185px 1fr 210px">
-        <!-- HW list for learner -->
-        <div class="db-col">
-          <div style="font-size:11px;font-weight:600;color:var(--dark);line-height:1.4;margin-bottom:10px" data-t="l_hw_t"></div>
-          <div class="hw-list-row">
-            <div><div style="font-size:11px;font-weight:600;color:var(--dark)" data-t="l_hw1"></div><div class="hw-assignee"><div class="hw-avatar">S</div><span data-t="l_hw1a"></span></div></div>
-            <div style="text-align:right"><div class="hw-mod m2" data-t="l_hw1m"></div><div style="font-size:9px;color:var(--muted);margin-top:2px" data-t="l_hw1d"></div></div>
-          </div>
-          <div class="hw-list-row">
-            <div><div style="font-size:11px;font-weight:600;color:var(--dark)" data-t="l_hw2"></div><div class="hw-assignee"><div class="hw-avatar">E</div><span data-t="l_hw2a"></span></div></div>
-            <div style="text-align:right"><div class="hw-mod m5" data-t="l_hw2m"></div><div style="font-size:9px;color:var(--muted);margin-top:2px" data-t="l_hw2d"></div></div>
-          </div>
-          <div class="hw-list-row" style="opacity:.5">
-            <div style="font-size:11px;font-weight:600;color:var(--dark)" data-t="l_hw3"></div>
-            <div class="hw-mod m4" data-t="l_hw3m"></div>
-          </div>
-        </div>
-        <!-- Exam Preparation -->
-        <div class="db-col">
-          <div class="db-lbl" data-t="l_exam_t"></div>
-          <div class="exam-stat"><span data-t="l_exam_time"></span><span class="exam-val" data-t="l_exam_time_v"></span></div>
-          <div class="exam-stat"><span data-t="l_exam_cov"></span><span class="exam-val" data-t="l_exam_cov_v"></span></div>
-          <div class="exam-stat"><span data-t="l_exam_tgt"></span><span class="exam-val" data-t="l_exam_tgt_v"></span></div>
-          <!-- Donut 89% -->
-          <div class="donut-wrap">
-            <svg viewBox="0 0 80 80" width="75" height="75">
-              <circle cx="40" cy="40" r="30" fill="none" stroke="#EBE0D0" stroke-width="8"/>
-              <circle cx="40" cy="40" r="30" fill="none" stroke="#F4722B" stroke-width="8"
-                stroke-dasharray="168.9 188.5" stroke-dashoffset="47.1" stroke-linecap="round"
-                transform="rotate(-90 40 40)"/>
-              <text x="40" y="45" text-anchor="middle" font-size="14" font-weight="700" fill="#1A1208">89%</text>
-            </svg>
-          </div>
-          <!-- buttons -->
-          <div style="display:flex;gap:6px;margin-top:4px">
-            <button style="flex:1;background:transparent;border:1.5px solid var(--orange);color:var(--orange);border-radius:20px;padding:6px 4px;font-size:10px;font-weight:600;cursor:pointer;font-family:var(--font-b)" data-t="l_exam_btn1"></button>
-            <button style="flex:1;background:var(--orange);border:none;color:#fff;border-radius:20px;padding:6px 4px;font-size:10px;font-weight:600;cursor:pointer;font-family:var(--font-b)" data-t="l_exam_btn2"></button>
-          </div>
-        </div>
-        <!-- Work Readiness -->
-        <div class="db-col">
-          <div class="db-lbl" data-t="l_ready_t"></div>
-          <!-- Soft Skills -->
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-            <span style="font-size:11px;color:var(--mid)" data-t="l_skill1"></span>
-            <span style="font-size:14px;font-weight:700;color:var(--orange)" data-t="l_skill1_v"></span>
-          </div>
-          <!-- Clinical Skills -->
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-            <span style="font-size:11px;color:var(--mid)" data-t="l_skill2"></span>
-            <span style="font-size:14px;font-weight:700;color:var(--orange)" data-t="l_skill2_v"></span>
-          </div>
-          <!-- Radar chart SVG -->
-          <svg viewBox="0 0 130 100" width="100%" height="90" style="overflow:visible">
-            <!-- Pentagon axes -->
-            <polygon points="65,8 118,42 98,92 32,92 12,42" fill="none" stroke="#EBE0D0" stroke-width="1"/>
-            <polygon points="65,22 102,48 87,82 43,82 28,48" fill="none" stroke="#EBE0D0" stroke-width="0.5"/>
-            <!-- Filled polygon — radar data -->
-            <polygon points="65,18 108,46 90,84 40,84 18,44" fill="rgba(45,140,94,0.25)" stroke="#2D8C5E" stroke-width="1.5"/>
-            <!-- Axis labels -->
-            <text x="65" y="5" text-anchor="middle" font-size="7" fill="#9B8B7A">Communication</text>
-            <text x="124" y="45" text-anchor="start" font-size="7" fill="#9B8B7A">Collaboration</text>
-            <text x="105" y="97" text-anchor="middle" font-size="7" fill="#9B8B7A">Problem Solving</text>
-            <text x="20" y="97" text-anchor="middle" font-size="7" fill="#9B8B7A">Professionalism</text>
-            <text x="6" y="45" text-anchor="end" font-size="7" fill="#9B8B7A">Clinical Skills</text>
-          </svg>
-          <!-- Placement badge -->
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;padding-top:6px;border-top:1px solid var(--border-light)">
-            <span style="font-size:11px;color:var(--mid)" data-t="l_placement"></span>
-            <span style="font-size:11px;font-weight:700;color:var(--green)" data-t="l_placement_v"></span>
-          </div>
-          <div style="height:4px;background:var(--green);border-radius:2px;margin-top:4px;width:90%"></div>
-        </div>
-      </div>
-    </div><!-- /db-learners -->
-
-    </div><!-- /db-panels-wrap -->
+    </div>
   </div>
 </div><!-- /hero -->
 
@@ -1250,9 +829,9 @@ function switchLang(l){
 <div id="sec-educators" class="feat-scroll-wrap">
   <div class="feat-sec flip">
     <!-- cluster -->
-    <div class="cc-wrap rev" style="height:600px">
+    <div class="cc-wrap rev">
       <!-- Edu AI Chat -->
-      <div class="cc" style="top:50px;left:50%;transform:translateX(-52%) rotate(0.3deg);width:238px;z-index:5">
+      <div class="cc" style="top:50px;left:50%;transform:translateX(-50%) rotate(0.3deg);width:242px;z-index:5">
         <div class="ch-h">
           <div class="ch-online"></div>
           <div><div class="ch-name" data-t="chat_name"></div><div class="ch-sub" id="edu-chat-sub"></div></div>
@@ -1266,7 +845,7 @@ function switchLang(l){
       </div>
 
       <!-- HW Card -->
-      <div class="cc" style="top:8px;left:0;width:192px;transform:rotate(-2deg)">
+      <div class="cc" style="top:10px;left:0;width:196px;transform:rotate(-2deg)">
         <div class="cc-h"><span class="cc-t" data-t="hw_title"></span><span class="badge bp" data-t="hw_ai"></span></div>
         <div class="hwr"><div style="flex:1"><div style="font-size:11px;font-weight:600" data-t="hw1"></div><div style="font-size:10px;color:var(--muted)" data-t="hw1s"></div></div><div class="hw-d"><div class="hw-dot f"></div><div class="hw-dot f"></div><div class="hw-dot f"></div><div class="hw-dot e"></div><div class="hw-dot e"></div></div></div>
         <div class="hwr"><div style="flex:1"><div style="font-size:11px;font-weight:600" data-t="hw2"></div><div style="font-size:10px;color:var(--muted)" data-t="hw2s"></div></div><div class="hw-d"><div class="hw-dot f"></div><div class="hw-dot f"></div><div class="hw-dot e"></div><div class="hw-dot e"></div><div class="hw-dot e"></div></div></div>
@@ -1274,122 +853,23 @@ function switchLang(l){
         <div style="font-size:10px;color:var(--muted);margin-top:6px" data-t="hw_count"></div>
       </div>
 
-      <!-- Class Materials card -->
-      <div class="cc" style="top:0;right:0;width:258px;transform:rotate(1deg);z-index:4">
-        <div class="cc-h"><span class="cc-t" data-t="lib_t"></span></div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:6px">
-          <!-- tile 1 -->
-          <div style="border-radius:6px;overflow:hidden;position:relative">
-            <div style="height:42px;background:linear-gradient(135deg,#E8D5B0,#D4B896);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px">🧼</div>
-            <div style="position:absolute;top:2px;right:2px;background:var(--green);color:#fff;font-size:7px;font-weight:700;padding:1px 4px;border-radius:3px" data-t="lib_published"></div>
-            <div style="font-size:9px;font-weight:600;color:var(--dark);margin-top:3px;line-height:1.2" data-t="lib1_title"></div>
-            <div style="font-size:8px;color:var(--muted);margin-top:1px" data-t="lib1_tags"></div>
-            <div style="font-size:8px;color:var(--muted);margin-top:2px">⏱ <span data-t="lib_read"></span></div>
-          </div>
-          <!-- tile 2 -->
-          <div style="border-radius:6px;overflow:hidden;position:relative">
-            <div style="height:42px;background:linear-gradient(135deg,#C8D8E8,#A8B8D0);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px">🦴</div>
-            <div style="position:absolute;top:2px;right:2px;background:var(--muted);color:#fff;font-size:7px;font-weight:700;padding:1px 4px;border-radius:3px" data-t="lib_unlisted"></div>
-            <div style="font-size:9px;font-weight:600;color:var(--dark);margin-top:3px;line-height:1.2" data-t="lib2_title"></div>
-            <div style="font-size:8px;color:var(--muted);margin-top:1px" data-t="lib2_tags"></div>
-            <div style="font-size:8px;color:var(--muted);margin-top:2px">⏱ <span data-t="lib_read"></span></div>
-          </div>
-          <!-- tile 3 -->
-          <div style="border-radius:6px;overflow:hidden">
-            <div style="height:42px;background:linear-gradient(135deg,#D8E8D8,#B8D0B8);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px">👴</div>
-            <div style="font-size:9px;font-weight:600;color:var(--dark);margin-top:3px;line-height:1.2" data-t="lib3_title"></div>
-            <div style="font-size:8px;color:var(--muted);margin-top:1px" data-t="lib3_tags"></div>
-            <div style="font-size:8px;color:var(--muted);margin-top:2px">⏱ <span data-t="lib_read"></span></div>
-          </div>
-        </div>
+      <!-- Perf card -->
+      <div class="cc" style="bottom:60px;right:0;width:198px;transform:rotate(-1deg)">
+        <div class="cc-h"><span class="cc-t" data-t="perf_t"></span></div>
+        <div class="cb-row"><div class="cb-ll"><span data-t="p1l"></span><span style="font-weight:700;color:var(--green)">84%</span></div><div class="cb"><div class="cb-f" style="width:84%;background:var(--green)"></div></div></div>
+        <div class="cb-row"><div class="cb-ll"><span data-t="p2l"></span><span style="font-weight:700;color:var(--orange)">77%</span></div><div class="cb"><div class="cb-f" style="width:77%"></div></div></div>
+        <div style="font-size:10px;color:var(--muted);margin-top:8px">Class A &gt; B ↑</div>
       </div>
 
-      <!-- Alerts card -->
-      <div class="cc" style="top:230px;right:0;width:220px;transform:rotate(-0.5deg);z-index:3">
-        <div class="cc-h"><span class="cc-t" data-t="alerts_t"></span><span class="badge br" data-t="alerts_new"></span></div>
-        <div class="hwr" style="align-items:flex-start">
-          <div style="color:var(--red);font-size:11px;margin-top:1px;margin-right:4px">⊘</div>
-          <div style="flex:1">
-            <div style="font-size:11px;font-weight:600;color:var(--dark)" data-t="alert1"></div>
-            <div style="font-size:10px;color:var(--red);font-weight:600;margin-top:2px" data-t="alert1s"></div>
-          </div>
-        </div>
-        <div class="hwr">
-          <div style="color:var(--muted);font-size:11px;margin-right:4px">⊘</div>
-          <div style="font-size:11px;color:var(--dark)" data-t="alert2"></div>
-        </div>
-        <div class="hwr" style="border:none">
-          <div style="color:var(--muted);font-size:11px;margin-right:4px">⊘</div>
-          <div style="font-size:11px;color:var(--dark)" data-t="alert3"></div>
-        </div>
-      </div>
-
-      <!-- Curriculum Progress card -->
-      <div class="cc" style="bottom:100px;left:50%;transform:translateX(-46%) rotate(0.5deg);width:240px;z-index:4">
-        <div class="cc-h">
-          <span class="cc-t" data-t="curr_prog_t"></span>
-          <span style="font-size:10px;color:var(--green);font-weight:700;background:var(--green-light);padding:2px 7px;border-radius:8px" data-t="curr_ahead"></span>
-        </div>
-        <!-- Legend -->
-        <div style="display:flex;gap:12px;margin-bottom:6px">
-          <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:var(--muted)"><div style="width:14px;height:2px;background:var(--muted);border-top:1px dashed var(--muted)"></div><span data-t="curr_planned"></span></div>
-          <div style="display:flex;align-items:center;gap:4px;font-size:9px;color:var(--orange)"><div style="width:14px;height:2px;background:var(--orange)"></div><span data-t="curr_actual"></span></div>
-        </div>
-        <svg viewBox="0 0 210 60" width="100%" height="55" style="overflow:visible">
-          <defs><linearGradient id="cpg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F4722B" stop-opacity=".12"/><stop offset="100%" stop-color="#F4722B" stop-opacity="0"/></linearGradient></defs>
-          <!-- planned dashed -->
-          <path d="M0,50 Q52,44 80,36 T140,28 T210,18" stroke="#C8B8A8" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
-          <!-- actual area -->
-          <path d="M0,52 Q40,50 70,44 T120,30 T150,38 T180,24 T210,12 L210,60 L0,60Z" fill="url(#cpg)"/>
-          <!-- actual line -->
-          <path d="M0,52 Q40,50 70,44 T120,30 T150,38 T180,24 T210,12" stroke="#F4722B" stroke-width="2" fill="none"/>
-          <!-- ahead annotation dot + label -->
-          <circle cx="150" cy="30" r="3.5" fill="#F4722B"/>
-          <text x="0" y="59" font-size="7" fill="#9B8B7A">W01</text>
-          <text x="38" y="59" font-size="7" fill="#9B8B7A">W02</text>
-          <text x="76" y="59" font-size="7" fill="#9B8B7A">W03</text>
-          <text x="114" y="59" font-size="7" fill="#9B8B7A">W04</text>
-          <text x="152" y="59" font-size="7" fill="#9B8B7A">W05</text>
-          <text x="182" y="59" font-size="7" fill="#9B8B7A">W06</text>
+      <!-- Student scores -->
+      <div class="cc" style="bottom:20px;left:10px;width:184px;transform:rotate(1.5deg)">
+        <div class="cc-h"><span class="cc-t">Scores</span><span class="badge bk">Ø 78%</span></div>
+        <svg viewBox="0 0 150 72" width="100%" height="60">
+          <rect x="0" y="4" width="110" height="9" rx="3" fill="#F4722B" opacity=".85"/><text x="114" y="13" font-size="8" fill="#5C4A38" font-weight="600">82%</text>
+          <rect x="0" y="20" width="86" height="9" rx="3" fill="#F4722B" opacity=".5"/><text x="90" y="29" font-size="8" fill="#5C4A38">65%</text>
+          <rect x="0" y="36" width="123" height="9" rx="3" fill="#F4722B"/><text x="127" y="45" font-size="8" fill="#5C4A38" font-weight="600">91%</text>
+          <rect x="0" y="52" width="98" height="9" rx="3" fill="#F4722B" opacity=".65"/><text x="102" y="61" font-size="8" fill="#5C4A38">74%</text>
         </svg>
-      </div>
-
-      <!-- Student Scores card -->
-      <div class="cc" style="bottom:0;right:0;width:220px;transform:rotate(1deg)">
-        <div class="cc-h"><span class="cc-t" data-t="scores_t"></span></div>
-        <!-- top stats row -->
-        <div style="display:flex;gap:8px;margin-bottom:8px">
-          <div style="font-size:9px;color:var(--muted)"><span data-t="scores_a"></span> <b style="color:var(--dark)">78</b></div>
-          <div style="font-size:9px;color:var(--muted)"><span data-t="scores_m"></span> <b style="color:var(--dark)">85</b></div>
-          <div style="font-size:9px;color:var(--muted)"><span data-t="scores_p"></span> <b style="color:var(--dark)">92</b></div>
-        </div>
-        <svg viewBox="0 0 190 72" width="100%" height="60">
-          <text x="0" y="9" font-size="7" fill="#9B8B7A">John</text><rect x="30" y="2" width="140" height="7" rx="2" fill="#F4722B" opacity=".85"/>
-          <text x="0" y="22" font-size="7" fill="#9B8B7A">Mary</text><rect x="30" y="15" width="155" height="7" rx="2" fill="#F4722B"/>
-          <text x="0" y="35" font-size="7" fill="#9B8B7A">Oliver</text><rect x="30" y="28" width="110" height="7" rx="2" fill="#F4722B" opacity=".6"/>
-          <text x="0" y="48" font-size="7" fill="#9B8B7A">Katie</text><rect x="30" y="41" width="128" height="7" rx="2" fill="#F4722B" opacity=".7"/>
-          <text x="0" y="61" font-size="7" fill="#9B8B7A">Mike</text><rect x="30" y="54" width="60" height="7" rx="2" fill="#F4722B" opacity=".4"/>
-          <text x="0" y="74" font-size="7" fill="#9B8B7A">Alice</text><rect x="30" y="67" width="80" height="7" rx="2" fill="#F4722B" opacity=".5"/>
-        </svg>
-      </div>
-
-      <!-- Performance Statistics card -->
-      <div class="cc" style="bottom:0;left:0;width:196px;transform:rotate(-1.5deg)">
-        <div class="cc-h"><span class="cc-t" data-t="perf_stat_t"></span></div>
-        <!-- colour bar -->
-        <div style="height:5px;border-radius:3px;background:linear-gradient(90deg,#DC3C28 0%,#F4722B 40%,#2D8C5E 100%);margin-bottom:10px"></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:3px 0;font-size:10px">
-          <div style="display:flex;align-items:center;gap:5px"><div style="width:8px;height:8px;border-radius:50%;background:#DC3C28"></div><span data-t="perf_low"></span></div>
-          <b style="color:var(--dark)">02</b>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:3px 0;font-size:10px">
-          <div style="display:flex;align-items:center;gap:5px"><div style="width:8px;height:8px;border-radius:50%;background:#F4722B"></div><span data-t="perf_avg"></span></div>
-          <b style="color:var(--dark)">10</b>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:3px 0;font-size:10px">
-          <div style="display:flex;align-items:center;gap:5px"><div style="width:8px;height:8px;border-radius:50%;background:#2D8C5E"></div><span data-t="perf_high"></span></div>
-          <b style="color:var(--dark)">08</b>
-        </div>
       </div>
     </div>
 
@@ -1429,59 +909,24 @@ function switchLang(l){
       </div>
     </div>
 
-    <!-- Card 2 — Interactive Scenarios -->
+    <!-- Card 2 — Scenario + AI exam prep -->
     <div class="cc rev d1" style="position:static;transform:none;width:100%">
       <div style="height:3px;background:linear-gradient(90deg,#F4722B,#E85D9A);border-radius:2px;width:48px;margin-bottom:18px;transition:width .5s" class="feat-bar"></div>
       <div style="font-size:22px;margin-bottom:10px">🏥</div>
       <h3 style="margin-bottom:8px" data-t="lc2t"></h3>
       <p style="font-size:14px;color:var(--mid);line-height:1.55;margin-bottom:16px" data-t="lc2b"></p>
-      <!-- Three scenario tiles -->
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <!-- Scenario 1 -->
-        <div style="background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border)">
-          <div style="height:52px;background:linear-gradient(135deg,#D4C4A8 0%,#C8B494 100%);display:flex;align-items:center;justify-content:center;font-size:28px;position:relative">
-            🏥
-            <span style="position:absolute;top:4px;left:6px;background:var(--orange);color:#fff;font-size:8px;font-weight:700;padding:2px 6px;border-radius:5px" data-t="sc1_tag"></span>
-          </div>
-          <div style="padding:7px 9px">
-            <div style="font-size:11px;font-weight:700;color:var(--dark);margin-bottom:3px" data-t="sc1_title"></div>
-            <div style="font-size:10px;color:var(--muted);line-height:1.4;margin-bottom:6px" data-t="sc1_desc"></div>
-            <div style="display:flex;align-items:center;justify-content:space-between">
-              <span style="font-size:9px;color:var(--muted)">⏱ <span data-t="sc1_time"></span></span>
-              <button style="background:var(--orange);color:#fff;border:none;border-radius:8px;padding:3px 8px;font-size:9px;font-weight:700;cursor:pointer;font-family:var(--font-b)" data-t="sc_btn"></button>
-            </div>
-          </div>
-        </div>
-        <!-- Scenario 2 -->
-        <div style="background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border)">
-          <div style="height:52px;background:linear-gradient(135deg,#B8D4C8 0%,#94B8A8 100%);display:flex;align-items:center;justify-content:center;font-size:28px;position:relative">
-            🧼
-            <span style="position:absolute;top:4px;left:6px;background:var(--orange);color:#fff;font-size:8px;font-weight:700;padding:2px 6px;border-radius:5px" data-t="sc2_tag"></span>
-          </div>
-          <div style="padding:7px 9px">
-            <div style="font-size:11px;font-weight:700;color:var(--dark);margin-bottom:3px" data-t="sc2_title"></div>
-            <div style="font-size:10px;color:var(--muted);line-height:1.4;margin-bottom:6px" data-t="sc2_desc"></div>
-            <div style="display:flex;align-items:center;justify-content:space-between">
-              <span style="font-size:9px;color:var(--muted)">⏱ <span data-t="sc2_time"></span></span>
-              <button style="background:var(--orange);color:#fff;border:none;border-radius:8px;padding:3px 8px;font-size:9px;font-weight:700;cursor:pointer;font-family:var(--font-b)" data-t="sc_btn"></button>
-            </div>
-          </div>
-        </div>
-        <!-- Scenario 3 -->
-        <div style="background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border)">
-          <div style="height:52px;background:linear-gradient(135deg,#C8B8D8 0%,#A89CC4 100%);display:flex;align-items:center;justify-content:center;font-size:28px;position:relative">
-            🛡️
-            <span style="position:absolute;top:4px;left:6px;background:var(--purple);color:#fff;font-size:8px;font-weight:700;padding:2px 6px;border-radius:5px" data-t="sc3_tag"></span>
-          </div>
-          <div style="padding:7px 9px">
-            <div style="font-size:11px;font-weight:700;color:var(--dark);margin-bottom:3px" data-t="sc3_title"></div>
-            <div style="font-size:10px;color:var(--muted);line-height:1.4;margin-bottom:6px" data-t="sc3_desc"></div>
-            <div style="display:flex;align-items:center;justify-content:space-between">
-              <span style="font-size:9px;color:var(--muted)">⏱ <span data-t="sc3_time"></span></span>
-              <button style="background:var(--orange);color:#fff;border:none;border-radius:8px;padding:3px 8px;font-size:9px;font-weight:700;cursor:pointer;font-family:var(--font-b)" data-t="sc_btn"></button>
-            </div>
-          </div>
-        </div>
+      <!-- Lingo AI exam prep -->
+      <div class="ch-h" style="margin-bottom:8px">
+        <div class="ch-online"></div>
+        <div><div class="ch-name" data-t="chat_name"></div><div class="ch-sub" data-t="f3_eye"></div></div>
+      </div>
+      <div class="bbl u" data-t="l_chat_u"></div>
+      <div class="bbl ai" id="chat-learn-ai"></div>
+      <div class="ch-acts" style="flex-wrap:wrap;margin-top:6px">
+        <div class="ch-btn" data-t="l_b1"></div>
+        <div class="ch-btn" data-t="l_b2"></div>
+        <div class="ch-btn" data-t="l_b3"></div>
+        <div class="ch-btn" data-t="l_b4"></div>
       </div>
     </div>
 
@@ -1660,43 +1105,6 @@ function switchLang(l){
 
 
 <script>
-// ════ HERO DASHBOARD SWITCHER ════
-// 3 panels cycle in sync with trustCycle (7.5s, 3 slides = 2.5s each)
-// Order matches tr1=schools, tr2=educators, tr3=learners
-const dbPanels   = ['db-schools','db-educators','db-learners'];
-const chipSets   = ['chips-schools','chips-educators','chips-learners'];
-let dbCurrent    = 0;
-let dbInterval   = null;
-
-function switchDashboard(idx){
-  dbPanels.forEach((id,i) => {
-    const p = document.getElementById(id);
-    const ch = document.getElementById(chipSets[i]);
-    if(!p) return;
-    if(i === idx){
-      p.classList.add('active');
-      if(ch) ch.classList.add('active');
-    } else {
-      p.classList.remove('active');
-      if(ch) ch.classList.remove('active');
-    }
-  });
-  dbCurrent = idx;
-}
-
-function startDashboardCycle(){
-  if(dbInterval) clearInterval(dbInterval);
-  // 7.5s total / 3 slides = 2.5s per slide
-  dbInterval = setInterval(() => {
-    dbCurrent = (dbCurrent + 1) % 3;
-    switchDashboard(dbCurrent);
-  }, 2500);
-}
-
-// Start cycle on load
-switchDashboard(0);
-startDashboardCycle();
-
 // ════ HIDE-ON-SCROLL NAV ════
 let lastScrollY = window.scrollY;
 let navHideTimer;
