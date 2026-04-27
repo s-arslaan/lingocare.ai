@@ -1,0 +1,2291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LingoCare MVP · Internal Build Plan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700&family=Geist:wght@300..600&family=Geist+Mono:wght@400..500&family=Fraunces:ital,opsz,wght@1,9..144,300..500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --obsidian: #0B0B10;
+            --ink: #15151B;
+            --graphite: #2A2A33;
+            --ash: #6B6B72;
+            --mist: #E8E5DF;
+            --bone: #F6F2EC;
+            --paper: #FAFAF7;
+            --ember: #E8B07A;
+            --ember-deep: #C58E5C;
+            --dawn: #F2C19A;
+            --coral: #C58FB8;
+            --twilight: #6B7FE0;
+            --ember-gradient: linear-gradient(135deg, var(--dawn) 0%, var(--coral) 50%, var(--twilight) 100%);
+            --display: "Bricolage Grotesque", -apple-system, sans-serif;
+            --body: "Geist", -apple-system, sans-serif;
+            --mono: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+            --editorial: "Fraunces", Georgia, serif;
+            --s-1: 4px;
+            --s-2: 8px;
+            --s-3: 16px;
+            --s-4: 24px;
+            --s-5: 32px;
+            --s-6: 48px;
+            --s-7: 80px;
+            --s-8: 120px;
+            --s-9: 160px;
+            --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+            --dur-fast: 120ms;
+            --dur-base: 200ms;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%
+        }
+
+        body {
+            font-family: var(--body);
+            font-size: 16px;
+            line-height: 1.625;
+            color: var(--ink);
+            background: var(--bone);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: inherit
+        }
+
+        ul {
+            list-style: none
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .display-xl {
+            font-family: var(--display);
+            font-size: clamp(56px, 9vw, 96px);
+            line-height: .96;
+            letter-spacing: -.025em;
+            font-weight: 500
+        }
+
+        .h1 {
+            font-family: var(--display);
+            font-size: clamp(36px, 4.5vw, 56px);
+            line-height: 1.07;
+            letter-spacing: -.015em;
+            font-weight: 500
+        }
+
+        .h2 {
+            font-family: var(--display);
+            font-size: clamp(28px, 3.5vw, 40px);
+            line-height: 1.1;
+            letter-spacing: -.01em;
+            font-weight: 500
+        }
+
+        .body-l {
+            font-size: 18px;
+            line-height: 1.65;
+            font-weight: 400
+        }
+
+        .caption {
+            font-size: 13px;
+            line-height: 1.45;
+            font-weight: 400;
+            color: var(--ash)
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            line-height: 1.45;
+            font-weight: 600;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--ash)
+        }
+
+        .mono {
+            font-family: var(--mono);
+            font-size: 13px;
+            letter-spacing: -.01em
+        }
+
+        .text-ash {
+            color: var(--ash)
+        }
+
+        .gradient-y {
+            background: var(--ember-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--s-7)
+        }
+
+        @media(max-width:768px) {
+            .container {
+                padding: 0 var(--s-4)
+            }
+        }
+
+        section {
+            padding-block: var(--s-8)
+        }
+
+        section+section {
+            border-top: 1px solid var(--mist)
+        }
+
+        section.go-section+section {
+            border-top: none
+        }
+
+        .section-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: var(--s-2);
+            margin-bottom: var(--s-4)
+        }
+
+        .section-eyebrow::before {
+            content: "";
+            display: block;
+            width: 24px;
+            height: 1px;
+            background: var(--ash)
+        }
+
+        /* NAV */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(246, 242, 236, .92);
+            backdrop-filter: saturate(140%) blur(10px);
+            border-bottom: 1px solid transparent;
+            transition: border-color var(--dur-base) var(--ease-out)
+        }
+
+        .nav.scrolled {
+            border-bottom-color: var(--mist)
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: var(--s-3) var(--s-7);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--s-5)
+        }
+
+        .nav-mark {
+            font-family: var(--display);
+            font-weight: 600;
+            font-size: 18px;
+            letter-spacing: -.01em
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--s-5);
+            align-items: center
+        }
+
+        .nav-link {
+            font-size: 13px;
+            color: var(--ash);
+            transition: color var(--dur-fast) var(--ease-out)
+        }
+
+        .nav-link:hover {
+            color: var(--ink)
+        }
+
+        .nav-tag {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ash);
+            padding: 4px 10px;
+            border: 1px solid var(--mist);
+            border-radius: 999px
+        }
+
+        @media(max-width:900px) {
+            .nav-inner {
+                padding: var(--s-3) var(--s-4)
+            }
+
+            .nav-links {
+                display: none
+            }
+        }
+
+        /* HERO */
+        .hero {
+            padding-block: var(--s-9) var(--s-8)
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--s-7);
+            align-items: end
+        }
+
+        @media(min-width:900px) {
+            .hero-grid {
+                grid-template-columns: 2fr 1fr;
+                gap: var(--s-9)
+            }
+        }
+
+        .hero-tagline {
+            font-family: var(--editorial);
+            font-style: italic;
+            font-weight: 300;
+            font-size: 22px;
+            line-height: 1.4;
+            color: var(--ash);
+            max-width: 36ch
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-direction: column;
+            gap: var(--s-3);
+            border-left: 1px solid var(--mist);
+            padding-left: var(--s-4)
+        }
+
+        .hero-meta-row {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--s-3)
+        }
+
+        .hero-meta-key {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ash)
+        }
+
+        .hero-meta-val {
+            font-size: 14px;
+            font-weight: 500
+        }
+
+        .hero-divider {
+            height: 1px;
+            background: var(--mist);
+            margin-block: var(--s-7)
+        }
+
+        /* SPRINT GRID */
+        .sprint-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 1px;
+            background: var(--mist);
+            border: 1px solid var(--mist)
+        }
+
+        @media(max-width:1100px) {
+            .sprint-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+        }
+
+        @media(max-width:600px) {
+            .sprint-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .sprint-week {
+            background: var(--paper);
+            padding: var(--s-4);
+            display: flex;
+            flex-direction: column;
+            gap: var(--s-2);
+            min-height: 200px
+        }
+
+        .sprint-week.milestone {
+            background: var(--bone)
+        }
+
+        .sprint-week .week-num {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ash);
+            letter-spacing: .1em
+        }
+
+        .sprint-week .week-dates {
+            font-family: var(--display);
+            font-weight: 500;
+            font-size: 16px;
+            margin-top: var(--s-1)
+        }
+
+        .sprint-week .week-theme {
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--ash);
+            margin-top: var(--s-2);
+            flex: 1
+        }
+
+        .sprint-week .week-tag {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .04em;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-top: var(--s-3);
+            width: fit-content
+        }
+
+        .sprint-week .week-tag.milestone {
+            background: var(--ember);
+            color: var(--ink);
+            font-weight: 500
+        }
+
+        /* TEAM */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1px;
+            background: var(--mist);
+            border: 1px solid var(--mist)
+        }
+
+        .team-card {
+            background: var(--paper);
+            padding: var(--s-5);
+            display: flex;
+            flex-direction: column;
+            gap: var(--s-3);
+            transition: background var(--dur-base) var(--ease-out);
+            cursor: pointer
+        }
+
+        .team-card:hover {
+            background: var(--bone)
+        }
+
+        .team-card.active .team-name {
+            color: var(--ember-deep)
+        }
+
+        .team-card-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: var(--s-3)
+        }
+
+        .team-name {
+            font-family: var(--display);
+            font-weight: 500;
+            font-size: 22px;
+            letter-spacing: -.005em
+        }
+
+        .team-role {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ash);
+            text-align: right;
+            letter-spacing: .04em;
+            text-transform: uppercase
+        }
+
+        .team-blurb {
+            font-size: 14px;
+            line-height: 1.55;
+            color: var(--ash)
+        }
+
+        .team-task-count {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ash);
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: var(--s-3);
+            border-top: 1px solid var(--mist)
+        }
+
+        .team-task-count strong {
+            color: var(--ink);
+            font-weight: 500
+        }
+
+        /* ROLES TREE */
+        .roles-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--s-7)
+        }
+
+        @media(min-width:900px) {
+            .roles-section {
+                grid-template-columns: 1fr 1.5fr
+            }
+        }
+
+        .roles-prose p {
+            margin-bottom: var(--s-4);
+            max-width: 50ch
+        }
+
+        .roles-prose p:last-child {
+            margin-bottom: 0
+        }
+
+        .roles-tree {
+            display: flex;
+            flex-direction: column;
+            gap: var(--s-3)
+        }
+
+        .role-tier-label {
+            font-size: 11px;
+            font-family: var(--mono);
+            letter-spacing: .12em;
+            color: var(--ash);
+            text-transform: uppercase;
+            padding-left: var(--s-3);
+            margin-top: var(--s-3)
+        }
+
+        .role-tier-label:first-child {
+            margin-top: 0
+        }
+
+        .role-row {
+            background: var(--paper);
+            border: 1px solid var(--mist);
+            padding: var(--s-3) var(--s-4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--s-3);
+            flex-wrap: wrap
+        }
+
+        .role-row.indent-1 {
+            margin-left: var(--s-4)
+        }
+
+        .role-row.indent-2 {
+            margin-left: var(--s-6)
+        }
+
+        .role-row.indent-3 {
+            margin-left: var(--s-7)
+        }
+
+        .role-name {
+            font-weight: 500;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: var(--s-2)
+        }
+
+        .role-scope {
+            font-size: 12px;
+            color: var(--ash);
+            font-family: var(--mono)
+        }
+
+        .role-arrow {
+            color: var(--ember);
+            margin-right: 6px
+        }
+
+        /* SWIMLANES */
+        .lanes-wrap {
+            background: var(--paper);
+            border: 1px solid var(--mist);
+            padding: var(--s-5);
+            overflow-x: auto
+        }
+
+        .lanes-table {
+            display: grid;
+            grid-template-columns: 120px repeat(9, minmax(80px, 1fr));
+            gap: 1px;
+            background: var(--mist);
+            border: 1px solid var(--mist);
+            min-width: 880px;
+            font-size: 12px
+        }
+
+        .lane-cell {
+            background: var(--paper);
+            padding: var(--s-2) var(--s-3)
+        }
+
+        .lane-header {
+            background: var(--bone);
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .04em;
+            color: var(--ash);
+            font-weight: 500;
+            text-align: center;
+            padding-block: var(--s-3)
+        }
+
+        .lane-name {
+            background: var(--bone);
+            font-family: var(--display);
+            font-weight: 500;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            padding: var(--s-3)
+        }
+
+        .work-bar {
+            padding: 6px 8px;
+            font-size: 11px;
+            line-height: 1.4;
+            min-height: 44px;
+            display: flex;
+            align-items: center
+        }
+
+        .work-design .work-bar {
+            background: rgba(232, 176, 122, .18);
+            border-left: 2px solid var(--ember)
+        }
+
+        .work-build .work-bar {
+            background: var(--mist);
+            border-left: 2px solid var(--graphite)
+        }
+
+        .work-review .work-bar {
+            background: rgba(43, 43, 51, .06);
+            border-left: 2px solid var(--ash);
+            font-style: italic
+        }
+
+        .work-empty .work-bar {
+            background: var(--paper);
+            color: var(--ash);
+            border-left: 2px solid transparent
+        }
+
+        /* FILTERS + TASKS */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--s-2);
+            align-items: center;
+            margin-bottom: var(--s-5);
+            padding: var(--s-3);
+            background: var(--paper);
+            border: 1px solid var(--mist)
+        }
+
+        .filter-label {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--ash);
+            margin-right: var(--s-2)
+        }
+
+        .filter-pill {
+            font-size: 13px;
+            padding: 6px 14px;
+            border: 1px solid var(--mist);
+            border-radius: 999px;
+            background: var(--bone);
+            color: var(--ink);
+            transition: all var(--dur-fast) var(--ease-out);
+            font-weight: 500
+        }
+
+        .filter-pill:hover {
+            border-color: var(--ash)
+        }
+
+        .filter-pill.active {
+            background: var(--ink);
+            color: var(--bone);
+            border-color: var(--ink)
+        }
+
+        .filter-divider {
+            width: 1px;
+            height: 20px;
+            background: var(--mist);
+            margin-inline: var(--s-2)
+        }
+
+        .folder {
+            border: 1px solid var(--mist);
+            background: var(--paper);
+            margin-bottom: -1px
+        }
+
+        .folder.is-empty {
+            display: none
+        }
+
+        .folder-head {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--s-4) var(--s-5);
+            text-align: left;
+            transition: background var(--dur-fast) var(--ease-out)
+        }
+
+        .folder-head:hover {
+            background: var(--bone)
+        }
+
+        .folder-title {
+            display: flex;
+            align-items: baseline;
+            gap: var(--s-3)
+        }
+
+        .folder-num {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ash);
+            letter-spacing: .04em
+        }
+
+        .folder-name {
+            font-family: var(--display);
+            font-weight: 500;
+            font-size: 22px;
+            letter-spacing: -.005em
+        }
+
+        .folder-count {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ash)
+        }
+
+        .folder-chev {
+            width: 16px;
+            height: 16px;
+            border-right: 1.5px solid var(--ash);
+            border-bottom: 1.5px solid var(--ash);
+            transform: rotate(45deg);
+            transition: transform var(--dur-base) var(--ease-out);
+            margin-left: var(--s-3)
+        }
+
+        .folder.open .folder-chev {
+            transform: rotate(-135deg)
+        }
+
+        .folder-body {
+            display: none;
+            border-top: 1px solid var(--mist)
+        }
+
+        .folder.open .folder-body {
+            display: block
+        }
+
+        .task {
+            display: grid;
+            grid-template-columns: minmax(80px, auto) 1fr auto;
+            gap: var(--s-4);
+            padding: var(--s-4) var(--s-5);
+            border-bottom: 1px solid var(--mist);
+            align-items: start;
+            transition: background var(--dur-fast) var(--ease-out);
+            cursor: pointer
+        }
+
+        .task:last-child {
+            border-bottom: none
+        }
+
+        .task:hover {
+            background: var(--bone)
+        }
+
+        .task.is-hidden {
+            display: none
+        }
+
+        .task-id {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ash);
+            padding-top: 2px
+        }
+
+        .task-title {
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 1.4;
+            margin-bottom: 4px
+        }
+
+        .task-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--s-2);
+            margin-top: 6px;
+            align-items: center
+        }
+
+        .tag {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 999px;
+            font-family: var(--mono);
+            letter-spacing: .02em
+        }
+
+        .tag-week {
+            background: var(--mist);
+            color: var(--ink)
+        }
+
+        .tag-assignee {
+            color: var(--bone)
+        }
+
+        .tag-assignee.tag-yesha {
+            background: #2A2A33
+        }
+
+        .tag-assignee.tag-rishi {
+            background: #15151B
+        }
+
+        .tag-assignee.tag-belinda {
+            background: #3A3A44
+        }
+
+        .tag-assignee.tag-arslaan {
+            background: #1F1F26
+        }
+
+        .tag-assignee.tag-sara {
+            background: #25252D
+        }
+
+        .tag-assignee.tag-joint {
+            background: var(--graphite)
+        }
+
+        .tag-priority {
+            background: var(--bone);
+            color: var(--ash);
+            border: 1px solid var(--mist)
+        }
+
+        .tag-priority.p0 {
+            color: var(--ember-deep);
+            border-color: var(--ember)
+        }
+
+        .tag-priority.p1 {
+            color: var(--ink)
+        }
+
+        .tag-priority.p2 {
+            color: var(--ash);
+            font-style: italic
+        }
+
+        .tag-type {
+            background: transparent;
+            color: var(--ash);
+            border: 1px solid var(--mist)
+        }
+
+        .task-week-col {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ash);
+            text-align: right;
+            padding-top: 2px;
+            white-space: nowrap
+        }
+
+        .task-detail {
+            display: none;
+            grid-column: 2;
+            margin-top: var(--s-3);
+            padding-top: var(--s-3);
+            border-top: 1px dashed var(--mist);
+            font-size: 13px;
+            line-height: 1.55;
+            color: var(--ash)
+        }
+
+        .task.expanded .task-detail {
+            display: block
+        }
+
+        .task-detail .dlabel {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .06em;
+            color: var(--ash);
+            text-transform: uppercase;
+            display: block;
+            margin-top: var(--s-3);
+            margin-bottom: 4px
+        }
+
+        .task-detail .dlabel:first-child {
+            margin-top: 0
+        }
+
+        .task-detail .dval {
+            color: var(--ink)
+        }
+
+        /* PROCESS FLOW */
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 1px;
+            background: var(--mist);
+            border: 1px solid var(--mist)
+        }
+
+        @media(max-width:600px) {
+            .flow-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .flow-card {
+            background: var(--paper);
+            padding: var(--s-4) var(--s-5);
+            display: flex;
+            flex-direction: column;
+            gap: var(--s-4)
+        }
+
+        .flow-header {
+            display: flex;
+            align-items: center;
+            gap: var(--s-3)
+        }
+
+        .flow-code {
+            font-family: var(--mono);
+            font-size: 11px;
+            background: var(--ink);
+            color: var(--bone);
+            padding: 3px 9px;
+            letter-spacing: .06em;
+            border-radius: 2px
+        }
+
+        .flow-name {
+            font-weight: 500;
+            font-size: 15px
+        }
+
+        .flow-name .sub {
+            font-size: 12px;
+            color: var(--ash);
+            font-weight: 400;
+            margin-left: 4px
+        }
+
+        .flow-chain {
+            display: flex;
+            align-items: stretch;
+            gap: 6px;
+            flex-wrap: wrap
+        }
+
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            padding: 8px 12px;
+            gap: 3px;
+            flex-shrink: 0
+        }
+
+        .flow-step.s-design {
+            background: rgba(232, 176, 122, .15);
+            border: 1px solid var(--ember)
+        }
+
+        .flow-step.s-build {
+            background: var(--mist);
+            border: 1px solid var(--graphite)
+        }
+
+        .flow-step.s-review {
+            background: transparent;
+            border: 1px dashed var(--ash)
+        }
+
+        .flow-step.s-content {
+            background: rgba(107, 127, 224, .1);
+            border: 1px solid rgba(107, 127, 224, .4)
+        }
+
+        .flow-step.s-run {
+            background: var(--obsidian);
+            border: 1px solid var(--graphite)
+        }
+
+        .step-who {
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 1
+        }
+
+        .step-role {
+            font-size: 11px;
+            color: var(--ash);
+            line-height: 1.3
+        }
+
+        .step-consult {
+            font-size: 10px;
+            color: var(--ember-deep);
+            margin-top: 2px;
+            line-height: 1.3;
+            font-family: var(--mono)
+        }
+
+        .s-run .step-who,
+        .s-run .step-role {
+            color: var(--bone)
+        }
+
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            color: var(--ash);
+            font-size: 14px;
+            padding: 0 2px;
+            align-self: center;
+            flex-shrink: 0
+        }
+
+        .flow-note {
+            font-size: 12px;
+            color: var(--ash);
+            font-style: italic;
+            border-top: 1px dashed var(--mist);
+            padding-top: var(--s-3);
+            line-height: 1.5
+        }
+
+        /* RELIEF VALVES */
+        .cuts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--s-5)
+        }
+
+        @media(min-width:800px) {
+            .cuts-grid {
+                grid-template-columns: 1.4fr 1fr;
+                gap: var(--s-7)
+            }
+        }
+
+        .cuts-panel {
+            background: var(--paper);
+            border: 1px solid var(--mist);
+            padding: var(--s-5)
+        }
+
+        .cuts-panel.never {
+            background: var(--ink);
+            color: var(--bone);
+            border: none
+        }
+
+        .cuts-panel.never .cuts-title {
+            color: var(--bone)
+        }
+
+        .cuts-panel.never li {
+            border-bottom-color: var(--graphite)
+        }
+
+        .cuts-title {
+            font-family: var(--display);
+            font-weight: 500;
+            font-size: 24px;
+            margin-bottom: var(--s-2)
+        }
+
+        .cuts-sub {
+            font-size: 13px;
+            color: var(--ash);
+            margin-bottom: var(--s-4);
+            max-width: 36ch
+        }
+
+        .cuts-panel.never .cuts-sub {
+            color: #888
+        }
+
+        .cuts-list li {
+            display: flex;
+            align-items: baseline;
+            gap: var(--s-3);
+            padding-block: var(--s-3);
+            border-bottom: 1px solid var(--mist);
+            font-size: 14px
+        }
+
+        .cuts-list li:last-child {
+            border-bottom: none
+        }
+
+        .cut-num {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ash);
+            width: 24px;
+            flex-shrink: 0
+        }
+
+        .cuts-panel.never .cut-num {
+            color: var(--ember)
+        }
+
+        /* GO / NO-GO */
+        .go-section {
+            background: var(--ink);
+            color: var(--bone)
+        }
+
+        .go-section .h1 {
+            color: var(--bone)
+        }
+
+        .go-section .text-ash {
+            color: #888
+        }
+
+        .go-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1px;
+            margin-top: var(--s-6)
+        }
+
+        @media(min-width:720px) {
+            .go-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+        }
+
+        .go-cell {
+            background: var(--graphite);
+            padding: var(--s-5);
+            display: flex;
+            flex-direction: column;
+            gap: var(--s-2)
+        }
+
+        .go-num {
+            font-family: var(--display);
+            font-size: 48px;
+            line-height: 1;
+            font-weight: 500;
+            color: var(--ember);
+            letter-spacing: -.02em
+        }
+
+        .go-label {
+            font-size: 14px;
+            color: var(--mist)
+        }
+
+        footer {
+            padding-block: var(--s-7);
+            background: var(--bone);
+            border-top: 1px solid var(--mist)
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: var(--s-5);
+            flex-wrap: wrap
+        }
+
+        .footer-mark {
+            font-family: var(--display);
+            font-weight: 500;
+            font-size: 36px;
+            letter-spacing: -.01em;
+            line-height: 1
+        }
+
+        .footer-meta {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ash);
+            text-align: right
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(16px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .stagger>* {
+            opacity: 0;
+            animation: rise 600ms var(--ease-out) forwards
+        }
+
+        .stagger>*:nth-child(1) {
+            animation-delay: 0ms
+        }
+
+        .stagger>*:nth-child(2) {
+            animation-delay: 80ms
+        }
+
+        @media print {
+            body {
+                background: white
+            }
+
+            .nav,
+            .filters {
+                display: none
+            }
+
+            .folder-body {
+                display: block !important
+            }
+
+            .folder-chev,
+            .lanes-wrap {
+                display: none
+            }
+
+            section {
+                padding-block: var(--s-5);
+                page-break-inside: avoid
+            }
+
+            .go-section {
+                background: white;
+                color: var(--ink);
+                border: 2px solid var(--ink)
+            }
+
+            .go-section .h1 {
+                color: var(--ink)
+            }
+
+            .go-cell {
+                background: var(--bone);
+                border: 1px solid var(--mist)
+            }
+
+            .go-num {
+                color: var(--ember-deep)
+            }
+
+            .go-label {
+                color: var(--ink)
+            }
+
+            .cuts-panel.never {
+                background: var(--bone);
+                color: var(--ink);
+                border: 2px solid var(--ink)
+            }
+
+            .cuts-panel.never .cuts-title,
+            .cuts-panel.never .cut-num {
+                color: var(--ink)
+            }
+
+            .flow-step.s-run {
+                background: var(--bone)
+            }
+
+            .s-run .step-who,
+            .s-run .step-role {
+                color: var(--ink)
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <div class="nav-mark">lingocare<span class="gradient-y" style="font-weight:600">/</span>mvp</div>
+            <ul class="nav-links">
+                <li><a class="nav-link" href="#calendar">Calendar</a></li>
+                <li><a class="nav-link" href="#team">Team</a></li>
+                <li><a class="nav-link" href="#roles">Roles</a></li>
+                <li><a class="nav-link" href="#workflow">Workflow</a></li>
+                <li><a class="nav-link" href="#tasks">Tasks</a></li>
+                <li><a class="nav-link" href="#how">How Work Gets Done</a></li>
+                <li><a class="nav-link" href="#go">Go/No-Go</a></li>
+            </ul>
+            <span class="nav-tag">v3 · 28 Apr 2026</span>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow">Internal · Build Plan · MVP</span></div>
+            <h1 class="display-xl stagger">
+                <span style="display:block">Lingocare</span>
+                <span style="display:block">M<span class="gradient-y">V</span>P</span>
+            </h1>
+            <div class="hero-divider" style="height:1px;background:var(--mist);margin-block:var(--s-7)"></div>
+            <div class="hero-grid">
+                <p class="hero-tagline">
+                    Nine weeks. Five people. Yesha designs a week ahead of Rishi. Belinda keeps the content honest.
+                    Arslaan and Sara review together every Wednesday. The pipeline starts on day one.
+                </p>
+                <div class="hero-meta">
+                    <div class="hero-meta-row"><span class="hero-meta-key">Window</span><span class="hero-meta-val">29
+                            Apr → 27 Jun</span></div>
+                    <div class="hero-meta-row"><span class="hero-meta-key">Sprints</span><span class="hero-meta-val">W1
+                            – W9</span></div>
+                    <div class="hero-meta-row"><span class="hero-meta-key">Tasks</span><span class="hero-meta-val"
+                            id="total-task-count">—</span></div>
+                    <div class="hero-meta-row"><span class="hero-meta-key">Pilots</span><span class="hero-meta-val">Care
+                            Comet · Datteln · Goethe</span></div>
+                    <div class="hero-meta-row"><span class="hero-meta-key">Go/No-Go</span><span
+                            class="hero-meta-val">Jun 27</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPRINT CALENDAR -->
+    <section id="calendar">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow">01 · Sprint Calendar</span></div>
+            <h2 class="h1">Nine weeks. Two milestones.</h2>
+            <p class="body-l text-ash" style="margin-top:var(--s-3);max-width:60ch">Monday planning · Wednesday design
+                review · Friday staging demo. Every week, every sprint.</p>
+            <div class="sprint-grid" style="margin-top:var(--s-6)">
+                <div class="sprint-week"><span class="week-num">W1</span><span class="week-dates">Apr 29–30</span><span
+                        class="week-theme">Kickoff. Yesha starts designs. Rishi sets up testing infra. Belinda sources
+                        textbooks.</span></div>
+                <div class="sprint-week"><span class="week-num">W2</span><span class="week-dates">May 5–9</span><span
+                        class="week-theme">Curriculum backbone + Auth + design system. Lingo character lands.</span>
+                </div>
+                <div class="sprint-week"><span class="week-num">W3</span><span class="week-dates">May 12–16</span><span
+                        class="week-theme">Director experience build + AI ingestion pipeline + monitoring
+                        dashboard.</span></div>
+                <div class="sprint-week milestone"><span class="week-num">W4</span><span class="week-dates">May
+                        19–23</span><span class="week-theme">Student experience + AI retrieval + gamification decision
+                        post-Datteln.</span><span class="week-tag"
+                        style="border:1px solid var(--graphite);color:var(--ink);font-family:var(--mono);font-size:11px;letter-spacing:.04em;display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;margin-top:var(--s-3)">DEC:
+                        Gamification</span></div>
+                <div class="sprint-week milestone"><span class="week-num">W5</span><span class="week-dates">May
+                        26–30</span><span class="week-theme">Calendar + Language Garden. Content tool. Mid-MVP user test
+                        ~May 27.</span><span class="week-tag milestone">M2 · User Test ~May 27</span></div>
+                <div class="sprint-week"><span class="week-num">W6</span><span class="week-dates">Jun 2–6</span><span
+                        class="week-theme">Teacher experience + generation pipeline + Goethe onboarding.</span></div>
+                <div class="sprint-week"><span class="week-num">W7</span><span class="week-dates">Jun 9–13</span><span
+                        class="week-theme">Token wallet + audit log + pronunciation STT + content scaling.</span></div>
+                <div class="sprint-week"><span class="week-num">W8</span><span class="week-dates">Jun 16–20</span><span
+                        class="week-theme">Full polish + cross-integration + AI mass content complete (22 LUs × 3
+                        levels).</span></div>
+                <div class="sprint-week milestone"><span class="week-num">W9</span><span class="week-dates">Jun
+                        23–27</span><span class="week-theme">Integration testing only. Production tenant. Launch
+                        readiness.</span><span class="week-tag milestone">Go/No-Go · Jun 27</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow">02 · Team</span></div>
+            <h2 class="h1">Five people. Five lanes. One product.</h2>
+            <p class="body-l text-ash" style="margin-top:var(--s-3);max-width:60ch">Click a card to filter the task
+                list. Rishi owns all technical work — app and AI pipeline.</p>
+            <div class="team-grid" style="margin-top:var(--s-6)" id="team-grid"></div>
+        </div>
+    </section>
+
+    <!-- ROLES & RBAC -->
+    <section id="roles">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow">03 · Roles & Permissions</span></div>
+            <h2 class="h1">Seven roles. Two sides of the wall.</h2>
+            <div class="roles-section" style="margin-top:var(--s-6)">
+                <div class="roles-prose" style="font-size:16px">
+                    <p>The architecture is <strong>tenant-first, school-second.</strong> A tenant (e.g. Pflegeakademie
+                        Datteln) can run multiple schools. School Admins manage their school; Tenant Directors manage
+                        every school under the tenant.</p>
+                    <p>LingoCare's three internal roles run the platform: <strong>Super Admin</strong> (us, full
+                        control), <strong>Admin</strong> (most operations), <strong>Sales</strong> (read-only
+                        analytics).</p>
+                    <p>The tenant side has four user-facing roles. Each invites only downward: Tenant Director → School
+                        Admin → Instructor → Learner.</p>
+                    <p class="caption">Platform: CASL with tenant_id + school_id enforced at the model layer. Full
+                        permission matrix in the RBAC doc.</p>
+                </div>
+                <div class="roles-tree">
+                    <div class="role-tier-label">Lingocare Internal</div>
+                    <div class="role-row"><span class="role-name"><span class="role-arrow">●</span>Super
+                            Admin</span><span class="role-scope">platform · all tenants · full control</span></div>
+                    <div class="role-row indent-1"><span class="role-name">Admin</span><span class="role-scope">platform
+                            · most operations</span></div>
+                    <div class="role-row indent-1"><span class="role-name">Sales</span><span
+                            class="role-scope">read-only · business analytics</span></div>
+                    <div class="role-tier-label">Tenant Side</div>
+                    <div class="role-row"><span class="role-name"><span class="role-arrow">●</span>Tenant
+                            Director</span><span class="role-scope">tenant · all schools</span></div>
+                    <div class="role-row indent-1"><span class="role-name">School Admin</span><span
+                            class="role-scope">single school scope</span></div>
+                    <div class="role-row indent-2"><span class="role-name">Instructor</span><span
+                            class="role-scope">assigned programs · enrolled learners</span></div>
+                    <div class="role-row indent-3"><span class="role-name">Learner</span><span class="role-scope">own
+                            enrollments + calendar</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARALLEL WORK SWIMLANES -->
+    <section id="workflow">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow">04 · Parallel Work Model</span></div>
+            <h2 class="h1">The rule: Yesha is one week ahead.</h2>
+            <p class="body-l text-ash" style="margin-top:var(--s-3);max-width:60ch">Rishi builds app features and the AI
+                pipeline. Designs are reviewed Wednesday. Rishi starts building only after sign-off.</p>
+            <div class="lanes-wrap" style="margin-top:var(--s-6)">
+                <div class="lanes-table">
+                    <div class="lane-cell lane-header"></div>
+                    <div class="lane-cell lane-header">W1</div>
+                    <div class="lane-cell lane-header">W2</div>
+                    <div class="lane-cell lane-header">W3</div>
+                    <div class="lane-cell lane-header">W4</div>
+                    <div class="lane-cell lane-header">W5</div>
+                    <div class="lane-cell lane-header">W6</div>
+                    <div class="lane-cell lane-header">W7</div>
+                    <div class="lane-cell lane-header">W8</div>
+                    <div class="lane-cell lane-header">W9</div>
+
+                    <div class="lane-cell lane-name">Yesha</div>
+                    <div class="lane-cell work-design">
+                        <div class="work-bar">Design system + School UI + Lingo character</div>
+                    </div>
+                    <div class="lane-cell work-design">
+                        <div class="work-bar">Student home + Lesson page + PF types</div>
+                    </div>
+                    <div class="lane-cell work-design">
+                        <div class="work-bar">Calendar (3 roles) + Monitoring dashboard</div>
+                    </div>
+                    <div class="lane-cell work-design">
+                        <div class="work-bar">Student calendar + progress + L&P Garden</div>
+                    </div>
+                    <div class="lane-cell work-design">
+                        <div class="work-bar">Content tool + Instructor grading UX</div>
+                    </div>
+                    <div class="lane-cell work-design">
+                        <div class="work-bar">Token wallet + audit + Director analytics</div>
+                    </div>
+                    <div class="lane-cell work-design">
+                        <div class="work-bar">Final polish: student + instructor</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Final QA: all screens vs designs</div>
+                    </div>
+                    <div class="lane-cell work-empty">
+                        <div class="work-bar">—</div>
+                    </div>
+
+                    <div class="lane-cell lane-name">Rishi</div>
+                    <div class="lane-cell work-build">
+                        <div class="work-bar">Test infra + CI + bug fixes + AI SDK + data residency</div>
+                    </div>
+                    <div class="lane-cell work-build">
+                        <div class="work-bar">School onboarding + Auth + RBAC (7 roles) + AI ingestion loader</div>
+                    </div>
+                    <div class="lane-cell work-build">
+                        <div class="work-bar">Curriculum backbone + invitation flow + AI chunker + embeddings</div>
+                    </div>
+                    <div class="lane-cell work-build">
+                        <div class="work-bar">Student experience + AI retrieval pipeline + Lingo chat</div>
+                    </div>
+                    <div class="lane-cell work-build">
+                        <div class="work-bar">Calendar all 3 roles + L&P Garden + AI generation pipeline</div>
+                    </div>
+                    <div class="lane-cell work-build">
+                        <div class="work-bar">Instructor grading + class mgmt + content tool API + publishing bridge
+                        </div>
+                    </div>
+                    <div class="lane-cell work-build">
+                        <div class="work-bar">Token wallet + audit log + STT + mass content generation</div>
+                    </div>
+                    <div class="lane-cell work-build">
+                        <div class="work-bar">E2E testing + hardening + mobile pass + mass content QA</div>
+                    </div>
+                    <div class="lane-cell work-build">
+                        <div class="work-bar">Fix P0 bugs + production tenant setup + monitoring</div>
+                    </div>
+
+                    <div class="lane-cell lane-name">Belinda</div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Textbook sourcing + LU2 post-test refresh</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Gold examples ×8 + KI1 error analysis</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Upload textbooks + validate chunking</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Review chunks + validate classifications</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Content for May 27 test + first generation review</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">50+ items approved across AD2, KI1, BD1</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Review all content + Language Garden content</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Final review: 22 LUs × 3 levels complete</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Post-launch content roadmap</div>
+                    </div>
+
+                    <div class="lane-cell lane-name">Arslaan</div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Test synthesis + OAuth research + decisions kick</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">AI model decisions (content + Lingo) + reviews</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Reviews + GDPR review + DPA template</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Gamification decision + reviews</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Test objectives + May 27 prep + reviews</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Reviews</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Go/No-Go prep + AI model strategy doc</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Go/No-Go prep</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Go/No-Go decision</div>
+                    </div>
+
+                    <div class="lane-cell lane-name">Sara</div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Care Comet + Datteln contact</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Lingo tone guide + Datteln scoping</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Datteln onboard + DPA signing</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Gamification: input from Datteln</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">May 27 logistics + run</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Goethe onboard</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Pilots running + pricing plan</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Pilots running</div>
+                    </div>
+                    <div class="lane-cell work-review">
+                        <div class="work-bar">Pilot validation + Go/No-Go</div>
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex;gap:var(--s-5);margin-top:var(--s-5);flex-wrap:wrap">
+                <span class="caption"><span
+                        style="display:inline-block;width:12px;height:12px;background:rgba(232,176,122,.18);border-left:2px solid var(--ember);margin-right:8px;transform:translateY(2px)"></span>Design</span>
+                <span class="caption"><span
+                        style="display:inline-block;width:12px;height:12px;background:var(--mist);border-left:2px solid var(--graphite);margin-right:8px;transform:translateY(2px)"></span>Build
+                    · AI pipeline · Ops</span>
+                <span class="caption"><span
+                        style="display:inline-block;width:12px;height:12px;background:rgba(43,43,51,.06);border-left:2px solid var(--ash);margin-right:8px;transform:translateY(2px)"></span>Review
+                    · Coordination · Content</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TASKS -->
+    <section id="tasks">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow">05 · Tasks</span></div>
+            <h2 class="h1">Every task, every week, every owner.</h2>
+            <p class="body-l text-ash" style="margin-top:var(--s-3);max-width:60ch">Click any task to expand acceptance
+                criteria. Filters stack — person × week × priority. Each folder maps to a ClickUp Folder.</p>
+            <div class="filters" style="margin-top:var(--s-5)">
+                <span class="filter-label">Person</span>
+                <button class="filter-pill active" data-filter="person" data-value="all">All</button>
+                <button class="filter-pill" data-filter="person" data-value="Yesha">Yesha</button>
+                <button class="filter-pill" data-filter="person" data-value="Rishi">Rishi</button>
+                <button class="filter-pill" data-filter="person" data-value="Belinda">Belinda</button>
+                <button class="filter-pill" data-filter="person" data-value="Arslaan">Arslaan</button>
+                <button class="filter-pill" data-filter="person" data-value="Sara">Sara</button>
+                <button class="filter-pill" data-filter="person" data-value="Joint">Joint</button>
+                <span class="filter-divider"></span>
+                <span class="filter-label">Week</span>
+                <button class="filter-pill active" data-filter="week" data-value="all">All</button>
+                <button class="filter-pill" data-filter="week" data-value="W1">W1</button>
+                <button class="filter-pill" data-filter="week" data-value="W2">W2</button>
+                <button class="filter-pill" data-filter="week" data-value="W3">W3</button>
+                <button class="filter-pill" data-filter="week" data-value="W4">W4</button>
+                <button class="filter-pill" data-filter="week" data-value="W5">W5</button>
+                <button class="filter-pill" data-filter="week" data-value="W6">W6</button>
+                <button class="filter-pill" data-filter="week" data-value="W7">W7</button>
+                <button class="filter-pill" data-filter="week" data-value="W8">W8</button>
+                <button class="filter-pill" data-filter="week" data-value="W9">W9</button>
+                <span class="filter-divider"></span>
+                <span class="filter-label">Priority</span>
+                <button class="filter-pill active" data-filter="priority" data-value="all">All</button>
+                <button class="filter-pill" data-filter="priority" data-value="P0">P0</button>
+                <button class="filter-pill" data-filter="priority" data-value="P1">P1</button>
+                <button class="filter-pill" data-filter="priority" data-value="P2">P2</button>
+            </div>
+            <div id="folder-list" style="margin-top:var(--s-5)"></div>
+        </div>
+    </section>
+
+    <!-- HOW WORK GETS DONE — PROCESS FLOWS -->
+    <section id="how">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow">06 · How Work Gets Done</span></div>
+            <h2 class="h1">Every task type has a flow.</h2>
+            <p class="body-l text-ash" style="margin-top:var(--s-3);max-width:60ch">
+                Yesha designs — connecting with whoever owns the domain for that task type. Then Arslaan and Sara review
+                together. Then Rishi builds. Pure technical tasks skip design entirely.
+            </p>
+
+            <div style="display:flex;gap:var(--s-5);flex-wrap:wrap;margin-top:var(--s-5);margin-bottom:var(--s-5)">
+                <span class="caption"><span
+                        style="display:inline-block;width:32px;height:14px;background:rgba(232,176,122,.15);border:1px solid var(--ember);margin-right:8px;transform:translateY(3px)"></span>Design
+                    step</span>
+                <span class="caption"><span
+                        style="display:inline-block;width:32px;height:14px;background:var(--mist);border:1px solid var(--graphite);margin-right:8px;transform:translateY(3px)"></span>Build
+                    step</span>
+                <span class="caption"><span
+                        style="display:inline-block;width:32px;height:14px;background:transparent;border:1px dashed var(--ash);margin-right:8px;transform:translateY(3px)"></span>Review
+                    step</span>
+                <span class="caption"><span
+                        style="display:inline-block;width:32px;height:14px;background:rgba(107,127,224,.1);border:1px solid rgba(107,127,224,.4);margin-right:8px;transform:translateY(3px)"></span>Content
+                    step</span>
+            </div>
+
+            <div class="flow-grid" id="flow-grid"></div>
+        </div>
+    </section>
+
+    <!-- RELIEF VALVES + NEVER-CUT -->
+    <section>
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow">07 · Scope Pressure</span></div>
+            <h2 class="h1">If we slip, we cut in this order.</h2>
+            <div class="cuts-grid" style="margin-top:var(--s-6)">
+                <div class="cuts-panel">
+                    <h3 class="cuts-title">Relief valves</h3>
+                    <p class="cuts-sub">Cut from the top. Each lower number means more painful but still survivable.</p>
+                    <ul class="cuts-list">
+                        <li><span class="cut-num">01</span><span>Announcement system → email instead</span></li>
+                        <li><span class="cut-num">02</span><span>Director CSV export → screenshot</span></li>
+                        <li><span class="cut-num">03</span><span>LLM re-ranker → vector + metadata sufficient</span>
+                        </li>
+                        <li><span class="cut-num">04</span><span>Language Adapter → generate B1 only, adapt
+                                manually</span></li>
+                        <li><span class="cut-num">05</span><span>PF3 simulation types → ship PF1 + PF2 only</span></li>
+                        <li><span class="cut-num">06</span><span>Gamification (if W4 says go) → no-go = no change</span>
+                        </li>
+                        <li><span class="cut-num">07</span><span>Pronunciation STT → text-based listening only</span>
+                        </li>
+                        <li><span class="cut-num">08</span><span>Adaptive referral → learners find Garden
+                                manually</span></li>
+                        <li><span class="cut-num">09</span><span>Lingo for instructor + director → learner only</span>
+                        </li>
+                        <li><span class="cut-num">10</span><span>Outlook sync → ICS export fallback</span></li>
+                        <li><span class="cut-num">11</span><span>WCAG AA audit → document debt, fix post-MVP</span></li>
+                    </ul>
+                </div>
+                <div class="cuts-panel never">
+                    <h3 class="cuts-title">Never cut</h3>
+                    <p class="cuts-sub">If any of these slip, Go/No-Go becomes No-Go.</p>
+                    <ul class="cuts-list">
+                        <li><span class="cut-num">·</span><span>Lesson + PF1/PF2 task flow</span></li>
+                        <li><span class="cut-num">·</span><span>Knowledge Cards</span></li>
+                        <li><span class="cut-num">·</span><span>Calendar — all 3 roles</span></li>
+                        <li><span class="cut-num">·</span><span>Curriculum management (Director)</span></li>
+                        <li><span class="cut-num">·</span><span>Learner activity logging</span></li>
+                        <li><span class="cut-num">·</span><span>AI ingestion → generation pipeline</span></li>
+                        <li><span class="cut-num">·</span><span>Content-to-app publishing bridge</span></li>
+                        <li><span class="cut-num">·</span><span>RBAC + multi-tenant isolation</span></li>
+                        <li><span class="cut-num">·</span><span>Audit log</span></li>
+                        <li><span class="cut-num">·</span><span>Backend integration tests + CI</span></li>
+                        <li><span class="cut-num">·</span><span>Production tenant + monitoring</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GO / NO-GO -->
+    <section class="go-section" id="go">
+        <div class="container">
+            <div class="section-eyebrow" style="margin-bottom:var(--s-4)"><span class="eyebrow"
+                    style="color:var(--ash)">08 · Launch Gate</span></div>
+            <h2 class="h1">Go / No-Go · 27 June</h2>
+            <p class="body-l" style="margin-top:var(--s-3);max-width:60ch;color:#888">All criteria must be met. Any
+                single P0 bug is automatic No-Go. If No-Go, a recovery plan is written the same day.</p>
+            <div class="go-grid">
+                <div class="go-cell">
+                    <div class="go-num">0</div>
+                    <div class="go-label">P0 bugs open</div>
+                </div>
+                <div class="go-cell">
+                    <div class="go-num">5/5</div>
+                    <div class="go-label">E2E flows passing</div>
+                </div>
+                <div class="go-cell">
+                    <div class="go-num">22</div>
+                    <div class="go-label">LUs × 3 levels published &amp; reviewed</div>
+                </div>
+                <div class="go-cell">
+                    <div class="go-num">1</div>
+                    <div class="go-label">Production tenant live on lingocare.ai</div>
+                </div>
+                <div class="go-cell">
+                    <div class="go-num">100%</div>
+                    <div class="go-label">Monitoring &amp; alerts active</div>
+                </div>
+                <div class="go-cell">
+                    <div class="go-num">3/3</div>
+                    <div class="go-label">Pilots confirmed for July testing</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-mark">lingocare<span class="gradient-y" style="font-weight:600">.</span></div>
+                    <p class="caption" style="margin-top:var(--s-2)">Internal build plan · for the team only</p>
+                </div>
+                <div class="footer-meta">
+                    <div>v3 · 28 April 2026</div>
+                    <div style="margin-top:4px">Maintained by Arslaan</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ======================================================
+        // DATA
+        // ======================================================
+        const TEAM = [
+            { key: "Yesha", role: "Designer", blurb: "All UX, UI, design system, Lingo character, gamification UX. One sprint ahead of Rishi throughout." },
+            { key: "Rishi", role: "Developer", blurb: "Backend, frontend, RBAC, infra, integrations — and the full AI content pipeline. Pulls designs once approved." },
+            { key: "Belinda", role: "Content Expert", blurb: "Pedagogical authority. Textbooks, gold examples, generation review. Keeps the AI clinically honest." },
+            { key: "Arslaan", role: "Tech PM", blurb: "Tech decisions, design reviews with Sara, test synthesis, AI strategy, integrations research." },
+            { key: "Sara", role: "Business PM", blurb: "Pilot partnerships, DPAs, gamification decision, Datteln and Goethe onboarding, growth." }
+        ];
+
+        // All AI Eng tasks → Rishi
+        const TASKS = [
+            // 01 · Curriculum & Data Model
+            { id: "CUR-01", folder: "01 · Curriculum & Data Model", title: "Academic Term model + API", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Term (id, tenant_id, school_id, name, dates, status draft/active/archived). CRUD endpoints, one active term per school enforced.", done: "CRUD via API. Status transitions tested. Zod validation passes. Integration test covers transitions." },
+            { id: "CUR-02", folder: "01 · Curriculum & Data Model", title: "Program (Curriculum) model + API", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Program belongs to Term. Holds assigned Mega Clusters, active Topics, scheduled Lessons. CRUD endpoints.", done: "Program CRUD works. Cluster/Topic activation toggles tested. Returns normalised schedule for any learner." },
+            { id: "CUR-03", folder: "01 · Curriculum & Data Model", title: "Lesson (LU) Schedule model + API", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Per-Lesson: availability_start/end, recommended_completion, assigned_groups. Emits Calendar Events automatically on save.", done: "Saving a schedule entry creates calendar events. Availability window queryable per learner." },
+            { id: "CUR-04", folder: "01 · Curriculum & Data Model", title: "Calendar Event model + API", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Type enum (class_session/lu_deadline/milestone/custom), linked entity, RRULE recurrence, role-filtered queries. Propagates to all assigned users.", done: "Events propagate to assigned users in <1s. Recurrence expansion correct." },
+            { id: "CUR-05", folder: "01 · Curriculum & Data Model", title: "Learner Group model + enrollment", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Director creates groups, enrolls learners. Groups attach to Lesson schedules. Enrollment creates calendar entries.", done: "Enrollment creates correct calendar. Access-control integration test passes." },
+            { id: "CUR-06", folder: "01 · Curriculum & Data Model", title: "Pedagogical entities — refactor for tenant scope", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Mega Cluster → Topic → Lesson → Practice Focus → KC. Refactor APH6 build for tenant_id + school_id scoping. Migration idempotent.", done: "All entities scoped. APH6 data does not break. Migration script runs cleanly." },
+            { id: "CUR-07", folder: "01 · Curriculum & Data Model", title: "Backend integration test suite + CI", who: "Rishi", week: "W1", priority: "P0", type: "Test", what: "Vitest + Supertest + mongodb-memory-server. Test factories for all entities. GitHub Actions CI — PR cannot merge without green tests. Old APH6 frontend test modules deleted.", done: "pnpm test green in CI. Coverage report generated. Full suite <60s." },
+            { id: "CUR-08", folder: "01 · Curriculum & Data Model", title: "Pilot school seed script", who: "Rishi", week: "W3", priority: "P0", type: "Ops", what: "Idempotent seed: 1 tenant + 1 school + all 5 roles + active term + AD/KI/BD clusters + all 4 topics + 22 lessons (placeholder content) + populated calendar.", done: "pnpm seed:pilot works on staging. Idempotent on re-run." },
+
+            // 02 · Auth, RBAC & Infra
+            { id: "INF-01", folder: "02 · Auth, RBAC & Infra", title: "Data residency lockdown + documentation", who: "Rishi", week: "W1", priority: "P0", type: "Ops", what: "Verify + enforce S3/MongoDB/Redis Frankfurt + Azure OpenAI Sweden Central. IAM blocks non-EU regions. Document in /docs/data-residency.md.", done: "Doc written. Reviewed by Arslaan. No pilot data lands without this signed off." },
+            { id: "INF-02", folder: "02 · Auth, RBAC & Infra", title: "Tenant + school isolation (multi-tenant)", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Mongoose middleware enforces tenant_id + school_id on every query. Tenant A cannot access Tenant B data on any endpoint.", done: "Isolation matrix integration test passes (2 tenants × 2 schools × 5 entity types × 3 roles)." },
+            { id: "INF-03", folder: "02 · Auth, RBAC & Infra", title: "CASL RBAC — all 7 roles", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Super Admin, Admin, Sales (LingoCare internal) + Tenant Director, School Admin, Instructor, Learner. Per-role abilities from RBAC doc. Invitation hierarchy enforced server-side.", done: "Role × entity × action matrix all green (7 roles × 8 entities × 4 actions = 224 rules). Controller-level ability checks." },
+            { id: "INF-04", folder: "02 · Auth, RBAC & Infra", title: "Auth: email/password + Google OAuth", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Sign in/out, password reset, session management (JWT or session cookies). 30 concurrent logins tested.", done: "Login <3s. Password reset email works. 30 concurrent logins pass." },
+            { id: "INF-05", folder: "02 · Auth, RBAC & Infra", title: "QR-code login (APH6 critical fix)", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Director generates QR per learner. One-time auth token. Login in <3 clicks. APH6 critical fix #1.", done: "30 learners log in via QR in <30s total. Expired tokens rejected." },
+            { id: "INF-06", folder: "02 · Auth, RBAC & Infra", title: "User invitation system (per role hierarchy)", who: "Rishi", week: "W3", priority: "P0", type: "Build", what: "Each role invites only roles below. Tenant Director → School Admin/Instructor/Learner. School Admin → Instructor/Learner. Email + 7d expiry + idempotent on re-invite.", done: "Invite email delivered. Hierarchy enforced server-side. Bulk email paste works." },
+            { id: "INF-07", folder: "02 · Auth, RBAC & Infra", title: "Image compression + CDN (APH6 critical fix)", who: "Rishi", week: "W1", priority: "P0", type: "Build", what: "All KC and case images via CDN. Auto-compressed on upload (<200KB target). Responsive sizes. APH6 fix #2.", done: "Lighthouse perf >80. Images load <1s on 3G throttle." },
+            { id: "INF-08", folder: "02 · Auth, RBAC & Infra", title: "German UI 100% audit + i18n linter", who: "Rishi+Yesha", week: "W1", priority: "P0", type: "Build", what: "Full string audit. i18n linter step in CI prevents English strings from merging. APH6 fix #3.", done: "Zero English strings in any user-facing UI. CI linter blocks regressions." },
+            { id: "INF-09", folder: "02 · Auth, RBAC & Infra", title: "Rate limiting + request logging", who: "Rishi", week: "W3", priority: "P1", type: "Build", what: "Per-user rate limits on AI + auth endpoints. Request log: user_id + endpoint + status + latency, 30d retention.", done: "AI endpoints rate-limited. Logs queryable." },
+            { id: "INF-10", folder: "02 · Auth, RBAC & Infra", title: "OAuth app verification — Google + Microsoft (initiate W1)", who: "Rishi", week: "W1", priority: "P0", type: "Ops", what: "Start the Google OAuth app verification process and Microsoft Entra app registration early — these take weeks and block features like Google Calendar sync and 'Sign in with Google' showing as verified (not 'unverified app' warning). Submit Google OAuth consent screen for verification. Register app in Azure for Microsoft Graph/Outlook access. Track approval status weekly. Both are required for users to trust connecting their accounts.", done: "Both verification submissions live. Status tracked. No feature blocks Rishi from building ahead; app shows as pending-verification, not a blocker to ship but must resolve before launch." },
+            { id: "INF-11", folder: "02 · Auth, RBAC & Infra", title: "GDPR compliance review + DPA template", who: "Arslaan", week: "W2", priority: "P0", type: "Review", what: "Review data model for GDPR: learner consent recording, right to erasure, data processing register. Cookie banner (non-blocking strip per brand). Privacy policy drafted. DPA template for pilot partners handed to Sara.", done: "Arslaan sign-off. DPA template with Sara by end W2." },
+
+            // 03 · LingoCare Internal Console
+            { id: "LIC-D1", folder: "03 · LingoCare Internal Console", title: "Design: Internal console (Super Admin / Admin / Sales)", who: "Yesha", week: "W3", priority: "P0", type: "Design", what: "Tenant list, tenant detail + usage caps, internal user management, platform analytics. Three role-scoped views showing only what each role can see.", done: "W3 design review. Arslaan + Sara approved." },
+            { id: "LIC-01", folder: "03 · LingoCare Internal Console", title: "Tenant onboarding flow (Super Admin)", who: "Rishi", week: "W4", priority: "P0", type: "Build", what: "Create tenant record, configure usage caps (learner caps, program caps), invite Tenant Director. Activate/deactivate tenant.", done: "Sara can onboard a new pilot tenant in <5 min. Usage caps enforced on generation." },
+            { id: "LIC-02", folder: "03 · LingoCare Internal Console", title: "Tenant management — modify, configure", who: "Rishi", week: "W4", priority: "P0", type: "Build", what: "Edit tenant details (name, branding, contact, address). Modify usage caps. Terminate tenant (Super Admin only with confirmation).", done: "Permission matrix enforced per RBAC doc. Termination requires typed confirmation." },
+            { id: "LIC-03", folder: "03 · LingoCare Internal Console", title: "Internal user management (LingoCare team)", who: "Rishi", week: "W4", priority: "P1", type: "Build", what: "Invite/edit/block Admin + Sales. Reset password (Super Admin only). View all internal users list.", done: "Sara can invite a new Sales colleague. Super Admin can reset passwords. Permission matrix enforced." },
+            { id: "LIC-04", folder: "03 · LingoCare Internal Console", title: "Platform analytics — collective + per-tenant", who: "Rishi", week: "W6", priority: "P1", type: "Build", what: "Collective tenant analytics (most-used features). Per-tenant business metrics (school size, active users, growth). Live user count by tenant/school.", done: "Sara pulls analytics for pilot review. Renders <2s for 3 tenants." },
+            { id: "LIC-05", folder: "03 · LingoCare Internal Console", title: "Tenant activity logs + session management", who: "Rishi", week: "W7", priority: "P1", type: "Build", what: "View + filter activity logs by tenant/user/date (all actions). View + terminate active sessions across tenants.", done: "Active sessions visible. Terminate force-logs-out user. Tested with 3 tenants." },
+
+            // 04 · Director Experience
+            { id: "DIR-D1", folder: "04 · Director Experience", title: "Design: School onboarding + invitation UI", who: "Yesha", week: "W1", priority: "P0", type: "Design", what: "Create school, edit profile, invite users by email + role, invitation list states. Tenant Director and School Admin variant views.", done: "W1 design review. Arslaan + Sara approved." },
+            { id: "DIR-01", folder: "04 · Director Experience", title: "School management UI", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Create/delete school (Tenant Director only). Modify school details (logo to S3, colors, address). Enable/disable school-level features (calendar integration toggle).", done: "Tenant Director stands up a new school in <3 min. Logo upload to S3 works." },
+            { id: "DIR-D2", folder: "04 · Director Experience", title: "Design: Program management + Gantt timeline", who: "Yesha", week: "W2", priority: "P0", type: "Design", what: "Term setup, cluster/topic activation, lesson scheduling (dates + groups), Gantt of availability windows across term. Drag-to-reschedule interaction.", done: "W2 design review. Arslaan + Sara approved." },
+            { id: "DIR-02", folder: "04 · Director Experience", title: "Program management — Term, Cluster, Topic", who: "Rishi", week: "W3", priority: "P0", type: "Build", what: "Term create/edit/activate (one active per school enforced). Cluster toggle (AD/KI/BD for MVP). Topic toggle. Warns when deactivating topic that has scheduled lessons.", done: "Director sets up full term in <5 min. Warnings work. Integration tested." },
+            { id: "DIR-03", folder: "04 · Director Experience", title: "Lesson scheduling + Gantt timeline", who: "Rishi", week: "W3", priority: "P0", type: "Build", what: "Per topic: list lessons, set availability window + recommended completion + assigned groups. Gantt view shows all windows across the term. Schedule saves trigger calendar event creation.", done: "Schedule change → calendar fires within 1s. Gantt renders. Drag-reschedule (P1)." },
+            { id: "DIR-D3", folder: "04 · Director Experience", title: "Design: Lesson + PF + KC content editor (the CMS layer)", who: "Yesha", week: "W3", priority: "P0", type: "Design", what: "The 'Google Forms for nursing lessons' — Belinda must be able to author end-to-end without Rishi. Lesson (case + airlock). PF task builder for all Tier 1 + Tier 2 exercise types. KC block builder. Preview pane.", done: "W3 review. Belinda shown preview and confirms the workflow makes sense for her." },
+            { id: "DIR-04", folder: "04 · Director Experience", title: "Lesson content editor (authoring)", who: "Rishi", week: "W4", priority: "P0", type: "Build", what: "Create/edit lesson: case text (rich), airlock diagram upload, KC block linking. Content Expert role sees all schools globally; school director sees only their school.", done: "Belinda authors a complete lesson on staging without Rishi's help." },
+            { id: "DIR-05", folder: "04 · Director Experience", title: "Practice Focus editor — Tier 1 + Tier 2 exercise types", who: "Rishi", week: "W4", priority: "P0", type: "Build", what: "Authoring for: single/multi-select, drag-drop order, free text (Tier 1). Hotspot diagram (region editor), drag-drop matrix, single+free-text, multi+free-text, structured free-text (Tier 2). Preview pane shows student view.", done: "Belinda builds AD1-LU2 PF1+PF2 sequence in <15 min. Hotspot region editor works. Each type tested." },
+            { id: "DIR-06", folder: "04 · Director Experience", title: "Knowledge Card block builder", who: "Rishi", week: "W4", priority: "P0", type: "Build", what: "Create Wissensbaustein: up to 6 cards, text + image + comprehension check (MC/True-False/Multi-Select). Link blocks to lessons and PFs.", done: "Belinda builds 3-card block in <5 min. KC appears as hint in PF and in Knowledge Library." },
+            { id: "DIR-D4", folder: "04 · Director Experience", title: "Design: Director analytics + term Gantt overview", who: "Yesha", week: "W5", priority: "P0", type: "Design", what: "Completion rates, on-track/behind, deadline adherence, language level distribution, students needing intervention, instructor grading turnaround. Term Gantt with today marker and drag-to-reschedule.", done: "W5 design review. Arslaan + Sara approved." },
+            { id: "DIR-07", folder: "04 · Director Experience", title: "Director analytics + term Gantt build", who: "Rishi", week: "W6", priority: "P0", type: "Build", what: "Implements DIR-D4. CSV export. Drag-to-reschedule fires calendar updates for all affected users.", done: "Every metric renders <2s. CSV downloads. Reschedule propagates to all role calendars." },
+            { id: "DIR-08", folder: "04 · Director Experience", title: "Announcement system (basic)", who: "Rishi", week: "W6", priority: "P2", type: "Build", what: "Create announcement: title + body + target (school/cluster/role). Schedule for future date. Learner dashboard shows latest 3–5 dismissable. First relief valve — cut to email if behind.", done: "Announcement reaches targeted learners <5 min. Scheduling works." },
+            { id: "DIR-09", folder: "04 · Director Experience", title: "School Admin scoped views", who: "Rishi", week: "W3", priority: "P0", type: "Build", what: "School Admin sees only their school's program/lesson/instructor/learner data. Cannot create or delete schools. Subset of Tenant Director views.", done: "RBAC matrix enforced. Tested with 2 schools under 1 tenant — no cross-contamination." },
+
+            // 05 · Learner Experience
+            { id: "STU-D1", folder: "05 · Learner Experience", title: "Design: Learner onboarding wizard", who: "Yesha", week: "W1", priority: "P0", type: "Design", what: "Language level picker (A2/B1/B2 with plain descriptions, not CEFR jargon). Native language. Account confirmation. Lingo welcomes. Progress indicator.", done: "W1 review. Arslaan + Sara approved." },
+            { id: "STU-01", folder: "05 · Learner Experience", title: "Onboarding wizard build", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Implements STU-D1. Level stored in profile. Editable from settings. All content renders at selected level from this point. <90s end-to-end.", done: "Level persists. Switching re-renders all content immediately." },
+            { id: "STU-D2", folder: "05 · Learner Experience", title: "Design: Learner home + curriculum Learning view", who: "Yesha", week: "W2", priority: "P0", type: "Design", what: "Mega Clusters → Topics → Lesson cards (case preview, PF status 0/4–4/4). Calendar widget (compact). What's next strip. Mobile-first.", done: "W2 review. Arslaan + Sara approved." },
+            { id: "STU-02", folder: "05 · Learner Experience", title: "Learner home + Learning view build", who: "Rishi", week: "W3", priority: "P0", type: "Build", what: "Curriculum-driven home. Lessons hidden until availability_start. Status badges. Calendar widget pulls from calendar engine.", done: "Learner sees only scheduled content. Renders <1s." },
+            { id: "STU-D3", folder: "05 · Learner Experience", title: "Design: Lesson page + PF flow + all exercise types", who: "Yesha", week: "W2", priority: "P0", type: "Design", what: "Case + airlock + 4 PF cards. PF task flow: progress, navigation, all Tier 1 + Tier 2 exercise types. Knowledge anchor always visible. Back button. Feedback: correct=green, wrong=red+explanation. Batch feedback every 3–5 tasks.", done: "W2 review. All Tier 1 types covered. Tier 2 covered in same review." },
+            { id: "STU-03", folder: "05 · Learner Experience", title: "Lesson page + PF1 task flow (refreshed from APH6)", who: "Rishi", week: "W3", priority: "P0", type: "Build", what: "Lesson connected to curriculum. Case at learner's language level. PF1 all 4 Tier 1 types. APH6 fixes: auto-advance, MC radio-only, back button, repeat task, batch feedback, knowledge anchor always visible.", done: "All 4 types integration-tested. iOS Safari + Android Chrome tested. Touch drag-drop works." },
+            { id: "STU-04", folder: "05 · Learner Experience", title: "PF2 task flow — Tier 2 exercise types", who: "Rishi", week: "W4", priority: "P0", type: "Build", what: "Hotspot diagram, drag-drop matrix, single+free-text, multi+free-text, structured free-text. Learner side. Hotspot clickable regions on mobile.", done: "Each type integration-tested. Hotspot works on mobile. All 3 levels render correctly." },
+            { id: "STU-D4", folder: "05 · Learner Experience", title: "Design: Knowledge Library + KC overlay in PF", who: "Yesha", week: "W3", priority: "P0", type: "Design", what: "Library browseable by topic. KC card-by-card view with comprehension check + card counter. Hint overlay in PF (non-intrusive, dismissable). End-of-PF suggestion. System-triggered suggestion.", done: "W3 review. Arslaan + Sara approved." },
+            { id: "STU-05", folder: "05 · Learner Experience", title: "Knowledge Library + KC integration", who: "Rishi", week: "W4", priority: "P0", type: "Build", what: "Library in main nav. Hint overlay in PF. End-of-PF suggestion. System trigger: 3+ wrong answers on a concept → suggest KC. All accesses logged.", done: "Library accessible from 3 entry points. Hint overlay doesn't interrupt task. System trigger fires correctly." },
+            { id: "STU-D5", folder: "05 · Learner Experience", title: "Design: Progress dashboard + full calendar views", who: "Yesha", week: "W4", priority: "P0", type: "Design", what: "Progress: term overview → cluster → lesson → PF. Score history. Deadline indicators (green/amber/red). Calendar: Today view, week view, month view. Completed = checkmark. Overdue = highlighted. Tap event → opens lesson.", done: "W4 review. Arslaan + Sara approved." },
+            { id: "STU-06", folder: "05 · Learner Experience", title: "Progress dashboard build", who: "Rishi", week: "W5", priority: "P0", type: "Build", what: "Implements STU-D5 progress views. Deadline urgency driven by lesson schedule. Exercise history per PF with scores + instructor feedback.", done: "Data correct across all 3 levels. Renders <1s." },
+            { id: "STU-07", folder: "05 · Learner Experience", title: "Learner calendar (Today / Week / Month)", who: "Rishi", week: "W5", priority: "P0", type: "Build", what: "Calendar views connected to curriculum engine. Tap event → opens lesson. In-app badge for approaching deadlines (24h before). Continue-where-I-left-off on home.", done: "Tap-to-lesson works. Deadline badges appear. Continue-from deep-link works." },
+            { id: "STU-08", folder: "05 · Learner Experience", title: "Receptive language rendering everywhere", who: "Rishi", week: "W5", priority: "P0", type: "Build", what: "All content (cases, PF tasks, KCs, Garden exercises) renders at learner's selected level. textVariants: {A2, B1, B2} on all content fields. Missing-level fallback to nearest available.", done: "Switching level in settings re-renders all content immediately. Fallback works." },
+            { id: "STU-09", folder: "05 · Learner Experience", title: "Glossary (~30 AD1 terms)", who: "Rishi+Belinda", week: "W2", priority: "P0", type: "Build", what: "Glossary collection (term, German definition, English translation, optional image). Tappable from case text. Replaces 'Use-Case' in nav. Initial AD1 entries.", done: "~30 entries seeded. Tappable from any case text. Searchable in library." },
+            { id: "STU-10", folder: "05 · Learner Experience", title: "Translation function fix (APH6 fix #11)", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Hover/tap word translation works again. Tested on AD1 case text across all 3 levels. Doesn't interfere with exercise interactions.", done: "Works on all case text. Interaction-safe." },
+            { id: "STU-11", folder: "05 · Learner Experience", title: "Learner experience polish pass", who: "Rishi+Yesha", week: "W8", priority: "P1", type: "Review", what: "Smooth PF transitions. Lesson completion summary. Garden referral polish. Micro-interactions per Yesha's final QA.", done: "Yesha's screen-by-screen review passes." },
+
+            // 06 · Instructor (Teacher) Experience
+            { id: "TCH-D1", folder: "06 · Instructor Experience", title: "Design: Monitoring dashboard (curriculum-connected)", who: "Yesha", week: "W2", priority: "P0", type: "Design", what: "Real-time class view. Submission feed. Per-learner state. Names + avatars prominent. Show-task toggle. APH6 fixes #19 #20 #21 #24 embedded.", done: "W2 review. Arslaan + Sara approved." },
+            { id: "TCH-01", folder: "06 · Instructor Experience", title: "Monitoring dashboard build (SSE real-time)", who: "Rishi", week: "W3", priority: "P0", type: "Build", what: "SSE real-time updates at 1s latency. Completion sync fixed (APH6 #9). Case review read-only (APH6 #21). Analytics drill-down clickable (APH6 #20).", done: "Tested with 30 simulated learners. SSE updates <1s." },
+            { id: "TCH-D2", folder: "06 · Instructor Experience", title: "Design: Grading + class management", who: "Yesha", week: "W4", priority: "P0", type: "Design", what: "Grading inbox sorted by urgency. Free text review UI. Auto-graded override. Student × Lesson × PF matrix. Stuck/behind flags. Today's sessions view.", done: "W4 review. Arslaan + Sara approved." },
+            { id: "TCH-02", folder: "06 · Instructor Experience", title: "Grading workflow build", who: "Rishi", week: "W5", priority: "P0", type: "Build", what: "Inbox. Free text score + feedback. Learner sees feedback in PF history. 'Your instructor graded' in-app indicator.", done: "Round-trip works. Learner notification appears correctly." },
+            { id: "TCH-03", folder: "06 · Instructor Experience", title: "Class management — curriculum-connected", who: "Rishi", week: "W5", priority: "P0", type: "Build", what: "My Classes filtered by current term. Learner × Lesson × PF matrix. Stuck flag (3+ failed attempts). Behind-schedule flag (per lesson deadline).", done: "Matrix renders accurately for class of 30 learners." },
+            { id: "TCH-04", folder: "06 · Instructor Experience", title: "Show-task toggle + solo fallback for partner tasks", who: "Rishi", week: "W3", priority: "P1", type: "Build", what: "APH6 #19: task ↔ results toggle for class projection. APH6 #16: partner tasks → solo fallback when no partner online.", done: "Toggle works in full-screen. Solo flagged in submission." },
+            { id: "TCH-05", folder: "06 · Instructor Experience", title: "Instructor experience polish", who: "Rishi+Yesha", week: "W8", priority: "P1", type: "Review", what: "Batch auto-grade confirmation. Today's sessions quick view with linked lesson. Grading inbox sort tuned.", done: "Usability check with at least 1 Datteln instructor." },
+
+            // 07 · Calendar
+            { id: "CAL-D1", folder: "07 · Calendar (cross-role)", title: "Design: Calendar — all 3 tenant roles", who: "Yesha", week: "W3", priority: "P0", type: "Design", what: "Tenant Director: full school. Instructor: my classes. Learner: my schedule. One Figma frame enforces consistency across all three. Session creation + recurrence UI.", done: "W3 review. Arslaan + Sara approved." },
+            { id: "CAL-01", folder: "07 · Calendar (cross-role)", title: "Calendar event engine + all 3 role views", who: "Rishi", week: "W4", priority: "P0", type: "Build", what: "Centralised events propagate director→instructor→learner. Recurrence (RRULE). Edit-this/edit-series. Role-filtered queries.", done: "Director creates recurring session → instructor + learners see it <1s. Recurrence works." },
+            { id: "CAL-02", folder: "07 · Calendar (cross-role)", title: "Google Calendar + Outlook sync (conditional on INF-10 verification)", who: "Rishi", week: "W5", priority: "P1", type: "Build", what: "Once OAuth app verifications (INF-10) are approved: integrate Google Calendar sync via Google Calendar API and Outlook sync via Microsoft Graph API. Until approved: ICS/iCal export fallback so users can add to any calendar app.", done: "Either: OAuth sync works bi-directionally. Or: ICS export downloads accurate calendar file. Decision based on INF-10 verification progress." },
+
+            // 08 · Lingo AI
+            { id: "LNG-D1", folder: "08 · Lingo AI", title: "Design: Lingo character + all screen placements", who: "Yesha", week: "W1", priority: "P0", type: "Design", what: "Otter character: happy / thinking / encouraging. Vector source in Figma. Placement spec for every learner-facing screen. Chat panel design (text-only MVP). Voice button as mockup with 'Coming Q3' state.", done: "W1 review. Arslaan + Sara approve character and placement spec." },
+            { id: "LNG-01", folder: "08 · Lingo AI", title: "Lingo character in all learner screens", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Animated Lingo (CSS/Lottie) in correct state per context. State driven by: correct answer (happy), task in progress (thinking), wrong answer (encouraging). No layout shift.", done: "Lingo on every learner-facing screen. State changes smooth." },
+            { id: "LNG-02", folder: "08 · Lingo AI", title: "Lingo tone-of-voice guideline", who: "Sara+Belinda", week: "W1", priority: "P0", type: "Decision", what: "1-page guideline: colloquial/youth-friendly German. 20 sample phrases across contexts (right, wrong, encouragement, hint). Becomes system prompt foundation for Rishi + prompt engineering.", done: "Document written. Handed to Rishi for prompt implementation." },
+            { id: "LNG-03", folder: "08 · Lingo AI", title: "Lingo chat backend — Learner role", who: "Rishi", week: "W3", priority: "P0", type: "Build", what: "POST /ai/lingo endpoint. Context: current lesson + PF + task + language level + recent attempts. Claude Haiku (fast, cheap, good German). SSE streaming. Rate-limited 20/h per learner. Fallback: static KC hint if model fails.", done: "Hint returned <5s. Rate limit works. Fallback triggers on failure." },
+            { id: "LNG-04", folder: "08 · Lingo AI", title: "Lingo chat backend — Instructor role", who: "Rishi", week: "W5", priority: "P1", type: "Build", what: "Predefined DB-backed queries: 'Which learners are struggling today?' 'Learners who haven't completed Lesson 3.' Read-only queries only.", done: "5 instructor queries work. Response <3s." },
+            { id: "LNG-05", folder: "08 · Lingo AI", title: "Lingo chat backend — Director role", who: "Rishi", week: "W5", priority: "P1", type: "Build", what: "Predefined DB-backed queries: 'Which instructors haven't marked sessions complete this week?' 'Summarise AD1 progress this week.' Read-only.", done: "5 director queries work. Response <3s." },
+            { id: "LNG-06", folder: "08 · Lingo AI", title: "End-of-task feedback (wrong → Lingo explanation)", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "Wrong answer → Lingo shows encouraging state + explanation (from task content, no AI call — keeps it instant). APH6 fixes #4 + #5. 'Can do / Need to practice' summary at PF close.", done: "Every wrong answer triggers explanation. State change smooth. No AI call delay." },
+            { id: "LNG-07", folder: "08 · Lingo AI", title: "Prompt engineering + clinical safety (Lingo)", who: "Rishi+Belinda", week: "W3", priority: "P0", type: "Build", what: "System prompt embeds AI Training Parameters: colloquial mentor tone, case first, model uncertainty, no diagnoses, no invented terms, no unsupervised patients, mandatory disclosures. 30 test prompts, >90% pass rate.", done: "Belinda reviews 30 Lingo responses. Pass rate ≥90%. Any failures cause prompt revision not documentation." },
+
+            // 09 · AI Content Generation (Rishi owns all AI pipeline)
+            { id: "ING-01", folder: "09 · AI Content Generation", title: "AI infra: SDKs + queues + vector index", who: "Rishi", week: "W1", priority: "P0", type: "Build", what: "Azure OpenAI SDK (Sweden Central) + Anthropic SDK (Claude fallback). BullMQ queues (ingestion/retrieval/generation) on Redis Frankfurt. MongoDB Atlas Vector Search index (1536-dim). All connectivity smoke-tested.", done: "All SDKs return valid responses. Queues process test jobs. Vector index queryable." },
+            { id: "DEC-AI", folder: "09 · AI Content Generation", title: "DEC: Content generation model strategy", who: "Arslaan", week: "W2", priority: "P0", type: "Decision", what: "Decide on the AI infrastructure for generating LU content from Belinda's textbooks. Copyright-sensitive: textbook data must stay in EU. Options: (A) Azure OpenAI + Claude fallback — recommended, EU residency contractually guaranteed, no training on customer data; (B) Self-hosted Gemma 4 / Llama 3 — full IP control, higher ops; (C) Hybrid — API for MVP, migrate post-launch. Include data processing agreement review for chosen provider.", done: "Decision doc in /docs/decisions/ before Rishi builds GEN-01." },
+            { id: "ING-02", folder: "09 · AI Content Generation", title: "Document Loader + Text Chunker workers", who: "Rishi", week: "W2", priority: "P0", type: "Build", what: "PDF upload → S3 (Frankfurt, encrypted) → pdf-parse text → chapter/section structure preserved → chunked (~800 tokens, 100 overlap, section boundaries, metadata: source/page/section/tenant). Job status API.", done: "5 sample textbooks process correctly. Edge cases (scanned pages, tables) flagged." },
+            { id: "ING-03", folder: "09 · AI Content Generation", title: "Embedding Generator + Domain Classifier", who: "Rishi", week: "W3", priority: "P0", type: "Build", what: "Chunks → text-embedding-3-small → Atlas Vector Search. Chunks → GPT-4o-mini → classify by Mega Cluster domain (AD/KI/BD) + knowledge level (L1 Theory / L2 Subject Logic / L3 Action) + content type. Store as metadata.", done: "Pipeline end-to-end. Belinda spot-checks; top 5 misclassifications corrected in classifier prompt." },
+            { id: "RET-01", folder: "09 · AI Content Generation", title: "3-layer retrieval pipeline", who: "Rishi", week: "W3", priority: "P0", type: "Build", what: "Layer 1: query → embedding → Vector Search → top 20. Layer 2: metadata filter by domain + knowledge level + content type. Layer 3: GPT-4o-mini re-rank → top 5–8. Layer 3 is relief valve #3.", done: "30+ test queries return relevant chunks. Recall@5 and Precision@5 measured. Belinda validates quality." },
+            { id: "GEN-01", folder: "09 · AI Content Generation", title: "Prompt templates (all content types, Handlebars)", who: "Rishi+Belinda", week: "W4", priority: "P0", type: "Build", what: "Templates for: lesson case (situation-before-definition), PF1 sequences, PF2 sequences, KC blocks (Wissensbaustein — one element, 5-min read), L&P Garden exercises, A2/B1/B2 language adaptation. All embed AI Training Parameters as system instructions.", done: "Each template generates valid output for 3+ test inputs. Belinda rates ≥7/10 on mentor tone + case-first." },
+            { id: "GEN-02", folder: "09 · AI Content Generation", title: "PII Guard + Generator + Language Adapter + Orchestration", who: "Rishi", week: "W4", priority: "P0", type: "Build", what: "PII: compromise.cool + regex → strip + log + warn. Generator: GPT-4o via Azure + SSE streaming + source citations + Claude fallback. Adapter: generates A2/B1/B2 versions (relief valve #4: generate B1 only if behind). Orchestration: POST /ai/generate → retrieval → prompt → PII → generate → adapt.", done: "Full pipeline for all 6 content types. PII test set (20 prompts) zero leaks. Azure failure → Claude fallback transparent." },
+
+            // 10 · AI Content Tool & Library
+            { id: "CTL-D1", folder: "10 · AI Content Tool & Library", title: "Design: Content tool — upload, generate, review, library", who: "Yesha", week: "W4", priority: "P0", type: "Design", what: "Textbook upload + processing status. Chunk browser with editable classifications. Generation interface (content type + cluster + topic + levels). Language comparison (A2/B1/B2 side-by-side, each editable). Review flow (draft → approve/reject). Content Library.", done: "W4 review. Belinda shown and confirms the workflow makes sense for her daily use." },
+            { id: "CTL-01", folder: "10 · AI Content Tool & Library", title: "Content tool UI build (full)", who: "Rishi", week: "W5", priority: "P0", type: "Build", what: "Implements CTL-D1. Belinda must be able to: upload textbook → wait for processing → generate content → see language comparison → edit inline → approve — without any help.", done: "Belinda demos full workflow on staging without Rishi present." },
+            { id: "CTL-02", folder: "10 · AI Content Tool & Library", title: "Content-to-app publishing bridge", who: "Rishi", week: "W6", priority: "P0", type: "Build", what: "Approved lesson case → auto-creates lesson in curriculum. Approved PF tasks → into PF sequence. Approved KC block → into Knowledge Library. Approved Garden exercises → into Garden. Assign to cluster/topic/lesson during publish. Appears in curriculum schedule → calendar → learner view within 10s.", done: "Approve in tool → learner sees it on their schedule. End-to-end tested." },
+            { id: "CTL-03", folder: "10 · AI Content Tool & Library", title: "Mass content generation (22 lessons × 3 levels)", who: "Rishi+Belinda", week: "W8", priority: "P0", type: "Build", what: "Batch generate: AD1 (6 LUs) + AD2 (8 LUs) + KI1 (4 LUs) + BD1 (4 LUs) × PF1 + PF2 + KC blocks × A2/B1/B2. L&P Garden exercises for AD/KI/BD gardens. Belinda reviews + approves all. Bulk publish to pilot curriculum.", done: "All 22 lessons populated, approved, published. Belinda's quality report written." },
+
+            // 11 · Language Garden (L&P only for MVP)
+            { id: "GAR-D1", folder: "11 · Language Garden (L&P only)", title: "Design: Language Garden — Hören & Aussprechen module", who: "Yesha", week: "W4", priority: "P0", type: "Design", what: "Garden navigation (3 gardens: AD/KI/BD). Listening exercise: transcript + comprehension question. Pronunciation: see phrase → tap record → phonetic feedback. Pronunciation portfolio. Adaptive referral banner (from PF when stuck, from onboarding for A2).", done: "W4 review. STT phonetic feedback UI gets Arslaan sign-off specifically." },
+            { id: "GAR-01", folder: "11 · Language Garden (L&P only)", title: "Language Garden shell + navigation", who: "Rishi", week: "W5", priority: "P0", type: "Build", what: "Garden area in main nav (separate from lesson flow). 3 Gardens (AD/KI/BD), each with 1 L&P module in MVP. Grammatik, Wortschatz, Mini-Produktion = post-MVP.", done: "Navigation works. Garden accessible independently from any lesson." },
+            { id: "GAR-02", folder: "11 · Language Garden (L&P only)", title: "Listening exercises (text-based for MVP)", who: "Rishi", week: "W5", priority: "P0", type: "Build", what: "Transcript + comprehension question. No audio file required for MVP. This unblocks content creation and tests the L&P UX without audio complexity. Audio is GAR-03.", done: "Text-based listening works. Content loadable via publishing bridge." },
+            { id: "GAR-03", folder: "11 · Language Garden (L&P only)", title: "Pronunciation + STT feedback + portfolio", who: "Rishi", week: "W7", priority: "P1", type: "Build", what: "Web Speech API or Azure Speech Services. Phoneme-level score + encouragement. Pronunciation portfolio: tracks scores per phrase over time per learner.", done: "Works on iOS Safari + Android Chrome. Score returned <3s. Portfolio shows progress." },
+            { id: "GAR-04", folder: "11 · Language Garden (L&P only)", title: "Adaptive referral (stuck + onboarding triggers)", who: "Rishi", week: "W5", priority: "P1", type: "Build", what: "Trigger 1: learner fails 2+ tasks in a PF → system checks for relevant Garden content → banner 'Having trouble with the language? Try the Language Garden.' Trigger 2: learner selected A2 at onboarding → Garden proactively recommended when entering Mega Cluster. Always dismissable.", done: "Both triggers fire correctly. Logged. Dismissable without friction." },
+
+            // 12 · Token Wallet & Audit
+            { id: "CMP-01", folder: "12 · Token Wallet & Audit", title: "Token Wallet (per tenant)", who: "Rishi", week: "W7", priority: "P0", type: "Build", what: "Balance, usage history, billing cycle. Insufficient → reject generation with clear message. Director dashboard: balance, trends, cost breakdown by content type.", done: "Deductions atomic. Matches Azure/Anthropic billing within 2%." },
+            { id: "CMP-02", folder: "12 · Token Wallet & Audit", title: "Metering middleware", who: "Rishi", week: "W7", priority: "P0", type: "Build", what: "Tokens counted per generation flow. Deducted on completion. Rolled back atomically on failure.", done: "Test: generate → deduct → fail mid-generation → rollback. Verified." },
+            { id: "CMP-03", folder: "12 · Token Wallet & Audit", title: "Audit Log (immutable, append-only)", who: "Rishi", week: "W7", priority: "P0", type: "Build", what: "Every AI action: who, model, tokens, cost, input, output, PII flag, timestamp. No edit/delete at DB level. Director-facing viewer + filters + export.", done: "No delete/edit path exists. GDPR audit-ready." },
+
+            // 13 · User Testing
+            { id: "UT-01", folder: "13 · User Testing", title: "Apr 14 test synthesis", who: "Arslaan", week: "W1", priority: "P0", type: "Review", what: "Findings doc: bugs, UX confusion, top 3 wins, top 5 fixes. Cross-reference APH6 list. Confirm which fixes were done pre-W1 and which are still open.", done: "1-page doc in shared drive. Open fixes have ClickUp tasks." },
+            { id: "UT-02", folder: "13 · User Testing", title: "May 27 test — content preparation", who: "Belinda", week: "W3", priority: "P0", type: "Content", what: "2 lessons from AD1 (LU2 already drafted, prepare LU3 or LU4). Primary cohort: B1. One set at A2 to test language level differences. PF1 + PF2 complete. 1 KC block linked per lesson.", done: "Content seeded to staging by May 23. Arslaan verifies on staging." },
+            { id: "UT-03", folder: "13 · User Testing", title: "May 27 test — logistics + observation protocol", who: "Sara", week: "W3", priority: "P0", type: "Ops", what: "5–8 nursing learners from Care Comet, mixed language profiles. Consent forms. Observation protocol written. 1 instructor participant for monitoring test. Test script with specific task prompts.", done: "All logistics confirmed by May 20. Participants confirmed." },
+            { id: "UT-04", folder: "13 · User Testing", title: "May 27 test — testing objectives", who: "Arslaan+Sara", week: "W2", priority: "P0", type: "Decision", what: "8 objectives: (1) curriculum home without instruction, (2) A2 vs B1 language level distinction, (3) PF2 exercise types intuitive without explanation, (4) Lingo chat tone colloquial, (5) calendar what's-next clear, (6) knowledge anchor noticed and used, (7) instructor live feed useful, (8) Language Garden L&P accessible.", done: "Objectives doc written and agreed. Handed to Sara for observation protocol." },
+            { id: "UT-05", folder: "13 · User Testing", title: "May 27 test — frontend adjustments + dry run", who: "Rishi", week: "W4", priority: "P0", type: "Build", what: "Minor frontend tweaks from UT-01 + UT-04 only — configuration and content loading, not new features. Maximum 1 day. Dry run May 25 with Arslaan.", done: "Staging ready. Seed script clean. Dry run successful." },
+            { id: "UT-06", folder: "13 · User Testing", title: "Post May 27 test synthesis", who: "Arslaan", week: "W5", priority: "P0", type: "Review", what: "Same format as UT-01. Findings feed W6–W8 build + polish tasks. New P0 tasks created immediately.", done: "Doc by May 30." },
+
+            // 14 · Integration & Launch
+            { id: "INT-01", folder: "14 · Integration & Launch", title: "E2E Flow 1 — Director", who: "Arslaan+Rishi", week: "W9", priority: "P0", type: "Test", what: "Create school → invite → create term → activate AD cluster → schedule AD1 lessons → calendar populates for all roles.", done: "Passes 3 consecutive runs without errors." },
+            { id: "INT-02", folder: "14 · Integration & Launch", title: "E2E Flow 2 — Instructor", who: "Arslaan+Rishi", week: "W9", priority: "P0", type: "Test", what: "See calendar → today's session has 'Hand disinfection' → monitor learners → review free text → grade → learner receives feedback.", done: "Passes 3 consecutive runs." },
+            { id: "INT-03", folder: "14 · Integration & Launch", title: "E2E Flow 3 — Learner (critical)", who: "Sara+Rishi", week: "W9", priority: "P0", type: "Test", what: "Login → B1 → calendar (today: hand disinfection) → tap → lesson → read case → PF1 → KC hint → Library → progress → PF2 → struggle → Garden referral → L&P → success → next lesson deadline on calendar.", done: "Sara runs as if she is a Datteln nursing learner. Passes 3 consecutive runs." },
+            { id: "INT-04", folder: "14 · Integration & Launch", title: "E2E Flow 4 — AI Content", who: "Rishi+Belinda", week: "W9", priority: "P0", type: "Test", what: "Upload textbook → process → generate BD1 lesson case + PF1 + KCs → review → approve → publish → assign to curriculum → learner sees on schedule.", done: "Passes. Belinda confirms quality of published content." },
+            { id: "INT-05", folder: "14 · Integration & Launch", title: "E2E Flow 5 — Token / Audit", who: "Rishi", week: "W9", priority: "P0", type: "Test", what: "Generate → wallet deducts → exhaust balance → blocked → director sees in dashboard → audit log shows complete trail.", done: "Passes." },
+            { id: "INT-06", folder: "14 · Integration & Launch", title: "Security + performance hardening", who: "Rishi", week: "W9", priority: "P0", type: "Test", what: "RBAC audit (7 roles × 8 entities × 4 actions). PII guard validation (20 prompts). Rate limiting verified. Load test: lesson load <2s, task submit <1s, calendar <1s, AI first-token <5s, 30 concurrent learners.", done: "All targets met. Zero RBAC violations. Zero PII leaks." },
+            { id: "INT-07", folder: "14 · Integration & Launch", title: "WCAG AA on critical learner flows", who: "Yesha+Rishi", week: "W8", priority: "P1", type: "Test", what: "axe-core scan on: login, lesson page, PF1 task, KC view, Language Garden, calendar.", done: "Zero critical violations." },
+            { id: "INT-08", folder: "14 · Integration & Launch", title: "Mobile final pass (iOS Safari + Android Chrome)", who: "Rishi+Yesha", week: "W8", priority: "P0", type: "Test", what: "No horizontal scroll at 375px. Touch targets ≥44px. Touch drag-drop critical. Keyboard handling for free text inputs. Tested on real devices.", done: "All screens pass on real device. Not emulator." },
+            { id: "INT-09", folder: "14 · Integration & Launch", title: "Production tenant setup + monitoring", who: "Rishi", week: "W9", priority: "P0", type: "Ops", what: "Pilot school on lingocare.ai: school + 3 clusters + 4 topics + 22 lessons + all content × 3 levels + term + calendar + director + instructor accounts + token wallet. Sentry + uptime + AI pipeline alerts (queue depth, failed jobs).", done: "Pilot director logs into lingocare.ai, sees populated curriculum, invites first learner." },
+            { id: "INT-10", folder: "14 · Integration & Launch", title: "Go/No-Go decision (Jun 27)", who: "Arslaan+Sara", week: "W9", priority: "P0", type: "Decision", what: "Written decision. GO criteria (all must pass): zero P0 bugs, all 5 E2E flows passing, 22 LUs × 3 levels published + reviewed, production tenant live, monitoring active, 3 pilots confirmed for July.", done: "Decision doc signed. If NO-GO: 1-page recovery plan written same day." },
+
+            // 15 · Content Production
+            { id: "CON-01", folder: "15 · Content Production", title: "Source textbooks + PDF preparation", who: "Belinda", week: "W1", priority: "P0", type: "Content", what: "Identify + prepare PDFs for AD1, AD2, KI1, BD1. Confirm copyright allows internal AI processing (data stays on EU servers).", done: "4+ PDFs ready by W2." },
+            { id: "CON-02", folder: "15 · Content Production", title: "Gold-standard few-shot examples (8–10)", who: "Belinda", week: "W2", priority: "P0", type: "Content", what: "Hand-written exemplars: 2 lesson case texts, 3 PF1 sequences, 2 PF2 sequences, 2 KC blocks. Feed into GEN-01 prompt templates.", done: "Reviewed by Arslaan. Handed to Rishi." },
+            { id: "CON-03", folder: "15 · Content Production", title: "AD1 LU2 post-test refresh", who: "Belinda", week: "W1", priority: "P0", type: "Content", what: "Apply Apr 14 test findings to existing AD1-LU2. Refresh case text, fix confusing task wording, validate glossary entries.", done: "Updated content in staging DB." },
+            { id: "CON-04", folder: "15 · Content Production", title: "KI1 typical learner errors (TBD in briefing doc)", who: "Belinda", week: "W2", priority: "P1", type: "Content", what: "The pedagogical briefing doc has KI1 learner errors as TBD. Needed for AI Training Parameters in GEN-01 prompts and for PF task design for KI1 (empathic speaking — highest risk for generic AI tone).", done: "Error analysis complete. Handed to Rishi for prompt integration." },
+            { id: "CON-05", folder: "15 · Content Production", title: "Generation review cycles (W5–W8)", who: "Belinda", week: "W5", priority: "P0", type: "Review", what: "Weekly generation review. Targets: 15+ approved by W5, 30+ by W6, 50+ by W7, all 22 × 3 levels by W8. Quality criteria: mentor tone, case-first structure, clinical accuracy, no prohibited content, appropriate language level.", done: "Each weekly target met. Quality report written at W8 end." },
+
+            // 16 · PM & Decisions
+            { id: "PM-01", folder: "16 · PM & Decisions", title: "Weekly planning (Mon, 30 min, recurring)", who: "Joint", week: "Recurring", priority: "P0", type: "Ops", what: "Prior week review, current week plan, blockers. Notes in shared doc. Blockers filed in ClickUp.", done: "Notes filed. Blockers in ClickUp." },
+            { id: "PM-02", folder: "16 · PM & Decisions", title: "Mid-week design review (Wed, 45 min, recurring)", who: "Arslaan+Sara+Yesha", week: "Recurring", priority: "P0", type: "Review", what: "Yesha walks through designs. Arslaan + Sara give feedback together. Decisions logged per task. Gate before Rishi starts building.", done: "Per-task decisions logged." },
+            { id: "PM-03", folder: "16 · PM & Decisions", title: "End-of-week staging demo (Fri, 30 min, recurring)", who: "Joint", week: "Recurring", priority: "P0", type: "Review", what: "Rishi demos all shipped features on stage.lingocare.ai. Every task shipped that week must be shown.", done: "Every shipped task demoed." },
+            { id: "PM-04", folder: "16 · PM & Decisions", title: "Datteln onboarding + scope definition", who: "Sara", week: "W3", priority: "P0", type: "Ops", what: "Onboard Pflegeakademie Datteln. Content scope. Task type ideas. Gamification input collected. 3-level test with their learners. Arslaan attends kickoff call only.", done: "Signed pilot agreement. First content review session scheduled." },
+            { id: "PM-05", folder: "16 · PM & Decisions", title: "DEC: Gamification (W4, post-Datteln input)", who: "Sara+Arslaan+Yesha", week: "W4", priority: "P0", type: "Decision", what: "What/how/where for gamification. Datteln input + Yesha feasibility assessment. If GO: Yesha designs W5, Rishi builds W6–W7. If NO-GO: June plan unchanged. Written decision.", done: "Decision doc in /docs/decisions/." },
+            { id: "PM-06", folder: "16 · PM & Decisions", title: "Goethe Pflegeakademie onboarding", who: "Sara", week: "W6", priority: "P0", type: "Ops", what: "Full onboarding: all 4 topics, all 3 levels, Language Garden, director analytics, calendar. Signed agreement.", done: "Agreement signed. First session scheduled." },
+            { id: "PM-07", folder: "16 · PM & Decisions", title: "DPA template + pilot partner signing", who: "Sara", week: "W3", priority: "P0", type: "Ops", what: "Send DPA template (from INF-11 Arslaan's review) to Care Comet + Datteln. Get signed before any production data lands.", done: "Signed DPAs from both by W4." },
+            { id: "PM-08", folder: "16 · PM & Decisions", title: "Internal AI model — long-term strategy", who: "Arslaan", week: "W7", priority: "P1", type: "Decision", what: "After 6 weeks of using the chosen MVP model: evaluate quality, cost, IP ownership. When does it make sense to transition to a self-hosted model (Gemma 4, Llama 3)? What is the trigger? Write a 1-page post-MVP AI roadmap.", done: "1-page roadmap in /docs/decisions/." }
+        ];
+
+        // ======================================================
+        // PROCESS FLOWS (section 06)
+        // ======================================================
+        const FLOWS = [
+            {
+                code: "CUR",
+                name: "Curriculum & Data Model",
+                chain: [
+                    { who: "Rishi", role: "Designs architecture", cls: "s-build" },
+                    { arrow: true },
+                    { who: "Arslaan", role: "Tech review", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Builds + tests", cls: "s-build" }
+                ],
+                note: "Pure backend. No design phase. Arslaan reviews the data model before Rishi writes migrations."
+            },
+            {
+                code: "INF",
+                name: "Auth, RBAC & Infra",
+                chain: [
+                    { who: "Rishi", role: "Designs + builds", cls: "s-build" },
+                    { arrow: true },
+                    { who: "Arslaan", role: "Tech review + GDPR", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Ships", cls: "s-build" }
+                ],
+                note: "Exception: INF-08 German strings also involves Yesha. OAuth verification (INF-10) is an ongoing ops task Rishi initiates and tracks weekly."
+            },
+            {
+                code: "LIC",
+                name: "LingoCare Internal Console",
+                chain: [
+                    { who: "Yesha", role: "Designs console UX", cls: "s-design", consult: "↕ consults Rishi on data available" },
+                    { arrow: true },
+                    { who: "A + Sara", role: "Review", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Builds", cls: "s-build" }
+                ],
+                note: "Internal tool for Sara (analytics) and Arslaan (tenant management). Sara is the primary design feedback voice here."
+            },
+            {
+                code: "DIR",
+                name: "Director Experience",
+                chain: [
+                    { who: "Yesha", role: "Designs UX", cls: "s-design", consult: "↕ UX consults Rishi · Editor consults Belinda" },
+                    { arrow: true },
+                    { who: "A + Sara", role: "Design review", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Builds", cls: "s-build" }
+                ],
+                note: "General director UX: Yesha consults Rishi on tech. The content editor (DIR-04/05/06) is the exception — Yesha works with Belinda to ensure the authoring flow matches how she actually creates lessons."
+            },
+            {
+                code: "STU",
+                name: "Learner Experience",
+                chain: [
+                    { who: "Yesha", role: "Designs UX", cls: "s-design", consult: "↕ consults Rishi on tech feasibility" },
+                    { arrow: true },
+                    { who: "A + Sara", role: "Design review", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Builds", cls: "s-build" }
+                ],
+                note: "The highest-volume design stream. Yesha and Rishi have a constant back-channel on what's technically possible for each exercise type before designs go to review."
+            },
+            {
+                code: "TCH",
+                name: "Instructor Experience",
+                chain: [
+                    { who: "Yesha", role: "Designs UX", cls: "s-design", consult: "↕ consults Rishi on real-time constraints" },
+                    { arrow: true },
+                    { who: "A + Sara", role: "Design review", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Builds", cls: "s-build" }
+                ],
+                note: "SSE real-time monitoring dashboard (TCH-01) needs Yesha to understand what Rishi can update at what latency before designing the live view."
+            },
+            {
+                code: "CAL",
+                name: "Calendar (cross-role)",
+                chain: [
+                    { who: "Yesha", role: "Designs 3 role views", cls: "s-design", consult: "↕ consults Rishi on event model" },
+                    { arrow: true },
+                    { who: "A + Sara", role: "Design review", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Builds event engine + views", cls: "s-build" }
+                ],
+                note: "Designed as one Figma frame showing all 3 role views together — enforces consistency. Rishi's event propagation model is explained to Yesha before design starts."
+            },
+            {
+                code: "LNG",
+                name: "Lingo AI",
+                chain: [
+                    { who: "Yesha", role: "Character + UX", cls: "s-design", consult: "↕ consults Belinda on tone guide" },
+                    { arrow: true },
+                    { who: "A + Sara", role: "Character review", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Builds backend + placement", cls: "s-build", consult: "↕ works with Belinda on prompts" }
+                ],
+                note: "Two parallel streams: Yesha designs the character and chat UI (needs Belinda's tone guide first). Rishi builds the API and prompt engineering (needs Belinda's clinical safety constraints)."
+            },
+            {
+                code: "AI",
+                name: "AI Content Generation",
+                chain: [
+                    { who: "Rishi", role: "Builds pipeline", cls: "s-build", consult: "↕ consults Belinda on content quality" },
+                    { arrow: true },
+                    { who: "Arslaan", role: "AI strategy review", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Ships pipeline", cls: "s-build" }
+                ],
+                note: "No design phase — this is internal infrastructure. Belinda is the quality gate at each stage (chunk review, classification spot-check, prompt rating). Arslaan owns the model strategy decision (DEC-AI)."
+            },
+            {
+                code: "CTL",
+                name: "AI Content Tool & Library",
+                chain: [
+                    { who: "Yesha", role: "Designs tool UX", cls: "s-design", consult: "↕ consults Belinda on her actual workflow" },
+                    { arrow: true },
+                    { who: "A + Sara", role: "Design review", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Builds tool API", cls: "s-build" }
+                ],
+                note: "Belinda is the primary user of this tool. Yesha spends significant design time shadowing how Belinda actually creates content before wireframing the authoring flow."
+            },
+            {
+                code: "GAR",
+                name: "Language Garden (L&P)",
+                chain: [
+                    { who: "Yesha", role: "Designs L&P UX", cls: "s-design", consult: "↕ consults Rishi on STT capabilities" },
+                    { arrow: true },
+                    { who: "A + Sara", role: "STT UX sign-off", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Builds + STT integration", cls: "s-build" }
+                ],
+                note: "Arslaan specifically signs off on the STT pronunciation feedback UI — this is a new interaction pattern and the feedback loop (score + encouragement) needs careful review before Rishi builds it."
+            },
+            {
+                code: "CMP",
+                name: "Token Wallet & Audit",
+                chain: [
+                    { who: "Yesha", role: "Designs wallet + audit UX", cls: "s-design" },
+                    { arrow: true },
+                    { who: "A + Sara", role: "GDPR + pricing review", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Builds immutable log + wallet", cls: "s-build" }
+                ],
+                note: "Sara reviews the wallet and audit viewer because she's setting the pricing model with pilot partners. Arslaan reviews audit log design for GDPR compliance."
+            },
+            {
+                code: "UT",
+                name: "User Testing",
+                chain: [
+                    { who: "Belinda", role: "Content prep", cls: "s-content" },
+                    { arrow: true },
+                    { who: "Sara", role: "Logistics + protocol", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Arslaan", role: "Objectives + test synthesis", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Frontend adjustments", cls: "s-build" },
+                    { arrow: true },
+                    { who: "Sara", role: "Runs the test", cls: "s-run" }
+                ],
+                note: "User testing is its own pipeline. Belinda seeds content, Sara recruits and runs the session, Arslaan defines what we're testing and synthesises findings, Rishi makes only minor frontend adjustments (no new features)."
+            },
+            {
+                code: "CON",
+                name: "Content Production",
+                chain: [
+                    { who: "Belinda", role: "Creates content", cls: "s-content", consult: "↕ uses Rishi's authoring tool" },
+                    { arrow: true },
+                    { who: "Arslaan", role: "Quality review", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Belinda", role: "Publishes via tool", cls: "s-content" }
+                ],
+                note: "Belinda owns content production end-to-end. Arslaan's review is quality and clinical accuracy — he checks against AI Training Parameters. Sara is not in this loop except for pilot-specific content decisions."
+            },
+            {
+                code: "INT",
+                name: "Integration & Launch",
+                chain: [
+                    { who: "Rishi", role: "Runs E2E flows", cls: "s-build" },
+                    { arrow: true },
+                    { who: "A + Sara", role: "P0/P1 classification", cls: "s-review" },
+                    { arrow: true },
+                    { who: "Rishi", role: "Fixes P0 bugs", cls: "s-build" }
+                ],
+                note: "W9 only. No new features. Arslaan and Sara run Flows 1–3 as their respective roles (director, learner). Sara specifically runs the learner flow as if she's a Datteln student."
+            }
+        ];
+
+        // ======================================================
+        // RENDER
+        // ======================================================
+        function taskMatchesPerson(task, person) {
+            if (person === "Joint") return task.who === "Joint" || task.who.includes("+");
+            return task.who === person || task.who.startsWith(person) || task.who.includes("+" + person) || task.who.includes(person + "+");
+        }
+
+        function renderTeam() {
+            document.getElementById("team-grid").innerHTML = TEAM.map(p => {
+                const count = TASKS.filter(t => taskMatchesPerson(t, p.key)).length;
+                return `<div class="team-card" data-person="${p.key}">
+      <div class="team-card-head">
+        <div class="team-name">${p.key}</div>
+        <div class="team-role">${p.role}</div>
+      </div>
+      <div class="team-blurb">${p.blurb}</div>
+      <div class="team-task-count"><span>Tasks owned</span><strong>${count}</strong></div>
+    </div>`;
+            }).join("");
+        }
+
+        function getFolders() {
+            const folders = {};
+            TASKS.forEach(t => { if (!folders[t.folder]) folders[t.folder] = []; folders[t.folder].push(t); });
+            return folders;
+        }
+
+        function assigneeClass(who) {
+            if (who.includes("Yesha") && !who.includes("+")) return "tag-yesha";
+            if (who.includes("Rishi") && !who.includes("+")) return "tag-rishi";
+            if (who.includes("Belinda") && !who.includes("+")) return "tag-belinda";
+            if (who.includes("Arslaan") && !who.includes("+")) return "tag-arslaan";
+            if (who.includes("Sara") && !who.includes("+")) return "tag-sara";
+            return "tag-joint";
+        }
+
+        function renderFolders() {
+            const folders = getFolders();
+            document.getElementById("folder-list").innerHTML = Object.entries(folders).map(([name, tasks], i) => {
+                const [num, ...rest] = name.split(" · ");
+                return `<div class="folder ${i === 0 ? "open" : ""}" data-folder="${name}">
+      <button class="folder-head" type="button">
+        <div class="folder-title">
+          <span class="folder-num">${num}</span>
+          <span class="folder-name">${rest.join(" · ")}</span>
+        </div>
+        <div style="display:flex;align-items:center">
+          <span class="folder-count" data-folder-count>${tasks.length} tasks</span>
+          <span class="folder-chev"></span>
+        </div>
+      </button>
+      <div class="folder-body">
+        <div class="task-list">
+          ${tasks.map(t => `<div class="task" data-person="${t.who}" data-week="${t.week}" data-priority="${t.priority}">
+            <div class="task-id mono">${t.id}</div>
+            <div class="task-main">
+              <div class="task-title">${t.title}</div>
+              <div class="task-meta">
+                <span class="tag tag-assignee ${assigneeClass(t.who)}">${t.who}</span>
+                <span class="tag tag-week">${t.week}</span>
+                <span class="tag tag-priority ${t.priority.toLowerCase()}">${t.priority}</span>
+                <span class="tag tag-type">${t.type}</span>
+              </div>
+              <div class="task-detail">
+                <span class="dlabel">What</span><div class="dval">${t.what}</div>
+                <span class="dlabel">Done when</span><div class="dval">${t.done}</div>
+              </div>
+            </div>
+            <div class="task-week-col">${t.week}</div>
+          </div>`).join("")}
+        </div>
+      </div>
+    </div>`;
+            }).join("");
+        }
+
+        function renderFlows() {
+            document.getElementById("flow-grid").innerHTML = FLOWS.map(f => {
+                const chainHtml = f.chain.map(step => {
+                    if (step.arrow) return `<div class="flow-arrow">→</div>`;
+                    return `<div class="flow-step ${step.cls}">
+        <span class="step-who">${step.who}</span>
+        <span class="step-role">${step.role}</span>
+        ${step.consult ? `<span class="step-consult">${step.consult}</span>` : ""}
+      </div>`;
+                }).join("");
+                return `<div class="flow-card">
+      <div class="flow-header">
+        <span class="flow-code">${f.code}</span>
+        <span class="flow-name">${f.name}</span>
+      </div>
+      <div class="flow-chain">${chainHtml}</div>
+      ${f.note ? `<div class="flow-note">${f.note}</div>` : ""}
+    </div>`;
+            }).join("");
+        }
+
+        // FILTERS
+        const filterState = { person: "all", week: "all", priority: "all" };
+
+        function applyFilters() {
+            document.querySelectorAll(".task").forEach(el => {
+                const personMatch = filterState.person === "all" || taskMatchesPerson({ who: el.dataset.person }, filterState.person);
+                const weekMatch = filterState.week === "all" || el.dataset.week === filterState.week;
+                const priMatch = filterState.priority === "all" || el.dataset.priority === filterState.priority;
+                el.classList.toggle("is-hidden", !(personMatch && weekMatch && priMatch));
+            });
+            const anyActive = filterState.person !== "all" || filterState.week !== "all" || filterState.priority !== "all";
+            document.querySelectorAll(".folder").forEach(folderEl => {
+                const visible = folderEl.querySelectorAll(".task:not(.is-hidden)");
+                folderEl.classList.toggle("is-empty", visible.length === 0);
+                const countEl = folderEl.querySelector("[data-folder-count]");
+                if (countEl) countEl.textContent = `${visible.length} task${visible.length !== 1 ? "s" : ""}`;
+                if (anyActive && visible.length > 0) folderEl.classList.add("open");
+            });
+        }
+
+        document.addEventListener("click", e => {
+            const pill = e.target.closest(".filter-pill");
+            if (pill) {
+                const { filter, value } = pill.dataset;
+                filterState[filter] = value;
+                document.querySelectorAll(`.filter-pill[data-filter="${filter}"]`).forEach(p => p.classList.toggle("active", p === pill));
+                applyFilters();
+                return;
+            }
+            const teamCard = e.target.closest(".team-card");
+            if (teamCard) {
+                const person = teamCard.dataset.person;
+                document.querySelectorAll(".team-card").forEach(c => c.classList.remove("active"));
+                if (filterState.person === person) {
+                    filterState.person = "all";
+                } else {
+                    filterState.person = person;
+                    teamCard.classList.add("active");
+                }
+                document.querySelectorAll('.filter-pill[data-filter="person"]').forEach(p => p.classList.toggle("active", p.dataset.value === filterState.person));
+                applyFilters();
+                document.getElementById("tasks").scrollIntoView({ behavior: "smooth", block: "start" });
+                return;
+            }
+            const folderHead = e.target.closest(".folder-head");
+            if (folderHead) { folderHead.parentElement.classList.toggle("open"); return; }
+            const task = e.target.closest(".task");
+            if (task) { task.classList.toggle("expanded"); return; }
+        });
+
+        window.addEventListener("scroll", () => {
+            document.getElementById("nav").classList.toggle("scrolled", window.scrollY > 8);
+        }, { passive: true });
+
+        // Init
+        document.getElementById("total-task-count").textContent = TASKS.length;
+        renderTeam();
+        renderFolders();
+        renderFlows();
+        applyFilters();
+    </script>
+</body>
+
+</html>
