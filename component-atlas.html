@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lingocare AI — Interaction Component Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ─── REVYN DESIGN TOKENS ──────────────────────────────────────────────────── */
+:root {
+  /* Brand palette: Electric Blue + Mango + Mint */
+  --blue:       #1A6BFF;
+  --blue-soft:  #EBF2FF;
+  --blue-mid:   #BFDBFE;
+  --blue-dark:  #0F44CC;
+  --mango:      #FF8C00;
+  --mango-soft: #FFF3E0;
+  --mango-mid:  #FFCC80;
+  --mint:       #00C896;
+  --mint-soft:  #E0FFF6;
+  --mint-mid:   #80E8C8;
+
+  /* Neutral system */
+  --ink:        #0C0F1A;
+  --ink-70:     rgba(12,15,26,0.7);
+  --ink-40:     rgba(12,15,26,0.4);
+  --ink-12:     rgba(12,15,26,0.12);
+  --ink-06:     rgba(12,15,26,0.06);
+  --surface:    #F7F9FC;
+  --white:      #FFFFFF;
+
+  /* Section accent pools */
+  --s-interact: var(--blue);
+  --s-select:   var(--mint);
+  --s-text:     var(--mango);
+  --s-social:   #8B5CF6;
+  --s-sim:      #EF4444;
+  --s-audio:    #EC4899;
+
+  /* Typography */
+  --font-display: 'Outfit', sans-serif;
+  --font-body:    'Plus Jakarta Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --r-sm:  8px;
+  --r-md:  12px;
+  --r-lg:  16px;
+  --r-xl:  20px;
+  --r-2xl: 28px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--surface);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── HERO ─────────────────────────────────────────────────────────────────── */
+.hero {
+  background: var(--white);
+  border-bottom: 1px solid var(--ink-12);
+  padding: 64px 56px 56px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 480px; height: 480px;
+  background: conic-gradient(from 180deg at 50% 50%,
+    rgba(26,107,255,0.07) 0deg,
+    rgba(0,200,150,0.06) 120deg,
+    rgba(255,140,0,0.07) 240deg,
+    rgba(26,107,255,0.07) 360deg);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue-mid), transparent);
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block; width: 24px; height: 2px;
+  background: var(--blue); border-radius: 2px;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 60px);
+  font-weight: 800; line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+}
+.hero-title em { font-style: normal; color: var(--blue); }
+.hero-sub {
+  font-size: 16px; color: var(--ink-70); max-width: 520px;
+  margin-bottom: 48px; font-weight: 400;
+}
+.hero-stats {
+  display: flex; gap: 0; flex-wrap: wrap;
+  border: 1px solid var(--ink-12); border-radius: var(--r-xl);
+  overflow: hidden; max-width: 500px;
+  background: var(--surface);
+}
+.stat {
+  flex: 1; padding: 20px 24px;
+  border-right: 1px solid var(--ink-12);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.stat:last-child { border-right: none; }
+.stat-n {
+  font-family: var(--font-display);
+  font-size: 36px; font-weight: 800; line-height: 1;
+  letter-spacing: -1px;
+}
+.stat-n.blue   { color: var(--blue); }
+.stat-n.mint   { color: var(--mint); }
+.stat-n.mango  { color: var(--mango); }
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--ink-40);
+}
+.revyn-badge {
+  position: absolute; top: 24px; right: 56px;
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 1px; color: var(--ink-40);
+}
+.revyn-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--mint));
+}
+
+/* ─── STICKY NAV ──────────────────────────────────────────────────────────── */
+.topnav {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ink-12);
+  padding: 0 56px;
+  display: flex; align-items: center; gap: 0;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 13px; font-weight: 700;
+  color: var(--ink); margin-right: 32px;
+  white-space: nowrap; padding: 14px 0;
+  letter-spacing: -0.3px;
+}
+.nav-logo span { color: var(--blue); }
+.nav-links { display: flex; gap: 0; flex: 1; }
+.nav-btn {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 16px 18px; border: none; background: transparent;
+  color: var(--ink-40); cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.nav-btn:hover  { color: var(--ink); }
+.nav-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+/* ─── LAYOUT ──────────────────────────────────────────────────────────────── */
+.page-section {
+  max-width: 1360px; margin: 0 auto;
+  padding: 80px 56px;
+}
+.page-section.alt { background: var(--white); max-width: 100%; }
+.page-section.alt > .inner { max-width: 1360px; margin: 0 auto; padding: 80px 56px; }
+
+.sec-tag {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sec-tag::before {
+  content: ''; display: inline-block;
+  width: 16px; height: 2px;
+  background: var(--blue); border-radius: 2px;
+}
+.sec-heading {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 700; line-height: 1.15;
+  letter-spacing: -0.8px; margin-bottom: 10px;
+}
+.sec-sub {
+  font-size: 15px; color: var(--ink-70);
+  margin-bottom: 48px; max-width: 580px;
+}
+
+/* ─── HOW IT WORKS ────────────────────────────────────────────────────────── */
+.flow-card {
+  background: var(--surface);
+  border: 1px solid var(--ink-12);
+  border-radius: var(--r-2xl);
+  padding: 36px 40px;
+  margin-bottom: 48px;
+}
+.flow-row {
+  display: flex; align-items: center;
+  gap: 16px; flex-wrap: wrap; margin-bottom: 24px;
+}
+.flow-row:last-of-type { margin-bottom: 0; }
+.flow-box {
+  padding: 12px 20px; border-radius: var(--r-lg);
+  font-family: var(--font-display);
+  font-size: 13px; font-weight: 600;
+  text-align: center; min-width: 136px;
+  line-height: 1.3;
+}
+.flow-op {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 700;
+}
+.flow-result {
+  color: var(--white); font-weight: 700;
+}
+.flow-desc {
+  font-size: 13px; color: var(--ink-70); max-width: 220px;
+  line-height: 1.5; font-style: italic;
+}
+.flow-insight {
+  background: #FFFBEB;
+  border: 1px solid var(--mango-mid);
+  border-radius: var(--r-lg);
+  padding: 16px 20px;
+  margin-top: 24px;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.flow-insight-label {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--mango);
+  white-space: nowrap; padding-top: 2px;
+}
+.flow-insight p { font-size: 13px; color: var(--ink-70); line-height: 1.6; }
+
+/* ─── LEGEND ──────────────────────────────────────────────────────────────── */
+.legend {
+  display: flex; flex-wrap: wrap; gap: 10px 24px;
+  margin-bottom: 32px;
+}
+.legend-item {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 1px; text-transform: uppercase; color: var(--ink-70);
+}
+.legend-pip { width: 10px; height: 10px; border-radius: 3px; }
+
+/* ─── COMPONENT GRID ──────────────────────────────────────────────────────── */
+.comp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 16px;
+}
+.comp-card {
+  background: var(--white);
+  border: 1.5px solid var(--ink-12);
+  border-radius: var(--r-2xl);
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.22s, border-color 0.22s, transform 0.22s;
+  animation: slideUp 0.4s ease both;
+}
+.comp-card:hover {
+  box-shadow: 0 8px 32px rgba(26,107,255,0.10);
+  border-color: var(--blue-mid);
+  transform: translateY(-3px);
+}
+.comp-card.open {
+  grid-column: 1 / -1;
+  cursor: default;
+  transform: none;
+  border-color: var(--blue);
+  box-shadow: 0 12px 48px rgba(26,107,255,0.12);
+}
+.comp-card.open:hover { transform: none; }
+
+@keyframes slideUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.comp-card:nth-child(1)  { animation-delay:.04s }
+.comp-card:nth-child(2)  { animation-delay:.08s }
+.comp-card:nth-child(3)  { animation-delay:.12s }
+.comp-card:nth-child(4)  { animation-delay:.16s }
+.comp-card:nth-child(5)  { animation-delay:.20s }
+.comp-card:nth-child(6)  { animation-delay:.24s }
+.comp-card:nth-child(7)  { animation-delay:.28s }
+.comp-card:nth-child(8)  { animation-delay:.32s }
+.comp-card:nth-child(9)  { animation-delay:.36s }
+.comp-card:nth-child(10) { animation-delay:.40s }
+.comp-card:nth-child(11) { animation-delay:.44s }
+.comp-card:nth-child(12) { animation-delay:.48s }
+.comp-card:nth-child(13) { animation-delay:.52s }
+
+.card-top {
+  padding: 22px 22px 16px;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.card-icon-wrap {
+  width: 48px; height: 48px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.card-id {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.card-name {
+  font-family: var(--font-display);
+  font-size: 15px; font-weight: 700; line-height: 1.2;
+}
+.card-action {
+  font-size: 12.5px; color: var(--ink-70);
+  padding: 0 22px 14px; line-height: 1.55;
+}
+.card-illustration {
+  margin: 0 22px 14px;
+  border-radius: var(--r-lg); overflow: hidden;
+  height: 96px;
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+}
+.card-pills {
+  padding: 10px 22px 20px;
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.pill {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 20px;
+  border: 1px solid currentColor;
+  font-weight: 500;
+}
+
+/* ─── EXPANDED DETAIL PANEL ───────────────────────────────────────────────── */
+.detail-panel {
+  display: none;
+  border-top: 1px solid var(--ink-12);
+  padding: 28px 28px 32px;
+}
+.comp-card.open .detail-panel { display: block; }
+.detail-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 28px;
+}
+@media (max-width: 900px) { .detail-cols { grid-template-columns: 1fr; } }
+.detail-col-label {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ink-40); margin-bottom: 12px;
+}
+.aon-pill {
+  background: var(--surface);
+  border: 1px solid var(--ink-12);
+  border-radius: var(--r-md); padding: 8px 12px;
+  margin-bottom: 6px; font-size: 12px; line-height: 1.4;
+}
+.aon-id {
+  font-family: var(--font-mono); font-size: 9px;
+  color: var(--blue); display: block; margin-bottom: 2px;
+}
+.format-tag {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 9px;
+  padding: 4px 10px; border-radius: 6px;
+  margin: 3px 3px 0 0; font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.author-box {
+  background: var(--blue-soft); border-radius: var(--r-md);
+  padding: 12px; font-size: 12px; color: var(--ink-70);
+  line-height: 1.6; margin-top: 12px;
+}
+.dev-box {
+  background: #FFFBEB;
+  border-left: 3px solid var(--mango);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  padding: 12px 14px; font-size: 12px;
+  color: var(--ink-70); line-height: 1.6;
+}
+.close-chip {
+  position: absolute; top: 14px; right: 14px;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--surface); border: 1px solid var(--ink-12);
+  cursor: pointer; display: none; align-items: center;
+  justify-content: center; font-size: 14px; color: var(--ink-70);
+  transition: background 0.2s;
+}
+.comp-card.open .close-chip { display: flex; }
+.close-chip:hover { background: var(--ink-12); }
+
+/* ─── ADD-ONS GRID ────────────────────────────────────────────────────────── */
+.addons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
+}
+.addon-card {
+  background: var(--white);
+  border: 1px solid var(--ink-12);
+  border-radius: var(--r-xl);
+  padding: 16px 18px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.addon-card:hover {
+  border-color: var(--blue-mid);
+  box-shadow: 0 4px 16px rgba(26,107,255,0.07);
+}
+.addon-id-badge {
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 5px;
+}
+.addon-name {
+  font-family: var(--font-display);
+  font-size: 13px; font-weight: 700; margin-bottom: 6px;
+}
+.addon-desc { font-size: 11.5px; color: var(--ink-70); line-height: 1.5; }
+.addon-meta {
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 0.5px; color: var(--mint);
+  margin-top: 8px;
+}
+
+/* ─── MERGE ROWS ──────────────────────────────────────────────────────────── */
+.merge-list { display: flex; flex-direction: column; gap: 12px; }
+.merge-row {
+  background: var(--white);
+  border: 1px solid var(--ink-12);
+  border-radius: var(--r-xl);
+  padding: 22px 26px;
+  display: grid;
+  grid-template-columns: 180px 1fr 1fr 180px;
+  gap: 24px; align-items: start;
+  transition: border-color 0.2s;
+}
+.merge-row:hover { border-color: var(--blue-mid); }
+@media (max-width: 1000px) { .merge-row { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px)  { .merge-row { grid-template-columns: 1fr; } }
+.merge-title {
+  font-family: var(--font-display);
+  font-size: 14px; font-weight: 700; margin-bottom: 4px;
+}
+.merge-col-label {
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ink-40); margin-bottom: 8px;
+}
+.merge-result-box {
+  background: var(--blue-soft); border: 1px solid var(--blue-mid);
+  border-radius: var(--r-md); padding: 12px 14px;
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--blue); line-height: 1.5; font-weight: 500;
+}
+.merge-diff-text {
+  font-size: 12.5px; color: var(--ink-70); line-height: 1.6;
+}
+
+/* ─── FORMAT TAGS by section ──────────────────────────────────────────────── */
+.t-pf1 { background: #EBF2FF; color: #1A6BFF; }
+.t-pf2 { background: #E0FFF6; color: #00A37A; }
+.t-pf3 { background: #FEE2E2; color: #B91C1C; }
+.t-pf4 { background: #FFF3E0; color: #C06000; }
+.t-wb  { background: #EEF2FF; color: #4338CA; }
+.t-sg  { background: #FDF4FF; color: #7C3AED; }
+
+/* ─── DIVIDER ─────────────────────────────────────────────────────────────── */
+.divider {
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ink-12) 20%, var(--ink-12) 80%, transparent);
+}
+
+/* ─── FOOTER ──────────────────────────────────────────────────────────────── */
+.footer {
+  background: var(--ink);
+  padding: 32px 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-left {
+  font-family: var(--font-display);
+  font-size: 13px; font-weight: 600; color: var(--white);
+  letter-spacing: -0.3px;
+}
+.footer-left span { color: var(--blue); }
+.footer-right {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.footer-dots {
+  display: flex; gap: 6px; align-items: center;
+}
+.footer-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+}
+
+/* ─── SCROLLBAR ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--ink-12); border-radius: 3px; }
+
+@media (max-width: 768px) {
+  .hero, .page-section, .page-section.alt > .inner, .footer { padding-left: 24px; padding-right: 24px; }
+  .topnav { padding: 0 16px; overflow-x: auto; }
+  .nav-logo { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="revyn-badge">
+    <div class="revyn-dot"></div>
+    REVYN · LINGOCARE AI
+  </div>
+  <div class="hero-eyebrow">Interaction Component Atlas</div>
+  <h1 class="hero-title">38 formats.<br><em>13 components.</em></h1>
+  <p class="hero-sub">Every pedagogical format in the Lingocare AI spec, distilled into the smallest set of UI components your team needs to build. Click anything to explore.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-n blue">13</span>
+      <span class="stat-label">Components</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n mint">29</span>
+      <span class="stat-label">Add-ons</span>
+    </div>
+    <div class="stat">
+      <span class="stat-n mango">38</span>
+      <span class="stat-label">Formats</span>
+    </div>
+  </div>
+</header>
+
+<!-- ── NAV ── -->
+<nav class="topnav" id="topnav">
+  <div class="nav-logo">Lingocare <span>Atlas</span></div>
+  <div class="nav-links">
+    <button class="nav-btn active" data-target="sec-howto">How it works</button>
+    <button class="nav-btn" data-target="sec-components">Components</button>
+    <button class="nav-btn" data-target="sec-addons">Add-ons</button>
+    <button class="nav-btn" data-target="sec-merges">Merge groups</button>
+  </div>
+</nav>
+
+<!-- ── HOW IT WORKS ── -->
+<div id="sec-howto" class="page-section">
+  <div class="sec-tag">Mental model</div>
+  <h2 class="sec-heading">Component + Add-ons = Any format</h2>
+  <p class="sec-sub">The content creation engine only needs 13 base interactions. Every format is assembled by switching add-on flags on top of a base component — not by building a new screen.</p>
+
+  <div class="flow-card">
+    <p style="font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-40);margin-bottom:24px;">Example — PF1-A Hotspot Marking vs PF2-H Annotated Error Analysis</p>
+
+    <div class="flow-row">
+      <div class="flow-box" style="background:var(--blue-soft);color:var(--blue);">INT-01<br>Tap to Mark</div>
+      <div class="flow-op" style="color:var(--ink-40);">+</div>
+      <div class="flow-box" style="background:var(--surface);color:var(--ink-70);">AON-01<br>Term Dropdown</div>
+      <div class="flow-op" style="color:var(--blue);">=</div>
+      <div class="flow-box flow-result" style="background:var(--blue);">PF1-A<br>Hotspot Marking</div>
+      <div class="flow-op" style="color:var(--ink-40);">→</div>
+      <div class="flow-desc">Tap image → pin appears → pick or type the correct term</div>
+    </div>
+
+    <div class="flow-row">
+      <div class="flow-box" style="background:var(--blue-soft);color:var(--blue);">INT-01<br>Tap to Mark</div>
+      <div class="flow-op" style="color:var(--ink-40);">+</div>
+      <div class="flow-box" style="background:var(--surface);color:var(--ink-70);">AON-03<br>Error Counter</div>
+      <div class="flow-op" style="color:var(--ink-40);">+</div>
+      <div class="flow-box" style="background:var(--surface);color:var(--ink-70);">AON-05<br>Justification</div>
+      <div class="flow-op" style="color:var(--mint);">=</div>
+      <div class="flow-box flow-result" style="background:var(--mint);">PF2-H<br>Error Analysis</div>
+      <div class="flow-op" style="color:var(--ink-40);">→</div>
+      <div class="flow-desc">Mark N errors in image → counter badge → explain each one</div>
+    </div>
+
+    <div class="flow-insight">
+      <div class="flow-insight-label">Key insight</div>
+      <p>The content creation portal shows one component — <strong>"Tap to Mark"</strong> — with toggle switches. Authors never see format IDs. They just configure add-ons. The same 13 components cover all 38 format variations.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── COMPONENTS ── -->
+<div id="sec-components" class="page-section alt">
+<div class="inner">
+  <div class="sec-tag">Core components</div>
+  <h2 class="sec-heading">13 UI building blocks</h2>
+  <p class="sec-sub">Click any card to expand and see its add-ons, source format IDs, and dev notes.</p>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-pip" style="background:var(--s-interact)"></div>Spatial interaction</div>
+    <div class="legend-item"><div class="legend-pip" style="background:var(--s-select)"></div>Selection</div>
+    <div class="legend-item"><div class="legend-pip" style="background:var(--s-text)"></div>Text entry</div>
+    <div class="legend-item"><div class="legend-pip" style="background:var(--s-social)"></div>Social / multi-step</div>
+    <div class="legend-item"><div class="legend-pip" style="background:var(--s-sim)"></div>Simulation</div>
+    <div class="legend-item"><div class="legend-pip" style="background:var(--s-audio)"></div>Audio / voice</div>
+  </div>
+
+  <div class="comp-grid" id="compGrid"></div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── ADD-ONS ── -->
+<div id="sec-addons" class="page-section">
+  <div class="sec-tag">Add-on modifiers</div>
+  <h2 class="sec-heading">29 configuration flags</h2>
+  <p class="sec-sub">Not separate screens — toggle switches the content creation engine exposes per component. Every format difference boils down to one of these.</p>
+  <div class="addons-grid" id="addonGrid"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── MERGES ── -->
+<div id="sec-merges" class="page-section alt">
+<div class="inner">
+  <div class="sec-tag">Merge &amp; consolidation</div>
+  <h2 class="sec-heading">Where formats collapse</h2>
+  <p class="sec-sub">8 merge groups — every case where multiple format IDs map to a single component, differentiated only by an add-on switch or AI eval profile.</p>
+  <div class="merge-list" id="mergeList"></div>
+</div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-left">Lingocare <span>AI</span> — Interaction Component Atlas</div>
+  <div class="footer-dots">
+    <div class="footer-dot" style="background:var(--blue)"></div>
+    <div class="footer-dot" style="background:var(--mint)"></div>
+    <div class="footer-dot" style="background:var(--mango)"></div>
+  </div>
+  <div class="footer-right">Revyn · Dev &amp; Design Handoff · MVP</div>
+</footer>
+
+<script>
+/* ─── DATA ─────────────────────────────────────────────────────────────────── */
+const CAT = {
+  interaction: { label:'Spatial Interaction', color:'#1A6BFF', bg:'#EBF2FF' },
+  selection:   { label:'Selection',           color:'#00C896', bg:'#E0FFF6' },
+  text:        { label:'Text Entry',          color:'#FF8C00', bg:'#FFF3E0' },
+  social:      { label:'Social / Multi-step', color:'#8B5CF6', bg:'#EEF2FF' },
+  simulation:  { label:'Simulation',          color:'#EF4444', bg:'#FEE2E2' },
+  audio:       { label:'Audio / Voice',       color:'#EC4899', bg:'#FDF4FF' },
+};
+
+const COMPS = [
+  { id:'INT-01', name:'Tap to Mark', cat:'interaction',
+    action:'Learner taps a location on an image or element in a text to place a marker, then provides a term.',
+    addons:[['AON-01','Term Input at Pin'],['AON-02','Inline Label Field'],['AON-03','Error Counter Badge'],['AON-05','Justification Field'],['AON-10','Audio Playback']],
+    fmts:[['PF1-A','t-pf1'],['PF1-C','t-pf1'],['PF2-H','t-pf2'],['SG-3','t-sg']],
+    devNote:'Touch target min 44px. SVG-based image for scalable hotspots. Fuzzy matching (umlauts, capitalisation, L2). Max 5 pins. PF1-A vs PF1-C = input mode toggle only.',
+    svg:`<svg viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="96" fill="#EBF2FF"/>
+      <rect x="18" y="10" width="155" height="76" rx="8" fill="white" stroke="#BFDBFE" stroke-width="1.5"/>
+      <ellipse cx="68" cy="42" rx="20" ry="24" fill="#BFDBFE" stroke="#93C5FD" stroke-width="1"/>
+      <ellipse cx="110" cy="52" rx="16" ry="11" fill="#EBF2FF" stroke="#93C5FD" stroke-width="1"/>
+      <ellipse cx="140" cy="38" rx="11" ry="15" fill="#BFDBFE" stroke="#93C5FD" stroke-width="1"/>
+      <circle cx="110" cy="52" r="9" fill="#1A6BFF"/>
+      <path d="M110 61 L106 74 L110 69 L114 74 Z" fill="#1A6BFF"/>
+      <circle cx="110" cy="51" r="3.5" fill="white"/>
+      <circle cx="110" cy="52" r="15" fill="none" stroke="#1A6BFF" stroke-width="1.5" opacity="0.35"/>
+      <circle cx="110" cy="52" r="22" fill="none" stroke="#1A6BFF" stroke-width="1" opacity="0.15"/>
+      <rect x="192" y="28" width="74" height="42" rx="7" fill="white" stroke="#BFDBFE" stroke-width="1.5"/>
+      <text x="229" y="43" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#374151">Leber</text>
+      <line x1="192" y1="52" x2="266" y2="52" stroke="#EBF2FF" stroke-width="1"/>
+      <text x="229" y="63" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#9CA3AF">Herz</text>
+      <line x1="122" y1="52" x2="192" y2="46" stroke="#1A6BFF" stroke-width="1.5" stroke-dasharray="3,2"/>
+    </svg>`
+  },
+  { id:'INT-02', name:'Drag to Categorise', cat:'interaction',
+    action:'Learner drags cards (text, image, or both) into one of 2–4 named category drop zones.',
+    addons:[['AON-04',"'Not Sure' Zone"],['AON-05','Justification Field'],['AON-06','Countdown Timer'],['AON-07','Visual Scale Layout'],['AON-08','Matrix Layout'],['AON-09','Limited Chip Count'],['AON-25','Knowledge Anchor Overlay']],
+    fmts:[['PF1-B','t-pf1'],['PF2-I','t-pf2'],['PF2-L','t-pf2'],['PF2-M','t-pf2'],['PF2-T1','t-pf2'],['PF2-T2','t-pf2'],['PF4-T1','t-pf4'],['PF4-M','t-pf4']],
+    devNote:"Scale variant: replace zones with colour gradient (AON-07). Matrix variant: multi-level grid (AON-08). Timer variant: auto-submit on expiry (AON-06). 'Not sure' zone logged not penalised.",
+    svg:`<svg viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="96" fill="#E0FFF6"/>
+      <rect x="18" y="30" width="58" height="38" rx="7" fill="white" stroke="#80E8C8" stroke-width="1.5"/>
+      <text x="47" y="52" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="9" fill="#374151">Card A</text>
+      <path d="M82 49 L98 49" stroke="#00C896" stroke-width="2" stroke-dasharray="3,2"/>
+      <polygon points="98,45 108,49 98,53" fill="#00C896"/>
+      <rect x="110" y="14" width="72" height="68" rx="8" fill="white" stroke="#80E8C8" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="146" y="33" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#00A37A" font-weight="700">Zone 1</text>
+      <rect x="120" y="40" width="52" height="22" rx="5" fill="#E0FFF6"/>
+      <text x="146" y="54" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="8" fill="#374151">Card B</text>
+      <rect x="196" y="14" width="72" height="68" rx="8" fill="white" stroke="#80E8C8" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="232" y="33" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#00A37A" font-weight="700">Zone 2</text>
+      <rect x="206" y="40" width="52" height="22" rx="5" fill="#E0FFF6"/>
+      <text x="232" y="54" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="8" fill="#374151">Card C</text>
+    </svg>`
+  },
+  { id:'INT-03', name:'Drag to Order', cat:'interaction',
+    action:'Learner drags items into numbered sequence slots to reconstruct the correct procedural order.',
+    addons:[['AON-09','Limited Chip Count'],['AON-10','Audio Playback'],['AON-05','Justification Field']],
+    fmts:[['PF1-D','t-pf1'],['WB-4','t-wb'],['SG-2','t-sg'],['PF2-M M2','t-pf2']],
+    devNote:'MERGE NOTE: PF1-D and WB-4 are identical interactions. WB context only adds spaced retrieval system layer. Partial scoring per correctly placed item.',
+    svg:`<svg viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="96" fill="#EBF2FF"/>
+      ${[0,1,2,3].map((i)=>`
+        <rect x="${16+i*63}" y="28" width="55" height="40" rx="7" fill="${i===2?'white':'white'}" stroke="${i===2?'#1A6BFF':'#BFDBFE'}" stroke-width="${i===2?2:1.5}"/>
+        <circle cx="${16+i*63+13}" cy="48" r="10" fill="${i===2?'#1A6BFF':'#EBF2FF'}"/>
+        <text x="${16+i*63+13}" y="52" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="${i===2?'white':'#1A6BFF'}" font-weight="700">${i+1}</text>
+        <line x1="${16+i*63+5}" y1="44" x2="${16+i*63+22}" y2="44" stroke="${i===2?'#1A6BFF':'#CBD5E1'}" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+        <line x1="${16+i*63+5}" y1="48" x2="${16+i*63+22}" y2="48" stroke="${i===2?'#1A6BFF':'#CBD5E1'}" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+        <line x1="${16+i*63+5}" y1="52" x2="${16+i*63+22}" y2="52" stroke="${i===2?'#1A6BFF':'#CBD5E1'}" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+      `).join('')}
+    </svg>`
+  },
+  { id:'INT-04', name:'Drag to Match', cat:'interaction',
+    action:'Learner connects pairs — drags items to their match, or drags labels onto image regions.',
+    addons:[['AON-02','Inline Label Field (image-to-term)']],
+    fmts:[['WB-3','t-wb']],
+    devNote:'Two modes: (a) line connector between columns, (b) drag SVG labels onto image hotspots. Error shake before solution reveal. Partial scoring per correct pair.',
+    svg:`<svg viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="96" fill="#EEF2FF"/>
+      ${['Term A','Term B','Term C'].map((t,i)=>`
+        <rect x="18" y="${16+i*24}" width="72" height="18" rx="5" fill="white" stroke="#C7D2FE" stroke-width="1.5"/>
+        <text x="54" y="${28+i*24}" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="9" fill="#374151">${t}</text>
+      `).join('')}
+      <line x1="90" y1="25" x2="188" y2="25" stroke="#4338CA" stroke-width="1.5"/>
+      <line x1="90" y1="49" x2="188" y2="73" stroke="#4338CA" stroke-width="1.5" opacity="0.5"/>
+      <line x1="90" y1="73" x2="188" y2="49" stroke="#80E8C8" stroke-width="1.5" opacity="0.6"/>
+      ${['Def A','Def C','Def B'].map((t,i)=>`
+        <rect x="188" y="${16+i*24}" width="72" height="18" rx="5" fill="white" stroke="${i===0?'#4338CA':'#C7D2FE'}" stroke-width="${i===0?2:1.5}"/>
+        <text x="224" y="${28+i*24}" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="9" fill="#374151">${t}</text>
+      `).join('')}
+    </svg>`
+  },
+  { id:'INT-05', name:'Drag to Position', cat:'interaction',
+    action:'Learner drags a marker or chip to a specific point on a spectrum between two authored poles.',
+    addons:[['AON-09','Limited Chip Count'],['AON-05','Justification Field'],['AON-17','Anonymous Class Distribution']],
+    fmts:[['PF4-P','t-pf4'],['PF2-M M3','t-pf2'],['PF4-M M3','t-pf4']],
+    devNote:'No positional scoring — only justification is evaluated. Chip mechanic variant: submit locked until exactly N chips placed. Position stored as value 0–100.',
+    svg:`<svg viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="96" fill="#FFF3E0"/>
+      <text x="24" y="36" font-family="JetBrains Mono,monospace" font-size="8" fill="#C06000">Safety first</text>
+      <line x1="24" y1="52" x2="256" y2="52" stroke="#FFCC80" stroke-width="2.5"/>
+      <circle cx="24" cy="52" r="5" fill="#FF8C00" opacity="0.3"/>
+      <circle cx="256" cy="52" r="5" fill="#FF8C00" opacity="0.3"/>
+      ${[24,82,140,198,256].map(x=>`<line x1="${x}" y1="47" x2="${x}" y2="57" stroke="#FFCC80" stroke-width="2"/>`).join('')}
+      <circle cx="178" cy="52" r="14" fill="#FF8C00" stroke="white" stroke-width="2.5"/>
+      <line x1="178" y1="66" x2="178" y2="78" stroke="#FF8C00" stroke-width="2"/>
+      <text x="256" y="36" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="8" fill="#C06000">Efficiency</text>
+      <text x="178" y="92" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#C06000">drag to position</text>
+    </svg>`
+  },
+  { id:'INT-06', name:'Choice Selection (MCQ)', cat:'selection',
+    action:'Learner selects one answer (radio) or multiple answers (checkboxes) from a presented list.',
+    addons:[['AON-05','Justification Field'],['AON-10','Audio Playback'],['AON-17','Class Distribution'],['AON-18','Spaced Retrieval'],['AON-26','Checkbox Grid Layout'],['AON-27','Domino Chain Visual']],
+    fmts:[['WB-1','t-wb'],['WB-2','t-wb'],['PF2-G','t-pf2'],['PF4-R','t-pf4'],['PF2-T4','t-pf2'],['PF2-T6','t-pf2'],['SG-1','t-sg']],
+    devNote:'Radio = single-select. Checkboxes = multi-select + partial scoring. Spaced retrieval (WB): system hides reference card on later encounters based on LU completion data.',
+    svg:`<svg viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="96" fill="#E0FFF6"/>
+      <rect x="18" y="10" width="244" height="18" rx="5" fill="white" stroke="#80E8C8" stroke-width="1.5"/>
+      <text x="32" y="22" font-family="Plus Jakarta Sans,sans-serif" font-size="8.5" fill="#374151">What is the correct next action?</text>
+      ${['Call the nurse immediately','Document and wait','Ask the patient what hurts'].map((o,i)=>`
+        <rect x="18" y="${34+i*19}" width="244" height="16" rx="5" fill="${i===0?'#E0FFF6':'white'}" stroke="${i===0?'#00C896':'#80E8C8'}" stroke-width="${i===0?2:1}"/>
+        <circle cx="31" cy="${42+i*19}" r="5" fill="${i===0?'#00C896':'white'}" stroke="${i===0?'#00C896':'#80E8C8'}" stroke-width="1.5"/>
+        ${i===0?`<circle cx="31" cy="${42+i*19}" r="2.5" fill="white"/>`:''}
+        <text x="42" y="${46+i*19}" font-family="Plus Jakarta Sans,sans-serif" font-size="8.5" fill="${i===0?'#00A37A':'#374151'}">${o}</text>
+      `).join('')}
+    </svg>`
+  },
+  { id:'INT-07', name:'Scale Selector', cat:'selection',
+    action:'Learner taps a point on a 5-point labelled horizontal scale to register a position or emotional response.',
+    addons:[['AON-05','Justification Field'],['AON-12','Sentence Starter'],['AON-17','Anonymous Class Distribution']],
+    fmts:[['PF1-E','t-pf1'],['PF4-O','t-pf4'],['PF4-T2','t-pf4']],
+    devNote:'No emoji-only display. Visually calm — no gamification styling. PF1-E: cross-session persistence to PF4 of same Learning Unit is required.',
+    svg:`<svg viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="96" fill="#E0FFF6"/>
+      <text x="24" y="30" font-family="JetBrains Mono,monospace" font-size="8" fill="#00A37A">Disagree</text>
+      <text x="256" y="30" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="8" fill="#00A37A">Agree</text>
+      <line x1="24" y1="50" x2="256" y2="50" stroke="#80E8C8" stroke-width="2"/>
+      ${[24,82,140,198,256].map((x,i)=>`
+        <circle cx="${x}" cy="50" r="${i===3?14:10}" fill="${i===3?'#00C896':'white'}" stroke="${i===3?'#00C896':'#80E8C8'}" stroke-width="2"/>
+        <text x="${x}" y="${i===3?54:54}" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="${i===3?9:8}" fill="${i===3?'white':'#00A37A'}">${i+1}</text>
+      `).join('')}
+      <text x="24" y="76" font-family="JetBrains Mono,monospace" font-size="7" fill="#00A37A" opacity="0.7">Strongly disagree</text>
+      <text x="256" y="76" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="7" fill="#00A37A" opacity="0.7">Strongly agree</text>
+    </svg>`
+  },
+  { id:'INT-08', name:'Free Text Entry', cat:'text',
+    action:'Learner types a response — from a single word to a multi-sentence analysis — into open text field(s).',
+    addons:[['AON-05','Justification Field'],['AON-11','Dual-Panel Context'],['AON-12','Sentence Starter'],['AON-13','Multi-Entry Tag Input'],['AON-14','Sequential Step Reveal'],['AON-24','Word Cloud Display'],['AON-25','Knowledge Anchor Overlay']],
+    fmts:[['PF1-F','t-pf1'],['PF2-J','t-pf2'],['PF2-T3','t-pf2'],['PF2-T5','t-pf2'],['PF4-T5','t-pf4']],
+    devNote:'AI eval criteria (causal/term/case-ref) configured per exercise. Sentence starter: collapsible (High), always visible (Mid), builder (Low). PF2-T5 vs PF4-T5 = same component, different AI eval profile.',
+    svg:`<svg viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="96" fill="#FFF3E0"/>
+      <rect x="18" y="12" width="244" height="54" rx="9" fill="white" stroke="#FFCC80" stroke-width="1.5"/>
+      <text x="32" y="30" font-family="Plus Jakarta Sans,sans-serif" font-size="8.5" fill="#374151" font-style="italic">The nurse should have checked the patient's...</text>
+      <line x1="32" y1="42" x2="210" y2="42" stroke="#FFF3E0" stroke-width="1"/>
+      <line x1="32" y1="52" x2="170" y2="52" stroke="#FFF3E0" stroke-width="1"/>
+      <rect x="173" y="46" width="2" height="12" fill="#FF8C00"/>
+      <rect x="18" y="74" width="148" height="16" rx="8" fill="#FFCC80"/>
+      <text x="92" y="85" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#7C3600">💡 This happened because...</text>
+    </svg>`
+  },
+  { id:'INT-09', name:'Peer Interaction Flow', cat:'social',
+    action:'Three-step gated flow: learner writes a position → reads peer responses → writes a justified reaction.',
+    addons:[['AON-15','Peer Response Display'],['AON-16','Peer Evaluation Checklist'],['AON-28','Revision Step'],['AON-12','Sentence Starter']],
+    fmts:[['PF2-K','t-pf2'],['PF4-K','t-pf4'],['PF4-N','t-pf4']],
+    devNote:"Steps gated: Step 2 ONLY renders after Step 1 submitted — do not pre-render. Peer responses always anonymised. Fallback examples MUST be labelled 'Example response'. PF4-N adds checklist + revision.",
+    svg:`<svg viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="96" fill="#EEF2FF"/>
+      ${[0,1,2].map(i=>`
+        <rect x="${10+i*87}" y="18" width="78" height="60" rx="8" fill="${i===2?'white':'white'}" stroke="${i===2?'#4338CA':'#C7D2FE'}" stroke-width="${i===2?2:1.5}"/>
+        <text x="${49+i*87}" y="34" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="#4338CA">STEP ${i+1}</text>
+        ${i===0?`<text x="49" y="52" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="8" fill="#374151">Write your</text><text x="49" y="63" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="8" fill="#374151">position</text>`:''}
+        ${i===1?`<rect x="20" y="42" width="58" height="11" rx="3" fill="#EEF2FF"/><rect x="20" y="57" width="58" height="11" rx="3" fill="#EEF2FF"/><text x="49" y="51" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="7.5" fill="#374151">Peer A</text><text x="49" y="66" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="7.5" fill="#374151">Peer B</text>`:''}
+        ${i===2?`<text x="136" y="52" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="8" fill="#374151">React with</text><text x="136" y="63" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="8" fill="#374151">justification</text>`:''}
+        ${i<2?`<polygon points="${88+i*87},46 ${96+i*87},50 ${88+i*87},54" fill="#4338CA"/>`:''}
+      `).join('')}
+    </svg>`
+  },
+  { id:'INT-10', name:'Multi-Step Progressive Text', cat:'text',
+    action:'Three sequential text fields — each only appearing after the previous is submitted. Factual → Emotional → Professional.',
+    addons:[['AON-12','Sentence Starter'],['AON-14','Sequential Step Reveal']],
+    fmts:[['PF4-Q','t-pf4']],
+    devNote:'Steps must NOT be pre-rendered in DOM. Distress signals in Step 2 silently flagged to Teacher Dashboard — no AI intervention, teacher decides on follow-up.',
+    svg:`<svg viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="96" fill="#FFF3E0"/>
+      ${['What happened?','How did you feel?','What do you take away?'].map((q,i)=>`
+        <rect x="18" y="${10+i*28}" width="244" height="22" rx="7" fill="${i<2?'white':'#FFF3E0'}" stroke="${i===2?'#FFCC80':'#FFCC80'}" stroke-width="${i===2?1:1.5}" opacity="${i===2?0.6:1}"/>
+        <text x="30" y="${24+i*28}" font-family="Plus Jakarta Sans,sans-serif" font-size="9" fill="${i===2?'#9CA3AF':'#374151'}">${q}</text>
+        <text x="254" y="${24+i*28}" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="8" fill="${i===0?'#00C896':i===1?'#FF8C00':'#9CA3AF'}">${['✓ done','active','locked'][i]}</text>
+      `).join('')}
+    </svg>`
+  },
+  { id:'INT-11', name:'Branching Scenario', cat:'simulation',
+    action:'Learner makes sequential decisions across 6 nodes. Each choice moves a persistent risk bar. No undo.',
+    addons:[['AON-21','Risk Bar Indicator (always on)'],['AON-22','Pre-Decision Activation Q (Variant A)'],['AON-23','Post-Decision Justification (Variant B)']],
+    fmts:[['PF3-S','t-pf3']],
+    devNote:'Risk bar always visible — not collapsible. No undo mechanic. End state: 3 colour states only (green/yellow/red), no numerical score, no moral framing. Each node configured as Variant A or B individually.',
+    svg:`<svg viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="96" fill="#FEE2E2"/>
+      <rect x="18" y="8" width="244" height="12" rx="6" fill="white" stroke="#FECACA" stroke-width="1.5"/>
+      <rect x="18" y="8" width="152" height="12" rx="6" fill="#FECACA"/>
+      <rect x="18" y="8" width="90" height="12" rx="6" fill="#FCA5A5"/>
+      <rect x="18" y="8" width="46" height="12" rx="6" fill="#EF4444"/>
+      <text x="18" y="40" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#991B1B">NODE 3 / 6</text>
+      <text x="18" y="52" font-family="Plus Jakarta Sans,sans-serif" font-size="8" fill="#374151" font-style="italic">You notice the patient is in pain.</text>
+      <text x="18" y="63" font-family="Plus Jakarta Sans,sans-serif" font-size="8" fill="#374151" font-style="italic">You...</text>
+      ${['Call nurse immediately','Document and wait','Ask what hurts','Check meds chart'].map((o,i)=>`
+        <rect x="148" y="${26+i*17}" width="116" height="13" rx="4" fill="${i===0?'#FEE2E2':'white'}" stroke="${i===0?'#EF4444':'#FECACA'}" stroke-width="${i===0?1.5:1}"/>
+        <text x="206" y="${36+i*17}" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="7.5" fill="${i===0?'#991B1B':'#374151'}">${o}</text>
+      `).join('')}
+    </svg>`
+  },
+  { id:'INT-12', name:'Word Chip Assembly', cat:'audio',
+    action:'Learner listens to a sentence and assembles it from pre-given word chips. No free typing.',
+    addons:[['AON-10','Audio Playback'],['AON-20','Distractor Chips']],
+    fmts:[['SG-4','t-sg']],
+    devNote:'No keyboard input. Chips already correctly conjugated/declined. Distractor chip count scales by language group: 1–2 / 2–3 / 3–4.',
+    svg:`<svg viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="96" fill="#FDF4FF"/>
+      <rect x="18" y="8" width="244" height="22" rx="8" fill="white" stroke="#E9D5FF" stroke-width="1.5"/>
+      <circle cx="34" cy="19" r="7" fill="#EC4899"/>
+      <polygon points="31,16 31,22 37,19" fill="white"/>
+      <line x1="46" y1="19" x2="252" y2="19" stroke="#E9D5FF" stroke-width="1"/>
+      <circle cx="128" cy="19" r="4" fill="#EC4899"/>
+      <rect x="18" y="38" width="244" height="18" rx="5" fill="white" stroke="#E9D5FF" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="28" y="50" font-family="Plus Jakarta Sans,sans-serif" font-size="8.5" fill="#9CA3AF" font-style="italic">Assemble the sentence here...</text>
+      ${['Die','Patientin','hat','Schmerzen','starke'].map((w,i)=>`
+        <rect x="${18+i*50}" y="64" width="${Math.max(w.length*6+14,38)}" height="22" rx="7" fill="${i===4?'#FDF4FF':'white'}" stroke="${i===4?'#C084FC':'#E9D5FF'}" stroke-width="${i===4?1.5:1}"/>
+        <text x="${18+i*50+Math.max(w.length*6+14,38)/2}" y="79" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" fill="${i===4?'#7C3AED':'#374151'}">${w}</text>
+      `).join('')}
+      <text x="18" y="96" font-family="JetBrains Mono,monospace" font-size="7" fill="#7C3AED">↑ distractor chip</text>
+    </svg>`
+  },
+  { id:'INT-13', name:'Audio Record & Playback', cat:'audio',
+    action:'Learner listens to a model audio, records their own voice, plays it back, and compares to the model.',
+    addons:[['AON-10','Audio Playback'],['AON-19','Microphone Capture'],['AON-29','Verbal Sequencing Task']],
+    fmts:[['SG-5','t-sg'],['SG-6','t-sg']],
+    devNote:'Microphone permission required — graceful fallback if denied. Unlimited repeats, no score penalty. Pronunciation feedback is an optional extension, quality-gated for MVP.',
+    svg:`<svg viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="280" height="96" fill="#FDF4FF"/>
+      <rect x="10" y="10" width="120" height="36" rx="8" fill="white" stroke="#E9D5FF" stroke-width="1.5"/>
+      <text x="70" y="23" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="#EC4899">MODEL</text>
+      ${[18,34,50,66,82,98,112].map((x,i)=>`<line x1="${x}" y1="${32-[3,6,9,7,5,8,4][i]}" x2="${x}" y2="${32+[3,6,9,7,5,8,4][i]}" stroke="#EC4899" stroke-width="2.5" stroke-linecap="round"/>`).join('')}
+      <rect x="150" y="10" width="120" height="36" rx="8" fill="white" stroke="#E9D5FF" stroke-width="1.5"/>
+      <text x="210" y="23" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="#EC4899">YOUR RECORDING</text>
+      ${[158,174,190,206,222,238,254].map((x,i)=>`<line x1="${x}" y1="${32-[2,5,8,6,4,7,3][i]}" x2="${x}" y2="${32+[2,5,8,6,4,7,3][i]}" stroke="#F9A8D4" stroke-width="2.5" stroke-linecap="round"/>`).join('')}
+      <circle cx="140" cy="70" r="18" fill="#EC4899"/>
+      <circle cx="140" cy="70" r="10" fill="white"/>
+      <circle cx="140" cy="70" r="6" fill="#EC4899"/>
+      <text x="140" y="94" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7.5" fill="#BE185D">record</text>
+    </svg>`
+  },
+];
+
+const ADDONS = [
+  {id:'AON-01',name:'Term Input at Pin',desc:'After placing a pin, a term input overlay appears at the pin — dropdown or free-text.',applies:'INT-01',def:'Off'},
+  {id:'AON-02',name:'Inline Label Field',desc:'Text field appears directly at the marked element. No popup. Used for image-to-term.',applies:'INT-01, INT-04',def:'Off'},
+  {id:'AON-03',name:'Error Counter Badge',desc:"Badge shows '0/N marked'. Submit gated until minimum marks placed.",applies:'INT-01',def:'Off'},
+  {id:'AON-04',name:"'Not Sure' Zone",desc:"Extra drop zone always visible. Placements logged, not penalised, no score impact.",applies:'INT-02',def:'On (PF1-B)'},
+  {id:'AON-05',name:'Justification Field',desc:"Mandatory free-text after primary interaction. AI-evaluated. Cannot be skipped.",applies:'INT-01–08',def:'Off'},
+  {id:'AON-06',name:'Countdown Timer',desc:'Visible countdown. Auto-submits drag state on expiry. Timed sorting only.',applies:'INT-02',def:'Off'},
+  {id:'AON-07',name:'Visual Scale Layout',desc:'Drop zones replaced by a colour-gradient scale (green→red). Risk Meter variant.',applies:'INT-02',def:'Off'},
+  {id:'AON-08',name:'Matrix Layout',desc:'Multi-level grid layout for root cause analysis. Cohort variance is the output.',applies:'INT-02',def:'Off'},
+  {id:'AON-09',name:'Limited Chip Count',desc:'Exactly N chips given; submit locked until all N are placed.',applies:'INT-02, INT-03, INT-05',def:'Off'},
+  {id:'AON-10',name:'Audio Playback',desc:'Audio player above interaction. Repeat always available. Human-recorded only.',applies:'INT-01,03,06,12,13',def:'Off'},
+  {id:'AON-11',name:'Dual-Panel Context',desc:'Two scenes side-by-side or toggle. For Before/After formats. Two text fields follow.',applies:'INT-08',def:'Off'},
+  {id:'AON-12',name:'Sentence Starter',desc:'Pre-written sentence fragment. 3 visibility modes: collapsible / always visible / builder.',applies:'All text fields',def:'Always visible'},
+  {id:'AON-13',name:'Multi-Entry Tag Input',desc:'Tag-style input — Enter/comma creates new chip. For brainstorming with word cloud.',applies:'INT-08',def:'Off'},
+  {id:'AON-14',name:'Sequential Step Reveal',desc:"Next field hidden until previous submitted. Must NOT be CSS-only hidden.",applies:'INT-08, INT-10',def:'Off'},
+  {id:'AON-15',name:'Peer Response Display',desc:'After learner submits, 1–3 anonymised peer or labelled example responses appear.',applies:'INT-09',def:'Fallback examples'},
+  {id:'AON-16',name:'Peer Evaluation Checklist',desc:'Structured checklist to evaluate a peer text before reacting (PF4-N only).',applies:'INT-09',def:'Off'},
+  {id:'AON-17',name:'Anonymous Class Distribution',desc:"Live response distribution shown AFTER learner submits — never before.",applies:'INT-06, INT-07, INT-05',def:'Off'},
+  {id:'AON-18',name:'Spaced Retrieval Mode',desc:'Reference card hidden on later encounters. System controls timing via LU data.',applies:'INT-06',def:'Off'},
+  {id:'AON-19',name:'Microphone Capture',desc:'Record button → waveform → stop → playback. Permission required, graceful fallback.',applies:'INT-13',def:'Off'},
+  {id:'AON-20',name:'Distractor Chips',desc:'Extra word chips not in correct sentence. Count scales by language group (1–4).',applies:'INT-12',def:'On (scaled)'},
+  {id:'AON-21',name:'Risk Bar Indicator',desc:'Persistent bar always in view. Updates after each node. Always on for INT-11.',applies:'INT-11',def:'Always on'},
+  {id:'AON-22',name:'Pre-Decision Activation Q',desc:'Activation question shown before decision options appear (Variant A nodes only).',applies:'INT-11',def:'Per node'},
+  {id:'AON-23',name:'Post-Decision Justification',desc:'Justification required after choice, before risk bar updates (Variant B nodes).',applies:'INT-11',def:'Per node'},
+  {id:'AON-24',name:'Word Cloud Display',desc:"Anonymous word cloud of class entries after brainstorm timer. Solo: own list.",applies:'INT-08 (multi-entry)',def:'Off'},
+  {id:'AON-25',name:'Knowledge Anchor Overlay',desc:"Always-accessible reference overlay. No penalty for consulting it.",applies:'INT-02, INT-08',def:'Off'},
+  {id:'AON-26',name:'Checkbox Grid Layout',desc:'Options as compact 3×3 grid. Action-language labels. For Error Bingo.',applies:'INT-06',def:'Off'},
+  {id:'AON-27',name:'Domino Chain Visual',desc:'Arrow-chain visualisation of causal consequences after submission.',applies:'INT-06',def:'Off'},
+  {id:'AON-28',name:'Revision Step',desc:'After peer review, final revision field for learner to update their own response.',applies:'INT-09',def:'Off'},
+  {id:'AON-29',name:'Verbal Sequencing Task',desc:'Speak fragments in correct order. Speech recognition evaluates against target forms.',applies:'INT-13',def:'Off'},
+];
+
+const MERGES = [
+  { group:'Tap to Mark variants', fmts:[['PF1-A','t-pf1'],['PF1-C','t-pf1'],['PF2-H','t-pf2']], comp:'INT-01',
+    same:'All tap a location and provide a term. Same proximity evaluation and fuzzy match engine.',
+    diff:'PF1-A: dropdown at pin (AON-01). PF1-C: inline label field (AON-02). PF2-H: adds error counter (AON-03) + mandatory justification (AON-05).' },
+  { group:'Drag to Categorise (all)', fmts:[['PF1-B','t-pf1'],['PF2-I','t-pf2'],['PF2-L','t-pf2'],['PF2-T1','t-pf2'],['PF2-T2','t-pf2'],['PF4-T1','t-pf4']], comp:'INT-02',
+    same:'All drag cards into zones. Partial scoring per card.',
+    diff:'Timer (AON-06), scale layout (AON-07), matrix (AON-08), justification (AON-05) are the only differences. One component, multiple configs.' },
+  { group:'Chip Mechanic (PF2 + PF4)', fmts:[['PF2-M M1–M3','t-pf2'],['PF4-M M1–M3','t-pf4']], comp:'INT-02/03/05 + AON-09',
+    same:'Fixed N chips, submit locked until all placed, mandatory justification after.',
+    diff:'Only chip label language differs: systemic language (PF2) vs experience-near (PF4). Same component — author constraint only.' },
+  { group:'Sequence Reconstruction', fmts:[['PF1-D','t-pf1'],['WB-4','t-wb'],['SG-2','t-sg']], comp:'INT-03',
+    same:'Drag items into numbered slots. Partial scoring. Correct sequence shown after.',
+    diff:'SG-2 adds audio (AON-10). WB-4 operates in spaced retrieval context but the interaction is byte-for-byte identical to PF1-D.' },
+  { group:'Peer Interaction Flow', fmts:[['PF2-K','t-pf2'],['PF4-K','t-pf4'],['PF4-N','t-pf4']], comp:'INT-09',
+    same:'Three-step write→read→react flow. Steps gated. Peer responses anonymised.',
+    diff:'PF2-K checks causal argument. PF4-K checks reflective argument (same component, different AI eval profile). PF4-N adds checklist (AON-16) + revision (AON-28).' },
+  { group:'Scale Selector variants', fmts:[['PF1-E','t-pf1'],['PF4-O','t-pf4'],['PF4-T2','t-pf4']], comp:'INT-07',
+    same:'5-point horizontal scale, text labels, visually calm, no emoji.',
+    diff:'PF1-E: optional text, cross-session persistence. PF4-O: mandatory justification + class distribution. PF4-T2: poles relate to personal difficulty.' },
+  { group:'Before / After (PF2 + PF4)', fmts:[['PF2-T5','t-pf2'],['PF4-T5','t-pf4']], comp:'INT-08 + AON-11',
+    same:'Two panels shown. Two free-text fields follow. Identical DOM and component.',
+    diff:'AI eval profile only: PF2-T5 checks "names specific error"; PF4-T5 checks "connects to own development". One component, two AI eval configs.' },
+  { group:'WB Knowledge Units', fmts:[['WB-1','t-wb'],['WB-2','t-wb']], comp:'INT-06 + AON-18',
+    same:'Standard MCQ with auto-evaluation. Spaced retrieval manages card visibility across encounters.',
+    diff:'WB-1: radio buttons, binary scoring. WB-2: checkboxes, partial scoring, glossary tooltip on wrong options.' },
+];
+
+/* ─── RENDER COMPONENTS ─────────────────────────────────────────────────────── */
+function renderComponents() {
+  const grid = document.getElementById('compGrid');
+  COMPS.forEach((c, idx) => {
+    const cat = CAT[c.cat];
+    const card = document.createElement('div');
+    card.className = 'comp-card';
+    card.style.position = 'relative';
+    card.dataset.idx = idx;
+
+    card.innerHTML = `
+      <button class="close-chip" onclick="closeCard(event,${idx})" title="Close">×</button>
+      <div class="card-top">
+        <div class="card-icon-wrap" style="background:${cat.bg}">
+          <span style="font-family:var(--font-mono);font-size:9px;font-weight:700;color:${cat.color}">${c.id}</span>
+        </div>
+        <div>
+          <div class="card-id" style="color:${cat.color}">${c.id}</div>
+          <div class="card-name">${c.name}</div>
+        </div>
+      </div>
+      <p class="card-action">${c.action}</p>
+      <div class="card-illustration">${c.svg}</div>
+      <div class="card-pills">
+        <span class="pill" style="color:${cat.color};border-color:${cat.color}30">${cat.label}</span>
+        <span class="pill" style="color:var(--ink-40);border-color:var(--ink-12)">${c.addons.length} add-ons</span>
+        <span class="pill" style="color:var(--ink-40);border-color:var(--ink-12)">${c.fmts.length} format${c.fmts.length>1?'s':''}</span>
+      </div>
+      <div class="detail-panel">
+        <div class="detail-cols">
+          <div>
+            <div class="detail-col-label">Available add-ons</div>
+            ${c.addons.map(([id,name])=>`<div class="aon-pill"><span class="aon-id">${id}</span>${name}</div>`).join('')}
+          </div>
+          <div>
+            <div class="detail-col-label">Source format IDs</div>
+            <div style="margin-bottom:16px">${c.fmts.map(([id,cls])=>`<span class="format-tag ${cls}">${id}</span>`).join('')}</div>
+            <div class="detail-col-label">Content creator sees</div>
+            <div class="author-box">One component card: <strong>"${c.name}"</strong><br>with ${c.addons.length} toggle switch${c.addons.length>1?'es':''} below it.</div>
+          </div>
+          <div>
+            <div class="detail-col-label">Dev notes</div>
+            <div class="dev-box">${c.devNote}</div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    card.addEventListener('click', (e) => {
+      if (e.target.classList.contains('close-chip')) return;
+      if (card.classList.contains('open')) return;
+      closeAllCards();
+      card.classList.add('open');
+      setTimeout(() => card.scrollIntoView({ behavior:'smooth', block:'nearest' }), 80);
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+function closeCard(e, idx) {
+  e.stopPropagation();
+  document.querySelectorAll('.comp-card')[idx].classList.remove('open');
+}
+function closeAllCards() {
+  document.querySelectorAll('.comp-card.open').forEach(c => c.classList.remove('open'));
+}
+
+/* ─── RENDER ADD-ONS ─────────────────────────────────────────────────────────── */
+function renderAddons() {
+  const grid = document.getElementById('addonGrid');
+  ADDONS.forEach(a => {
+    const d = document.createElement('div');
+    d.className = 'addon-card';
+    d.innerHTML = `
+      <div class="addon-id-badge">${a.id}</div>
+      <div class="addon-name">${a.name}</div>
+      <div class="addon-desc">${a.desc}</div>
+      <div class="addon-meta">${a.applies} · Default: ${a.def}</div>
+    `;
+    grid.appendChild(d);
+  });
+}
+
+/* ─── RENDER MERGES ──────────────────────────────────────────────────────────── */
+function renderMerges() {
+  const list = document.getElementById('mergeList');
+  MERGES.forEach(m => {
+    const row = document.createElement('div');
+    row.className = 'merge-row';
+    row.innerHTML = `
+      <div>
+        <div class="merge-col-label">Merge group</div>
+        <div class="merge-title">${m.group}</div>
+      </div>
+      <div>
+        <div class="merge-col-label">Formats merged</div>
+        <div style="margin-bottom:10px">${m.fmts.map(([id,cls])=>`<span class="format-tag ${cls}">${id}</span>`).join('')}</div>
+        <div class="merge-diff-text"><em>Same because:</em> ${m.same}</div>
+      </div>
+      <div>
+        <div class="merge-col-label">What differentiates them</div>
+        <div class="merge-diff-text">${m.diff}</div>
+      </div>
+      <div>
+        <div class="merge-col-label">Unified to</div>
+        <div class="merge-result-box">${m.comp}</div>
+      </div>
+    `;
+    list.appendChild(row);
+  });
+}
+
+/* ─── NAV ─────────────────────────────────────────────────────────────────────── */
+function initNav() {
+  const btns = document.querySelectorAll('.nav-btn');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      const navH = document.getElementById('topnav').offsetHeight;
+      const y = target.getBoundingClientRect().top + window.scrollY - navH - 8;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // Highlight active section on scroll
+  const sections = ['sec-howto','sec-components','sec-addons','sec-merges'];
+  window.addEventListener('scroll', () => {
+    const navH = document.getElementById('topnav').offsetHeight;
+    let current = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= navH + 60) current = id;
+    });
+    btns.forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-target') === current);
+    });
+  }, { passive: true });
+}
+
+/* ─── INIT ────────────────────────────────────────────────────────────────────── */
+renderComponents();
+renderAddons();
+renderMerges();
+initNav();
+</script>
+</body>
+</html>
