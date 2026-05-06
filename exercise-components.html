@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lingocare AI — Exercise Type Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:#1A6BFF;--blue-soft:#EBF2FF;--blue-mid:#BFDBFE;--blue-dk:#0F44CC;
+  --mint:#00C896;--mint-soft:#E0FFF6;--mint-mid:#80E8C8;
+  --mango:#FF8C00;--mango-soft:#FFF3E0;--mango-mid:#FFCC80;
+  --red:#EF4444;--red-soft:#FEE2E2;
+  --violet:#7C3AED;--violet-soft:#F5F3FF;
+  --indigo:#4F46E5;--indigo-soft:#EEF2FF;
+  --ink:#0C0F1A;--ink-70:rgba(12,15,26,.7);--ink-40:rgba(12,15,26,.4);
+  --ink-12:rgba(12,15,26,.12);--ink-06:rgba(12,15,26,.06);
+  --surface:#F4F6FA;--white:#FFFFFF;
+  --font-d:'Montserrat',sans-serif;--font-b:'Sora',sans-serif;--font-m:'JetBrains Mono',monospace;
+  /* Responsive horizontal padding — used everywhere */
+  --px: clamp(20px, 5vw, 64px);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--surface);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ── HERO ── */
+.hero{background:var(--white);border-bottom:1px solid var(--ink-12);padding:clamp(40px,6vw,72px) var(--px) clamp(40px,5vw,64px);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:420px;height:420px;background:conic-gradient(from 180deg,rgba(26,107,255,.06),rgba(0,200,150,.05),rgba(255,140,0,.06),rgba(26,107,255,.06));border-radius:50%;pointer-events:none}
+.eyebrow{font-family:var(--font-m);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:var(--blue);border-radius:2px}
+.hero h1{font-family:var(--font-d);font-size:clamp(28px,4.5vw,56px);font-weight:800;line-height:1.08;letter-spacing:-1.5px;margin-bottom:14px}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero-sub{font-size:15px;color:var(--ink-70);max-width:540px;margin-bottom:44px;font-weight:400}
+.stats{display:flex;flex-wrap:wrap;border:1px solid var(--ink-12);border-radius:16px;overflow:hidden;background:var(--surface);width:fit-content;max-width:100%}
+.stat{padding:16px 24px;border-right:1px solid var(--ink-12)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:var(--font-d);font-size:34px;font-weight:800;line-height:1;letter-spacing:-1px}
+.stat-l{font-family:var(--font-m);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-40);margin-top:2px}
+.badge-revyn{position:absolute;top:20px;right:var(--px);font-family:var(--font-m);font-size:10px;letter-spacing:1px;color:var(--ink-40);display:flex;align-items:center;gap:7px}
+@media(max-width:600px){.badge-revyn{display:none}}
+.revyn-dot{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--mint))}
+
+/* ── STICKY NAV ── */
+.topnav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--ink-12);padding:0 var(--px);display:flex;align-items:center;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nav-brand{font-family:var(--font-d);font-size:13px;font-weight:700;color:var(--ink);margin-right:24px;white-space:nowrap;padding:14px 0;letter-spacing:-.3px;flex-shrink:0}
+.nav-brand span{color:var(--blue)}
+.navs{display:flex;flex-shrink:0}
+.nav-btn{font-family:var(--font-m);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:16px 14px;border:none;background:transparent;color:var(--ink-40);cursor:pointer;border-bottom:2.5px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap}
+.nav-btn:hover{color:var(--ink)}
+.nav-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1380px;margin:0 auto;padding:0 var(--px)}
+.section{padding:clamp(48px,7vw,80px) 0}
+.section.alt{background:var(--white)}
+.sec-tag{font-family:var(--font-m);font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sec-tag::before{content:'';display:inline-block;width:14px;height:2px;background:var(--blue);border-radius:2px}
+.sec-h{font-family:var(--font-d);font-size:clamp(20px,2.8vw,34px);font-weight:700;line-height:1.15;letter-spacing:-.5px;margin-bottom:8px}
+.sec-sub{font-size:14px;color:var(--ink-70);max-width:560px;margin-bottom:36px;font-weight:400}
+
+/* ── HOW IT WORKS ── */
+.formula-card{background:var(--surface);border:1px solid var(--ink-12);border-radius:20px;padding:32px 36px;margin-bottom:40px}
+.formula-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.formula-row:last-of-type{margin-bottom:0}
+.fbox{padding:11px 18px;border-radius:12px;font-family:var(--font-d);font-size:13px;font-weight:600;text-align:center;min-width:130px;line-height:1.3}
+.fop{font-family:var(--font-d);font-size:20px;font-weight:700;color:var(--ink-40)}
+.fdesc{font-size:12.5px;color:var(--ink-70);max-width:210px;line-height:1.5;font-style:italic}
+.insight-bar{background:#FFFBEB;border:1px solid var(--mango-mid);border-radius:12px;padding:14px 18px;margin-top:22px;display:flex;gap:12px;align-items:flex-start}
+.insight-label{font-family:var(--font-m);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--mango);white-space:nowrap;padding-top:3px}
+.insight-bar p{font-size:13px;color:var(--ink-70);line-height:1.6}
+
+/* ── FILTER BAR ── */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.filter-btn{font-family:var(--font-m);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;border-radius:20px;border:1.5px solid var(--ink-12);background:var(--white);color:var(--ink-70);cursor:pointer;transition:all .2s;white-space:nowrap}
+.filter-btn:hover{border-color:var(--blue);color:var(--blue)}
+.filter-btn.on{background:var(--blue);border-color:var(--blue);color:var(--white)}
+.filter-count{font-size:9px;background:rgba(255,255,255,.3);border-radius:10px;padding:1px 5px;margin-left:4px}
+.filter-btn:not(.on) .filter-count{background:var(--ink-06);color:var(--ink-40)}
+
+/* ── BUILDING BLOCKS ── */
+.blocks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.block-card{background:var(--white);border:1.5px solid var(--ink-12);border-radius:20px;overflow:hidden;cursor:pointer;transition:box-shadow .2s,border-color .2s,transform .2s;animation:su .4s ease both}
+.block-card:hover{box-shadow:0 6px 28px rgba(26,107,255,.09);border-color:var(--blue-mid);transform:translateY(-3px)}
+.block-card.open{grid-column:1/-1;cursor:default;transform:none;border-color:var(--blue);box-shadow:0 10px 40px rgba(26,107,255,.1)}
+.block-card.open:hover{transform:none}
+@keyframes su{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.block-card:nth-child(1){animation-delay:.04s}.block-card:nth-child(2){animation-delay:.08s}.block-card:nth-child(3){animation-delay:.12s}.block-card:nth-child(4){animation-delay:.16s}.block-card:nth-child(5){animation-delay:.20s}.block-card:nth-child(6){animation-delay:.24s}.block-card:nth-child(7){animation-delay:.28s}.block-card:nth-child(8){animation-delay:.32s}.block-card:nth-child(9){animation-delay:.36s}.block-card:nth-child(10){animation-delay:.40s}.block-card:nth-child(11){animation-delay:.44s}.block-card:nth-child(12){animation-delay:.48s}.block-card:nth-child(13){animation-delay:.52s}
+
+.bc-top{padding:20px 20px 14px;display:flex;align-items:flex-start;gap:14px}
+.bc-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-m);font-size:9px;font-weight:700}
+.bc-name{font-family:var(--font-d);font-size:15px;font-weight:700;line-height:1.2}
+.bc-cat{font-family:var(--font-m);font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.bc-illus{margin:0 20px 14px;border-radius:12px;overflow:hidden;background:var(--surface);line-height:0}
+.bc-illus svg{display:block;width:100%;height:auto;min-height:88px}
+.bc-pills{padding:10px 20px 18px;display:flex;gap:6px;flex-wrap:wrap}
+.pill{font-family:var(--font-m);font-size:9px;letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:20px;border:1px solid currentColor;font-weight:500}
+.close-x{position:absolute;top:14px;right:14px;width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--ink-12);cursor:pointer;display:none;align-items:center;justify-content:center;font-size:14px;color:var(--ink-70);transition:background .2s;z-index:5}
+.block-card.open .close-x{display:flex}
+.close-x:hover{background:var(--ink-12)}
+
+/* ── EXPANDED BLOCK PANEL ── */
+.block-detail{display:none;border-top:1px solid var(--ink-12);padding:28px 28px 32px}
+.block-card.open .block-detail{display:block}
+.detail-2col{display:grid;grid-template-columns:280px 1fr;gap:32px}
+@media(max-width:860px){.detail-2col{grid-template-columns:1fr}}
+.detail-label{font-family:var(--font-m);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-40);margin-bottom:10px}
+.addon-list{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.addon-row{background:var(--surface);border:1px solid var(--ink-12);border-radius:10px;padding:8px 12px;font-size:12px;line-height:1.4}
+.addon-id{font-family:var(--font-m);font-size:9px;color:var(--blue);display:block;margin-bottom:1px}
+.addon-name-bold{font-weight:600}
+.recipe-list{display:flex;flex-direction:column;gap:10px}
+.recipe-card{border:1px solid var(--ink-12);border-radius:12px;overflow:hidden;transition:border-color .2s}
+.recipe-card:hover{border-color:var(--blue-mid)}
+.recipe-header{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--surface);flex-wrap:wrap}
+.recipe-name{font-family:var(--font-d);font-size:14px;font-weight:700}
+.recipe-id{font-family:var(--font-m);font-size:10px;color:var(--ink-40)}.recipe-addons{display:flex;gap:5px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--ink-06)}
+.aon-chip{font-family:var(--font-m);font-size:9px;padding:3px 8px;border-radius:6px;background:var(--blue-soft);color:var(--blue);font-weight:500}
+.recipe-example{padding:10px 16px 14px;font-size:12.5px;color:var(--ink-70);line-height:1.55;border-top:1px solid var(--ink-06)}
+.recipe-example strong{color:var(--ink);font-weight:600}
+
+/* ── SECTION BADGES ── */
+.sb{display:inline-flex;align-items:center;font-family:var(--font-m);font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.sb-pf1{background:var(--blue-soft);color:var(--blue)}
+.sb-pf2{background:var(--mint-soft);color:#007A5E}
+.sb-pf3{background:var(--red-soft);color:#B91C1C}
+.sb-pf4{background:var(--mango-soft);color:#B45309}
+.sb-wb{background:var(--indigo-soft);color:var(--indigo)}
+.sb-sg{background:var(--violet-soft);color:var(--violet)}
+.sb-game{background:#FFF7ED;color:#C2410C}
+
+/* ── TASK FORMAT INDEX ── */
+.formats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fmt-card{background:var(--white);border:1.5px solid var(--ink-12);border-radius:16px;padding:18px 20px;transition:border-color .2s,box-shadow .2s;cursor:pointer}
+.fmt-card:hover{border-color:var(--blue-mid);box-shadow:0 4px 18px rgba(26,107,255,.07)}
+.fmt-card.hidden{display:none}
+.fmt-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;gap:8px}
+.fmt-name{font-family:var(--font-d);font-size:14px;font-weight:700;line-height:1.25}
+.fmt-id{font-family:var(--font-m);font-size:9.5px;color:var(--ink-40);margin-top:2px}
+.fmt-wld{font-size:12px;color:var(--ink-70);line-height:1.5;margin-bottom:12px}
+.fmt-recipe{background:var(--surface);border-radius:10px;padding:10px 12px}
+.fmt-recipe-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:5px}
+.fmt-recipe-label{font-family:var(--font-m);font-size:8.5px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-40);white-space:nowrap}
+.block-ref{font-family:var(--font-d);font-size:11.5px;font-weight:600;color:var(--blue);cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}
+.block-ref:hover{color:var(--blue-dk)}
+.aon-tag{font-family:var(--font-m);font-size:9px;padding:2px 7px;border-radius:5px;background:var(--blue-soft);color:var(--blue)}
+.fmt-example{font-size:11.5px;color:var(--ink-70);font-style:italic;line-height:1.5;margin-top:5px}
+
+/* ── DIVIDER ── */
+.div{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--ink-12) 20%,var(--ink-12) 80%,transparent)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:28px var(--px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer .fl{font-family:var(--font-d);font-size:13px;font-weight:600;color:var(--white);letter-spacing:-.3px}
+footer .fl span{color:var(--blue)}
+footer .fr{font-family:var(--font-m);font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3)}
+footer .dots{display:flex;gap:5px}
+footer .dot{width:6px;height:6px;border-radius:50%}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--ink-12);border-radius:3px}
+
+/* ── RESPONSIVE BREAKPOINTS ── */
+@media(max-width:960px){
+  .detail-2col{grid-template-columns:1fr !important}
+}
+@media(max-width:700px){
+  .blocks-grid{grid-template-columns:1fr}
+  .formats-grid{grid-template-columns:1fr}
+  .formula-card{padding:20px 18px}
+  .formula-row{flex-direction:column;align-items:flex-start;gap:8px}
+  .fop{display:none}
+  .fbox{min-width:0;width:100%}
+  .fdesc{max-width:100%}
+  .stats{width:100%}
+  .stat{flex:1;padding:14px 16px}
+  .nav-brand{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="badge-revyn"><div class="revyn-dot"></div>Revyn · Lingocare AI</div>
+  <div class="eyebrow">Exercise Type Atlas · Dev &amp; Design Handoff</div>
+  <h1>40 exercises.<br><em>13 building blocks.</em></h1>
+  <p class="hero-sub">Every task format from the Lingocare MVP spec — mapped to the smallest set of UI components your team needs to build. Each format = one building block + a set of add-on toggles.</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-n" style="color:var(--blue)">13</div><div class="stat-l">Building blocks</div></div>
+    <div class="stat"><div class="stat-n" style="color:var(--mint)">29</div><div class="stat-l">Add-on toggles</div></div>
+    <div class="stat"><div class="stat-n" style="color:var(--mango)">40</div><div class="stat-l">Task formats</div></div>
+  </div>
+</header>
+
+<nav class="topnav" id="topnav">
+  <div class="nav-brand">Lingocare <span>Atlas</span></div>
+  <div class="navs">
+    <button class="nav-btn active" data-sec="sec-how">How it works</button>
+    <button class="nav-btn" data-sec="sec-blocks">Building blocks</button>
+    <button class="nav-btn" data-sec="sec-formats">All 40 formats</button>
+  </div>
+</nav>
+
+<!-- HOW IT WORKS -->
+<section id="sec-how">
+<div class="wrap section">
+  <div class="sec-tag">Mental model</div>
+  <h2 class="sec-h">One building block + add-ons = any format</h2>
+  <p class="sec-sub">The content creation portal only needs to build 13 core interaction types. Every task format in the spec is assembled by switching add-on flags — not by building a new screen.</p>
+
+  <div class="formula-card">
+    <p style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-40);margin-bottom:20px">Two formats, one building block — PF1 examples</p>
+    <div class="formula-row">
+      <div class="fbox" style="background:var(--blue-soft);color:var(--blue)">Tap to Mark<br><span style="font-size:10px;opacity:.7">building block</span></div>
+      <div class="fop">+</div>
+      <div class="fbox" style="background:var(--surface);color:var(--ink-70)">Term Selector<br><span style="font-size:10px">add-on toggle</span></div>
+      <div class="fop" style="color:var(--blue)">=</div>
+      <div class="fbox" style="background:var(--blue);color:white">Hotspot Marking<br><span style="font-size:10px;opacity:.8">PF1-A</span></div>
+      <div class="fop" style="color:var(--ink-12)">→</div>
+      <div class="fdesc">Tap the liver on a body diagram → pick the correct term from a 3-option dropdown at the pin</div>
+    </div>
+    <div class="formula-row">
+      <div class="fbox" style="background:var(--blue-soft);color:var(--blue)">Tap to Mark<br><span style="font-size:10px;opacity:.7">building block</span></div>
+      <div class="fop">+</div>
+      <div class="fbox" style="background:var(--surface);color:var(--ink-70)">Inline Label<br><span style="font-size:10px">add-on toggle</span></div>
+      <div class="fop" style="color:var(--mint)">=</div>
+      <div class="fbox" style="background:var(--mint);color:white">Label-It<br><span style="font-size:10px;opacity:.8">PF1-C</span></div>
+      <div class="fop" style="color:var(--ink-12)">→</div>
+      <div class="fdesc">Tap the same diagram element → type the term directly in an inline field at that point</div>
+    </div>
+    <div class="formula-row">
+      <div class="fbox" style="background:var(--blue-soft);color:var(--blue)">Tap to Mark<br><span style="font-size:10px;opacity:.7">building block</span></div>
+      <div class="fop">+</div>
+      <div class="fbox" style="background:var(--surface);color:var(--ink-70)">Error Counter<br><span style="font-size:10px">add-on</span></div>
+      <div class="fop">+</div>
+      <div class="fbox" style="background:var(--surface);color:var(--ink-70)">Justification<br><span style="font-size:10px">add-on</span></div>
+      <div class="fop" style="color:var(--mango)">=</div>
+      <div class="fbox" style="background:var(--mango);color:white">Annotated Error Analysis<br><span style="font-size:10px;opacity:.8">PF2-H</span></div>
+      <div class="fop" style="color:var(--ink-12)">→</div>
+      <div class="fdesc">Mark 2 hygiene errors in an image → counter shows 0/2 → explain each one</div>
+    </div>
+    <div class="insight-bar">
+      <div class="insight-label">Key insight</div>
+      <p>The content creation portal shows <strong>one card: "Tap to Mark"</strong> with 3 toggle switches underneath. The author never sees format IDs. Switching toggles is how any of these three (and more) are created.</p>
+    </div>
+  </div>
+</div>
+</section>
+<div class="div"></div>
+
+<!-- BUILDING BLOCKS -->
+<section id="sec-blocks" class="alt">
+<div class="wrap section">
+  <div class="sec-tag">13 building blocks</div>
+  <h2 class="sec-h">Each block — every format it can power</h2>
+  <p class="sec-sub">Click any block to expand and see its complete recipe list: exactly which add-ons combine to create which task formats, with real examples from the spec.</p>
+
+  <div class="filter-bar" id="blockFilter">
+    <button class="filter-btn on" data-cat="all">All <span class="filter-count">13</span></button>
+    <button class="filter-btn" data-cat="spatial">Spatial interaction <span class="filter-count">5</span></button>
+    <button class="filter-btn" data-cat="selection">Selection <span class="filter-count">2</span></button>
+    <button class="filter-btn" data-cat="text">Text &amp; Analysis <span class="filter-count">3</span></button>
+    <button class="filter-btn" data-cat="social">Social / Multi-step <span class="filter-count">1</span></button>
+    <button class="filter-btn" data-cat="simulation">Simulation <span class="filter-count">1</span></button>
+    <button class="filter-btn" data-cat="audio">Audio / Voice <span class="filter-count">2</span></button>
+  </div>
+  <div class="blocks-grid" id="blocksGrid"></div>
+</div>
+</section>
+<div class="div"></div>
+
+<!-- ALL FORMATS -->
+<section id="sec-formats">
+<div class="wrap section">
+  <div class="sec-tag">40 task formats</div>
+  <h2 class="sec-h">Every format from the spec — with its recipe</h2>
+  <p class="sec-sub">Filter by section. Each card shows: what the learner does, which building block creates it, and which add-ons are active. Click the building block name to jump to it above.</p>
+
+  <div class="filter-bar" id="fmtFilter">
+    <button class="filter-btn on" data-sec="all">All <span class="filter-count">40</span></button>
+    <button class="filter-btn" data-sec="PF1">PF1 · Perceive &amp; Identify <span class="filter-count">6</span></button>
+    <button class="filter-btn" data-sec="PF2">PF2 · Observe &amp; Analyse <span class="filter-count">13</span></button>
+    <button class="filter-btn" data-sec="PF3">PF3 · Act <span class="filter-count">1</span></button>
+    <button class="filter-btn" data-sec="PF4">PF4 · Reflect <span class="filter-count">10</span></button>
+    <button class="filter-btn" data-sec="WB">Knowledge (WBs) <span class="filter-count">4</span></button>
+    <button class="filter-btn" data-sec="SG">Language Garden <span class="filter-count">6</span></button>
+  </div>
+  <div class="formats-grid" id="formatsGrid"></div>
+</div>
+</section>
+
+<footer>
+  <div class="fl">Lingocare <span>AI</span> · Exercise Type Atlas</div>
+  <div class="dots"><div class="dot" style="background:var(--blue)"></div><div class="dot" style="background:var(--mint)"></div><div class="dot" style="background:var(--mango)"></div></div>
+  <div class="fr">Revyn · Dev &amp; Design Handoff · MVP</div>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────────────────────────────────────
+
+const CATS = {
+  spatial:    {label:'Spatial Interaction',color:'#1A6BFF',bg:'#EBF2FF'},
+  selection:  {label:'Selection',          color:'#00C896',bg:'#E0FFF6'},
+  text:       {label:'Text & Analysis',    color:'#FF8C00',bg:'#FFF3E0'},
+  social:     {label:'Social / Multi-step',color:'#7C3AED',bg:'#F5F3FF'},
+  simulation: {label:'Simulation',         color:'#EF4444',bg:'#FEE2E2'},
+  audio:      {label:'Audio / Voice',      color:'#EC4899',bg:'#FDF4FF'},
+};
+
+// Add-on definitions
+const ADDONS = {
+  'Term Selector':         {desc:'Dropdown (3–4 options) OR free-text field appears at the pin location after tapping'},
+  'Inline Label':          {desc:'Text input rendered directly on the image at the element — no popup, no pin shown'},
+  'Error Counter Badge':   {desc:"Counter badge shows 'N / X errors marked'. Submit locked until minimum reached"},
+  'Justification Field':   {desc:'Mandatory free-text field appears after main interaction. AI-evaluated. Cannot be skipped'},
+  'Audio Playback':        {desc:'Audio player sits above the interaction. Repeat always available. Human-recorded audio only'},
+  "'Not Sure' Zone":       {desc:"Permanent extra drop zone. Placements logged but not scored. Reduces anxiety on uncertain items"},
+  'Knowledge Anchor':      {desc:'Always-accessible overlay showing a reference document. No penalty for consulting it'},
+  'Countdown Timer':       {desc:'Visible countdown; auto-submits current state on expiry. Timed sorting mechanic'},
+  'Gradient Scale Layout': {desc:'Drop zones replaced by a colour gradient (green → red). Items placed along the scale'},
+  'Matrix Layout':         {desc:'Zones arranged as a multi-level grid (rows = cause levels, columns = categories)'},
+  'Limited Chips':         {desc:'Learner receives exactly N chips (2–4). Submit locked until all N are placed'},
+  'Class Distribution':    {desc:'Anonymous class-wide response distribution shown after learner submits'},
+  'Spaced Retrieval':      {desc:'Reference card hidden on later encounters. System controls timing via LU completion data'},
+  'Checkbox Grid':         {desc:'Options shown as compact 3×3 grid with checkboxes. Action-language labels only'},
+  'Domino Chain Visual':   {desc:'After submission: selected consequences shown connected by an arrow chain diagram'},
+  'Multi-Entry Tags':      {desc:'Tag-style input — Enter/comma creates a new chip. For brainstorming (multiple short entries)'},
+  'Word Cloud':            {desc:'After a timer, aggregate class entries displayed as an anonymous word cloud'},
+  'Dual-Panel Display':    {desc:'Two scenes shown side-by-side (or toggle). Two separate text fields appear beneath'},
+  'Claim Display':         {desc:'A prominent claim (from a colleague) is shown before the free-text response field'},
+  'Case Overlay':          {desc:'Case text always accessible as a full-screen overlay. No penalty for consulting'},
+  'Peer Response Display': {desc:'After learner submits, 1–3 anonymised peer responses (or labelled examples) appear'},
+  'Peer Checklist':        {desc:'Structured checklist to evaluate a peer text before writing a reaction (PF4-N only)'},
+  'Revision Step':         {desc:'After peer review, a final field lets learner update their own original response'},
+  'Sequential Step Reveal':{desc:'Next field hidden until previous is submitted. Not CSS-only — fields must not be pre-rendered'},
+  'Distractor Chips':      {desc:'Extra chips added that are NOT part of the correct sentence. Count scales by language group'},
+  'Microphone Capture':    {desc:'Record button → waveform while recording → stop → playback. Permission required'},
+  'Verbal Sequencing Mode':{desc:'Learner hears fragments in wrong order, records them in correct order. Speech recognition evaluates'},
+  'Risk Bar':              {desc:'Persistent bar always visible; updates after each node decision. 3 colour states (green/yellow/red)'},
+  'Variant A: Pre-Q':      {desc:'Activation question shown before decision options at this node (primes thinking)'},
+  'Variant B: Post-Just.': {desc:'Justification field appears after choice but before risk bar updates at this node'},
+  'Image-to-Term Mode':    {desc:'Drag labelled chips onto SVG image regions rather than a two-column list. SVG-based for scale'},
+  'Experience-near Labels':{desc:"Chip labels use 'I felt...' language, never systemic/theoretical vocabulary"},
+  'Optional Text':         {desc:'Free-text field is shown but not required. With sentence starter. No scoring.'},
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BUILDING BLOCKS
+// ─────────────────────────────────────────────────────────────────────────────
+const BLOCKS = [
+  {
+    id:'BB-01', name:'Tap to Mark', subtitle:'on image or text passage', cat:'spatial',
+    desc:'Core action: learner taps/clicks a specific location on an image diagram, or taps a word in a text passage. A visual marker appears at that point.',
+    addons:['Term Selector','Inline Label','Error Counter Badge','Justification Field','Audio Playback'],
+    recipes:[
+      {name:'Hotspot Marking',     id:'PF1-A',sec:'PF1',addons:['Term Selector'],
+       wld:'Taps a location on an image to place a pin → selects or types the correct term for that location',
+       example:'Anatomy diagram of the human body — learner taps the kidney area → overlay appears: "Choose: Niere / Leber / Herz". Up to 5 pins per image. Immediate green/correct feedback per pin.'},
+      {name:'Label-It',            id:'PF1-C',sec:'PF1',addons:['Inline Label'],
+       wld:'Taps a labelled element in a diagram → types its technical name directly at that point',
+       example:'Wound dressing diagram with arrows — learner taps the arrow labelling the outer layer → types "Verbandmull" in the inline field that appears at that exact point on the image. Low-level variant: 3-term dropdown instead of typing.'},
+      {name:'Annotated Error Analysis',id:'PF2-H',sec:'PF2',addons:['Error Counter Badge','Justification Field'],
+       wld:'Taps to mark errors or risks in an image or text → explains why each is a problem in a text field',
+       example:'Photo of a care procedure — learner taps 2 hygiene violations. Counter badge shows "0 / 2 errors marked". After both are marked, a justification field appears: "Describe the consequence of each error."'},
+      {name:'Listen & Identify',   id:'SG-3',sec:'SG',addons:['Audio Playback'],
+       wld:'Listens to clinical audio → taps a specific term or phrase in the displayed transcript',
+       example:'Nurse handover audio plays → learner taps the word "Druckgeschwür" when they hear/read it in the transcript. Transcript visibility: always shown (Group 1), hidden until after (Group 2), never shown (Group 3).'},
+    ],
+    svg:`<svg viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto"><rect width="280" height="88" fill="#EBF2FF"/><rect x="16" y="8" width="152" height="72" rx="8" fill="white" stroke="#BFDBFE" stroke-width="1.5"/><ellipse cx="65" cy="38" rx="18" ry="22" fill="#BFDBFE" stroke="#93C5FD"/><ellipse cx="105" cy="48" rx="14" ry="10" fill="#EBF2FF" stroke="#93C5FD"/><ellipse cx="136" cy="34" rx="10" ry="14" fill="#BFDBFE" stroke="#93C5FD"/><circle cx="105" cy="48" r="8" fill="#1A6BFF"/><path d="M105 56 L101 68 L105 64 L109 68 Z" fill="#1A6BFF"/><circle cx="105" cy="47" r="3" fill="white"/><circle cx="105" cy="48" r="14" fill="none" stroke="#1A6BFF" stroke-width="1.5" opacity=".3"/><rect x="188" y="24" width="76" height="42" rx="7" fill="white" stroke="#BFDBFE" stroke-width="1.5"/><text x="226" y="40" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#374151">Niere</text><line x1="188" y1="48" x2="264" y2="48" stroke="#EBF2FF"/><text x="226" y="59" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9CA3AF">Leber</text><line x1="118" y1="48" x2="188" y2="42" stroke="#1A6BFF" stroke-width="1.5" stroke-dasharray="3,2"/></svg>`,
+  },
+  {
+    id:'BB-02', name:'Drag to Sort', subtitle:'cards into category zones', cat:'spatial',
+    desc:'Learner drags cards (text, image, or both) into named drop zones. 2–4 zones. Partial scoring per correctly placed card.',
+    addons:["'Not Sure' Zone",'Justification Field','Knowledge Anchor','Countdown Timer','Gradient Scale Layout','Matrix Layout','Limited Chips','Class Distribution','Experience-near Labels'],
+    recipes:[
+      {name:'Drag & Drop Sorting',          id:'PF1-B',sec:'PF1',addons:["'Not Sure' Zone"],
+       wld:"Drags cards into 2–4 category zones. A permanent 'Not sure' zone is always available — no penalty for using it",
+       example:'Cards with patient symptoms are sorted into 2 clinical categories. "Not sure" zone sits to the side. Correct placements confirmed after submission — no "why" explanation needed.'},
+      {name:'Structured Mapping',            id:'PF2-I',sec:'PF2',addons:['Justification Field','Knowledge Anchor'],
+       wld:'Sorts information items into a structured framework (e.g. SIS topic areas) by dragging, then justifies 1–2 placements',
+       example:'Risk factors sorted into SIS topic columns. Knowledge Anchor button opens SIS reference overlay at any time. After submission, justification field appears for the 2 flagged items.'},
+      {name:'Root Cause Analysis',          id:'PF2-L',sec:'PF2',addons:['Matrix Layout','Justification Field'],
+       wld:'Sorts causal factors into a person / situation / organisation matrix → justifies at least one placement',
+       example:'Case factors dragged into a 3×3 matrix grid. No single correct answer — teacher uses cohort distribution (auto-shown on dashboard). Justification required for at least one placement.'},
+      {name:'Chip Mechanic M1 (Categorise)',id:'PF2-M M1',sec:'PF2',addons:['Limited Chips','Justification Field'],
+       wld:'Receives exactly N chips and must assign all of them to categories. Genuine prioritisation forced',
+       example:'Learner receives 3 "risk chips". Must place all 3 into one of 4 risk-factor categories. Submit locked until all 3 placed. Mandatory justification after.'},
+      {name:'Chip Mechanic M1 (PF4 variant)',id:'PF4-M M1',sec:'PF4',addons:['Limited Chips','Justification Field','Experience-near Labels'],
+       wld:'Same chip mechanic but chip labels use experience-near language ("I felt uncertain") instead of systemic terms',
+       example:'3 emotion chips ("I felt overwhelmed", "I was unsure", "I felt pressured"). Must assign all 3 to categories. Same mechanic as PF2-M M1 — only the label language differs.'},
+      {name:'🎮 Sorting Challenge (Timed)', id:'PF2-T1',sec:'PF2',addons:['Countdown Timer','Justification Field'],
+       wld:'Sorts 6–8 case cards into 2 categories under a visible countdown → justifies the most problematic card after time ends',
+       example:'Timer shows 90 seconds. 7 care-action cards must be sorted into "Correct" / "Problematic" before time runs out. After expiry, justification field appears for one card.'},
+      {name:'🎮 Risk Meter',                id:'PF2-T2',sec:'PF2',addons:['Gradient Scale Layout','Justification Field'],
+       wld:'Drags case actions onto a visual risk scale (green to red) → justifies the highest-risk placement',
+       example:'A green-to-red gradient bar replaces category zones. 4 nurse actions dragged to positions on the scale. Expert rating revealed after submission. Justification for highest-risk placement.'},
+      {name:'🎮 Sorting Without Time Pressure',id:'PF4-T1',sec:'PF4',addons:['Justification Field','Class Distribution'],
+       wld:"Sorts case factors into 2 reflective categories (e.g. 'within my control' / 'outside my control'). Reflective justification after",
+       example:"Labels: 'Within my control' vs 'Outside my control'. No timer. Justification must reference a concrete case moment. Anonymous cohort distribution shown after submission."},
+    ],
+    svg:`<svg viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto"><rect width="280" height="88" fill="#E0FFF6"/><rect x="14" y="28" width="56" height="34" rx="7" fill="white" stroke="#80E8C8" stroke-width="1.5"/><text x="42" y="48" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#374151">Card</text><path d="M76 45 L94 45" stroke="#00C896" stroke-width="2" stroke-dasharray="3,2"/><polygon points="94,41 104,45 94,49" fill="#00C896"/><rect x="106" y="12" width="70" height="64" rx="8" fill="white" stroke="#80E8C8" stroke-width="1.5" stroke-dasharray="4,3"/><text x="141" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#007A5E" font-weight="700">Zone 1</text><rect x="116" y="36" width="50" height="18" rx="4" fill="#E0FFF6"/><text x="141" y="48" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8" fill="#374151">item</text><rect x="196" y="12" width="70" height="64" rx="8" fill="white" stroke="#80E8C8" stroke-width="1.5" stroke-dasharray="4,3"/><text x="231" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#007A5E" font-weight="700">Zone 2</text></svg>`,
+  },
+  {
+    id:'BB-03', name:'Drag to Order', subtitle:'items into a numbered sequence', cat:'spatial',
+    desc:'Learner drags items into numbered sequence slots to reconstruct the correct procedural order. Partial scoring per correctly placed item.',
+    addons:['Audio Playback','Limited Chips'],
+    recipes:[
+      {name:'Sequence Reconstruction',     id:'PF1-D',sec:'PF1',addons:[],
+       wld:'Drags steps or elements into the correct numbered sequence — no explanation needed',
+       example:'5 steps of hand disinfection shown as cards. Learner drags them into slots 1–5. Incorrectly placed cards highlighted after submission; correct sequence shown alongside.'},
+      {name:'WB Sequence Reconstruction',  id:'WB-4',sec:'WB',addons:[],
+       wld:'Arranges steps into the correct procedural sequence — suitable for PPE, hand disinfection, wound care',
+       example:'Identical interaction to PF1-D. The WB context means it can appear as a spaced-retrieval knowledge check in a later session — same component, different system context.'},
+      {name:'Listen & Sequence',            id:'SG-2',sec:'SG',addons:['Audio Playback'],
+       wld:'Listens to a sequence with multiple steps → arranges cards in the order heard',
+       example:'Audio of a wound care procedure plays. Learner drags 4 image/text cards into the order they heard. Repeat button always available. No microphone required.'},
+      {name:'Chip Mechanic M2 (Rank)',      id:'PF2-M M2',sec:'PF2',addons:['Limited Chips','Justification Field'],
+       wld:'Receives exactly N chips and must rank all of them by priority order',
+       example:'3 "priority chips" must be placed in rank order 1→3. Submit locked until all placed. Justification field: "Explain why you placed the top chip first."'},
+      {name:'Chip Mechanic M2 (PF4 variant)',id:'PF4-M M2',sec:'PF4',addons:['Limited Chips','Justification Field','Experience-near Labels'],
+       wld:'Same rank mechanic with experience-near chip labels in a communication / reflection context',
+       example:'"I would first acknowledge their feeling / then explain the situation / then ask what they need." 3 chips ranked. Same mechanic as PF2-M M2.'},
+    ],
+    svg:`<svg viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto"><rect width="280" height="88" fill="#EBF2FF"/>${[0,1,2,3].map((i)=>`<rect x="${12+i*63}" y="24" width="55" height="40" rx="7" fill="${i===2?'#EBF2FF':'white'}" stroke="${i===2?'#1A6BFF':'#BFDBFE'}" stroke-width="${i===2?2:1.5}"/><circle cx="${12+i*63+13}" cy="44" r="10" fill="${i===2?'#1A6BFF':'#EBF2FF'}"/><text x="${12+i*63+13}" y="48" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="${i===2?'white':'#1A6BFF'}" font-weight="700">${i+1}</text>`).join('')}</svg>`,
+  },
+  {
+    id:'BB-04', name:'Drag to Match', subtitle:'connect pairs or label image regions', cat:'spatial',
+    desc:'Learner connects pairs — drags items to their match, or drags text labels onto SVG image regions. Partial scoring per correct pair.',
+    addons:['Image-to-Term Mode'],
+    recipes:[
+      {name:'Matching (term-to-definition)',id:'WB-3',sec:'WB',addons:[],
+       wld:'Connects pairs: term to definition, symptom to condition, by drawing lines or dragging',
+       example:'Left column: 4 clinical terms. Right column: 4 definitions. Learner drags to draw connections. Error shake shown on mismatch. Correct pairings revealed only after full submission.'},
+      {name:'Matching (image-to-term)',     id:'WB-3 (img)',sec:'WB',addons:['Image-to-Term Mode'],
+       wld:'Drags text labels onto correct regions of an anatomical illustration',
+       example:'Illustration of the digestive system. 4 text chips ("Magen", "Leber", "Niere", "Milz") dragged onto the correct region of the SVG image. SVG-based for scalability across screen sizes.'},
+    ],
+    svg:`<svg viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto"><rect width="280" height="88" fill="#EEF2FF"/>${['A','B','C'].map((t,i)=>`<rect x="14" y="${14+i*24}" width="68" height="18" rx="5" fill="white" stroke="#C7D2FE" stroke-width="1.5"/><text x="48" y="${26+i*24}" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#374151">Term ${t}</text>`).join('')}<line x1="82" y1="23" x2="196" y2="23" stroke="#4F46E5" stroke-width="1.5"/><line x1="82" y1="47" x2="196" y2="71" stroke="#4F46E5" stroke-width="1.5" opacity=".5"/><line x1="82" y1="71" x2="196" y2="47" stroke="#80E8C8" stroke-width="1.5" opacity=".7"/>${['Def 1','Def 3','Def 2'].map((t,i)=>`<rect x="196" y="${14+i*24}" width="68" height="18" rx="5" fill="white" stroke="${i===0?'#4F46E5':'#C7D2FE'}" stroke-width="${i===0?2:1.5}"/><text x="230" y="${26+i*24}" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="9" fill="#374151">${t}</text>`).join('')}</svg>`,
+  },
+  {
+    id:'BB-05', name:'Drag to Position', subtitle:'marker on a spectrum between two poles', cat:'spatial',
+    desc:'Learner drags a marker or chip to a specific point on a single-axis spectrum defined by two authored poles. No positional scoring — only justification evaluated.',
+    addons:['Limited Chips','Justification Field','Class Distribution'],
+    recipes:[
+      {name:'Tension Mapping',              id:'PF4-P',sec:'PF4',addons:['Justification Field'],
+       wld:'Places a marker between two case-specific poles and justifies the placement. Goal: name the tension, not resolve it',
+       example:'Poles: "Patient autonomy" ↔ "Professional duty". Learner drags marker to their position. Justification field with sentence starter. System accepts deliberately open answers — no right/wrong.'},
+      {name:'Chip Mechanic M3 (Position)',  id:'PF2-M M3',sec:'PF2',addons:['Limited Chips','Justification Field'],
+       wld:'Receives exactly N chips and places them on a diagram or spectrum. Submit locked until all N placed',
+       example:'3 chips (each labelled 1–4 words) placed on a risk diagram. Must place all 3 before submitting. Justification field: "Explain your most controversial placement."'},
+      {name:'Chip Mechanic M3 (PF4 variant)',id:'PF4-M M3',sec:'PF4',addons:['Limited Chips','Justification Field','Experience-near Labels'],
+       wld:'Same placement mechanic with experience-near labels on a reflective tension diagram',
+       example:'"I felt trapped / I felt supported / I felt unsure." 3 chips placed on a tension axis. Identical mechanic to PF2-M M3 — author constraint: labels must use first-person language.'},
+    ],
+    svg:`<svg viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto"><rect width="280" height="88" fill="#FFF3E0"/><text x="20" y="32" font-family="JetBrains Mono" font-size="8" fill="#B45309">Pole A</text><text x="260" y="32" text-anchor="end" font-family="JetBrains Mono" font-size="8" fill="#B45309">Pole B</text><line x1="20" y1="50" x2="260" y2="50" stroke="#FFCC80" stroke-width="2.5"/>${[20,80,140,200,260].map(x=>`<line x1="${x}" y1="45" x2="${x}" y2="55" stroke="#FFCC80" stroke-width="2"/>`).join('')}<circle cx="174" cy="50" r="14" fill="#FF8C00" stroke="white" stroke-width="2.5"/><line x1="174" y1="64" x2="174" y2="76" stroke="#FF8C00" stroke-width="2"/><text x="174" y="86" text-anchor="middle" font-family="JetBrains Mono" font-size="7.5" fill="#B45309">drag</text></svg>`,
+  },
+  {
+    id:'BB-06', name:'Multiple Choice', subtitle:'select one or multiple options', cat:'selection',
+    desc:'Learner selects one correct answer (radio buttons) or all correct answers (checkboxes). Foundation for all MCQ-style tasks across all sections.',
+    addons:['Justification Field','Audio Playback','Spaced Retrieval','Checkbox Grid','Domino Chain Visual'],
+    recipes:[
+      {name:'Single Select (WB)',           id:'WB-1',sec:'WB',addons:['Spaced Retrieval'],
+       wld:'Selects one correct answer from 3–4 options. First encounter: reference card visible. Later: card hidden — pure recall',
+       example:'First time: WB card showing "Hand disinfection: 5 steps" is visible, MCQ below it. Second encounter (days later): card is hidden. Wrong answer → link back to card shown.'},
+      {name:'Multiple Select (WB)',         id:'WB-2',sec:'WB',addons:['Spaced Retrieval'],
+       wld:'Selects all correct answers from a list — multiple can be correct. Partial scoring. Spaced retrieval applies',
+       example:'Which 3 of these 5 symptoms indicate sepsis? Checkboxes. Partial score shown after submission. Glossary tooltip on incorrect options. Card hidden on later encounters.'},
+      {name:'Justified Selection',          id:'PF2-G',sec:'PF2',addons:['Justification Field'],
+       wld:'Selects one or more answer options → writes a mandatory short justification. Text field cannot be skipped',
+       example:'MCQ: "What is the highest priority action?" → learner picks an option → justification field appears (cannot submit without it). AI checks: causal link present? Clinical term used? Case referenced?'},
+      {name:'Team Conversation',            id:'PF4-R',sec:'PF4',addons:['Justification Field'],
+       wld:'Reads a second-person scenario → selects from 3–4 professional stances (no option is wrong) → mandatory justification',
+       example:'"Your colleague takes a shortcut you disagree with. You..." — 3 response options representing different professional stances. No option marked wrong. Justification checks: is the professional tension named?'},
+      {name:'Listen & Select',              id:'SG-1',sec:'SG',addons:['Audio Playback'],
+       wld:'Listens to a short clinical audio → selects the matching answer from 2–4 options (text, image, or both)',
+       example:'Audio of a doctor explaining a medication. MCQ: "What is the dosage frequency?" — 3 options. Image options preferred for Language Group 1. No microphone required.'},
+      {name:'🎮 Error Bingo',               id:'PF2-T4',sec:'PF2',addons:['Checkbox Grid'],
+       wld:'Receives a 3×3 grid of action categories and checks which ones actually occur in the case',
+       example:'Grid of 9 action labels (action language only — "failed to document", "rushed handover" etc.). Learner checks which ones happened in the case. Immediate feedback after submission.'},
+      {name:'🎮 Domino Chain',              id:'PF2-T6',sec:'PF2',addons:['Domino Chain Visual'],
+       wld:'Sees a trigger moment and selects all consequences that directly follow. Plausible distractors included',
+       example:'"Nurse skips handwashing before wound care." Learner selects 3 of 5 consequences. Optional domino arrow visual connects selected consequences after submission. 1–2 distractor options included.'},
+    ],
+    svg:`<svg viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto"><rect width="280" height="88" fill="#E0FFF6"/><rect x="14" y="8" width="252" height="18" rx="5" fill="white" stroke="#80E8C8" stroke-width="1.5"/><text x="28" y="20" font-family="Plus Jakarta Sans" font-size="8.5" fill="#374151">What is the correct next action?</text>${['Call the nurse immediately','Document and wait','Ask the patient what hurts'].map((o,i)=>`<rect x="14" y="${32+i*19}" width="252" height="16" rx="5" fill="${i===0?'#E0FFF6':'white'}" stroke="${i===0?'#00C896':'#80E8C8'}" stroke-width="${i===0?2:1}"/><circle cx="27" cy="${40+i*19}" r="5" fill="${i===0?'#00C896':'white'}" stroke="${i===0?'#00C896':'#80E8C8'}" stroke-width="1.5"/>${i===0?`<circle cx="27" cy="${40+i*19}" r="2.5" fill="white"/>`:''}  <text x="38" y="${44+i*19}" font-family="Plus Jakarta Sans" font-size="8" fill="${i===0?'#007A5E':'#374151'}">${o}</text>`).join('')}</svg>`,
+  },
+  {
+    id:'BB-07', name:'Scale Selector', subtitle:'5-point barometer between two poles', cat:'selection',
+    desc:'Learner taps a point on a 5-point horizontal scale defined by two authored text labels. No emoji-only display. Visually calm — no gamification styling.',
+    addons:['Optional Text','Justification Field','Class Distribution'],
+    recipes:[
+      {name:'Emotion Barometer',            id:'PF1-E',sec:'PF1',addons:['Optional Text'],
+       wld:'Selects a point on a 5-point scale to indicate an emotional response to the case. Optional free-text with sentence starter',
+       example:'Scale: "Not affected at all" ↔ "Very affected". Optional field: "What triggers this feeling for you?" Response stored cross-session and surfaced as a reflection anchor in PF4 of the same unit.'},
+      {name:'Position Barometer',           id:'PF4-O',sec:'PF4',addons:['Justification Field','Class Distribution'],
+       wld:'Positions self on 5-point scale between case-specific poles → anonymous class distribution shown → mandatory justification',
+       example:'Scale: "The nurse acted correctly" ↔ "The nurse made a serious error". Class distribution appears after submission (anonymous). Justification field: must cite a concrete case moment.'},
+      {name:'🎮 Tension Barometer',         id:'PF4-T2',sec:'PF4',addons:['Justification Field','Class Distribution'],
+       wld:'Rates "How difficult would it be for me to act professionally here?" → justifies with case reference',
+       example:'Scale: "Very easy for me" ↔ "Extremely difficult". Justification checks: concrete case moment cited? Own role referenced? Optional class distribution shown after. Reflective focus only.'},
+    ],
+    svg:`<svg viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto"><rect width="280" height="88" fill="#E0FFF6"/><text x="20" y="28" font-family="JetBrains Mono" font-size="7.5" fill="#007A5E">Disagree</text><text x="260" y="28" text-anchor="end" font-family="JetBrains Mono" font-size="7.5" fill="#007A5E">Agree</text><line x1="20" y1="48" x2="260" y2="48" stroke="#80E8C8" stroke-width="2"/>${[20,80,140,200,260].map((x,i)=>`<circle cx="${x}" cy="48" r="${i===3?14:10}" fill="${i===3?'#00C896':'white'}" stroke="${i===3?'#00C896':'#80E8C8'}" stroke-width="2"/><text x="${x}" y="${i===3?52:52}" text-anchor="middle" font-family="JetBrains Mono" font-size="${i===3?9:8}" fill="${i===3?'white':'#007A5E'}">${i+1}</text>`).join('')}</svg>`,
+  },
+  {
+    id:'BB-08', name:'Free Text Entry', subtitle:'open-ended writing into one or more fields', cat:'text',
+    desc:'Learner types any length of response. AI evaluates against configured criteria: causal chain present, clinical term used, case reference included. Sentence starters configurable by language level.',
+    addons:['Multi-Entry Tags','Word Cloud','Dual-Panel Display','Claim Display','Case Overlay','Justification Field'],
+    recipes:[
+      {name:'Brainstorming / Free Association',id:'PF1-F',sec:'PF1',addons:['Multi-Entry Tags','Word Cloud'],
+       wld:'Enters words or short phrases freely — anything they associate with the situation. Multiple entries. No right/wrong',
+       example:'3-minute countdown visible. Learner types "infection / forgot gloves / pressure / protocol" as separate tag entries. In class mode: anonymous word cloud of all entries shown after timer. Solo mode: own entries only.'},
+      {name:'Target–Actual Comparison',     id:'PF2-J',sec:'PF2',addons:['Case Overlay','Justification Field'],
+       wld:'Compares an observed actual state with a professional target standard. Names the deviation. Justifies the risk',
+       example:'Learner sees EITHER the actual observation OR the target standard (never both pre-filled). Step 1: name the deviation. Step 2: justify why it is a risk. Generic answers rejected with revision prompt.'},
+      {name:'🎮 Detective Mode',             id:'PF2-T3',sec:'PF2',addons:['Claim Display','Case Overlay'],
+       wld:'Reads a prominent claim and must confirm or refute it using specific evidence from the case',
+       example:"Claim shown prominently: 'The nurse acted within protocol.' Free-text field with starter: 'I disagree because in the case...' Case overlay always accessible. Generic answers without case evidence are rejected."},
+      {name:'🎮 Before / After',             id:'PF2-T5',sec:'PF2',addons:['Dual-Panel Display'],
+       wld:'Views two scenes — one with an error, one correct. Names the difference. Explains why it matters',
+       example:'Two care photos side by side (or toggle). Field 1: "What is different?" — must name the specific change. Field 2: "Why does this matter clinically?" Generic "the second one is better" answers rejected.'},
+      {name:'🎮 Before / After (Growth)',    id:'PF4-T5',sec:'PF4',addons:['Dual-Panel Display'],
+       wld:'"Before" shows an inexperienced reaction, "After" shows a professional one. Learner reflects on personal development',
+       example:'Same dual-panel mechanic as PF2-T5 but fields shift: Field 1: "What changed?" Field 2: "What does this development mean for you personally?" AI checks: is the learner connecting to their own growth — not just describing the difference?'},
+    ],
+    svg:`<svg viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto"><rect width="280" height="88" fill="#FFF3E0"/><rect x="14" y="10" width="252" height="50" rx="9" fill="white" stroke="#FFCC80" stroke-width="1.5"/><text x="28" y="28" font-family="Plus Jakarta Sans" font-size="8.5" fill="#374151" font-style="italic">The nurse should have checked the patient's...</text><line x1="28" y1="39" x2="220" y2="39" stroke="#FFF3E0"/><line x1="28" y1="49" x2="175" y2="49" stroke="#FFF3E0"/><rect x="178" y="44" width="2" height="11" fill="#FF8C00"/><rect x="14" y="68" width="152" height="16" rx="8" fill="#FFCC80"/><text x="90" y="79" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#7C3600">💡 This happened because...</text></svg>`,
+  },
+  {
+    id:'BB-09', name:'Peer Write → Read → React', subtitle:'three-step gated social flow', cat:'social',
+    desc:'Three-step gated flow: Step 1 — write position/reflection. Step 2 — read anonymised peer responses. Step 3 — react with justified response. Steps gated: each only appears after previous is submitted.',
+    addons:['Peer Response Display','Peer Checklist','Revision Step','Justification Field'],
+    recipes:[
+      {name:'Collaborative Discussion',     id:'PF2-K',sec:'PF2',addons:['Peer Response Display'],
+       wld:'Writes an analytical position → reads 2–3 peer responses → reacts with a justified response using sentence starters',
+       example:'Step 1: "What is the main risk in this case?" — min. 2 sentences. Step 2: 2 peer responses shown (anonymised). Step 3: "Respond to one of these — do you agree or disagree, and why?" AI checks: causal argument present?'},
+      {name:'Collaborative Discussion (PF4)',id:'PF4-K',sec:'PF4',addons:['Peer Response Display','Peer Checklist'],
+       wld:'Writes a reflective position → reads 1–2 peer responses → evaluates using a short checklist → reacts',
+       example:'Same three-step mechanic. AI eval switches from "causal argument" to "reflective argument + case referenced". Checklist added: content checkboxes, positive feedback field, constructive suggestion field.'},
+      {name:'Resident Perspective',         id:'PF4-N',sec:'PF4',addons:['Peer Response Display','Peer Checklist','Revision Step'],
+       wld:'Writes what they would say to the resident (min. 3 sentences) → evaluates a peer text → revises their own response',
+       example:'Step 1: write a direct-address message to the resident in own words. Step 2: peer checklist appears only AFTER submission (not before — intentional). Step 3: revision field to update original message.'},
+    ],
+    svg:`<svg viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto"><rect width="280" height="88" fill="#F5F3FF"/>${[0,1,2].map(i=>`<rect x="${8+i*88}" y="16" width="76" height="56" rx="8" fill="${i===2?'white':'white'}" stroke="${i===2?'#7C3AED':'#C4B5FD'}" stroke-width="${i===2?2:1.5}"/><text x="${46+i*88}" y="32" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#7C3AED">STEP ${i+1}</text>${i===0?`<text x="46" y="50" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8" fill="#374151">Write your</text><text x="46" y="61" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8" fill="#374151">position</text>`:''} ${i===1?`<rect x="18" y="40" width="56" height="10" rx="3" fill="#F5F3FF"/><rect x="18" y="53" width="56" height="10" rx="3" fill="#F5F3FF"/><text x="46" y="49" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="7" fill="#374151">Peer A</text><text x="46" y="62" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="7" fill="#374151">Peer B</text>`:''} ${i===2?`<text x="134" y="50" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8" fill="#374151">React with</text><text x="134" y="61" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="8" fill="#374151">justification</text>`:''} ${i<2?`<polygon points="${84+i*88},43 ${92+i*88},48 ${84+i*88},53" fill="#7C3AED"/>`:''}  `).join('')}</svg>`,
+  },
+  {
+    id:'BB-10', name:'Sequential Multi-Step Text', subtitle:'fields revealed step by step', cat:'text',
+    desc:'Three sequential text fields — each only appears after the previous is submitted. Moves from factual → emotional → professional. Steps must NOT be pre-rendered in the DOM.',
+    addons:['Sequential Step Reveal'],
+    recipes:[
+      {name:'Error Reflection (3-Step Prompt)',id:'PF4-Q',sec:'PF4',addons:['Sequential Step Reveal'],
+       wld:'Step 1: what happened (factual). Step 2: how would you have reacted (emotional). Step 3: professional takeaway',
+       example:'Step 1: "Describe what happened in 1–2 sentences." → submitted → Step 2 appears: "How would you have felt in that moment?" → submitted → Step 3: "What do you take away for your professional practice?" Step 3 purely technical without emotional dimension triggers a follow-up question.'},
+    ],
+    svg:`<svg viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto"><rect width="280" height="88" fill="#FFF3E0"/>${['What happened?','How did you feel?','What do you take away?'].map((q,i)=>`<rect x="14" y="${8+i*27}" width="252" height="22" rx="7" fill="${i<2?'white':'#FFF3E0'}" stroke="#FFCC80" stroke-width="${i===2?1:1.5}" opacity="${i===2?.5:1}"/><text x="26" y="${22+i*27}" font-family="Plus Jakarta Sans" font-size="9" fill="${i===2?'#9CA3AF':'#374151'}">${q}</text><text x="258" y="${22+i*27}" text-anchor="end" font-family="JetBrains Mono" font-size="8" fill="${['#00C896','#FF8C00','#9CA3AF'][i]}">${['✓ done','active','locked'][i]}</text>`).join('')}</svg>`,
+  },
+  {
+    id:'BB-11', name:'Branching Decision Simulation', subtitle:'6-node scenario with persistent risk bar', cat:'simulation',
+    desc:'Learner takes the role of the nursing care assistant and makes decisions across 6 sequential nodes. No undo. Each decision moves a persistent risk bar. End state: green / yellow / red.',
+    addons:['Risk Bar','Variant A: Pre-Q','Variant B: Post-Just.'],
+    recipes:[
+      {name:'Decision Simulation (6-Node)', id:'PF3-S',sec:'PF3',addons:['Risk Bar','Variant A: Pre-Q','Variant B: Post-Just.'],
+       wld:'Takes on the nurse role and makes decisions step by step. Persistent risk bar updates after each node. No undo',
+       example:'6-node scenario: "Mrs. Müller is in pain. You notice..." → 4 options per node. Author assigns ++ / + / - / -- to each option. Risk bar updates visually. Variant A nodes: activation question before options. Variant B nodes: justification required before bar updates. End state: 3 colour outcomes only — no numerical score displayed.'},
+    ],
+    svg:`<svg viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto"><rect width="280" height="88" fill="#FEE2E2"/><rect x="14" y="6" width="252" height="12" rx="6" fill="white" stroke="#FECACA" stroke-width="1.5"/><rect x="14" y="6" width="148" height="12" rx="6" fill="#FECACA"/><rect x="14" y="6" width="88" height="12" rx="6" fill="#FCA5A5"/><rect x="14" y="6" width="44" height="12" rx="6" fill="#EF4444"/><text x="14" y="38" font-family="JetBrains Mono" font-size="7.5" fill="#991B1B">NODE 3 / 6</text><text x="14" y="50" font-family="Plus Jakarta Sans" font-size="8" fill="#374151" font-style="italic">Patient is in pain. You...</text>${['Call nurse','Document','Ask them','Check meds'].map((o,i)=>`<rect x="152" y="${24+i*16}" width="112" height="13" rx="4" fill="${i===0?'#FEE2E2':'white'}" stroke="${i===0?'#EF4444':'#FECACA'}" stroke-width="${i===0?1.5:1}"/><text x="208" y="${34+i*16}" text-anchor="middle" font-family="Plus Jakarta Sans" font-size="7.5" fill="${i===0?'#991B1B':'#374151'}">${o}</text>`).join('')}</svg>`,
+  },
+  {
+    id:'BB-12', name:'Word Chip Assembly', subtitle:'audio + assemble chips in order', cat:'audio',
+    desc:'Learner listens to a sentence, then taps or drags pre-given word chips into the correct order to reconstruct it. No free typing. No microphone. All chips already correctly conjugated.',
+    addons:['Audio Playback','Distractor Chips'],
+    recipes:[
+      {name:'Dictation-Light',              id:'SG-4',sec:'SG',addons:['Audio Playback','Distractor Chips'],
+       wld:'Listens to a sentence and assembles it from pre-given word chips. All words correctly conjugated. No free typing',
+       example:'Audio: "Die Patientin hat starke Schmerzen." Chips shown: [Die] [Patientin] [hat] [Schmerzen] [starke] + 2 distractor chips. Learner taps/drags into correct order. Distractor count: 1–2 (Group 1), 2–3 (Group 2), 3–4 (Group 3).'},
+    ],
+    svg:`<svg viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto"><rect width="280" height="88" fill="#F5F3FF"/><rect x="14" y="6" width="252" height="22" rx="8" fill="white" stroke="#E9D5FF" stroke-width="1.5"/><circle cx="30" cy="17" r="7" fill="#8B5CF6"/><polygon points="27,14 27,20 33,17" fill="white"/><line x1="44" y1="17" x2="258" y2="17" stroke="#E9D5FF"/><circle cx="128" cy="17" r="4" fill="#8B5CF6"/><rect x="14" y="36" width="252" height="16" rx="5" fill="white" stroke="#E9D5FF" stroke-width="1.5" stroke-dasharray="4,3"/><text x="24" y="47" font-family="Plus Jakarta Sans" font-size="8" fill="#9CA3AF" font-style="italic">Assemble here...</text>${['Die','Patientin','hat','Schmerzen','starke'].map((w,i)=>`<rect x="${14+i*50}" y="60" width="${Math.max(w.length*6+14,36)}" height="22" rx="7" fill="${i===4?'#F5F3FF':'white'}" stroke="${i===4?'#A78BFA':'#E9D5FF'}" stroke-width="${i===4?1.5:1}"/><text x="${14+i*50+Math.max(w.length*6+14,36)/2}" y="75" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="${i===4?'#7C3AED':'#374151'}">${w}</text>`).join('')}</svg>`,
+  },
+  {
+    id:'BB-13', name:'Audio Record & Playback', subtitle:'listen to model then record own voice', cat:'audio',
+    desc:'Learner listens to a model audio, records their own voice, plays it back, and compares to the model. Microphone required. Primary feedback is self-assessment.',
+    addons:['Audio Playback','Microphone Capture','Verbal Sequencing Mode'],
+    recipes:[
+      {name:'Listen & Repeat',              id:'SG-5',sec:'SG',addons:['Audio Playback','Microphone Capture'],
+       wld:'Listens to a sentence or short sequence and repeats it. Recording saved, compared to model. Self-assessment primary',
+       example:'Model audio: nurse explaining discharge instructions. Learner records own version. Comparison view: model waveform alongside learner waveform. Unlimited repeats, no score penalty. Pronunciation scoring optional extension only.'},
+      {name:'Verbal Sequencing',            id:'SG-6',sec:'SG',addons:['Audio Playback','Microphone Capture','Verbal Sequencing Mode'],
+       wld:'Hears sentence fragments in wrong order → records them in the correct order. Speech recognition evaluates',
+       example:'3 sentence fragments shown in scrambled order. Each has audio support (Language Group 1). Learner records fragments in correct sequence. Speech recognition matches against pre-defined target forms — higher accuracy than free production, suitable for MVP.'},
+    ],
+    svg:`<svg viewBox="0 0 280 88" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto"><rect width="280" height="88" fill="#FDF4FF"/><rect x="8" y="8" width="118" height="34" rx="8" fill="white" stroke="#E9D5FF" stroke-width="1.5"/><text x="67" y="20" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#EC4899">MODEL</text>${[16,30,44,58,72,86,100].map((x,i)=>`<line x1="${x}" y1="${30-[3,6,9,7,5,8,4][i]}" x2="${x}" y2="${30+[3,6,9,7,5,8,4][i]}" stroke="#EC4899" stroke-width="2.5" stroke-linecap="round"/>`).join('')}<rect x="154" y="8" width="118" height="34" rx="8" fill="white" stroke="#E9D5FF" stroke-width="1.5"/><text x="213" y="20" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#EC4899">YOUR RECORDING</text>${[162,176,190,204,218,232,246].map((x,i)=>`<line x1="${x}" y1="${30-[2,5,8,6,4,7,3][i]}" x2="${x}" y2="${30+[2,5,8,6,4,7,3][i]}" stroke="#F9A8D4" stroke-width="2.5" stroke-linecap="round"/>`).join('')}<circle cx="140" cy="67" r="16" fill="#EC4899"/><circle cx="140" cy="67" r="9" fill="white"/><circle cx="140" cy="67" r="5" fill="#EC4899"/></svg>`,
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TASK FORMATS — all 40 from the Excel
+// ─────────────────────────────────────────────────────────────────────────────
+const FORMATS = [
+  // PF1
+  {id:'PF1-A',name:'Hotspot Marking',sec:'PF1',game:false,block:'BB-01',
+   wld:'Taps a location on an image → selects or types the correct term for that location',
+   addons:['Term Selector'],
+   example:'Tap the kidney on a body diagram → choose "Niere" from a dropdown of 3 terms'},
+  {id:'PF1-B',name:'Drag & Drop Sorting',sec:'PF1',game:false,block:'BB-02',
+   wld:"Drags cards into 2–4 category zones. Permanent 'Not sure' zone available",
+   addons:["'Not Sure' Zone"],
+   example:'Patient symptom cards sorted into clinical categories. "Not sure" zone always visible, no penalty'},
+  {id:'PF1-C',name:'Label-It',sec:'PF1',game:false,block:'BB-01',
+   wld:'Taps a labelled element in an image → types its technical name inline at that point',
+   addons:['Inline Label'],
+   example:'Tap the wound dressing layer → type "sterile compress" directly at that point on the image'},
+  {id:'PF1-D',name:'Sequence Reconstruction',sec:'PF1',game:false,block:'BB-03',
+   wld:'Drags steps into numbered sequence slots — ordering only, no explanation',
+   addons:[],
+   example:'5 hand disinfection steps shuffled → dragged into slots 1–5 in correct order'},
+  {id:'PF1-E',name:'Emotion Barometer',sec:'PF1',game:false,block:'BB-07',
+   wld:'Selects a point on 5-point scale to indicate emotional response to the case',
+   addons:['Optional Text'],
+   example:'Scale: "Not affected" ↔ "Very affected". Optional free-text. Response stored cross-session for PF4 reflection anchor'},
+  {id:'PF1-F',name:'Brainstorming / Free Association',sec:'PF1',game:false,block:'BB-08',
+   wld:'Enters words or phrases freely — anything associated with the situation. Multiple entries, no right/wrong',
+   addons:['Multi-Entry Tags','Word Cloud'],
+   example:'Type "infection, gloves, protocol, rushed" as tags. Class word cloud shown after 3-min timer. Solo: own entries only'},
+  // PF2
+  {id:'PF2-G',name:'Justified Selection',sec:'PF2',game:false,block:'BB-06',
+   wld:'Selects one or more MCQ options → writes a mandatory justification that cannot be skipped',
+   addons:['Justification Field'],
+   example:'MCQ: "Highest priority action?" → learner picks → justification field: AI checks causal link, clinical term, and case reference'},
+  {id:'PF2-H',name:'Annotated Error Analysis',sec:'PF2',game:false,block:'BB-01',
+   wld:'Taps to mark errors/risks in text or image → explains why each is a problem',
+   addons:['Error Counter Badge','Justification Field'],
+   example:'Care procedure photo → tap 2 hygiene errors → counter "0/2 marked" → justification: "Why is this a risk? Name the consequence."'},
+  {id:'PF2-I',name:'Structured Mapping',sec:'PF2',game:false,block:'BB-02',
+   wld:'Drags items into a structured framework (e.g. SIS) → justifies 1–2 placements',
+   addons:['Justification Field','Knowledge Anchor'],
+   example:'Risk factors sorted into SIS column framework. Knowledge Anchor opens SIS reference overlay. Justification for flagged items only'},
+  {id:'PF2-J',name:'Target–Actual Comparison',sec:'PF2',game:false,block:'BB-08',
+   wld:'Names the deviation between actual state and professional target standard → justifies the risk',
+   addons:['Case Overlay','Justification Field'],
+   example:'Sees either actual OR target (never both pre-filled). Step 1: name deviation. Step 2: justify the risk. Case overlay always accessible'},
+  {id:'PF2-K',name:'Collaborative Discussion',sec:'PF2',game:false,block:'BB-09',
+   wld:'Writes analytical position → reads 2–3 peer responses → reacts with justified response',
+   addons:['Peer Response Display'],
+   example:'Write: "The main risk is..." Min. 2 sentences. Read 2 peer responses. React: "I agree/disagree because..." AI checks: causal argument present?'},
+  {id:'PF2-L',name:'Root Cause Analysis',sec:'PF2',game:false,block:'BB-02',
+   wld:'Sorts causal factors into person / situation / organisation matrix → justifies one placement',
+   addons:['Matrix Layout','Justification Field'],
+   example:'5 case factors dragged into 3×3 matrix grid. No single correct answer — cohort distribution is the teacher dashboard output'},
+  {id:'PF2-M M1',name:'Chip Mechanic (Categorise)',sec:'PF2',game:false,block:'BB-02',
+   wld:'Receives exactly N chips → assigns all to categories. Submit locked until all N placed',
+   addons:['Limited Chips','Justification Field'],
+   example:'3 "risk chips" must be distributed across 4 risk-factor zones. Mandatory justification after. No positional score — value is in justification'},
+  {id:'PF2-M M2',name:'Chip Mechanic (Rank)',sec:'PF2',game:false,block:'BB-03',
+   wld:'Receives exactly N chips → ranks all by priority in numbered order',
+   addons:['Limited Chips','Justification Field'],
+   example:'3 priority chips placed in sequence slots 1–3. Justification: "Why is your top chip the most critical?"'},
+  {id:'PF2-M M3',name:'Chip Mechanic (Position)',sec:'PF2',game:false,block:'BB-05',
+   wld:'Receives exactly N chips → places all on a diagram or spectrum',
+   addons:['Limited Chips','Justification Field'],
+   example:'3 chips placed on a risk-tension axis. Submit locked until all 3 placed. Justification for most controversial placement'},
+  {id:'PF2-T1',name:'🎮 Sorting Challenge (Timed)',sec:'PF2',game:true,block:'BB-02',
+   wld:'Sorts 6–8 case cards into 2 categories under a countdown → justifies the most problematic card',
+   addons:['Countdown Timer','Justification Field'],
+   example:'90-second timer. 7 care action cards sorted into "Appropriate" / "Problematic". Auto-submit on expiry. Justification for most problematic card'},
+  {id:'PF2-T2',name:'🎮 Risk Meter',sec:'PF2',game:true,block:'BB-02',
+   wld:'Drags case actions onto a visual risk scale (green → red) → justifies highest-risk placement',
+   addons:['Gradient Scale Layout','Justification Field'],
+   example:'4 nurse actions dragged along a green-to-red gradient bar. Expert rating shown after submission. Justification for highest-risk position'},
+  {id:'PF2-T3',name:'🎮 Detective Mode',sec:'PF2',game:true,block:'BB-08',
+   wld:'Reads a claim from a colleague → confirms or refutes using concrete case evidence',
+   addons:['Claim Display','Case Overlay'],
+   example:"Prominent claim: 'The nurse acted within protocol.' Free-text with starter. Case overlay accessible. Generic answers without specific case evidence rejected"},
+  {id:'PF2-T4',name:'🎮 Error Bingo',sec:'PF2',game:true,block:'BB-06',
+   wld:'Receives a 3×3 grid of action categories → checks which ones occur in the case',
+   addons:['Checkbox Grid'],
+   example:'9 action labels in a grid (action language only). Learner checks which happened in the case. Immediate feedback after submission'},
+  {id:'PF2-T5',name:'🎮 Before / After',sec:'PF2',game:true,block:'BB-08',
+   wld:'Views two scenes (error vs correct) → names the difference → explains why it matters',
+   addons:['Dual-Panel Display'],
+   example:'Two care photos side by side. Field 1: name the specific change. Field 2: explain clinical significance. "The second one is better" rejected'},
+  {id:'PF2-T6',name:'🎮 Domino Chain',sec:'PF2',game:true,block:'BB-06',
+   wld:'Sees a trigger moment → selects all consequences that directly follow. Plausible distractors included',
+   addons:['Domino Chain Visual'],
+   example:'Trigger: "Nurse skips handwashing." Select 3 of 5 consequences. Optional domino arrow chain shown after. 1–2 distractor options included'},
+  // PF3
+  {id:'PF3-S',name:'Decision Simulation (6-Node)',sec:'PF3',game:false,block:'BB-11',
+   wld:'Makes decisions step by step across 6 nodes. Persistent risk bar moves after each. No undo',
+   addons:['Risk Bar','Variant A: Pre-Q','Variant B: Post-Just.'],
+   example:'6-node care scenario. 4 options per node. Risk bar always visible. Variant A: activation Q before options. Variant B: justification before bar updates. End: green/yellow/red — no score shown'},
+  // PF4
+  {id:'PF4-N',name:'Resident Perspective',sec:'PF4',game:false,block:'BB-09',
+   wld:'Writes what they would say to the resident (min. 3 sentences) → evaluates a peer text → revises',
+   addons:['Peer Response Display','Peer Checklist','Revision Step'],
+   example:'Write a direct-address message to the resident. Checklist appears ONLY after submission (never before). Evaluate peer text. Then revise own message'},
+  {id:'PF4-O',name:'Position Barometer',sec:'PF4',game:false,block:'BB-07',
+   wld:'Positions self on 5-point scale → class distribution shown → writes mandatory justification',
+   addons:['Justification Field','Class Distribution'],
+   example:'Scale: "Nurse acted correctly" ↔ "Serious error". Anonymous class distribution after submission. Justification must cite a concrete case moment'},
+  {id:'PF4-P',name:'Tension Mapping',sec:'PF4',game:false,block:'BB-05',
+   wld:'Places a marker between two poles → justifies placement. Goal: name the tension, not resolve it',
+   addons:['Justification Field'],
+   example:'Poles: "Patient autonomy" ↔ "Professional duty". Marker dragged to position. System accepts open answers — no right/wrong. Thin justification triggers a follow-up Q'},
+  {id:'PF4-Q',name:'Error Reflection (3-Step)',sec:'PF4',game:false,block:'BB-10',
+   wld:'Three sequential fields: factual → emotional → professional takeaway. Each unlocks after previous',
+   addons:['Sequential Step Reveal'],
+   example:'Step 1: "What happened?" (factual). Step 2: "How would you have felt?" (emotional). Step 3: "What do you take away?" (professional). Step 3 purely technical → follow-up Q asked'},
+  {id:'PF4-R',name:'Team Conversation',sec:'PF4',game:false,block:'BB-06',
+   wld:'Reads a second-person scenario → selects a professional stance (no wrong answer) → mandatory justification',
+   addons:['Justification Field'],
+   example:'Scenario: "Your colleague takes a shortcut you disagree with. You..." 3 options (all defensible). Justification checks: is the professional tension named?'},
+  {id:'PF4-K',name:'Collaborative Discussion (PF4)',sec:'PF4',game:false,block:'BB-09',
+   wld:'Writes reflective position → reads 1–2 peers → evaluates using checklist → reacts',
+   addons:['Peer Response Display','Peer Checklist'],
+   example:'Same three-step flow as PF2-K. AI eval switches to "reflective argument + case referenced". Peer checklist added after reading step'},
+  {id:'PF4-M M1',name:'Chip Mechanic PF4 (Categorise)',sec:'PF4',game:false,block:'BB-02',
+   wld:'Assigns exactly N experience-near chips to categories. Labels use "I felt..." language',
+   addons:['Limited Chips','Justification Field','Experience-near Labels'],
+   example:'"I felt overwhelmed / I was unsure / I felt pressured" — 3 chips assigned to emotion categories. Identical mechanic to PF2-M M1, only label language differs'},
+  {id:'PF4-M M2',name:'Chip Mechanic PF4 (Rank)',sec:'PF4',game:false,block:'BB-03',
+   wld:'Ranks exactly N experience-near chips by priority in a communication context',
+   addons:['Limited Chips','Justification Field','Experience-near Labels'],
+   example:'"I would acknowledge their feeling / explain / ask what they need" — 3 chips ranked 1→3. Identical mechanic to PF2-M M2'},
+  {id:'PF4-M M3',name:'Chip Mechanic PF4 (Position)',sec:'PF4',game:false,block:'BB-05',
+   wld:'Places exactly N experience-near chips on a reflective tension diagram',
+   addons:['Limited Chips','Justification Field','Experience-near Labels'],
+   example:'"I felt trapped / I felt supported / I felt unsure" — 3 chips on a tension axis. Identical to PF2-M M3 mechanically'},
+  {id:'PF4-T1',name:'🎮 Sorting Without Time Pressure',sec:'PF4',game:true,block:'BB-02',
+   wld:"Sorts case factors into 2 reflective categories without a countdown. Reflective justification after",
+   addons:['Justification Field','Class Distribution'],
+   example:'"Within my control" vs "Outside my control". No timer. Justification must cite case moment + own role. Cohort distribution shown after'},
+  {id:'PF4-T2',name:'🎮 Tension Barometer',sec:'PF4',game:true,block:'BB-07',
+   wld:'"How difficult would it be to act professionally here?" — positions on scale → justifies',
+   addons:['Justification Field','Class Distribution'],
+   example:'Scale: "Very easy for me" ↔ "Extremely difficult". Justification checks: case moment cited? Own role named? Optional class distribution after'},
+  {id:'PF4-T5',name:'🎮 Before / After (Growth)',sec:'PF4',game:true,block:'BB-08',
+   wld:'"Before" = inexperienced reaction, "After" = professional growth. Reflect on personal development',
+   addons:['Dual-Panel Display'],
+   example:'Two-panel view (growth focus). Field 1: "What changed?" Field 2: "What does this mean for your development?" AI checks: learner connects to own growth, not just describes difference'},
+  // WBs
+  {id:'WB-1',name:'Single Select',sec:'WB',game:false,block:'BB-06',
+   wld:'Selects one correct answer from 3–4 options. Card visible first time; hidden on later recall encounters',
+   addons:['Spaced Retrieval'],
+   example:'First encounter: WB card showing content is visible above MCQ. Later encounter: card hidden — pure recall. Wrong answer links back to card'},
+  {id:'WB-2',name:'Multiple Select',sec:'WB',game:false,block:'BB-06',
+   wld:'Selects all correct answers — multiple can be right. Partial scoring. Spaced retrieval applies',
+   addons:['Spaced Retrieval'],
+   example:'Which 3 of 5 symptoms indicate sepsis? Checkboxes. Partial score. Glossary tooltip on wrong options. Card hidden on later encounters'},
+  {id:'WB-3',name:'Matching (incl. Image-to-Term)',sec:'WB',game:false,block:'BB-04',
+   wld:'Connects pairs: term to definition, symptom to condition, or labels onto image regions',
+   addons:['Image-to-Term Mode'],
+   example:'Left: 4 clinical terms. Right: 4 definitions. Draw connection lines by dragging. Error shake before full reveal. Image-to-term variant: drag chip labels onto SVG anatomy diagram'},
+  {id:'WB-4',name:'Sequence Reconstruction (WB)',sec:'WB',game:false,block:'BB-03',
+   wld:'Arranges steps into correct procedural sequence — especially for PPE, hand disinfection, wound care',
+   addons:[],
+   example:'PPE steps shuffled → drag into numbered slots 1–5. Identical interaction to PF1-D. WB system manages spaced retrieval timing between sessions'},
+  // SG
+  {id:'SG-1',name:'Listen & Select',sec:'SG',game:false,block:'BB-06',
+   wld:'Listens to a short clinical audio → selects matching answer from 2–4 options',
+   addons:['Audio Playback'],
+   example:'Nurse handover audio → MCQ: "What is the main concern?" Options can be text or image. Repeat available. No microphone. Image options preferred for Language Group 1'},
+  {id:'SG-2',name:'Listen & Sequence',sec:'SG',game:false,block:'BB-03',
+   wld:'Listens to a multi-step sequence → arranges text or image cards in the order heard',
+   addons:['Audio Playback'],
+   example:'Audio of wound care procedure. Drag 4 step-cards into the sequence heard. Repeat always available. Image cards for Group 1, text for Group 3'},
+  {id:'SG-3',name:'Listen & Identify',sec:'SG',game:false,block:'BB-01',
+   wld:'Listens → taps to identify a clinical term or key word in the displayed transcript',
+   addons:['Audio Playback'],
+   example:'Nurse handover audio. Learner taps "Druckgeschwür" in the visible transcript. Transcript visibility: always (Gr.1) / after task (Gr.2) / never (Gr.3)'},
+  {id:'SG-4',name:'Dictation-Light',sec:'SG',game:false,block:'BB-12',
+   wld:'Listens to a sentence → assembles it from pre-given word chips. No free typing',
+   addons:['Audio Playback','Distractor Chips'],
+   example:'Audio: "Die Patientin hat starke Schmerzen." Chips provided + 2 distractors. Tap/drag into order. No keyboard input. Distractor count: 1–2 / 2–3 / 3–4 by language group'},
+  {id:'SG-5',name:'Listen & Repeat',sec:'SG',game:false,block:'BB-13',
+   wld:'Listens to model audio → records own voice → plays back and compares to model. Self-assessment primary',
+   addons:['Audio Playback','Microphone Capture'],
+   example:'Model: nurse giving discharge instructions. Record own version. Compare waveforms side by side. Unlimited repeats, no score penalty. Pronunciation feedback: optional extension only'},
+  {id:'SG-6',name:'Verbal Sequencing',sec:'SG',game:false,block:'BB-13',
+   wld:'Hears sentence fragments in wrong order → records them in correct order. Speech recognition evaluates',
+   addons:['Audio Playback','Microphone Capture','Verbal Sequencing Mode'],
+   example:'3 fragments shown scrambled. Each has audio support for Group 1. Learner records correct sequence. Speech recognition matched against pre-defined targets — more accurate than free production'},
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// RENDER BUILDING BLOCKS
+// ─────────────────────────────────────────────────────────────────────────────
+function blockSectionColor(sec){
+  return {PF1:'#1A6BFF',PF2:'#00C896',PF3:'#EF4444',PF4:'#FF8C00',WB:'#4F46E5',SG:'#7C3AED'}[sec]||'#6B7280';
+}
+function blockSectionBg(sec){
+  return {PF1:'#EBF2FF',PF2:'#E0FFF6',PF3:'#FEE2E2',PF4:'#FFF3E0',WB:'#EEF2FF',SG:'#F5F3FF'}[sec]||'#F9FAFB';
+}
+function sectionLabel(sec){
+  return {PF1:'PF1 · Perceive',PF2:'PF2 · Analyse',PF3:'PF3 · Act',PF4:'PF4 · Reflect',WB:'Knowledge WB',SG:'Language Garden'}[sec]||sec;
+}
+
+function renderBlocks(){
+  const grid = document.getElementById('blocksGrid');
+  BLOCKS.forEach((b,idx)=>{
+    const cat = CATS[b.cat];
+    const card = document.createElement('div');
+    card.className='block-card';
+    card.dataset.cat=b.cat;
+    card.style.position='relative';
+    card.id=b.id;
+
+    const recipeHtml = b.recipes.map(r=>{
+      const c = blockSectionColor(r.sec);
+      const bg = blockSectionBg(r.sec);
+      const aonHtml = r.addons.length
+        ? r.addons.map(a=>`<span class="aon-chip">${a}</span>`).join('')
+        : `<span style="font-family:var(--font-m);font-size:9px;color:var(--ink-40);font-style:italic">base interaction only</span>`;
+      return `<div class="recipe-card">
+        <div class="recipe-header">
+          <div>
+            <div class="recipe-name">${r.name}</div>
+            <div class="recipe-id">${r.id}</div>
+          </div>
+          <span class="sb sb-${r.sec.toLowerCase().replace(' ','')}">${sectionLabel(r.sec)}</span>
+        </div>
+        <div style="padding:8px 16px 0;font-family:var(--font-m);font-size:8.5px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-40)">Add-ons active</div>
+        <div class="recipe-addons">${aonHtml}</div>
+        <div class="recipe-example"><strong>Learner:</strong> ${r.wld}<br><span style="color:var(--blue)">Example:</span> ${r.example}</div>
+      </div>`;
+    }).join('');
+
+    const addonHtml = b.addons.map(a=>{
+      const def = ADDONS[a]||{desc:'See spec for details'};
+      return `<div class="addon-row"><span class="addon-id">${a}</span>${def.desc}</div>`;
+    }).join('');
+
+    card.innerHTML=`
+      <button class="close-x" onclick="closeBlock(event,'${b.id}')" title="Close">×</button>
+      <div class="bc-top">
+        <div class="bc-icon" style="background:${cat.bg};color:${cat.color}">${b.id.split('-')[1]}</div>
+        <div>
+          <div style="font-family:var(--font-m);font-size:8.5px;color:${cat.color};letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">${b.id}</div>
+          <div class="bc-name">${b.name}</div>
+          <div class="bc-cat" style="color:${cat.color}">${b.subtitle}</div>
+        </div>
+      </div>
+      <div class="bc-illus">${b.svg}</div>
+      <div class="bc-pills">
+        <span class="pill" style="color:${cat.color};border-color:${cat.color}30">${cat.label}</span>
+        <span class="pill" style="color:var(--ink-40);border-color:var(--ink-12)">${b.recipes.length} format${b.recipes.length!==1?'s':''} powered</span>
+      </div>
+      <div class="block-detail">
+        <div class="detail-2col">
+          <div>
+            <div style="font-family:var(--font-m);font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-40);margin-bottom:8px">Core description</div>
+            <p style="font-size:13px;color:var(--ink-70);line-height:1.6;margin-bottom:20px">${b.desc}</p>
+            <div style="font-family:var(--font-m);font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-40);margin-bottom:8px">Available add-on toggles</div>
+            <div class="addon-list">${addonHtml||'<div class="addon-row" style="color:var(--ink-40);font-style:italic">No add-ons — standalone interaction</div>'}</div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-m);font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-40);margin-bottom:12px">Formats this block powers — with exact recipes</div>
+            <div class="recipe-list">${recipeHtml}</div>
+          </div>
+        </div>
+      </div>`;
+
+    card.addEventListener('click',e=>{
+      if(e.target.classList.contains('close-x'))return;
+      if(card.classList.contains('open'))return;
+      closeAllBlocks();
+      card.classList.add('open');
+      setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'start'}),60);
+    });
+    grid.appendChild(card);
+  });
+}
+function closeBlock(e,id){e.stopPropagation();document.getElementById(id).classList.remove('open')}
+function closeAllBlocks(){document.querySelectorAll('.block-card.open').forEach(c=>c.classList.remove('open'))}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// RENDER FORMATS
+// ─────────────────────────────────────────────────────────────────────────────
+function renderFormats(){
+  const grid = document.getElementById('formatsGrid');
+  FORMATS.forEach(f=>{
+    const block = BLOCKS.find(b=>b.id===f.block)||{name:'—'};
+    const aonHtml = f.addons.length
+      ? f.addons.map(a=>`<span class="aon-tag">${a}</span>`).join('')
+      : `<span style="font-family:var(--font-m);font-size:9px;color:var(--ink-40)">base only</span>`;
+
+    const secKey = f.sec.split(' ')[0];
+    const card = document.createElement('div');
+    card.className='fmt-card';
+    card.dataset.sec=secKey;
+    card.innerHTML=`
+      <div class="fmt-top">
+        <div>
+          <span class="sb sb-${secKey.toLowerCase()}">${sectionLabel(secKey)}</span>
+          ${f.game?'<span class="sb sb-game" style="margin-left:5px">🎮 gamified</span>':''}
+        </div>
+      </div>
+      <div class="fmt-name">${f.name}</div>
+      <div class="fmt-id">${f.id}</div>
+      <p class="fmt-wld">${f.wld}</p>
+      <div class="fmt-recipe">
+        <div class="fmt-recipe-row">
+          <span class="fmt-recipe-label">Built with</span>
+          <span class="block-ref" onclick="jumpToBlock('${f.block}')">${block.name}</span>
+        </div>
+        <div class="fmt-recipe-row" style="margin-bottom:0">
+          <span class="fmt-recipe-label">Add-ons</span>
+          ${aonHtml}
+        </div>
+        <div class="fmt-example">${f.example}</div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function jumpToBlock(blockId){
+  closeAllBlocks();
+  const el = document.getElementById(blockId);
+  if(!el)return;
+  const nav = document.getElementById('topnav');
+  const y = el.getBoundingClientRect().top + window.scrollY - nav.offsetHeight - 12;
+  window.scrollTo({top:y,behavior:'smooth'});
+  setTimeout(()=>{el.classList.add('open');},400);
+  // activate building blocks nav tab
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('[data-sec="sec-blocks"]').classList.add('active');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// FILTERS
+// ─────────────────────────────────────────────────────────────────────────────
+function initFilters(){
+  // Block category filter
+  document.getElementById('blockFilter').addEventListener('click',e=>{
+    const btn = e.target.closest('.filter-btn');
+    if(!btn)return;
+    document.querySelectorAll('#blockFilter .filter-btn').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    const cat = btn.dataset.cat;
+    document.querySelectorAll('.block-card').forEach(card=>{
+      const show = cat==='all'||card.dataset.cat===cat;
+      card.style.display=show?'':'none';
+      if(!show&&card.classList.contains('open'))card.classList.remove('open');
+    });
+  });
+
+  // Format section filter
+  document.getElementById('fmtFilter').addEventListener('click',e=>{
+    const btn = e.target.closest('.filter-btn');
+    if(!btn)return;
+    document.querySelectorAll('#fmtFilter .filter-btn').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    const sec = btn.dataset.sec;
+    document.querySelectorAll('.fmt-card').forEach(card=>{
+      card.classList.toggle('hidden', sec!=='all' && card.dataset.sec!==sec);
+    });
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// NAV
+// ─────────────────────────────────────────────────────────────────────────────
+function initNav(){
+  const btns = document.querySelectorAll('.nav-btn');
+  btns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const id = btn.dataset.sec;
+      const el = document.getElementById(id);
+      if(!el)return;
+      const navH = document.getElementById('topnav').offsetHeight;
+      window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-navH-8,behavior:'smooth'});
+      btns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+  const secs=['sec-how','sec-blocks','sec-formats'];
+  window.addEventListener('scroll',()=>{
+    const navH=document.getElementById('topnav').offsetHeight;
+    let cur=secs[0];
+    secs.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=navH+80)cur=id;});
+    btns.forEach(b=>b.classList.toggle('active',b.dataset.sec===cur));
+  },{passive:true});
+}
+
+renderBlocks();
+renderFormats();
+initFilters();
+initNav();
+</script>
+</body>
+</html>
