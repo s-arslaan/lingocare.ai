@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LingoCare MVP Dashboard</title>
+  <style>
+    :root {
+      --color-background-secondary: #F2F1EE;
+      --color-background-tertiary: #E5E4E0;
+      --color-border-tertiary: #E2E1DC;
+      --color-border-secondary: #C8C6BF;
+      --color-text-primary: #1A1A18;
+      --color-text-secondary: #6B6963;
+      --color-text-tertiary: #9B9890;
+      --border-radius-md: 8px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #FAFAF8;
+      color: var(--color-text-primary);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 28px 24px;
+    }
+
+    button {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--color-border-secondary);
+      background: var(--color-background-secondary);
+      color: var(--color-text-primary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .15s;
+    }
+
+    button:hover {
+      background: var(--color-background-tertiary);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .kpi {
+      background: var(--color-background-secondary);
+      border-radius: var(--border-radius-md);
+      padding: 12px 10px;
+    }
+
+    .kpi-l {
+      font-size: 11px;
+      color: var(--color-text-secondary);
+      margin-bottom: 3px;
+      white-space: nowrap;
+    }
+
+    .kpi-v {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .kpi-s {
+      font-size: 11px;
+      color: var(--color-text-secondary);
+      margin-top: 2px;
+    }
+
+    .sc {
+      background: var(--color-background-secondary);
+      border-radius: var(--border-radius-md);
+      padding: 6px 4px;
+      text-align: center;
+      cursor: pointer;
+      border: 0.5px solid var(--color-border-tertiary);
+      transition: border-color .15s;
+    }
+
+    .sc:hover {
+      border-color: var(--color-border-secondary);
+    }
+
+    .sc.cur {
+      border: 1.5px solid #378ADD;
+    }
+
+    .sc.ms {
+      border: 1.5px solid #BA7517;
+    }
+
+    .sc-w {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+    }
+
+    .sc-d {
+      font-size: 10px;
+      color: var(--color-text-secondary);
+      margin-top: 2px;
+    }
+
+    .sc-n {
+      font-size: 10px;
+      color: var(--color-text-tertiary);
+      margin-top: 1px;
+    }
+
+    .fb {
+      height: 5px;
+      background: var(--color-background-tertiary);
+      border-radius: 3px;
+      margin-top: 3px;
+      overflow: hidden;
+    }
+
+    .ff {
+      height: 100%;
+      background: #BA7517;
+      border-radius: 3px;
+      transition: width .4s;
+    }
+
+    .ff.done-col {
+      background: #1D9E75;
+    }
+
+    .tr {
+      padding: 7px 0;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .tr:last-child {
+      border-bottom: none;
+    }
+
+    .sd {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .sd:hover {
+      opacity: .7;
+    }
+
+    .todo-d {
+      background: #B4B2A9;
+    }
+
+    .prog-d {
+      background: #378ADD;
+    }
+
+    .done-d {
+      background: #1D9E75;
+    }
+
+    .bp {
+      font-size: 10px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .bp0 {
+      background: #FAEEDA;
+      color: #633806;
+    }
+
+    .bp1 {
+      background: #E6F1FB;
+      color: #042C53;
+    }
+
+    .bp2 {
+      background: #F1EFE8;
+      color: #2C2C2A;
+    }
+
+    .pp {
+      font-size: 10px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: var(--color-background-tertiary);
+      color: var(--color-text-secondary);
+      flex-shrink: 0;
+    }
+
+    .gngr {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+      font-size: 12px;
+    }
+
+    .gngr:last-child {
+      border-bottom: none;
+    }
+
+    .gc {
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      border: 1.5px solid #B4B2A9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 9px;
+    }
+
+    .gc.ok {
+      background: #1D9E75;
+      border-color: #1D9E75;
+      color: #fff;
+    }
+
+    .sec {
+      font-size: 13px;
+      font-weight: 500;
+      margin: 0 0 8px;
+      color: var(--color-text-primary);
+    }
+
+    .pfr {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 0;
+      font-size: 12px;
+    }
+
+    .pn {
+      min-width: 58px;
+      color: var(--color-text-secondary);
+    }
+
+    .pb {
+      flex: 1;
+      height: 5px;
+      background: var(--color-background-tertiary);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .pf {
+      height: 100%;
+      background: #378ADD;
+      border-radius: 3px;
+    }
+
+    .pct {
+      min-width: 28px;
+      text-align: right;
+      font-size: 11px;
+      color: var(--color-text-secondary);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <h2 class="sr-only">LingoCare MVP build progress dashboard — 120 tasks across 16 folders, W1–W9 sprint, Go/No-Go Jun
+      27</h2>
+
+    <div style="padding:4px 0 16px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+        <div>
+          <p style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin:0">LingoCare MVP</p>
+          <p style="font-size:11px;color:var(--color-text-secondary);margin:2px 0 0" id="sync-label">Last sync: never —
+            click to pull live status from ClickUp</p>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span id="sync-msg" style="font-size:11px;color:var(--color-text-secondary)"></span>
+          <button id="sync-btn" onclick="doSync()">Sync with ClickUp ↗</button>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:14px" id="kpi-strip">
+      </div>
+
+      <p class="sec">Sprint timeline</p>
+      <div style="display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:4px;margin-bottom:16px"
+        id="sprint-grid"></div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+        <div>
+          <p class="sec">Workload by person</p>
+          <div id="people-bars"></div>
+        </div>
+        <div>
+          <p class="sec">Priority split</p>
+          <div style="position:relative;height:160px">
+            <canvas id="pri-chart" role="img"
+              aria-label="Donut chart showing task priority split across P0 urgent, P1 high, and P2 normal tasks">Priority
+              breakdown chart.</canvas>
+          </div>
+          <div id="pri-legend"
+            style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;font-size:11px;color:var(--color-text-secondary)">
+          </div>
+        </div>
+      </div>
+
+      <p class="sec">Progress by folder</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;margin-bottom:16px" id="folder-grid"></div>
+
+      <p class="sec" id="week-heading">This week's tasks</p>
+      <div id="week-tasks" style="max-height:240px;overflow-y:auto"></div>
+
+      <div style="margin-top:14px">
+        <p class="sec">Go / No-Go criteria — Jun 27</p>
+        <div id="gng-list"></div>
+      </div>
+
+      <p style="font-size:10px;color:var(--color-text-tertiary);margin-top:12px;text-align:right">Click any status dot
+        to update · Sync pulls live status from ClickUp · Saves across sessions</p>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script>
+    // localStorage polyfill for window.storage (Claude artifact API)
+    if (!window.storage) {
+      window.storage = {
+        get: (key) => Promise.resolve({ value: localStorage.getItem(key) }),
+        set: (key, val) => Promise.resolve(localStorage.setItem(key, val))
+      };
+    }
+
+    const TASKS = [
+      { id: "CUR-07", fn: 1, p: "R", w: 1, pri: 0 }, { id: "CUR-01", fn: 1, p: "R", w: 2, pri: 0 }, { id: "CUR-02", fn: 1, p: "R", w: 2, pri: 0 },
+      { id: "CUR-03", fn: 1, p: "R", w: 2, pri: 0 }, { id: "CUR-04", fn: 1, p: "R", w: 2, pri: 0 }, { id: "CUR-05", fn: 1, p: "R", w: 2, pri: 0 },
+      { id: "CUR-06", fn: 1, p: "R", w: 2, pri: 0 }, { id: "CUR-08", fn: 1, p: "R", w: 3, pri: 0 },
+      { id: "INF-10", fn: 2, p: "R", w: 1, pri: 0 }, { id: "INF-01", fn: 2, p: "R", w: 1, pri: 0 }, { id: "INF-07", fn: 2, p: "R", w: 1, pri: 0 },
+      { id: "INF-08", fn: 2, p: "J", w: 1, pri: 0 }, { id: "INF-02", fn: 2, p: "R", w: 2, pri: 0 }, { id: "INF-03", fn: 2, p: "R", w: 2, pri: 0 },
+      { id: "INF-04", fn: 2, p: "R", w: 2, pri: 0 }, { id: "INF-05", fn: 2, p: "R", w: 2, pri: 0 }, { id: "INF-11", fn: 2, p: "A", w: 2, pri: 0 },
+      { id: "INF-06", fn: 2, p: "R", w: 3, pri: 0 }, { id: "INF-09", fn: 2, p: "R", w: 3, pri: 1 },
+      { id: "LIC-D1", fn: 3, p: "Y", w: 3, pri: 0 }, { id: "LIC-01", fn: 3, p: "R", w: 4, pri: 0 }, { id: "LIC-02", fn: 3, p: "R", w: 4, pri: 0 },
+      { id: "LIC-03", fn: 3, p: "R", w: 4, pri: 1 }, { id: "LIC-04", fn: 3, p: "R", w: 6, pri: 1 }, { id: "LIC-05", fn: 3, p: "R", w: 7, pri: 1 },
+      { id: "DIR-D1", fn: 4, p: "Y", w: 1, pri: 0 }, { id: "DIR-01", fn: 4, p: "R", w: 2, pri: 0 }, { id: "DIR-D2", fn: 4, p: "Y", w: 2, pri: 0 },
+      { id: "DIR-02", fn: 4, p: "R", w: 3, pri: 0 }, { id: "DIR-03", fn: 4, p: "R", w: 3, pri: 0 }, { id: "DIR-09", fn: 4, p: "R", w: 3, pri: 0 },
+      { id: "DIR-D3", fn: 4, p: "Y", w: 3, pri: 0 }, { id: "DIR-04", fn: 4, p: "R", w: 4, pri: 0 }, { id: "DIR-05", fn: 4, p: "R", w: 4, pri: 0 },
+      { id: "DIR-06", fn: 4, p: "R", w: 4, pri: 0 }, { id: "DIR-D4", fn: 4, p: "Y", w: 5, pri: 0 }, { id: "DIR-07", fn: 4, p: "R", w: 6, pri: 0 },
+      { id: "DIR-08", fn: 4, p: "R", w: 6, pri: 2 },
+      { id: "STU-D1", fn: 5, p: "Y", w: 1, pri: 0 }, { id: "STU-D2", fn: 5, p: "Y", w: 2, pri: 0 }, { id: "STU-D3", fn: 5, p: "Y", w: 2, pri: 0 },
+      { id: "STU-01", fn: 5, p: "R", w: 2, pri: 0 }, { id: "STU-09", fn: 5, p: "J", w: 2, pri: 0 }, { id: "STU-10", fn: 5, p: "R", w: 2, pri: 0 },
+      { id: "STU-02", fn: 5, p: "R", w: 3, pri: 0 }, { id: "STU-03", fn: 5, p: "R", w: 3, pri: 0 }, { id: "STU-D4", fn: 5, p: "Y", w: 3, pri: 0 },
+      { id: "STU-04", fn: 5, p: "R", w: 4, pri: 0 }, { id: "STU-05", fn: 5, p: "R", w: 4, pri: 0 }, { id: "STU-D5", fn: 5, p: "Y", w: 4, pri: 0 },
+      { id: "STU-06", fn: 5, p: "R", w: 5, pri: 0 }, { id: "STU-07", fn: 5, p: "R", w: 5, pri: 0 }, { id: "STU-08", fn: 5, p: "R", w: 5, pri: 0 },
+      { id: "STU-11", fn: 5, p: "J", w: 8, pri: 1 },
+      { id: "TCH-D1", fn: 6, p: "Y", w: 2, pri: 0 }, { id: "TCH-01", fn: 6, p: "R", w: 3, pri: 0 }, { id: "TCH-04", fn: 6, p: "R", w: 3, pri: 1 },
+      { id: "TCH-D2", fn: 6, p: "Y", w: 4, pri: 0 }, { id: "TCH-02", fn: 6, p: "R", w: 5, pri: 0 }, { id: "TCH-03", fn: 6, p: "R", w: 5, pri: 0 },
+      { id: "TCH-05", fn: 6, p: "J", w: 8, pri: 1 },
+      { id: "CAL-D1", fn: 7, p: "Y", w: 3, pri: 0 }, { id: "CAL-01", fn: 7, p: "R", w: 4, pri: 0 }, { id: "CAL-02", fn: 7, p: "R", w: 5, pri: 1 },
+      { id: "LNG-D1", fn: 8, p: "Y", w: 1, pri: 0 }, { id: "LNG-02", fn: 8, p: "J", w: 1, pri: 0 }, { id: "LNG-01", fn: 8, p: "R", w: 2, pri: 0 },
+      { id: "LNG-06", fn: 8, p: "R", w: 2, pri: 0 }, { id: "LNG-03", fn: 8, p: "R", w: 3, pri: 0 }, { id: "LNG-07", fn: 8, p: "J", w: 3, pri: 0 },
+      { id: "LNG-04", fn: 8, p: "R", w: 5, pri: 1 }, { id: "LNG-05", fn: 8, p: "R", w: 5, pri: 1 },
+      { id: "ING-01", fn: 9, p: "R", w: 1, pri: 0 }, { id: "DEC-AI", fn: 9, p: "A", w: 2, pri: 0 }, { id: "ING-02", fn: 9, p: "R", w: 2, pri: 0 },
+      { id: "ING-03", fn: 9, p: "R", w: 3, pri: 0 }, { id: "RET-01", fn: 9, p: "R", w: 3, pri: 0 }, { id: "GEN-01", fn: 9, p: "J", w: 4, pri: 0 },
+      { id: "GEN-02", fn: 9, p: "R", w: 4, pri: 0 },
+      { id: "CTL-D1", fn: 10, p: "Y", w: 4, pri: 0 }, { id: "CTL-01", fn: 10, p: "R", w: 5, pri: 0 }, { id: "CTL-02", fn: 10, p: "R", w: 6, pri: 0 },
+      { id: "CTL-03", fn: 10, p: "J", w: 8, pri: 0 },
+      { id: "GAR-D1", fn: 11, p: "Y", w: 4, pri: 0 }, { id: "GAR-01", fn: 11, p: "R", w: 5, pri: 0 }, { id: "GAR-02", fn: 11, p: "R", w: 5, pri: 0 },
+      { id: "GAR-04", fn: 11, p: "R", w: 5, pri: 1 }, { id: "GAR-03", fn: 11, p: "R", w: 7, pri: 1 },
+      { id: "CMP-01", fn: 12, p: "R", w: 7, pri: 0 }, { id: "CMP-02", fn: 12, p: "R", w: 7, pri: 0 }, { id: "CMP-03", fn: 12, p: "R", w: 7, pri: 0 },
+      { id: "UT-01", fn: 13, p: "A", w: 1, pri: 0 }, { id: "UT-04", fn: 13, p: "J", w: 2, pri: 0 }, { id: "UT-02", fn: 13, p: "B", w: 3, pri: 0 },
+      { id: "UT-03", fn: 13, p: "S", w: 3, pri: 0 }, { id: "UT-05", fn: 13, p: "R", w: 4, pri: 0 }, { id: "UT-06", fn: 13, p: "A", w: 5, pri: 0 },
+      { id: "INT-08", fn: 14, p: "J", w: 8, pri: 0 }, { id: "INT-07", fn: 14, p: "J", w: 8, pri: 1 }, { id: "INT-01", fn: 14, p: "J", w: 9, pri: 0 },
+      { id: "INT-02", fn: 14, p: "J", w: 9, pri: 0 }, { id: "INT-03", fn: 14, p: "J", w: 9, pri: 0 }, { id: "INT-04", fn: 14, p: "J", w: 9, pri: 0 },
+      { id: "INT-05", fn: 14, p: "R", w: 9, pri: 0 }, { id: "INT-06", fn: 14, p: "R", w: 9, pri: 0 }, { id: "INT-09", fn: 14, p: "R", w: 9, pri: 0 },
+      { id: "INT-10", fn: 14, p: "J", w: 9, pri: 0 },
+      { id: "CON-01", fn: 15, p: "B", w: 1, pri: 0 }, { id: "CON-03", fn: 15, p: "B", w: 1, pri: 0 }, { id: "CON-02", fn: 15, p: "B", w: 2, pri: 0 },
+      { id: "CON-04", fn: 15, p: "B", w: 2, pri: 1 }, { id: "CON-05", fn: 15, p: "B", w: 5, pri: 0 },
+      { id: "PM-01", fn: 16, p: "J", w: 0, pri: 0 }, { id: "PM-02", fn: 16, p: "J", w: 0, pri: 0 }, { id: "PM-03", fn: 16, p: "J", w: 0, pri: 0 },
+      { id: "PM-04", fn: 16, p: "S", w: 3, pri: 0 }, { id: "PM-07", fn: 16, p: "S", w: 3, pri: 0 }, { id: "PM-05", fn: 16, p: "J", w: 4, pri: 0 },
+      { id: "PM-06", fn: 16, p: "S", w: 6, pri: 0 }, { id: "PM-08", fn: 16, p: "A", w: 7, pri: 1 }
+    ];
+
+    const FOLDERS = { 1: "Curriculum & Data Model", 2: "Auth, RBAC & Infra", 3: "Internal Console", 4: "Director Experience", 5: "Learner Experience", 6: "Instructor Experience", 7: "Calendar", 8: "Lingo AI", 9: "AI Content Generation", 10: "AI Content Tool", 11: "Language Garden", 12: "Token Wallet & Audit", 13: "User Testing", 14: "Integration & Launch", 15: "Content Production", 16: "PM & Decisions" };
+    const PEOPLE = { R: "Rishi", Y: "Yesha", B: "Belinda", A: "Arslaan", S: "Sara", J: "Joint" };
+    const SPRINTS = [{ w: 1, d: "Apr 29–30", ms: false }, { w: 2, d: "May 5–9", ms: false }, { w: 3, d: "May 12–16", ms: false }, { w: 4, d: "May 19–23", ms: false }, { w: 5, d: "May 26–30", ms: true }, { w: 6, d: "Jun 2–6", ms: false }, { w: 7, d: "Jun 9–13", ms: false }, { w: 8, d: "Jun 16–20", ms: false }, { w: 9, d: "Jun 23–27", ms: true }];
+    const GO_NO_GO = [
+      { label: "Zero P0 bugs open", check: (s) => TASKS.filter(t => t.pri === 0).every(t => s[t.id] === "done") },
+      { label: "5/5 E2E flows passing", check: (s) => ["INT-01", "INT-02", "INT-03", "INT-04", "INT-05"].every(id => s[id] === "done") },
+      { label: "22 LUs × 3 levels published & reviewed", check: (s) => s["CTL-03"] === "done" },
+      { label: "Production tenant live on lingocare.ai", check: (s) => s["INT-09"] === "done" },
+      { label: "Monitoring & alerts active", check: (s) => s["INT-09"] === "done" },
+      { label: "3 pilots confirmed for July", check: (s) => s["PM-04"] === "done" && s["PM-06"] === "done" }
+    ];
+
+    let statuses = {};
+    let lastSync = null;
+    let priChartInst = null;
+
+    function getWeek() {
+      const now = new Date();
+      const bounds = [
+        [new Date("2026-04-29"), new Date("2026-04-30")],
+        [new Date("2026-05-05"), new Date("2026-05-09")],
+        [new Date("2026-05-12"), new Date("2026-05-16")],
+        [new Date("2026-05-19"), new Date("2026-05-23")],
+        [new Date("2026-05-26"), new Date("2026-05-30")],
+        [new Date("2026-06-02"), new Date("2026-06-06")],
+        [new Date("2026-06-09"), new Date("2026-06-13")],
+        [new Date("2026-06-16"), new Date("2026-06-20")],
+        [new Date("2026-06-23"), new Date("2026-06-27")]
+      ];
+      if (now < new Date("2026-04-29")) return 1;
+      if (now > new Date("2026-06-27")) return 9;
+      for (let i = 0; i < bounds.length; i++) { if (now >= bounds[i][0] && now <= bounds[i][1]) return i + 1; }
+      for (let i = 0; i < bounds.length - 1; i++) { if (now > bounds[i][1] && now < bounds[i + 1][0]) return i + 2; }
+      return 9;
+    }
+
+    function getDays() { return Math.max(0, Math.ceil((new Date("2026-06-27") - new Date()) / 86400000)); }
+
+    function cycleStatus(id) {
+      const cur = statuses[id] || "todo";
+      statuses[id] = cur === "todo" ? "in_progress" : cur === "in_progress" ? "done" : "todo";
+      saveAndRender();
+    }
+
+    async function saveAndRender() {
+      try { await window.storage.set("lc-statuses", JSON.stringify(statuses)); } catch (e) { }
+      render();
+    }
+
+    function render() {
+      const cw = getWeek();
+      const done = TASKS.filter(t => statuses[t.id] === "done").length;
+      const prog = TASKS.filter(t => statuses[t.id] === "in_progress").length;
+      const p0 = TASKS.filter(t => t.pri === 0);
+      const p0done = p0.filter(t => statuses[t.id] === "done").length;
+      const p0open = p0.length - p0done;
+      const pct = Math.round(done / TASKS.length * 100);
+
+      document.getElementById("kpi-strip").innerHTML = `
+      <div class="kpi"><div class="kpi-l">Total tasks</div><div class="kpi-v">120</div><div class="kpi-s">${done} done · ${prog} in progress</div></div>
+      <div class="kpi"><div class="kpi-l">Completion</div><div class="kpi-v">${pct}%</div><div class="kpi-s">${done} of 120</div></div>
+      <div class="kpi"><div class="kpi-l">P0 open</div><div class="kpi-v" style="color:${p0open > 0 ? "#BA7517" : "#1D9E75"}">${p0open}</div><div class="kpi-s">${p0done} of ${p0.length} P0s closed</div></div>
+      <div class="kpi"><div class="kpi-l">Days to launch</div><div class="kpi-v">${getDays()}</div><div class="kpi-s">Go/No-Go Jun 27</div></div>
+      <div class="kpi"><div class="kpi-l">Current sprint</div><div class="kpi-v">W${cw}</div><div class="kpi-s">of 9 weeks</div></div>
+    `;
+
+      document.getElementById("sprint-grid").innerHTML = SPRINTS.map(s => {
+        const tw = TASKS.filter(t => t.w === s.w);
+        const td = tw.filter(t => statuses[t.id] === "done").length;
+        const cls = s.w === cw ? "sc cur" : s.ms ? "sc ms" : "sc";
+        return `<div class="${cls}"><div class="sc-w">W${s.w}</div><div class="sc-d">${s.d}</div><div class="sc-n">${td}/${tw.length}${s.ms ? " ★" : ""}</div></div>`;
+      }).join("");
+
+      const personKeys = ["R", "Y", "B", "A", "S"];
+      const personColors = { R: "#378ADD", Y: "#BA7517", B: "#D4537E", A: "#1D9E75", S: "#639922" };
+      document.getElementById("people-bars").innerHTML = personKeys.map(pk => {
+        const own = TASKS.filter(t => t.p === pk);
+        const od = own.filter(t => statuses[t.id] === "done").length;
+        const pct2 = own.length ? Math.round(od / own.length * 100) : 0;
+        return `<div class="pfr"><div class="pn">${PEOPLE[pk]}</div><div class="pb"><div class="pf" style="width:${pct2}%;background:${personColors[pk]}"></div></div><div class="pct">${od}/${own.length}</div></div>`;
+      }).join("");
+
+      const p0c = TASKS.filter(t => t.pri === 0).length;
+      const p1c = TASKS.filter(t => t.pri === 1).length;
+      const p2c = TASKS.filter(t => t.pri === 2).length;
+      const ctx = document.getElementById("pri-chart");
+      if (priChartInst) { priChartInst.destroy(); }
+      priChartInst = new Chart(ctx, {
+        type: "doughnut",
+        data: { labels: ["P0 urgent", "P1 high", "P2 normal"], datasets: [{ data: [p0c, p1c, p2c], backgroundColor: ["#BA7517", "#378ADD", "#B4B2A9"], borderWidth: 0, hoverOffset: 4 }] },
+        options: { responsive: true, maintainAspectRatio: false, cutout: "62%", plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => `${c.label}: ${c.raw}` } } } }
+      });
+      document.getElementById("pri-legend").innerHTML = `
+      <span style="display:flex;align-items:center;gap:4px"><span style="width:9px;height:9px;border-radius:2px;background:#BA7517"></span>P0 urgent ${p0c}</span>
+      <span style="display:flex;align-items:center;gap:4px"><span style="width:9px;height:9px;border-radius:2px;background:#378ADD"></span>P1 high ${p1c}</span>
+      <span style="display:flex;align-items:center;gap:4px"><span style="width:9px;height:9px;border-radius:2px;background:#B4B2A9"></span>P2 normal ${p2c}</span>
+    `;
+
+      const fkeys = [...new Set(TASKS.map(t => t.fn))].sort((a, b) => a - b);
+      document.getElementById("folder-grid").innerHTML = fkeys.map(fn => {
+        const ft = TASKS.filter(t => t.fn === fn);
+        const fd = ft.filter(t => statuses[t.id] === "done").length;
+        const fp = Math.round(fd / ft.length * 100);
+        return `<div><div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--color-text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px">${String(fn).padStart(2, "0")} · ${FOLDERS[fn]}</span><span style="color:var(--color-text-tertiary);flex-shrink:0;margin-left:4px">${fd}/${ft.length}</span></div><div class="fb"><div class="ff${fp === 100 ? " done-col" : ""}" style="width:${fp}%"></div></div></div>`;
+      }).join("");
+
+      const wt = TASKS.filter(t => t.w === cw || t.w === cw + 1);
+      document.getElementById("week-heading").textContent = `W${cw} tasks (${SPRINTS[cw - 1]?.d || ""})`;
+      document.getElementById("week-tasks").innerHTML = wt.length
+        ? wt.map(t => {
+          const st = statuses[t.id] || "todo";
+          const dc = st === "done" ? "done-d" : st === "in_progress" ? "prog-d" : "todo-d";
+          return `<div class="tr"><span class="sd ${dc}" title="Click to cycle status" onclick="cycleStatus('${t.id}')"></span><span class="bp bp${t.pri}">P${t.pri}</span><span style="flex:1;color:var(--color-text-primary)">${t.id}</span><span class="pp">${PEOPLE[t.p] || t.p}</span></div>`;
+        }).join("")
+        : `<p style="font-size:12px;color:var(--color-text-secondary);padding:8px 0">No tasks scheduled for W${cw}.</p>`;
+
+      document.getElementById("gng-list").innerHTML = GO_NO_GO.map(g => {
+        const ok = g.check(statuses);
+        return `<div class="gngr"><div class="gc${ok ? " ok" : ""}">${ok ? "✓" : ""}</div><span style="color:var(--color-text-${ok ? "primary" : "secondary"})">${g.label}</span></div>`;
+      }).join("");
+
+      if (lastSync) { document.getElementById("sync-label").textContent = `Last sync: ${new Date(lastSync).toLocaleString()}`; }
+    }
+
+    function doSync() {
+      const msg = document.getElementById("sync-msg");
+      msg.textContent = "ClickUp sync requires a server-side proxy — not available in standalone mode.";
+      setTimeout(() => { msg.textContent = ""; }, 4000);
+    }
+
+    async function init() {
+      try { const r = await window.storage.get("lc-statuses"); if (r?.value) statuses = JSON.parse(r.value); } catch (e) { }
+      try { const r = await window.storage.get("lc-sync"); if (r?.value) lastSync = r.value; } catch (e) { }
+      render();
+    }
+
+    init();
+  </script>
+</body>
+
+</html>
