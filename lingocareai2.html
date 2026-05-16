@@ -1,0 +1,3357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lingocare Proprietary LLM — Strategy & Build Report v2</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --lc-orange: #ED7D00;
+            --lc-orange-light: #FFF3E0;
+            --lc-orange-mid: #FFE5C0;
+            --lc-red: #BE211C;
+            --lc-bg: #FAF7F2;
+            --lc-bg-gradient: linear-gradient(135deg, #FAF7F2 0%, #FFF3E0 50%, #FFE5C0 100%);
+            --lc-text: #282725;
+            --lc-text-muted: #6B6460;
+            --lc-white: #FFFFFF;
+            --lc-card-border: rgba(237, 125, 0, 0.35);
+            --lc-dark-brown: #3B2800;
+            --lc-font-heading: 'Montserrat', sans-serif;
+            --lc-font-body: 'Roboto', sans-serif;
+            --lc-radius: 12px;
+            --lc-radius-pill: 9999px;
+            --sidebar-w: 270px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--lc-font-body);
+            background: var(--lc-bg);
+            color: var(--lc-text);
+            line-height: 1.65;
+            font-size: 16px;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-w);
+            height: 100vh;
+            background: var(--lc-text);
+            color: var(--lc-white);
+            overflow-y: auto;
+            z-index: 100;
+            padding: 32px 0 32px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-logo {
+            padding: 0 24px 28px;
+            border-bottom: 1px solid rgba(237, 125, 0, 0.3);
+            margin-bottom: 16px;
+        }
+
+        .sidebar-logo .brand {
+            font-family: var(--lc-font-heading);
+            font-weight: 800;
+            font-size: 22px;
+            color: var(--lc-orange);
+        }
+
+        .sidebar-logo .brand span {
+            color: var(--lc-white);
+        }
+
+        .sidebar-logo .doc-label {
+            font-family: var(--lc-font-body);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.45);
+            letter-spacing: 0.08em;
+            margin-top: 4px;
+        }
+
+        .sidebar nav {
+            padding: 0 12px;
+            flex: 1;
+        }
+
+        .nav-section-label {
+            font-family: var(--lc-font-heading);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--lc-orange);
+            padding: 16px 12px 6px;
+        }
+
+        .sidebar nav a {
+            display: block;
+            padding: 8px 12px;
+            font-family: var(--lc-font-body);
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+            line-height: 1.4;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            background: rgba(237, 125, 0, 0.15);
+            color: var(--lc-orange);
+        }
+
+        .sidebar-footer {
+            padding: 16px 24px 0;
+            border-top: 1px solid rgba(237, 125, 0, 0.2);
+            margin-top: 16px;
+        }
+
+        .sidebar-footer p {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.3);
+            line-height: 1.5;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: var(--lc-orange);
+            color: var(--lc-white);
+            font-family: var(--lc-font-heading);
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 999px;
+            letter-spacing: 0.1em;
+            margin-top: 6px;
+        }
+
+        /* MAIN */
+        .main {
+            margin-left: var(--sidebar-w);
+            min-height: 100vh;
+        }
+
+        /* HERO */
+        .hero {
+            background: var(--lc-bg-gradient);
+            padding: 80px 64px 72px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(237, 125, 0, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: 10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(237, 125, 0, 0.07) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--lc-font-heading);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--lc-orange);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 32px;
+            height: 2px;
+            background: var(--lc-orange);
+        }
+
+        .hero h1 {
+            font-family: var(--lc-font-heading);
+            font-weight: 800;
+            font-size: 52px;
+            line-height: 1.1;
+            color: var(--lc-text);
+            max-width: 760px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 span {
+            color: var(--lc-orange);
+        }
+
+        .hero-subtitle {
+            font-family: var(--lc-font-body);
+            font-size: 19px;
+            color: var(--lc-text-muted);
+            max-width: 680px;
+            margin-bottom: 40px;
+            font-weight: 300;
+            line-height: 1.65;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .hero-meta-item .label {
+            font-family: var(--lc-font-heading);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--lc-orange);
+        }
+
+        .hero-meta-item .value {
+            font-family: var(--lc-font-body);
+            font-size: 14px;
+            color: var(--lc-text);
+            font-weight: 500;
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 64px 64px;
+            border-bottom: 1px solid rgba(237, 125, 0, 0.1);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-alt {
+            background: linear-gradient(180deg, #FAF7F2 0%, #FFF9F0 100%);
+        }
+
+        .section-eyebrow {
+            font-family: var(--lc-font-heading);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--lc-orange);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-eyebrow::after {
+            content: '';
+            flex: 0 0 24px;
+            height: 2px;
+            background: var(--lc-orange);
+            opacity: 0.5;
+        }
+
+        .section-title {
+            font-family: var(--lc-font-heading);
+            font-weight: 800;
+            font-size: 36px;
+            color: var(--lc-text);
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .section-title .accent {
+            color: var(--lc-orange);
+        }
+
+        .section-title .red {
+            color: var(--lc-red);
+        }
+
+        .section-intro {
+            font-family: var(--lc-font-body);
+            font-size: 17px;
+            color: var(--lc-text-muted);
+            max-width: 760px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--lc-white);
+            border: 1.5px solid var(--lc-card-border);
+            border-radius: var(--lc-radius);
+            padding: 28px 32px;
+            box-shadow: 0 2px 16px rgba(237, 125, 0, 0.07);
+        }
+
+        .card-label {
+            font-family: var(--lc-font-heading);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--lc-orange);
+            margin-bottom: 10px;
+        }
+
+        .card-stat {
+            font-family: var(--lc-font-heading);
+            font-weight: 800;
+            font-size: 64px;
+            color: var(--lc-text);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .card-stat.red {
+            color: var(--lc-red);
+        }
+
+        .card-desc {
+            font-family: var(--lc-font-body);
+            font-size: 14px;
+            color: var(--lc-text-muted);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .card-divider {
+            border: none;
+            border-top: 1px solid rgba(237, 125, 0, 0.2);
+            margin: 16px 0;
+        }
+
+        .card-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .card-bullets li {
+            font-family: var(--lc-font-body);
+            font-size: 14px;
+            color: var(--lc-text);
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            line-height: 1.45;
+        }
+
+        .card-bullets li::before {
+            content: '•';
+            color: var(--lc-orange);
+            font-weight: 700;
+            margin-top: 1px;
+            flex-shrink: 0;
+        }
+
+        /* GRIDS */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* PHASE */
+        .phase-badge {
+            width: 48px;
+            height: 48px;
+            background: var(--lc-orange);
+            border-radius: 50%;
+            color: var(--lc-white);
+            font-family: var(--lc-font-heading);
+            font-weight: 800;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .phase-card {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .phase-card-body {
+            flex: 1;
+        }
+
+        .phase-card-title {
+            font-family: var(--lc-font-heading);
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--lc-text);
+            margin-bottom: 6px;
+        }
+
+        .phase-card-subtitle {
+            font-family: var(--lc-font-body);
+            font-size: 12px;
+            color: var(--lc-orange);
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* TABLE */
+        .lc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--lc-font-body);
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .lc-table th {
+            background: var(--lc-orange);
+            color: var(--lc-white);
+            font-family: var(--lc-font-heading);
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        .lc-table th:first-child {
+            border-radius: var(--lc-radius) 0 0 0;
+        }
+
+        .lc-table th:last-child {
+            border-radius: 0 var(--lc-radius) 0 0;
+        }
+
+        .lc-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(237, 125, 0, 0.12);
+            color: var(--lc-text);
+            vertical-align: top;
+            line-height: 1.5;
+        }
+
+        .lc-table tr:nth-child(even) td {
+            background: #FFF9F2;
+        }
+
+        .lc-table .tag-yes {
+            display: inline-block;
+            background: rgba(237, 125, 0, 0.12);
+            color: var(--lc-orange);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-family: var(--lc-font-heading);
+        }
+
+        .lc-table .tag-no {
+            display: inline-block;
+            background: rgba(190, 33, 28, 0.08);
+            color: var(--lc-red);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-family: var(--lc-font-heading);
+        }
+
+        .lc-table .tag-partial {
+            display: inline-block;
+            background: rgba(40, 39, 37, 0.07);
+            color: var(--lc-text-muted);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-family: var(--lc-font-heading);
+        }
+
+        .lc-table .winner-row td {
+            background: rgba(237, 125, 0, 0.04) !important;
+        }
+
+        .lc-table .winner-row td:first-child {
+            border-left: 3px solid var(--lc-orange);
+        }
+
+        .lc-table .highlight-row td {
+            background: rgba(237, 125, 0, 0.06) !important;
+            font-weight: 500;
+        }
+
+        /* CALLOUT */
+        .callout {
+            background: rgba(237, 125, 0, 0.07);
+            border-left: 4px solid var(--lc-orange);
+            border-radius: 0 var(--lc-radius) var(--lc-radius) 0;
+            padding: 20px 24px;
+            margin: 24px 0;
+        }
+
+        .callout-label {
+            font-family: var(--lc-font-heading);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--lc-orange);
+            margin-bottom: 6px;
+        }
+
+        .callout p {
+            font-family: var(--lc-font-body);
+            font-size: 15px;
+            color: var(--lc-text);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .callout-red {
+            background: rgba(190, 33, 28, 0.05);
+            border-left-color: var(--lc-red);
+        }
+
+        .callout-red .callout-label {
+            color: var(--lc-red);
+        }
+
+        .callout-dark {
+            background: rgba(40, 39, 37, 0.06);
+            border-left-color: var(--lc-text);
+        }
+
+        .callout-dark .callout-label {
+            color: var(--lc-text);
+        }
+
+        /* RISK */
+        .risk-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(237, 125, 0, 0.12);
+        }
+
+        .risk-item:last-child {
+            border-bottom: none;
+        }
+
+        .risk-level {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--lc-font-heading);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 999px;
+        }
+
+        .risk-high {
+            background: rgba(190, 33, 28, 0.1);
+            color: var(--lc-red);
+        }
+
+        .risk-med {
+            background: rgba(237, 125, 0, 0.12);
+            color: var(--lc-orange);
+        }
+
+        .risk-low {
+            background: rgba(40, 39, 37, 0.07);
+            color: var(--lc-text-muted);
+        }
+
+        .risk-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* ROADMAP */
+        .roadmap-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--lc-orange) 0%, rgba(237, 125, 0, 0.2) 100%);
+        }
+
+        .roadmap-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 8px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--lc-orange);
+            border: 3px solid var(--lc-bg);
+            box-shadow: 0 0 0 2px var(--lc-orange);
+        }
+
+        .roadmap-phase {
+            font-family: var(--lc-font-heading);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--lc-orange);
+            margin-bottom: 4px;
+        }
+
+        .roadmap-title {
+            font-family: var(--lc-font-heading);
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--lc-text);
+            margin-bottom: 8px;
+        }
+
+        .roadmap-timeline-label {
+            display: inline-block;
+            background: var(--lc-orange);
+            color: var(--lc-white);
+            font-family: var(--lc-font-heading);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 999px;
+            margin-bottom: 14px;
+        }
+
+        /* COST */
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(237, 125, 0, 0.12);
+            gap: 16px;
+        }
+
+        .cost-row:last-child {
+            border-bottom: none;
+        }
+
+        .cost-label {
+            font-family: var(--lc-font-body);
+            font-size: 14px;
+            color: var(--lc-text);
+            flex: 1;
+        }
+
+        .cost-note {
+            font-family: var(--lc-font-body);
+            font-size: 12px;
+            color: var(--lc-text-muted);
+        }
+
+        .cost-amount {
+            font-family: var(--lc-font-heading);
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--lc-orange);
+            text-align: right;
+            min-width: 120px;
+        }
+
+        .cost-amount.red {
+            color: var(--lc-red);
+        }
+
+        .cost-total {
+            background: var(--lc-text);
+            border-radius: 0 0 var(--lc-radius) var(--lc-radius);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 -1px -1px;
+        }
+
+        .cost-total-label {
+            font-family: var(--lc-font-heading);
+            font-weight: 700;
+            color: var(--lc-white);
+            font-size: 14px;
+        }
+
+        .cost-total-amount {
+            font-family: var(--lc-font-heading);
+            font-weight: 800;
+            color: var(--lc-orange);
+            font-size: 24px;
+        }
+
+        /* CHIP */
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--lc-white);
+            border: 1.5px solid var(--lc-card-border);
+            border-radius: 999px;
+            padding: 5px 14px;
+            font-family: var(--lc-font-heading);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--lc-text);
+        }
+
+        .chip-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--lc-orange);
+            flex-shrink: 0;
+        }
+
+        .chips-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* REC BOX */
+        .rec-box {
+            background: var(--lc-text);
+            border-radius: var(--lc-radius);
+            padding: 36px 40px;
+            color: var(--lc-white);
+            margin-top: 32px;
+        }
+
+        .rec-box .rec-label {
+            font-family: var(--lc-font-heading);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--lc-orange);
+            margin-bottom: 10px;
+        }
+
+        .rec-box h3 {
+            font-family: var(--lc-font-heading);
+            font-weight: 800;
+            font-size: 26px;
+            color: var(--lc-white);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .rec-box h3 span {
+            color: var(--lc-orange);
+        }
+
+        .rec-box p {
+            font-family: var(--lc-font-body);
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        /* BODY TEXT */
+        .body-text {
+            font-family: var(--lc-font-body);
+            font-size: 16px;
+            color: var(--lc-text);
+            line-height: 1.75;
+            max-width: 820px;
+            margin-bottom: 24px;
+        }
+
+        .body-text strong {
+            color: var(--lc-text);
+            font-weight: 700;
+        }
+
+        .body-text em {
+            color: var(--lc-orange);
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        .sub-heading {
+            font-family: var(--lc-font-heading);
+            font-weight: 700;
+            font-size: 22px;
+            color: var(--lc-text);
+            margin: 36px 0 14px;
+        }
+
+        .sub-heading-sm {
+            font-family: var(--lc-font-heading);
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--lc-text);
+            margin: 24px 0 10px;
+        }
+
+        /* ICON BADGE */
+        .icon-badge {
+            width: 44px;
+            height: 44px;
+            background: rgba(237, 125, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 14px;
+        }
+
+        /* LAYOUTS */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .two-col-aside {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .lc-hr {
+            border: none;
+            border-top: 1px solid rgba(237, 125, 0, 0.2);
+            margin: 32px 0;
+        }
+
+        /* VERDICT */
+        .verdict-banner {
+            background: linear-gradient(135deg, var(--lc-orange) 0%, #FF9A2E 100%);
+            border-radius: var(--lc-radius);
+            padding: 20px 28px;
+            color: var(--lc-white);
+            margin: 20px 0;
+        }
+
+        .verdict-banner .vb-label {
+            font-family: var(--lc-font-heading);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+
+        .verdict-banner .vb-text {
+            font-family: var(--lc-font-heading);
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 1.3;
+        }
+
+        /* PROVIDER COMPARISON CARD */
+        .provider-card {
+            border-radius: var(--lc-radius);
+            overflow: hidden;
+            border: 1.5px solid var(--lc-card-border);
+        }
+
+        .provider-header {
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .provider-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .provider-name {
+            font-family: var(--lc-font-heading);
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .provider-tagline {
+            font-family: var(--lc-font-body);
+            font-size: 12px;
+            color: var(--lc-text-muted);
+            margin-top: 2px;
+        }
+
+        .provider-body {
+            padding: 20px 24px;
+            background: var(--lc-white);
+        }
+
+        .provider-pricing {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+            background: #FAF7F2;
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .price-item .price-label {
+            font-family: var(--lc-font-heading);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--lc-text-muted);
+            margin-bottom: 3px;
+        }
+
+        .price-item .price-value {
+            font-family: var(--lc-font-heading);
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--lc-orange);
+        }
+
+        .price-item .price-unit {
+            font-family: var(--lc-font-body);
+            font-size: 10px;
+            color: var(--lc-text-muted);
+        }
+
+        /* COMPLIANCE */
+        .compliance-item {
+            border-left: 3px solid var(--lc-orange);
+            padding-left: 20px;
+            margin-bottom: 28px;
+        }
+
+        .compliance-title {
+            font-family: var(--lc-font-heading);
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--lc-text);
+            margin-bottom: 6px;
+        }
+
+        .compliance-subtitle {
+            font-family: var(--lc-font-body);
+            font-size: 12px;
+            color: var(--lc-orange);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+        }
+
+        /* MIGRATION STEPS */
+        .migration-step {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            background: var(--lc-orange);
+            border-radius: 50%;
+            color: var(--lc-white);
+            font-family: var(--lc-font-heading);
+            font-weight: 800;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-body {
+            flex: 1;
+        }
+
+        .step-title {
+            font-family: var(--lc-font-heading);
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--lc-text);
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-family: var(--lc-font-body);
+            font-size: 13px;
+            color: var(--lc-text-muted);
+            line-height: 1.55;
+        }
+
+        /* FOOTER */
+        .report-footer {
+            background: var(--lc-text);
+            padding: 40px 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .report-footer .footer-brand {
+            font-family: var(--lc-font-heading);
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--lc-orange);
+        }
+
+        .report-footer .footer-brand span {
+            color: var(--lc-white);
+        }
+
+        .report-footer p {
+            font-family: var(--lc-font-body);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: right;
+        }
+
+        /* NEW BADGE */
+        .new-badge {
+            display: inline-block;
+            background: var(--lc-orange);
+            color: var(--lc-white);
+            font-family: var(--lc-font-heading);
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 999px;
+            letter-spacing: 0.08em;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+
+        .updated-badge {
+            display: inline-block;
+            background: rgba(237, 125, 0, 0.15);
+            color: var(--lc-orange);
+            font-family: var(--lc-font-heading);
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 999px;
+            letter-spacing: 0.08em;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(237, 125, 0, 0.4);
+            border-radius: 999px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="brand">Lingo<span>care</span></div>
+            <div class="doc-label">LLM Strategy Report</div>
+            <span class="version-badge">VERSION 2 · MAY 2025</span>
+        </div>
+        <nav>
+            <div class="nav-section-label">Overview</div>
+            <a href="#exec-summary">Executive Summary</a>
+            <a href="#context">The Problem Context</a>
+            <div class="nav-section-label">Phase 1 — API Analysis <span class="new-badge"
+                    style="font-size:8px;">NEW</span></div>
+            <a href="#phase1-api">API Provider Comparison</a>
+            <a href="#phase1-costs">Phase 1 Cost Modelling</a>
+            <div class="nav-section-label">Phase 2 — Own LLM</div>
+            <a href="#phase2-vision">What We're Building</a>
+            <a href="#model-selection">Model Selection</a>
+            <a href="#model-matrix">Comparison Matrix</a>
+            <a href="#managed-vs-selfhost">Managed API vs Self-Hosted</a>
+            <div class="nav-section-label">Build & Compliance</div>
+            <a href="#architecture">Technical Architecture</a>
+            <a href="#dataset">Dataset Strategy</a>
+            <a href="#compliance">Regulatory Compliance <span class="new-badge" style="font-size:8px;">NEW</span></a>
+            <div class="nav-section-label">Execution</div>
+            <a href="#roadmap">12-Month Roadmap</a>
+            <a href="#model-upgrades">Model Upgrade Flexibility</a>
+            <a href="#multilingual">Multilingual Expansion</a>
+            <div class="nav-section-label">Business</div>
+            <a href="#challenges">Challenges & Solutions</a>
+            <a href="#costs">Full Cost Analysis</a>
+            <a href="#risks">Risk Register</a>
+            <a href="#recommendations">Recommendations</a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>Confidential · Lingocare GmbH · lingocare.ai</p>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-eyebrow">Technical Strategy Report — Version 2</div>
+            <h1>Building the <span>Lingocare</span><br>Proprietary LLM</h1>
+            <p class="hero-subtitle">Updated with Mistral Small 3.2, managed fine-tuning pricing, Phase 1 API provider
+                analysis (Claude Haiku vs GPT-4o mini vs Mistral), and a new Regulatory Compliance framework covering
+                GDPR, Zero Data Retention, and the vLLM migration path.</p>
+            <div class="hero-meta">
+                <div class="hero-meta-item">
+                    <span class="label">Primary Model</span>
+                    <span class="value">Mistral Small 3.2 — Apache 2.0</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="label">Phase 1 Winner</span>
+                    <span class="value">Mistral Small 3.2 API · $0.10/$0.30 per M tokens</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="label">Fine-Tune Cost</span>
+                    <span class="value">$4 / M training tokens (Managed API)</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="label">Breakeven</span>
+                    <span class="value">Managed API beats self-host below ~8K students/day</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXEC SUMMARY -->
+        <section class="section" id="exec-summary">
+            <div class="section-eyebrow">Start Here</div>
+            <h2 class="section-title">Executive <span class="accent">Summary</span> <span
+                    class="updated-badge">UPDATED</span></h2>
+            <p class="section-intro">Mistral Small 3.2, released in 2025, changes the calculus significantly. It is
+                SOTA, multimodal, multilingual, agentic, Apache 2.0, and available via a managed fine-tuning API at $4
+                per million training tokens. This creates a third path — between pure API orchestration and full
+                self-hosted LLM — that is optimal for Lingocare's current scale.</p>
+
+            <div class="callout">
+                <div class="callout-label">The Updated Core Argument</div>
+                <p>Mistral Small 3.2 is now the right choice for both Phase 1 (API orchestration) and Phase 2
+                    (fine-tuned proprietary LLM). One model family across both phases means zero migration friction. The
+                    managed fine-tuning API removes the need for GPU rental during training at current scale.
+                    Self-hosted deployment via vLLM remains the long-term target once student volume exceeds ~8,000/day
+                    — at which point the economics decisively favour on-premises infrastructure.</p>
+            </div>
+
+            <div class="grid-4" style="margin-top: 32px;">
+                <div class="card">
+                    <div class="icon-badge">🎯</div>
+                    <div class="card-label">Phase 1 (Now)</div>
+                    <p
+                        style="font-family: var(--lc-font-body); font-size: 14px; color: var(--lc-text); line-height: 1.55;">
+                        Use Mistral Small 3.2 API at $0.10 input / $0.30 output per million tokens. 3× cheaper than
+                        GPT-4o mini. 11× cheaper than Claude Haiku 3.5.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-badge">🏗️</div>
+                    <div class="card-label">Phase 2 — Early</div>
+                    <p
+                        style="font-family: var(--lc-font-body); font-size: 14px; color: var(--lc-text); line-height: 1.55;">
+                        Fine-tune on Mistral's Managed API at $4/M training tokens. A 5,000-example dataset costs ~$16
+                        to train. Inference remains $0.10/$0.30 per M tokens. No GPU management needed.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-badge">🖥️</div>
+                    <div class="card-label">Phase 2 — Scale</div>
+                    <p
+                        style="font-family: var(--lc-font-body); font-size: 14px; color: var(--lc-text); line-height: 1.55;">
+                        Migrate fine-tuned weights to self-hosted vLLM on EU-region GPU servers when student volume
+                        exceeds ~8,000/day. This is where the 90% cost reduction over APIs materialises.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-badge">🔒</div>
+                    <div class="card-label">Compliance</div>
+                    <p
+                        style="font-family: var(--lc-font-body); font-size: 14px; color: var(--lc-text); line-height: 1.55;">
+                        Mistral offers Zero Data Retention on its API. Apache 2.0 license gives Lingocare full ownership
+                        of fine-tuned weights. EU-origin model supports GDPR compliance posture.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTEXT -->
+        <section class="section section-alt" id="context">
+            <div class="section-eyebrow">The Problem</div>
+            <h2 class="section-title">Germany needs more nurses, trains fewer,<br>and <span class="red">loses 1 in
+                    4</span> along the way.</h2>
+            <p class="section-intro">The structural nursing shortage defines every technical requirement. The AI system
+                must work in real nursing schools, in real German, with real international trainees — at a cost that a
+                school can absorb.</p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-label">The Gap</div>
+                    <div class="card-stat">~500K</div>
+                    <p class="card-desc">nurses Germany will be short of by 2030. Up to 690K projected shortfall by
+                        2049.</p>
+                    <hr class="card-divider">
+                    <ul class="card-bullets">
+                        <li>115K–200K already missing today</li>
+                        <li>Annual demand (~75K) outpaces graduates (~50K)</li>
+                        <li>Structural deficit growing year on year</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-label">The Pipeline</div>
+                    <div class="card-stat">~1,500</div>
+                    <p class="card-desc">Pflegeschulen in Germany. ~57,000 trainees begin each year. Hundreds lack
+                        digital infrastructure.</p>
+                    <hr class="card-divider">
+                    <ul class="card-bullets">
+                        <li>Most large schools are hospital-affiliated</li>
+                        <li>Hundreds of smaller schools are underserved</li>
+                        <li>High market fragmentation — long-tail opportunity</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-label">The Leak</div>
+                    <div class="card-stat red">1 in 4</div>
+                    <p class="card-desc">trainees drop out. Three root causes — all directly addressable by the
+                        Lingocare AI system.</p>
+                    <hr class="card-divider">
+                    <ul class="card-bullets">
+                        <li>Language barrier — especially international trainees</li>
+                        <li>No personalised support during clinical placement</li>
+                        <li>Generic, non-adaptive learning materials</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 1 API COMPARISON -->
+        <section class="section" id="phase1-api">
+            <div class="section-eyebrow">Phase 1 — API Orchestration</div>
+            <h2 class="section-title">Choosing the Right <span class="accent">Phase 1 API</span> <span
+                    class="new-badge">NEW</span></h2>
+            <p class="section-intro">Before building a proprietary LLM, Lingocare uses commercial APIs to power the
+                product, validate pedagogy, and generate training data. The choice of API provider matters: cost, German
+                language quality, data handling policy, and alignment with the Phase 2 model family all determine which
+                provider is optimal.</p>
+
+            <div class="callout" style="margin-bottom: 36px;">
+                <div class="callout-label">Evaluation Framework</div>
+                <p>Three providers are compared: Anthropic Claude Haiku 3.5, OpenAI GPT-4o mini, and Mistral Small 3.2
+                    API. All are "lightweight/efficient" tier models — the appropriate tier for a high-volume
+                    student-facing application. Flagship models (GPT-4o, Claude Opus, Mistral Large) are excluded:
+                    cost-per-token is 8–20× higher with marginal quality gain for structured nursing education
+                    dialogues.</p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 36px;">
+
+                <!-- Mistral Small 3.2 -->
+                <div class="provider-card" style="border-color: var(--lc-orange); border-width: 2px;">
+                    <div class="provider-header" style="background: rgba(237,125,0,0.08);">
+                        <div class="provider-icon" style="background: rgba(237,125,0,0.15);">🌟</div>
+                        <div>
+                            <div class="provider-name" style="color: var(--lc-orange);">Mistral Small 3.2 <span
+                                    class="tag-yes"
+                                    style="font-size:10px; vertical-align:middle; margin-left:6px;">RECOMMENDED</span>
+                            </div>
+                            <div class="provider-tagline">SOTA · Multimodal · Multilingual · Apache 2.0 · Managed
+                                Fine-Tuning Available</div>
+                        </div>
+                    </div>
+                    <div class="provider-body">
+                        <div class="provider-pricing">
+                            <div class="price-item">
+                                <div class="price-label">Input</div>
+                                <div class="price-value">$0.10</div>
+                                <div class="price-unit">per million tokens</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="price-label">Output</div>
+                                <div class="price-value">$0.30</div>
+                                <div class="price-unit">per million tokens</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="price-label">Fine-Tune Training</div>
+                                <div class="price-value">$4.00</div>
+                                <div class="price-unit">per million tokens</div>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-size: 11px; font-weight: 700; color: var(--lc-orange); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">
+                                    Advantages for Lingocare</div>
+                                <ul class="card-bullets">
+                                    <li><strong>Best-in-class European multilingual performance</strong> — German,
+                                        French, Italian, Spanish all excellent</li>
+                                    <li><strong>Apache 2.0 license</strong> — full commercial rights, Lingocare owns any
+                                        fine-tuned derivative</li>
+                                    <li><strong>Zero Data Retention available</strong> — API calls not stored or used
+                                        for training by Mistral</li>
+                                    <li><strong>Managed fine-tuning API</strong> — train proprietary version at $4/M
+                                        tokens; no GPU management needed</li>
+                                    <li><strong>EU-origin company (France)</strong> — strongest GDPR compliance posture
+                                    </li>
+                                    <li><strong>Multimodal</strong> — can process images of nursing documents, diagrams,
+                                        clinical charts</li>
+                                    <li><strong>Agentic</strong> — supports tool use for future simulation features</li>
+                                    <li><strong>Same model family for Phase 1 and 2</strong> — zero migration friction
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-size: 11px; font-weight: 700; color: var(--lc-red); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">
+                                    Limitations</div>
+                                <ul class="card-bullets">
+                                    <li>Smaller ecosystem than OpenAI — fewer third-party integrations out of the box
+                                    </li>
+                                    <li>Less brand recognition with non-technical stakeholders and school directors</li>
+                                    <li>Slightly smaller developer community compared to GPT ecosystem</li>
+                                </ul>
+                                <div
+                                    style="margin-top: 16px; padding: 14px 16px; background: rgba(237,125,0,0.07); border-radius: 8px;">
+                                    <div
+                                        style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 13px; color: var(--lc-text); margin-bottom: 4px;">
+                                        Phase 1 → 2 Continuity</div>
+                                    <p
+                                        style="font-size: 12px; color: var(--lc-text-muted); font-family: var(--lc-font-body); line-height: 1.5;">
+                                        Choosing Mistral Small 3.2 for Phase 1 means Phase 2 fine-tuning targets the
+                                        same model family. No retraining costs from switching providers. The data
+                                        pipeline built in Phase 1 is reused directly in Phase 2.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GPT-4o mini -->
+                <div class="provider-card">
+                    <div class="provider-header" style="background: #f8f8f8;">
+                        <div class="provider-icon" style="background: rgba(16,163,127,0.12);">🤖</div>
+                        <div>
+                            <div class="provider-name">OpenAI GPT-4o mini</div>
+                            <div class="provider-tagline">Capable · Huge ecosystem · US company · Limited fine-tune
+                                rights</div>
+                        </div>
+                    </div>
+                    <div class="provider-body">
+                        <div class="provider-pricing">
+                            <div class="price-item">
+                                <div class="price-label">Input</div>
+                                <div class="price-value" style="color: var(--lc-text-muted);">$0.15</div>
+                                <div class="price-unit">per million tokens</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="price-label">Output</div>
+                                <div class="price-value" style="color: var(--lc-text-muted);">$0.60</div>
+                                <div class="price-unit">per million tokens</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="price-label">Fine-Tune</div>
+                                <div class="price-value" style="color: var(--lc-red);">$3–8</div>
+                                <div class="price-unit">per M tokens (limited)</div>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-size: 11px; font-weight: 700; color: var(--lc-orange); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">
+                                    Strengths</div>
+                                <ul class="card-bullets">
+                                    <li>Largest developer ecosystem — widest library and integration support</li>
+                                    <li>Good German language quality</li>
+                                    <li>Reliable uptime and SLA — battle-tested infrastructure</li>
+                                    <li>Fine-tuning available (GPT-4o mini fine-tune program)</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-size: 11px; font-weight: 700; color: var(--lc-red); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">
+                                    Concerns for Lingocare</div>
+                                <ul class="card-bullets">
+                                    <li><strong>US company (OpenAI)</strong> — GDPR data transfer complexity; EU patient
+                                        scenario data requires Standard Contractual Clauses</li>
+                                    <li><strong>No Zero Data Retention by default</strong> — data may be used for abuse
+                                        monitoring; enterprise tier required for ZDR</li>
+                                    <li><strong>Fine-tuned weights not portable</strong> — cannot self-host OpenAI
+                                        fine-tuned models; full API dependency</li>
+                                    <li><strong>1.5× more expensive than Mistral</strong> on output tokens</li>
+                                    <li>Different model for Phase 1 and 2 means migration cost</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Claude Haiku -->
+                <div class="provider-card">
+                    <div class="provider-header" style="background: #f8f4ff;">
+                        <div class="provider-icon" style="background: rgba(100,50,200,0.1);">🧠</div>
+                        <div>
+                            <div class="provider-name">Anthropic Claude Haiku 3.5</div>
+                            <div class="provider-tagline">Safety-focused · Strong reasoning · Highest cost in tier · US
+                                company</div>
+                        </div>
+                    </div>
+                    <div class="provider-body">
+                        <div class="provider-pricing">
+                            <div class="price-item">
+                                <div class="price-label">Input</div>
+                                <div class="price-value" style="color: var(--lc-red);">$0.80</div>
+                                <div class="price-unit">per million tokens</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="price-label">Output</div>
+                                <div class="price-value" style="color: var(--lc-red);">$4.00</div>
+                                <div class="price-unit">per million tokens</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="price-label">Fine-Tune</div>
+                                <div class="price-value" style="color: var(--lc-red);">Not available</div>
+                                <div class="price-unit">closed model, no ownership</div>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-size: 11px; font-weight: 700; color: var(--lc-orange); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">
+                                    Strengths</div>
+                                <ul class="card-bullets">
+                                    <li>Excellent at nuanced instruction-following and safety guardrails</li>
+                                    <li>Strong reasoning on pedagogical dialogue tasks</li>
+                                    <li>Constitutional AI training reduces harmful output risk</li>
+                                    <li>Best for Phase 0: generating high-quality synthetic training data (seed dataset)
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-size: 11px; font-weight: 700; color: var(--lc-red); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">
+                                    Concerns for Lingocare</div>
+                                <ul class="card-bullets">
+                                    <li><strong>8× more expensive on input, 13× more on output than Mistral Small
+                                            3.2</strong> — prohibitive at student scale</li>
+                                    <li><strong>No fine-tuning available</strong> — no path to model ownership</li>
+                                    <li><strong>Closed weights</strong> — permanent API dependency; cannot self-host
+                                    </li>
+                                    <li><strong>US company (Anthropic)</strong> — same GDPR complexity as OpenAI</li>
+                                    <li>German language quality good but not EU-native advantage</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="callout-red callout" style="margin: 16px 0 0; padding: 12px 16px;">
+                            <div class="callout-label">Recommended Use Only</div>
+                            <p style="font-size: 13px;">Claude Haiku 3.5 is best used for synthetic dataset generation
+                                during Phase 0 — where its instruction quality helps produce high-quality training
+                                examples — not as the production Phase 1 API for student interactions. At 500
+                                students/day, Haiku costs ~€430/month vs Mistral's ~€37/month.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 1 COSTS -->
+        <section class="section section-alt" id="phase1-costs">
+            <div class="section-eyebrow">Phase 1 — Cost Modelling</div>
+            <h2 class="section-title">Phase 1 API <span class="accent">Cost Comparison</span></h2>
+            <p class="section-intro">Real numbers, based on Mistral Small 3.2 pricing ($0.10 input / $0.30 output per
+                million tokens) and equivalent published pricing for GPT-4o mini and Claude Haiku 3.5. Assumptions: 70%
+                input tokens, 30% output tokens per request; avg 1,000 tokens per interaction.</p>
+
+            <div class="sub-heading-sm">Assumptions per Student Level</div>
+            <div class="callout-dark callout" style="margin-bottom: 28px;">
+                <div class="callout-label">Calculation Basis</div>
+                <p style="font-style: normal; font-size: 14px;">15 interactions/student/day × 1,000 avg
+                    tokens/interaction = 15,000 tokens/student/day. Per interaction split: ~700 tokens input (system
+                    prompt + context + user message), ~300 tokens output (AI response). Monthly = 30 days.</p>
+            </div>
+
+            <div style="overflow-x: auto; margin-bottom: 32px;">
+                <table class="lc-table">
+                    <thead>
+                        <tr>
+                            <th>Scale</th>
+                            <th>Tokens/Month</th>
+                            <th>Mistral Small 3.2 ⭐</th>
+                            <th>GPT-4o mini</th>
+                            <th>Claude Haiku 3.5</th>
+                            <th>Mistral vs Haiku Saving</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>50 students/day</strong> (Pilot)</td>
+                            <td>22.5M total</td>
+                            <td><span class="tag-yes">~$3.70/mo</span></td>
+                            <td>~$7.43/mo</td>
+                            <td style="color:var(--lc-red);">~$43/mo</td>
+                            <td><strong style="color:var(--lc-orange);">$39 saved/mo</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>200 students/day</strong> (Early)</td>
+                            <td>90M total</td>
+                            <td><span class="tag-yes">~$14.70/mo</span></td>
+                            <td>~$29.7/mo</td>
+                            <td style="color:var(--lc-red);">~$171/mo</td>
+                            <td><strong style="color:var(--lc-orange);">$156 saved/mo</strong></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>500 students/day</strong> (Target)</td>
+                            <td>225M total</td>
+                            <td><span class="tag-yes">~$36.75/mo</span></td>
+                            <td>~$74.25/mo</td>
+                            <td style="color:var(--lc-red);">~$427.50/mo</td>
+                            <td><strong style="color:var(--lc-orange);">$390 saved/mo</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2,000 students/day</strong> (Scale)</td>
+                            <td>900M total</td>
+                            <td><span class="tag-yes">~$147/mo</span></td>
+                            <td>~$297/mo</td>
+                            <td style="color:var(--lc-red);">~$1,710/mo</td>
+                            <td><strong style="color:var(--lc-orange);">$1,563 saved/mo</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>5,000 students/day</strong> (Growth)</td>
+                            <td>2,250M total</td>
+                            <td><span class="tag-yes">~$368/mo</span></td>
+                            <td>~$742/mo</td>
+                            <td style="color:var(--lc-red);">~$4,275/mo</td>
+                            <td><strong style="color:var(--lc-orange);">$3,907 saved/mo</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table class="lc-table">
+                    <thead>
+                        <tr>
+                            <th>Criterion</th>
+                            <th>Mistral Small 3.2 ⭐</th>
+                            <th>GPT-4o mini</th>
+                            <th>Claude Haiku 3.5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="winner-row">
+                            <td><strong>Input cost / M tokens</strong></td>
+                            <td><span class="tag-yes">$0.10</span></td>
+                            <td>$0.15 (1.5× more)</td>
+                            <td style="color:var(--lc-red);">$0.80 (8× more)</td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Output cost / M tokens</strong></td>
+                            <td><span class="tag-yes">$0.30</span></td>
+                            <td>$0.60 (2× more)</td>
+                            <td style="color:var(--lc-red);">$4.00 (13× more)</td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>German language quality</strong></td>
+                            <td><span class="tag-yes">Excellent (EU-native)</span></td>
+                            <td><span class="tag-yes">Very Good</span></td>
+                            <td><span class="tag-partial">Good</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>EU/GDPR posture</strong></td>
+                            <td><span class="tag-yes">Best (FR company)</span></td>
+                            <td><span class="tag-partial">Moderate (US, SCCs)</span></td>
+                            <td><span class="tag-partial">Moderate (US, SCCs)</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Zero Data Retention</strong></td>
+                            <td><span class="tag-yes">Available</span></td>
+                            <td><span class="tag-partial">Enterprise only</span></td>
+                            <td><span class="tag-partial">Enterprise only</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Fine-tuning available</strong></td>
+                            <td><span class="tag-yes">Yes — $4/M tokens</span></td>
+                            <td><span class="tag-partial">Limited program</span></td>
+                            <td><span class="tag-no">No</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Weights ownership</strong></td>
+                            <td><span class="tag-yes">Apache 2.0 ✓</span></td>
+                            <td><span class="tag-no">No (closed)</span></td>
+                            <td><span class="tag-no">No (closed)</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Self-hostable (Phase 2)</strong></td>
+                            <td><span class="tag-yes">Yes — vLLM</span></td>
+                            <td><span class="tag-no">No</span></td>
+                            <td><span class="tag-no">No</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Phase 2 model continuity</strong></td>
+                            <td><span class="tag-yes">Same family — zero migration</span></td>
+                            <td><span class="tag-no">Different model needed</span></td>
+                            <td><span class="tag-no">No Phase 2 path</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Multimodal (images)</strong></td>
+                            <td><span class="tag-yes">Yes</span></td>
+                            <td><span class="tag-yes">Yes</span></td>
+                            <td><span class="tag-yes">Yes</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Synthetic data generation quality</strong></td>
+                            <td><span class="tag-partial">Good</span></td>
+                            <td><span class="tag-partial">Good</span></td>
+                            <td><span class="tag-yes">Excellent (use for seed data)</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Overall Phase 1 score</strong></td>
+                            <td><strong style="color:var(--lc-orange);">9.4 / 10</strong></td>
+                            <td><strong>6.8 / 10</strong></td>
+                            <td><strong style="color:var(--lc-red);">4.2 / 10</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="verdict-banner" style="margin-top: 24px;">
+                <div class="vb-label">Phase 1 Decision</div>
+                <div class="vb-text">Use Mistral Small 3.2 API for all student-facing interactions. Use Claude Haiku 3.5
+                    only for generating seed training data (Phase 0) — its instruction quality is worth the cost at
+                    small data-generation volume. Never use Haiku at student scale.</div>
+            </div>
+        </section>
+
+        <!-- PHASE 2 VISION -->
+        <section class="section" id="phase2-vision">
+            <div class="section-eyebrow">Phase 2 — Own LLM</div>
+            <h2 class="section-title">The <span class="accent">Lingocare LLM</span> — What We're Building</h2>
+            <p class="section-intro">A domain-expert AI trained on three intersecting data layers: Lingocare's
+                pedagogical framework, German nursing clinical standards, and real multilingual learner interactions.
+            </p>
+
+            <div class="grid-3" style="margin-bottom: 40px;">
+                <div class="card">
+                    <div class="icon-badge">🗣️</div>
+                    <div class="card-label">Layer 1 — Language</div>
+                    <div
+                        style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 18px; margin-bottom: 10px;">
+                        Clinical German Mastery</div>
+                    <ul class="card-bullets">
+                        <li>Fachsprache Pflege — professional nursing German</li>
+                        <li>Anatomical and pharmacological vocabulary in German</li>
+                        <li>Patient communication register (formal/informal)</li>
+                        <li>German regulatory language (Pflegeberufegesetz)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="icon-badge">🏥</div>
+                    <div class="card-label">Layer 2 — Care Knowledge</div>
+                    <div
+                        style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 18px; margin-bottom: 10px;">
+                        Nursing Domain Expertise</div>
+                    <ul class="card-bullets">
+                        <li>German Expertenstandards in der Pflege</li>
+                        <li>Clinical procedures and care protocols</li>
+                        <li>Medication administration safety rules</li>
+                        <li>Hessen nursing curriculum alignment</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="icon-badge">📚</div>
+                    <div class="card-label">Layer 3 — Pedagogy</div>
+                    <div
+                        style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 18px; margin-bottom: 10px;">
+                        Lingocare Teaching Logic</div>
+                    <ul class="card-bullets">
+                        <li>Lingocare proprietary pedagogical framework</li>
+                        <li>Scenario-based learning dialogue patterns</li>
+                        <li>Adaptive difficulty progression signals</li>
+                        <li>Native-tongue-aware explanation strategies</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODEL SELECTION -->
+        <section class="section section-alt" id="model-selection">
+            <div class="section-eyebrow">Model Selection</div>
+            <h2 class="section-title">Why <span class="accent">Mistral Small 3.2</span> Wins <span
+                    class="updated-badge">UPDATED</span></h2>
+            <p class="section-intro">Mistral Small 3.2 supersedes Mistral Nemo 12B as the primary recommendation. It is
+                SOTA across reasoning, coding, and multilingual benchmarks, adds multimodal and agentic capabilities,
+                maintains Apache 2.0, and is now the base model behind Mistral's managed fine-tuning API.</p>
+
+            <div class="two-col" style="margin-bottom: 32px;">
+                <div class="card" style="border-left: 4px solid var(--lc-orange);">
+                    <div class="card-label">Primary Recommendation — Updated</div>
+                    <div
+                        style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 26px; color: var(--lc-text); margin-bottom: 10px;">
+                        Mistral Small 3.2</div>
+                    <p
+                        style="font-family: var(--lc-font-body); font-size: 14px; color: var(--lc-text-muted); line-height: 1.6; margin-bottom: 16px;">
+                        Released 2025 by Mistral AI (Paris, France). Apache 2.0. SOTA performance on multilingual
+                        reasoning benchmarks. Multimodal (vision). Agentic (tool-use native). Available on Mistral's
+                        managed fine-tuning platform at $4/M training tokens — eliminating GPU management for training
+                        at current scale.</p>
+                    <div class="chips-wrap" style="margin-bottom: 16px;">
+                        <span class="chip"><span class="chip-dot"></span>Multimodal 👁️</span>
+                        <span class="chip"><span class="chip-dot"></span>Agentic 🤖</span>
+                        <span class="chip"><span class="chip-dot"></span>Apache 2.0</span>
+                        <span class="chip"><span class="chip-dot"></span>EU Origin 🇫🇷</span>
+                        <span class="chip"><span class="chip-dot"></span>Managed Fine-Tune</span>
+                        <span class="chip"><span class="chip-dot"></span>Zero Data Retention</span>
+                    </div>
+                    <ul class="card-bullets">
+                        <li><strong>SOTA multilingual</strong> — German, French, Italian, Spanish all excellent;
+                            top-tier European language performance in this weight class</li>
+                        <li><strong>Managed fine-tuning API</strong> — $4/M training tokens; a 5K example dataset costs
+                            ~$16 to train; no GPU configuration needed</li>
+                        <li><strong>Self-hostable via vLLM</strong> — when scale demands it, fine-tuned weights migrate
+                            to on-premises servers with no re-training</li>
+                        <li><strong>Apache 2.0</strong> — Lingocare owns all fine-tuned derivatives outright</li>
+                        <li><strong>Zero Data Retention option</strong> — API calls not stored; critical for GDPR and
+                            patient-scenario data</li>
+                        <li><strong>Image understanding</strong> — can process nursing procedure diagrams, medication
+                            packaging, wound photos for training materials</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="card" style="margin-bottom: 20px;">
+                        <div class="card-label">What Changed vs v1 Recommendation</div>
+                        <div
+                            style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 15px; margin-bottom: 10px; color: var(--lc-text);">
+                            Mistral Nemo 12B → Mistral Small 3.2</div>
+                        <ul class="card-bullets">
+                            <li>Small 3.2 is newer and benchmarks higher than Nemo on multilingual tasks</li>
+                            <li>Adds multimodal capability — Nemo was text-only</li>
+                            <li>Adds agentic/tool-use — critical for clinical simulation features</li>
+                            <li>Managed fine-tuning API eliminates the need for GPU rental during training at current
+                                scale</li>
+                            <li>Same Apache 2.0 license — no change to ownership rights</li>
+                            <li>Same EU origin — no change to GDPR compliance posture</li>
+                        </ul>
+                    </div>
+                    <div class="callout">
+                        <div class="callout-label">On Gemma and Llama</div>
+                        <p>Gemma 3 (27B, Google) is capable but carries the Gemma Terms of Service — not fully Apache
+                            2.0. No managed fine-tuning API. US-origin Google. Strong benchmarks but worse EU compliance
+                            posture. Llama 3.3 (70B, Meta) outperforms on raw benchmarks but Llama Community License
+                            imposes commercial restrictions. US-origin Meta. Excellent for engineering experimentation;
+                            problematic for a regulated EU healthcare product. Neither offers the managed fine-tuning +
+                            self-host migration path that Mistral provides.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODEL MATRIX -->
+        <section class="section" id="model-matrix">
+            <div class="section-eyebrow">Decision Matrix</div>
+            <h2 class="section-title">Phase 2 Model <span class="accent">Comparison</span> <span
+                    class="updated-badge">UPDATED</span></h2>
+            <p class="section-intro">Updated comparison of all Phase 2 candidate base models against Lingocare's
+                specific requirements.</p>
+
+            <div style="overflow-x: auto;">
+                <table class="lc-table">
+                    <thead>
+                        <tr>
+                            <th>Criterion</th>
+                            <th>Mistral Small 3.2 ⭐</th>
+                            <th>Mistral Nemo 12B</th>
+                            <th>Llama 3.3 70B</th>
+                            <th>Gemma 3 27B</th>
+                            <th>GPT-4o (API)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="winner-row">
+                            <td><strong>German Language Quality</strong></td>
+                            <td><span class="tag-yes">SOTA</span></td>
+                            <td><span class="tag-yes">Excellent</span></td>
+                            <td><span class="tag-yes">Very Good</span></td>
+                            <td><span class="tag-partial">Good</span></td>
+                            <td><span class="tag-yes">Excellent</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Medical Domain Priming</strong></td>
+                            <td><span class="tag-yes">Good</span></td>
+                            <td><span class="tag-partial">Moderate</span></td>
+                            <td><span class="tag-yes">Good</span></td>
+                            <td><span class="tag-partial">Moderate</span></td>
+                            <td><span class="tag-yes">Excellent</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>EU/GDPR Compliance</strong></td>
+                            <td><span class="tag-yes">Best (FR 🇫🇷)</span></td>
+                            <td><span class="tag-yes">Best (FR 🇫🇷)</span></td>
+                            <td><span class="tag-partial">Moderate (US, Meta)</span></td>
+                            <td><span class="tag-partial">Moderate (US, Google)</span></td>
+                            <td><span class="tag-no">Complex (US)</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>License</strong></td>
+                            <td><span class="tag-yes">Apache 2.0 ✓</span></td>
+                            <td><span class="tag-yes">Apache 2.0 ✓</span></td>
+                            <td><span class="tag-partial">Llama Community</span></td>
+                            <td><span class="tag-partial">Gemma TOS</span></td>
+                            <td><span class="tag-no">Closed</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Managed Fine-Tune API</strong></td>
+                            <td><span class="tag-yes">$4/M tokens ✓</span></td>
+                            <td><span class="tag-no">No</span></td>
+                            <td><span class="tag-no">No</span></td>
+                            <td><span class="tag-no">No</span></td>
+                            <td><span class="tag-no">N/A</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Multimodal</strong></td>
+                            <td><span class="tag-yes">Yes 👁️</span></td>
+                            <td><span class="tag-no">No</span></td>
+                            <td><span class="tag-partial">Text only</span></td>
+                            <td><span class="tag-yes">Yes</span></td>
+                            <td><span class="tag-yes">Yes</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Agentic / Tool Use</strong></td>
+                            <td><span class="tag-yes">Native 🤖</span></td>
+                            <td><span class="tag-partial">Basic</span></td>
+                            <td><span class="tag-yes">Yes</span></td>
+                            <td><span class="tag-partial">Basic</span></td>
+                            <td><span class="tag-yes">Yes</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Self-Hostable via vLLM</strong></td>
+                            <td><span class="tag-yes">Yes</span></td>
+                            <td><span class="tag-yes">Yes</span></td>
+                            <td><span class="tag-yes">Yes</span></td>
+                            <td><span class="tag-yes">Yes</span></td>
+                            <td><span class="tag-no">No</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Phase 1 → 2 Continuity</strong></td>
+                            <td><span class="tag-yes">Same model ✓</span></td>
+                            <td><span class="tag-partial">Switch needed</span></td>
+                            <td><span class="tag-no">Full switch</span></td>
+                            <td><span class="tag-no">Full switch</span></td>
+                            <td><span class="tag-no">No path</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Multilingual (FR, IT, ES)</strong></td>
+                            <td><span class="tag-yes">SOTA</span></td>
+                            <td><span class="tag-yes">Excellent</span></td>
+                            <td><span class="tag-yes">Good</span></td>
+                            <td><span class="tag-partial">Moderate</span></td>
+                            <td><span class="tag-yes">Excellent</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td><strong>Overall Score for Lingocare</strong></td>
+                            <td><strong style="color:var(--lc-orange);">9.6 / 10</strong></td>
+                            <td><strong>8.2 / 10</strong></td>
+                            <td><strong>6.0 / 10</strong></td>
+                            <td><strong>5.8 / 10</strong></td>
+                            <td><strong style="color:var(--lc-red);">3.8 / 10</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- MANAGED API VS SELF-HOST -->
+        <section class="section section-alt" id="managed-vs-selfhost">
+            <div class="section-eyebrow">Infrastructure Decision</div>
+            <h2 class="section-title">Managed API vs <span class="accent">Self-Hosted</span> — The Right Sequence <span
+                    class="new-badge">NEW</span></h2>
+            <p class="section-intro">Mistral's managed fine-tuning API changes the deployment calculus. The question is
+                no longer "API or self-host" — it is "managed fine-tune API now, self-host later when scale justifies
+                it." Understanding the breakeven point is critical.</p>
+
+            <div class="two-col" style="margin-bottom: 32px;">
+                <div class="card" style="border-top: 4px solid var(--lc-orange);">
+                    <div class="card-label">Path A — Managed Fine-Tuning API (Recommended: Now)</div>
+                    <div
+                        style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 18px; margin-bottom: 12px; color: var(--lc-text);">
+                        Mistral Managed API</div>
+                    <p
+                        style="font-family: var(--lc-font-body); font-size: 14px; color: var(--lc-text-muted); line-height: 1.6; margin-bottom: 14px;">
+                        Fine-tune directly on Mistral's infrastructure. No GPU configuration, no DevOps, no idle compute
+                        costs. Pay only for training tokens and inference.</p>
+                    <div
+                        style="background: var(--lc-orange-light); border-radius: 8px; padding: 14px 16px; margin-bottom: 14px;">
+                        <div
+                            style="font-family: var(--lc-font-heading); font-size: 10px; font-weight: 700; color: var(--lc-orange); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">
+                            Actual Costs</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    5,000 examples training</div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 20px; color: var(--lc-orange);">
+                                    ~$16</div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    4M tokens × $4/M</div>
+                            </div>
+                            <div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    Monthly storage</div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 20px; color: var(--lc-orange);">
+                                    $2</div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    per fine-tuned model</div>
+                            </div>
+                            <div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    Inference (500 students)</div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 20px; color: var(--lc-orange);">
+                                    ~$37</div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    same as base model rate</div>
+                            </div>
+                            <div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    Monthly re-fine-tune</div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 20px; color: var(--lc-orange);">
+                                    ~$16</div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    per training cycle</div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="card-bullets">
+                        <li>Zero DevOps overhead — no GPU configuration, CUDA drivers, or vLLM setup</li>
+                        <li>Instant scalability — Mistral handles inference autoscaling</li>
+                        <li>Fine-tuned weights remain accessible for export to self-host later</li>
+                        <li>Pay-per-use model — no idle GPU costs during low-usage periods</li>
+                        <li>Best for current student volumes (below ~8,000/day)</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-top: 4px solid var(--lc-text);">
+                    <div class="card-label">Path B — Self-Hosted vLLM (Recommended: Later)</div>
+                    <div
+                        style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 18px; margin-bottom: 12px; color: var(--lc-text);">
+                        On-Premises / Cloud GPU</div>
+                    <p
+                        style="font-family: var(--lc-font-body); font-size: 14px; color: var(--lc-text-muted); line-height: 1.6; margin-bottom: 14px;">
+                        Export fine-tuned weights from Mistral's platform. Deploy via vLLM on EU-region GPU servers.
+                        Fixed monthly infrastructure cost — economics flip decisively at high student volume.</p>
+                    <div
+                        style="background: rgba(40,39,37,0.05); border-radius: 8px; padding: 14px 16px; margin-bottom: 14px;">
+                        <div
+                            style="font-family: var(--lc-font-heading); font-size: 10px; font-weight: 700; color: var(--lc-text); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">
+                            Actual Costs</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                            <div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    1× A100 80GB (RunPod EU)</div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 20px; color: var(--lc-text);">
+                                    ~$700/mo</div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    dedicated, always-on</div>
+                            </div>
+                            <div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    Monthly re-fine-tune</div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 20px; color: var(--lc-text);">
+                                    ~$5</div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    8hrs × $0.60/hr A6000</div>
+                            </div>
+                            <div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    Inference (unlimited)</div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 20px; color: var(--lc-text);">
+                                    $0</div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    included in GPU rental</div>
+                            </div>
+                            <div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    Breakeven vs managed</div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 20px; color: var(--lc-text);">
+                                    ~8K</div>
+                                <div
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    students/day</div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="card-bullets">
+                        <li>Full data sovereignty — all inference data stays on your infrastructure</li>
+                        <li>Zero marginal cost per token — economics improve as usage increases</li>
+                        <li>Highest GDPR compliance — no third-party data processing at inference time</li>
+                        <li>Required for on-premises deployment at client Pflegeschulen (if contracted)</li>
+                        <li>Requires ML Engineer for setup and maintenance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout">
+                <div class="callout-label">The Breakeven Analysis</div>
+                <p>At 500 students/day, Managed API costs ~$39/month vs ~$700/month for a dedicated GPU server.
+                    Self-hosting only becomes cheaper when monthly token volume exceeds ~3.5B tokens — approximately
+                    7,800–8,500 students/day at average usage. Below that threshold, managed API wins on cost. Above it,
+                    self-hosted wins decisively. The correct sequence: Managed API now, self-hosted vLLM at scale.</p>
+            </div>
+        </section>
+
+        <!-- ARCHITECTURE -->
+        <section class="section" id="architecture">
+            <div class="section-eyebrow">Technical Architecture</div>
+            <h2 class="section-title">The <span class="accent">Intelligence Stack</span></h2>
+            <p class="section-intro">A layered system with two deployment modes — managed API for current scale, vLLM
+                self-hosted for production scale — with the same fine-tuned weights powering both.</p>
+
+            <div class="two-col" style="margin-bottom: 40px;">
+                <div>
+                    <div class="sub-heading-sm">Training Method: QLoRA via Managed API</div>
+                    <div class="card" style="margin-bottom: 16px;">
+                        <div class="card-label">Fine-Tuning Method</div>
+                        <p
+                            style="font-family: var(--lc-font-body); font-size: 14px; color: var(--lc-text); line-height: 1.6; margin-bottom: 12px;">
+                            Mistral's managed fine-tuning API handles the QLoRA training process — Quantized Low-Rank
+                            Adaptation. The base model is frozen; only small adapter matrices are trained on top. You
+                            supply the JSONL dataset. Mistral handles everything else.</p>
+                        <ul class="card-bullets">
+                            <li>Pay $4 per million training tokens — a 5K example dataset ≈ 4M tokens ≈ $16</li>
+                            <li>Storage: $2/month per fine-tuned model version</li>
+                            <li>Inference after fine-tuning: same $0.10/$0.30 per M tokens as base</li>
+                            <li>Fine-tuned weights are exportable — not locked to Mistral's platform</li>
+                        </ul>
+                    </div>
+
+                    <div class="sub-heading-sm">Local Training Option (GPU Rental)</div>
+                    <div class="chips-wrap" style="margin-bottom: 8px;">
+                        <span class="chip"><span class="chip-dot"></span>Unsloth (2× speed)</span>
+                        <span class="chip"><span class="chip-dot"></span>Hugging Face TRL</span>
+                        <span class="chip"><span class="chip-dot"></span>PEFT</span>
+                        <span class="chip"><span class="chip-dot"></span>bitsandbytes</span>
+                        <span class="chip"><span class="chip-dot"></span>Weights &amp; Biases</span>
+                    </div>
+                    <p
+                        style="font-size: 13px; color: var(--lc-text-muted); font-family: var(--lc-font-body); line-height: 1.5;">
+                        For teams that prefer full control or want to experiment with non-Mistral base models. RunPod
+                        A6000 48GB at ~$1.10/hr. A full fine-tune run takes 3–5 hours (~$5.50). Use Unsloth for 2× speed
+                        and 60% memory reduction.</p>
+                </div>
+                <div>
+                    <div class="sub-heading-sm">Inference Stack</div>
+                    <div class="card" style="margin-bottom: 16px;">
+                        <div class="card-label">Production Serving</div>
+                        <p
+                            style="font-family: var(--lc-font-body); font-size: 14px; color: var(--lc-text); line-height: 1.6; margin-bottom: 12px;">
+                            <strong>Phase 2 Early:</strong> Mistral Managed API endpoint (zero DevOps). <strong>Phase 2
+                                Scale:</strong> vLLM on EU-region GPU servers — OpenAI-compatible API endpoint,
+                            continuous batching, PagedAttention. The Lingocare product layer uses the same API spec in
+                            both cases — switching is a config change, not a code rewrite.</p>
+                        <ul class="card-bullets">
+                            <li>vLLM for production self-hosted inference (OpenAI-compatible)</li>
+                            <li>GGUF quantization (Q4_K_M) for on-premises school deployment</li>
+                            <li>Ollama for teacher/developer local testing</li>
+                            <li>RunPod Serverless for auto-scale mid-tier</li>
+                        </ul>
+                    </div>
+                    <div class="chips-wrap">
+                        <span class="chip"><span class="chip-dot"></span>EU-region Frankfurt hosting</span>
+                        <span class="chip"><span class="chip-dot"></span>GitHub + DVC (data versioning)</span>
+                        <span class="chip"><span class="chip-dot"></span>Private HuggingFace collection</span>
+                        <span class="chip"><span class="chip-dot"></span>EU S3/R2 bucket (weights)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-heading">Data Format — ChatML (unchanged)</div>
+            <div class="card" style="background: #1E1A17; border-color: rgba(237,125,0,0.3);">
+                <div class="card-label" style="color: rgba(237,125,0,0.8);">Example Training Record — Nursing Scenario
+                    (ChatML / JSONL)</div>
+                <pre
+                    style="font-family: 'Courier New', monospace; font-size: 12.5px; color: #E8D5B7; line-height: 1.7; white-space: pre-wrap; overflow-x: auto; margin-top: 10px;">{
+  "messages": [
+    {
+      "role": "system",
+      "content": "Du bist ein Lernassistent für angehende Pflegefachkräfte nach dem Lingocare-Lehrrahmen. Antworte auf Deutsch. Bei medizinischen Unsicherheiten verweise auf klinisches Fachpersonal."
+    },
+    {
+      "role": "user",
+      "content": "Was ist der Unterschied zwischen Dekubitus Grad I und Grad II?"
+    },
+    {
+      "role": "assistant",
+      "content": "Gute Frage! Lass uns das gemeinsam klären.\n\n**Dekubitus Grad I:** Die Haut ist noch intakt — eine nicht wegdrückbare Rötung (Erythem) an einer druckbelasteten Stelle.\n\n**Dekubitus Grad II:** Oberflächlicher Hautverlust — offenes Geschwür oder intakte Flüssigkeitsblase.\n\n📌 Merkhilfe: Grad I = Haut intakt, Röte bleibt. Grad II = Haut offen oder Blase.\n\nIn welcher klinischen Situation würdest du diese Einschätzung vornehmen?"
+    }
+  ]
+}</pre>
+            </div>
+        </section>
+
+        <!-- DATASET -->
+        <section class="section section-alt" id="dataset">
+            <div class="section-eyebrow">Data Strategy</div>
+            <h2 class="section-title">The <span class="accent">Nursing Gold Standard</span> Dataset</h2>
+            <p class="section-intro">The dataset is the most valuable asset Lingocare will create. The model can be
+                retrained. The data cannot be replicated by a competitor. Every Phase 1 student interaction is a seed.
+            </p>
+
+            <div class="grid-3" style="margin-bottom: 32px;">
+                <div class="card">
+                    <div class="card-label">Target Size</div>
+                    <div class="card-stat">3–5K</div>
+                    <p class="card-desc">expert-validated instruction-response pairs. Quality over quantity — always.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-label">Training Cost</div>
+                    <div class="card-stat" style="font-size:42px;">~$16</div>
+                    <p class="card-desc">for 5,000 examples (4M tokens × $4/M) on Mistral's managed API. Monthly
+                        re-training included.</p>
+                </div>
+                <div class="card">
+                    <div class="card-label">Primary Language</div>
+                    <div class="card-stat" style="font-size:40px;">DE 🇩🇪</div>
+                    <p class="card-desc">German as primary. Multilingual alignment seeds (FR, IT) added in later phases.
+                    </p>
+                </div>
+            </div>
+
+            <table class="lc-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Share</th>
+                        <th>Description</th>
+                        <th>Validation Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>German Nursing Protocols</strong></td>
+                        <td><span class="tag-yes">55%</span></td>
+                        <td>Expertenstandards in der Pflege, Hessen curriculum, care procedures</td>
+                        <td>Expert nursing educator review — mandatory</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Clinical Scenarios / Role-Play</strong></td>
+                        <td><span class="tag-yes">20%</span></td>
+                        <td>Patient dialogues, triage simulations, handover communications</td>
+                        <td>Expert review — mandatory for any numerical data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Language Instruction</strong></td>
+                        <td><span class="tag-partial">15%</span></td>
+                        <td>Clinical vocabulary drills, grammar correction, Fachsprache exercises</td>
+                        <td>Linguistic review</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Safety &amp; Refusal Examples</strong></td>
+                        <td><span class="tag-partial">5%</span></td>
+                        <td>Model correctly declines to diagnose, flags urgency, refers to physician</td>
+                        <td>Legal + clinical review</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Multilingual Alignment Seeds</strong></td>
+                        <td><span class="tag-partial">5%</span></td>
+                        <td>DE↔FR, DE↔IT concept mappings for future expansion</td>
+                        <td>Bilingual expert review</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- REGULATORY COMPLIANCE -->
+        <section class="section" id="compliance">
+            <div class="section-eyebrow">Legal & Ethics</div>
+            <h2 class="section-title">Regulatory <span class="accent">Compliance</span> Framework <span
+                    class="new-badge">NEW</span></h2>
+            <p class="section-intro">Healthcare-adjacent AI in the EU operates at the intersection of GDPR, the EU AI
+                Act, copyright law, and medical ethics. Each layer requires deliberate architecture choices — not
+                afterthoughts.</p>
+
+            <div class="grid-2" style="margin-bottom: 36px;">
+                <div>
+                    <div class="compliance-item">
+                        <div class="compliance-subtitle">GDPR — Data Protection</div>
+                        <div class="compliance-title">GDPR-Compliant Data Architecture</div>
+                        <p
+                            style="font-family: var(--lc-font-body); font-size: 14px; color: var(--lc-text-muted); line-height: 1.6; margin-bottom: 12px;">
+                            Lingocare processes student interaction data and potentially patient scenario content. This
+                            requires clear data residency, retention policy, and lawful basis for processing.</p>
+                        <ul class="card-bullets">
+                            <li><strong>Data residency:</strong> All inference infrastructure deployed in EU-region
+                                (Frankfurt). No student data leaves the EU without explicit legal mechanism.</li>
+                            <li><strong>Retention policy:</strong> Student interaction logs retained for 90 days for
+                                quality assurance, then anonymised or deleted. Define this in your data processing
+                                agreement with each Pflegeschule.</li>
+                            <li><strong>Lawful basis:</strong> Processing under legitimate interest (educational
+                                improvement) plus explicit consent. School directors must be data controllers; Lingocare
+                                is data processor.</li>
+                            <li><strong>Data subject rights:</strong> Students can request deletion of their interaction
+                                history. Build this into the product from Phase 1.</li>
+                            <li><strong>Training data anonymisation:</strong> Before any interaction data enters the
+                                fine-tuning dataset, all student identifiers and any patient-identifiable information
+                                must be stripped.</li>
+                        </ul>
+                    </div>
+
+                    <div class="compliance-item">
+                        <div class="compliance-subtitle">Zero Data Retention — API Level</div>
+                        <div class="compliance-title">Mistral ZDR Option</div>
+                        <p
+                            style="font-family: var(--lc-font-body); font-size: 14px; color: var(--lc-text-muted); line-height: 1.6; margin-bottom: 12px;">
+                            Mistral AI offers a Zero Data Retention (ZDR) API tier where API request and response
+                            content is not stored, logged, or used for model training by Mistral. This is a critical
+                            capability for a healthcare education product.</p>
+                        <ul class="card-bullets">
+                            <li><strong>Activate ZDR for all student-facing API calls</strong> in Phase 1 immediately.
+                            </li>
+                            <li>ZDR means Lingocare is the sole data controller for all interaction content — no shared
+                                responsibility with Mistral.</li>
+                            <li>ZDR applies to the base API; fine-tuned model inference on Mistral's platform also
+                                supports ZDR.</li>
+                            <li>When self-hosted via vLLM, ZDR is inherent — no third-party API calls at inference time.
+                            </li>
+                            <li><strong>Document ZDR activation</strong> in your GDPR records of processing activities
+                                (Article 30 GDPR).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="compliance-item">
+                        <div class="compliance-subtitle">Copyright — Training Data</div>
+                        <div class="compliance-title">LoRA Adaptation & Copyright Compliance</div>
+                        <p
+                            style="font-family: var(--lc-font-body); font-size: 14px; color: var(--lc-text-muted); line-height: 1.6; margin-bottom: 12px;">
+                            Fine-tuning on copyrighted nursing textbooks, standards documents, or curricula requires
+                            careful legal architecture. The LoRA approach offers a structural advantage here.</p>
+                        <ul class="card-bullets">
+                            <li><strong>LoRA does not memorise verbatim text</strong> the way full fine-tuning does.
+                                Adapter matrices learn patterns and relationships, not literal passages. This
+                                significantly reduces direct infringement risk.</li>
+                            <li><strong>Preferred sources for training data:</strong> Original content created by
+                                Lingocare's nursing educators (no copyright issue); publicly licensed nursing standards
+                                (e.g., government-published Hessen curriculum — public domain); content licensed from
+                                publishers under explicit data-for-training agreements.</li>
+                            <li><strong>Avoid:</strong> Scraping copyrighted nursing textbooks (Thieme, Elsevier)
+                                without a license. Do not use content from paywalled medical databases without explicit
+                                API/licensing rights.</li>
+                            <li><strong>EU Text and Data Mining exception</strong> (DSM Directive Article 4): Research
+                                organisations may use copyrighted content for TDM without permission if the rightsholder
+                                has not opted out. Lingocare as a commercial entity may not qualify — seek legal counsel
+                                before using third-party copyrighted material in training data.</li>
+                            <li><strong>Best practice:</strong> All training examples should cite their source. Maintain
+                                a training data provenance log.</li>
+                        </ul>
+                    </div>
+
+                    <div class="compliance-item">
+                        <div class="compliance-subtitle">EU AI Act</div>
+                        <div class="compliance-title">Risk Classification & Obligations</div>
+                        <p
+                            style="font-family: var(--lc-font-body); font-size: 14px; color: var(--lc-text-muted); line-height: 1.6; margin-bottom: 12px;">
+                            The EU AI Act (in force from August 2024, obligations phasing in through 2026) classifies AI
+                            systems by risk. Lingocare's positioning within this framework is crucial.</p>
+                        <ul class="card-bullets">
+                            <li><strong>Current classification: Limited Risk</strong> — Lingocare LLM is a learning
+                                support tool, not a clinical decision system. It does not determine patient care
+                                outcomes. This places it outside the "high risk" Annex III categories.</li>
+                            <li><strong>Maintain "limited risk" positioning</strong> by: always including AI disclosure,
+                                always deferring to clinical supervisors, never presenting AI responses as clinical
+                                guidance.</li>
+                            <li><strong>Transparency obligation (Article 52):</strong> Students must always know they
+                                are interacting with an AI. This is already in the Lingocare product design — document
+                                it formally.</li>
+                            <li><strong>General Purpose AI provisions (Title VIII):</strong> If Mistral Small 3.2 is
+                                classified as a GPAI model, Mistral bears the primary compliance obligations. Lingocare
+                                as a downstream deployer has lighter obligations — but must document the deployment use
+                                case.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-heading">Long-Term Modularity: The vLLM Migration Path</div>
+            <p class="body-text">The path from managed API to private on-premises infrastructure is deliberate and
+                achievable. Fine-tuned weights exported from Mistral's platform are standard GGUF/safetensor format —
+                directly compatible with vLLM, Ollama, and any major inference engine.</p>
+
+            <div class="card" style="margin-bottom: 24px;">
+                <div class="card-label">Migration Roadmap — Managed API to On-Premises vLLM</div>
+                <div style="margin-top: 16px;">
+                    <div class="migration-step">
+                        <div class="step-num">1</div>
+                        <div class="step-body">
+                            <div class="step-title">Export fine-tuned weights from Mistral's platform</div>
+                            <div class="step-desc">Mistral's fine-tuning API allows weight export in standard format.
+                                Download the LoRA adapter files and the base model weights (available via HuggingFace
+                                under Apache 2.0). Store in EU-region S3 bucket. Estimated time: 2–4 hours including
+                                download and storage setup.</div>
+                        </div>
+                    </div>
+                    <div class="migration-step">
+                        <div class="step-num">2</div>
+                        <div class="step-body">
+                            <div class="step-title">Merge adapter into base model (optional but recommended for
+                                production)</div>
+                            <div class="step-desc">Merge the LoRA adapter weights into the base model for faster
+                                inference (eliminates the adapter computation step at runtime). Use the Hugging Face
+                                PEFT merge_and_unload() function. Output: a single merged safetensor model ready for
+                                serving. Estimated time: 1 hour on any modern GPU.</div>
+                        </div>
+                    </div>
+                    <div class="migration-step">
+                        <div class="step-num">3</div>
+                        <div class="step-body">
+                            <div class="step-title">Quantize for deployment (GGUF Q4_K_M or AWQ)</div>
+                            <div class="step-desc">Convert to GGUF Q4_K_M quantization using llama.cpp. Reduces model
+                                size by ~70% with minimal quality loss. This enables deployment on smaller GPU SKUs (RTX
+                                4090-class) and on-premises school servers. Use AWQ quantization for vLLM production
+                                serving for better throughput. Estimated time: 2–3 hours per quantization format.</div>
+                        </div>
+                    </div>
+                    <div class="migration-step">
+                        <div class="step-num">4</div>
+                        <div class="step-body">
+                            <div class="step-title">Deploy via vLLM on EU-region GPU server</div>
+                            <div class="step-desc">vLLM provides an OpenAI-compatible API endpoint — the Lingocare
+                                product layer requires no code changes to switch from managed API to self-hosted. Run:
+                                vllm serve lingocare-model --max-model-len 32768 --tensor-parallel-size 1. Configure
+                                behind an nginx reverse proxy with TLS. Estimated time: 4–8 hours for initial setup,
+                                then ongoing maintenance.</div>
+                        </div>
+                    </div>
+                    <div class="migration-step">
+                        <div class="step-num">5</div>
+                        <div class="step-body">
+                            <div class="step-title">Switch product API endpoint from Mistral to self-hosted vLLM</div>
+                            <div class="step-desc">Update the LINGOCARE_API_BASE environment variable from
+                                api.mistral.ai to your self-hosted endpoint. Run canary (10% traffic) for 48 hours.
+                                Monitor latency, error rate, and quality scores. Full cutover when metrics match or
+                                exceed managed API. Zero downtime migration. Estimated time: 2 hours configuration +
+                                48-hour monitoring window.</div>
+                        </div>
+                    </div>
+                    <div class="migration-step">
+                        <div class="step-num">6</div>
+                        <div class="step-body">
+                            <div class="step-title">On-Premises School Deployment (Future)</div>
+                            <div class="step-desc">For Pflegeschulen that contract for an air-gapped on-premises
+                                deployment (highest data sovereignty), package the GGUF model with an Ollama server as a
+                                Docker container. Runs on a workstation-class GPU (RTX 4090). School's student data
+                                never leaves their network. This is the ultimate GDPR compliance posture and a premium
+                                product offering.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout-red callout">
+                <div class="callout-label">Critical Compliance Action Items — Before Phase 1 Launch</div>
+                <p style="font-style: normal; font-size: 14px; line-height: 1.7;">1. Activate Mistral Zero Data
+                    Retention on your API account. 2. Draft a Data Processing Agreement (DPA) template for Pflegeschule
+                    contracts — Lingocare as processor, school as controller. 3. Document your lawful basis for
+                    processing student interaction data under GDPR Article 6. 4. Ensure your training data provenance
+                    log covers every example in the fine-tuning dataset. 5. Add AI disclosure language to every
+                    student-facing interface. 6. Consult legal counsel on EU TDM exception applicability before using
+                    third-party nursing textbooks in training data.</p>
+            </div>
+        </section>
+
+        <!-- ROADMAP -->
+        <section class="section section-alt" id="roadmap">
+            <div class="section-eyebrow">Execution Plan</div>
+            <h2 class="section-title">12-Month <span class="accent">Build Roadmap</span> <span
+                    class="updated-badge">UPDATED</span></h2>
+            <p class="section-intro">Four phases, each gated by a classroom validation checkpoint. Updated to reflect
+                managed fine-tuning API approach for Phase 2 Early and vLLM self-hosting for Phase 2 Scale.</p>
+
+            <div class="two-col-aside">
+                <div class="roadmap-timeline">
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-phase">Phase 0 · Months 0–2</div>
+                        <div class="roadmap-title">Foundation, Compliance & Data Pipeline</div>
+                        <div class="roadmap-timeline-label">Months 0–2</div>
+                        <div class="card">
+                            <ul class="card-bullets">
+                                <li><strong>Switch Phase 1 API to Mistral Small 3.2</strong> — from any current provider
+                                </li>
+                                <li>Activate Mistral Zero Data Retention on API account</li>
+                                <li>Draft and sign Pflegeschule Data Processing Agreements</li>
+                                <li>Mine Phase 1 pilot interaction data — extract 500–1,000 seed examples</li>
+                                <li>Set up data pipeline: raw logs → ChatML JSONL → DVC repo → EU S3</li>
+                                <li>Use Claude Haiku 3.5 to generate 2,000 synthetic draft examples from seed content
+                                </li>
+                                <li>Engage nursing educators for expert validation review (15–20hrs/month)</li>
+                                <li>First managed API fine-tune: 500 validated examples, cost ~$1.60</li>
+                                <li>Establish evaluation benchmark: 100 test cases, teacher blind-scoring protocol</li>
+                            </ul>
+                            <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
+                                <span class="chip" style="font-size:11px;"><span class="chip-dot"></span>Owner:
+                                    Arslaan</span>
+                                <span class="chip" style="font-size:11px;"><span class="chip-dot"></span>Reviewer:
+                                    Belinda (content)</span>
+                                <span class="chip" style="font-size:11px;"><span class="chip-dot"></span>Cost: ~$50
+                                    infra + data review time</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-phase">Phase 1-LLM · Months 3–6</div>
+                        <div class="roadmap-title">Core Dataset Build & First Fine-Tune</div>
+                        <div class="roadmap-timeline-label">Months 3–6</div>
+                        <div class="card">
+                            <ul class="card-bullets">
+                                <li>Scale dataset to 2,500 validated examples across all categories</li>
+                                <li>Cover core nursing competencies per Hessen curriculum framework</li>
+                                <li>Add 300+ safety/refusal training examples — clinically validated</li>
+                                <li>Full fine-tune v0.1 on Mistral Managed API: ~2M tokens × $4 = <strong>~$8</strong>
+                                </li>
+                                <li>Store v0.1 model: $2/month on Mistral platform + backup to EU S3</li>
+                                <li>Internal evaluation: teacher blind-comparison vs Phase 1 Mistral base API</li>
+                                <li>Gate: Lingocare LLM v0.1 must score ≥80% parity on evaluation benchmark</li>
+                                <li>Shadow deployment alongside base model in one pilot school</li>
+                            </ul>
+                            <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
+                                <span class="chip" style="font-size:11px;"><span class="chip-dot"></span>Gate: 80%
+                                    parity with base model</span>
+                                <span class="chip" style="font-size:11px;"><span class="chip-dot"></span>Total fine-tune
+                                    cost: ~$8</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-phase">Phase 2-LLM · Months 7–9</div>
+                        <div class="roadmap-title">DPO Alignment & Classroom Validation</div>
+                        <div class="roadmap-timeline-label">Months 7–9</div>
+                        <div class="card">
+                            <ul class="card-bullets">
+                                <li>Scale dataset to 4,000–5,000 examples — full fine-tune v0.2: <strong>~$16</strong>
+                                </li>
+                                <li>Add DPO (Direct Preference Optimization) alignment layer: 1,000 preference pairs
+                                    teacher-labelled</li>
+                                <li>Live pilot: Lingocare LLM v0.2 deployed in 2 pilot schools, full student cohort</li>
+                                <li>Systematic student and teacher satisfaction survey (target ≥4.0/5.0)</li>
+                                <li>Gate: student satisfaction ≥4.0/5.0; zero clinical safety incidents over 8-week
+                                    window</li>
+                                <li>Begin multilingual seed data — 200 DE↔FR nursing concept pairs</li>
+                                <li>Export fine-tuned weights to EU S3 (prepare for self-hosted migration)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-phase">Phase 3-LLM · Months 10–12</div>
+                        <div class="roadmap-title">Production Launch & Scale Preparation</div>
+                        <div class="roadmap-timeline-label">Months 10–12</div>
+                        <div class="card">
+                            <ul class="card-bullets">
+                                <li>Full switch to Lingocare LLM v0.2 in production — Phase 1 base model retired</li>
+                                <li>Continue on Mistral Managed API inference until student count triggers breakeven
+                                </li>
+                                <li>Set up vLLM proof-of-concept on RunPod EU — validate migration path</li>
+                                <li>Implement monitoring: latency, error rate, clinical accuracy drift detection</li>
+                                <li>Monthly re-fine-tune cycle: new classroom data → $16 per cycle</li>
+                                <li>Publish internal model card and GDPR compliance documentation</li>
+                                <li>Begin French expansion DPO training</li>
+                                <li>Evaluate vLLM self-hosting migration when student count approaches 8,000/day</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="card" style="position: sticky; top: 24px;">
+                        <div class="card-label">Cost Summary by Phase</div>
+                        <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 12px;">
+                            <div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 13px; color: var(--lc-text); margin-bottom: 4px;">
+                                    Phase 0 Infrastructure</div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 20px; color: var(--lc-orange);">
+                                    ~$50</div>
+                                <p
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    API costs + first mini fine-tune. Main cost: expert review time.</p>
+                            </div>
+                            <hr class="card-divider">
+                            <div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 13px; color: var(--lc-text); margin-bottom: 4px;">
+                                    Phase 1-LLM Fine-Tune</div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 20px; color: var(--lc-orange);">
+                                    ~$8</div>
+                                <p
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    2M tokens × $4/M. $2/month storage.</p>
+                            </div>
+                            <hr class="card-divider">
+                            <div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 13px; color: var(--lc-text); margin-bottom: 4px;">
+                                    Phase 2-LLM Fine-Tune</div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 20px; color: var(--lc-orange);">
+                                    ~$16</div>
+                                <p
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    4M tokens × $4/M. Full dataset fine-tune.</p>
+                            </div>
+                            <hr class="card-divider">
+                            <div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 13px; color: var(--lc-text); margin-bottom: 4px;">
+                                    Monthly Re-Fine-Tune</div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 20px; color: var(--lc-orange);">
+                                    ~$16</div>
+                                <p
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    Continuous improvement cycle. Dramatically cheaper than GPU rental.</p>
+                            </div>
+                            <hr class="card-divider">
+                            <div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 13px; color: var(--lc-text); margin-bottom: 4px;">
+                                    Total R&amp;D Infrastructure</div>
+                                <div
+                                    style="font-family: var(--lc-font-heading); font-weight: 800; font-size: 24px; color: var(--lc-orange);">
+                                    &lt;$100</div>
+                                <p
+                                    style="font-size: 11px; color: var(--lc-text-muted); font-family: var(--lc-font-body);">
+                                    For the full 12-month build cycle. The main investment is expert review time, not
+                                    compute.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODEL UPGRADES -->
+        <section class="section" id="model-upgrades">
+            <div class="section-eyebrow">Long-Term Strategy</div>
+            <h2 class="section-title">Model Upgrade <span class="accent">Flexibility</span></h2>
+            <p class="section-intro">The dataset is the durable asset. The model is the replaceable engine. Updating to
+                a new Mistral release is a re-training run costing ~$16, not a migration project.</p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-label">Within Mistral Family (Easiest)</div>
+                    <div
+                        style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 16px; margin-bottom: 10px;">
+                        ~4–8 hours total</div>
+                    <p
+                        style="font-size: 14px; color: var(--lc-text-muted); font-family: var(--lc-font-body); line-height: 1.55;">
+                        When Mistral releases Small 3.3 or a successor: re-submit the same JSONL dataset to Mistral's
+                        managed fine-tuning API. New model, same data, same $16 training cost. Zero engineering work —
+                        Mistral handles the training infrastructure upgrade automatically.</p>
+                </div>
+                <div class="card">
+                    <div class="card-label">Cross-Family Upgrade</div>
+                    <div
+                        style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 16px; margin-bottom: 10px;">
+                        ~1–2 days total</div>
+                    <p
+                        style="font-size: 14px; color: var(--lc-text-muted); font-family: var(--lc-font-body); line-height: 1.55;">
+                        If a superior EU-origin model emerges (e.g., a future German-developed model, or a
+                        medical-specialized European LLM): convert ChatML JSONL to the new model's chat template (mostly
+                        automated), re-run fine-tuning. The data is the constant; only the format conversion is new
+                        work.</p>
+                </div>
+                <div class="card">
+                    <div class="card-label">Scale-Up to Larger Model</div>
+                    <div
+                        style="font-family: var(--lc-font-heading); font-weight: 700; font-size: 16px; margin-bottom: 10px;">
+                        Infrastructure investment</div>
+                    <p
+                        style="font-size: 14px; color: var(--lc-text-muted); font-family: var(--lc-font-body); line-height: 1.55;">
+                        Moving to Mistral Large or Mixtral 8×22B when user scale justifies it. Requires multi-GPU
+                        self-hosted infrastructure (2–4× A100 80GB). Training cost increases proportionally ($4/M tokens
+                        remains the same; more tokens needed for larger model). Same dataset — larger engine.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MULTILINGUAL -->
+        <section class="section section-alt" id="multilingual">
+            <div class="section-eyebrow">Language Expansion</div>
+            <h2 class="section-title">Multilingual <span class="accent">Expansion Strategy</span></h2>
+            <p class="section-intro">German first. Then French, Italian, Spanish — using Cross-Lingual Transfer via DPO,
+                not full re-training. Mistral Small 3.2's native European multilingual pre-training makes each
+                additional language cheaper to activate.</p>
+
+            <div class="two-col">
+                <div>
+                    <p class="body-text">The nursing care concepts are universal. The model knows what a Dekubitus is in
+                        German. It needs only to learn the linguistic mapping to French (escarre) or Italian (piaga da
+                        decubito). Direct Preference Optimization with Cross-Lingual Pairs (DPO-XL) achieves this with
+                        200–500 expert-validated concept pairs per language.</p>
+                    <table class="lc-table">
+                        <thead>
+                            <tr>
+                                <th>Language</th>
+                                <th>Phase</th>
+                                <th>Pairs Needed</th>
+                                <th>Est. Training Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>German 🇩🇪</strong></td>
+                                <td><span class="tag-yes">Phase 1-LLM</span></td>
+                                <td>3,000–5,000</td>
+                                <td>~$16 per full run</td>
+                            </tr>
+                            <tr>
+                                <td><strong>French 🇫🇷</strong></td>
+                                <td><span class="tag-partial">Phase 3–4</span></td>
+                                <td>300–500 alignment pairs</td>
+                                <td>~$2–3 per DPO run</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Italian 🇮🇹</strong></td>
+                                <td><span class="tag-partial">Phase 4–5</span></td>
+                                <td>200–400 pairs</td>
+                                <td>~$2–3 per DPO run</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Spanish 🇪🇸</strong></td>
+                                <td><span class="tag-partial">Phase 5+</span></td>
+                                <td>200–400 pairs</td>
+                                <td>~$2–3 per DPO run</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="callout" style="height: fit-content; margin: 0;">
+                    <div class="callout-label">Why Mistral Small 3.2 Excels Here</div>
+                    <p>Mistral AI trained Small 3.2 on high-quality European multilingual data — German, French,
+                        Italian, and Spanish are all strongly represented in base pre-training. The fine-tuning delta
+                        needed for each additional European language is dramatically smaller than with US-origin models.
+                        This is the single biggest reason to standardise on Mistral across both Phase 1 and Phase 2.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHALLENGES -->
+        <section class="section" id="challenges">
+            <div class="section-eyebrow">Challenges & Solutions</div>
+            <h2 class="section-title">Known <span class="accent">Challenges</span> &amp; How to Solve Them</h2>
+            <p class="section-intro">Every challenge below has a known solution. None are blockers. The managed API
+                approach removes several infrastructure challenges that were present in v1 of this report.</p>
+
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="card">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                        <div>
+                            <div class="card-label" style="color:var(--lc-red);">Challenge</div>
+                            <div
+                                style="font-family:var(--lc-font-heading);font-weight:700;font-size:17px;color:var(--lc-text);margin-bottom:8px;">
+                                Medical Hallucination Risk</div>
+                            <p
+                                style="font-family:var(--lc-font-body);font-size:14px;color:var(--lc-text-muted);line-height:1.55;">
+                                LLMs generate plausible-sounding but incorrect medical information — dangerous in a
+                                nursing education context.</p>
+                        </div>
+                        <div>
+                            <div class="card-label">Solution</div>
+                            <ul class="card-bullets">
+                                <li>All medical training data expert-validated by nursing educators before inclusion
+                                </li>
+                                <li>Explicit refusal training examples: "Als KI-Lernassistent kann ich keine Diagnose
+                                    stellen..."</li>
+                                <li>Post-generation safety filter for numerical medical values (dosages, vital ranges)
+                                </li>
+                                <li>Always display "KI-generiert — mit klinischer Fachkraft verifizieren" in student UI
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                        <div>
+                            <div class="card-label" style="color:var(--lc-red);">Challenge</div>
+                            <div
+                                style="font-family:var(--lc-font-heading);font-weight:700;font-size:17px;color:var(--lc-text);margin-bottom:8px;">
+                                Data Scarcity — Cold Start</div>
+                            <p
+                                style="font-family:var(--lc-font-body);font-size:14px;color:var(--lc-text-muted);line-height:1.55;">
+                                3,000 high-quality validated examples are hard to produce quickly.</p>
+                        </div>
+                        <div>
+                            <div class="card-label">Solution</div>
+                            <ul class="card-bullets">
+                                <li>Mine Phase 1 pilot data immediately — 500–800 usable seed examples exist now</li>
+                                <li>Use Claude Haiku 3.5 to generate 2,000 synthetic drafts from seeds, then
+                                    expert-review</li>
+                                <li>Start managed fine-tuning at 500 examples (~$0.40) to validate pipeline quality</li>
+                                <li>Revyn Tech India team handles ChatML formatting and data processing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                        <div>
+                            <div class="card-label" style="color:var(--lc-red);">Challenge</div>
+                            <div
+                                style="font-family:var(--lc-font-heading);font-weight:700;font-size:17px;color:var(--lc-text);margin-bottom:8px;">
+                                GDPR + EU AI Act Compliance</div>
+                            <p
+                                style="font-family:var(--lc-font-body);font-size:14px;color:var(--lc-text-muted);line-height:1.55;">
+                                Dual regulatory framework creates compliance complexity for a healthcare education
+                                product.</p>
+                        </div>
+                        <div>
+                            <div class="card-label">Solution</div>
+                            <ul class="card-bullets">
+                                <li>Activate Mistral ZDR immediately — removes API-level data retention concern</li>
+                                <li>EU-region (Frankfurt) hosting for all inference — maintains GDPR data residency</li>
+                                <li>Lingocare = Limited Risk under EU AI Act (learning tool, not clinical system)</li>
+                                <li>Engage compliance counsel at Phase 3-LLM before production launch</li>
+                                <li>Maintain full training data provenance log from day one</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                        <div>
+                            <div class="card-label" style="color:var(--lc-red);">Challenge</div>
+                            <div
+                                style="font-family:var(--lc-font-heading);font-weight:700;font-size:17px;color:var(--lc-text);margin-bottom:8px;">
+                                Model Quality Regression After Update</div>
+                            <p
+                                style="font-family:var(--lc-font-body);font-size:14px;color:var(--lc-text-muted);line-height:1.55;">
+                                A new fine-tune or base model update might underperform the previous version in some
+                                areas.</p>
+                        </div>
+                        <div>
+                            <div class="card-label">Solution</div>
+                            <ul class="card-bullets">
+                                <li>Maintain frozen evaluation benchmark of 200 test cases — run on every new model
+                                    version</li>
+                                <li>Canary deployment: new model gets 10% of traffic, monitor for 48 hours before full
+                                    rollout</li>
+                                <li>Never delete old model versions — immutable snapshots in EU S3 and Mistral platform
+                                </li>
+                                <li>At $2/month storage, keeping 6 historical versions costs $12/month — worth it</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COSTS -->
+        <section class="section section-alt" id="costs">
+            <div class="section-eyebrow">Financial Planning</div>
+            <h2 class="section-title">Full <span class="accent">Cost Analysis</span> <span
+                    class="updated-badge">UPDATED</span></h2>
+            <p class="section-intro">Updated with actual Mistral Small 3.2 pricing ($0.10/$0.30 per M tokens, $4/M
+                training tokens, $2/month model storage). All figures incorporate real published rates.</p>
+
+            <div class="grid-3" style="margin-bottom: 40px;">
+                <div>
+                    <div class="sub-heading-sm">Phase 1 API — Monthly (Mistral Small 3.2)</div>
+                    <div class="card" style="padding: 0; overflow: hidden;">
+                        <div style="padding: 20px 24px;">
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">50 students/day (Pilot)</div>
+                                    <div class="cost-note">22.5M tokens/month</div>
+                                </div>
+                                <div class="cost-amount">~$3.70</div>
+                            </div>
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">200 students/day</div>
+                                    <div class="cost-note">90M tokens/month</div>
+                                </div>
+                                <div class="cost-amount">~$14.70</div>
+                            </div>
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">500 students/day</div>
+                                    <div class="cost-note">225M tokens/month</div>
+                                </div>
+                                <div class="cost-amount">~$36.75</div>
+                            </div>
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">2,000 students/day</div>
+                                    <div class="cost-note">900M tokens/month</div>
+                                </div>
+                                <div class="cost-amount">~$147</div>
+                            </div>
+                        </div>
+                        <div class="cost-total"><span class="cost-total-label">Mistral Small 3.2 at 500
+                                students</span><span class="cost-total-amount">~$37/mo</span></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="sub-heading-sm">Phase 2 — Managed Fine-Tuning Costs</div>
+                    <div class="card" style="padding: 0; overflow: hidden;">
+                        <div style="padding: 20px 24px;">
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">v0.1 fine-tune (2M tokens)</div>
+                                    <div class="cost-note">2,500 examples × 800 tokens avg</div>
+                                </div>
+                                <div class="cost-amount">~$8</div>
+                            </div>
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">v0.2 fine-tune (4M tokens)</div>
+                                    <div class="cost-note">5,000 examples × 800 tokens avg</div>
+                                </div>
+                                <div class="cost-amount">~$16</div>
+                            </div>
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">Model storage</div>
+                                    <div class="cost-note">$2/month per fine-tuned model version</div>
+                                </div>
+                                <div class="cost-amount">$2/mo</div>
+                            </div>
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">Monthly re-fine-tune cycle</div>
+                                    <div class="cost-note">New classroom data each month</div>
+                                </div>
+                                <div class="cost-amount">~$16/mo</div>
+                            </div>
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">Inference (500 students)</div>
+                                    <div class="cost-note">Same rate as base: $0.10/$0.30</div>
+                                </div>
+                                <div class="cost-amount">~$37/mo</div>
+                            </div>
+                        </div>
+                        <div class="cost-total"><span class="cost-total-label">Phase 2 total R&amp;D infra
+                                cost</span><span class="cost-total-amount">&lt;$100</span></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="sub-heading-sm">Phase 3 — Self-Hosted vLLM (At Scale)</div>
+                    <div class="card" style="padding: 0; overflow: hidden;">
+                        <div style="padding: 20px 24px;">
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">1× A100 80GB dedicated (EU)</div>
+                                    <div class="cost-note">RunPod Frankfurt — always-on</div>
+                                </div>
+                                <div class="cost-amount">~$700/mo</div>
+                            </div>
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">Storage (EU S3)</div>
+                                    <div class="cost-note">Model weights + logs + training data</div>
+                                </div>
+                                <div class="cost-amount">~$30/mo</div>
+                            </div>
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">Monthly re-fine-tune (local GPU)</div>
+                                    <div class="cost-note">8hrs × A6000 $1.10/hr</div>
+                                </div>
+                                <div class="cost-amount">~$9/mo</div>
+                            </div>
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">Inference (unlimited tokens)</div>
+                                    <div class="cost-note">Included in GPU rental — zero marginal cost</div>
+                                </div>
+                                <div class="cost-amount">$0</div>
+                            </div>
+                            <div class="cost-row">
+                                <div>
+                                    <div class="cost-label">Break-even point vs managed API</div>
+                                    <div class="cost-note">~8,000 students/day</div>
+                                </div>
+                                <div class="cost-amount">—</div>
+                            </div>
+                        </div>
+                        <div class="cost-total"><span class="cost-total-label">Phase 3 at 10K+ students/day</span><span
+                                class="cost-total-amount">~$739/mo</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-heading">5-Year Projection — All Phases</div>
+            <div style="overflow-x: auto;">
+                <table class="lc-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Students/Day</th>
+                            <th>Phase</th>
+                            <th>Claude Haiku (old)</th>
+                            <th>Mistral API (now)</th>
+                            <th>vLLM Self-Hosted</th>
+                            <th>Annual Saving vs Haiku</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Year 1 (Pilots)</td>
+                            <td>50–200</td>
+                            <td>Phase 1 API</td>
+                            <td style="color:var(--lc-red);">€170–1,500/mo</td>
+                            <td><strong>€3–14/mo</strong></td>
+                            <td>N/A (below breakeven)</td>
+                            <td><span class="tag-yes">~€2K–18K</span></td>
+                        </tr>
+                        <tr class="winner-row">
+                            <td>Year 2 (Early Scale)</td>
+                            <td>500–1,500</td>
+                            <td>Phase 2 Managed</td>
+                            <td style="color:var(--lc-red);">€4K–12K/mo</td>
+                            <td><strong>€37–147/mo</strong></td>
+                            <td>N/A (below breakeven)</td>
+                            <td><span class="tag-yes">~€47K–142K</span></td>
+                        </tr>
+                        <tr>
+                            <td>Year 3 (Growth)</td>
+                            <td>2,000–5,000</td>
+                            <td>Phase 2 → 3</td>
+                            <td style="color:var(--lc-red);">€16K–40K/mo</td>
+                            <td><strong>€147–368/mo</strong></td>
+                            <td>€700–1,200/mo (at 5K+)</td>
+                            <td><span class="tag-yes">~€185K–470K</span></td>
+                        </tr>
+                        <tr>
+                            <td>Year 4 (Scale)</td>
+                            <td>5,000–15,000</td>
+                            <td>Phase 3 Self-Host</td>
+                            <td style="color:var(--lc-red);">€40K–120K/mo</td>
+                            <td>€368–1,100/mo</td>
+                            <td><strong>€700–1,800/mo</strong></td>
+                            <td><span class="tag-yes">~€470K–1.4M</span></td>
+                        </tr>
+                        <tr>
+                            <td>Year 5 (National)</td>
+                            <td>15,000–50,000</td>
+                            <td>Phase 3 Self-Host</td>
+                            <td style="color:var(--lc-red);">€120K–400K/mo</td>
+                            <td>€1.1K–3.7K/mo</td>
+                            <td><strong>€1,800–5,000/mo</strong></td>
+                            <td><span class="tag-yes">~€1.4M–4.7M</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p
+                style="font-size: 12px; color: var(--lc-text-muted); font-family: var(--lc-font-body); margin-top: 10px;">
+                * Haiku pricing: $0.80/$4.00 per M tokens. Mistral pricing: $0.10/$0.30 per M tokens (source: Mistral
+                platform, May 2025). Self-hosted: RunPod EU A100 80GB ~$700/mo. EUR/USD assumed at parity for
+                simplicity.</p>
+        </section>
+
+        <!-- RISKS -->
+        <section class="section" id="risks">
+            <div class="section-eyebrow">Risk Management</div>
+            <h2 class="section-title">Risk Register &amp; <span class="accent">Mitigations</span></h2>
+            <div class="card">
+                <div
+                    style="display: grid; grid-template-columns: 2fr 1fr 3fr; gap: 16px; padding: 0 0 12px; border-bottom: 2px solid rgba(237,125,0,0.2); margin-bottom: 4px;">
+                    <div
+                        style="font-family:var(--lc-font-heading);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--lc-text-muted);">
+                        Risk</div>
+                    <div
+                        style="font-family:var(--lc-font-heading);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--lc-text-muted);">
+                        Level</div>
+                    <div
+                        style="font-family:var(--lc-font-heading);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--lc-text-muted);">
+                        Mitigation</div>
+                </div>
+
+                <div class="risk-item">
+                    <div>
+                        <div
+                            style="font-family:var(--lc-font-heading);font-weight:700;font-size:14px;margin-bottom:4px;">
+                            Model produces clinically incorrect content</div>
+                        <p style="font-size:12px;color:var(--lc-text-muted);font-family:var(--lc-font-body);">
+                            Hallucinated dosages or care protocols presented as fact</p>
+                    </div>
+                    <div><span class="risk-level risk-high"><span class="risk-dot"></span>High</span></div>
+                    <div>
+                        <ul class="card-bullets">
+                            <li>Expert-validate all medical training data</li>
+                            <li>Train explicit refusal behaviour in German</li>
+                            <li>Post-generation safety filter on numerical medical values</li>
+                            <li>AI disclosure in all student-facing outputs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="risk-item">
+                    <div>
+                        <div
+                            style="font-family:var(--lc-font-heading);font-weight:700;font-size:14px;margin-bottom:4px;">
+                            EU AI Act reclassifies product as high-risk</div>
+                        <p style="font-size:12px;color:var(--lc-text-muted);font-family:var(--lc-font-body);">Regulatory
+                            change forces compliance burden</p>
+                    </div>
+                    <div><span class="risk-level risk-med"><span class="risk-dot"></span>Medium</span></div>
+                    <div>
+                        <ul class="card-bullets">
+                            <li>Design for auditability from day one</li>
+                            <li>Maintain human teacher oversight layer</li>
+                            <li>Engage EU AI compliance counsel at Phase 3-LLM</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="risk-item">
+                    <div>
+                        <div
+                            style="font-family:var(--lc-font-heading);font-weight:700;font-size:14px;margin-bottom:4px;">
+                            Mistral AI changes licensing or is acquired</div>
+                        <p style="font-size:12px;color:var(--lc-text-muted);font-family:var(--lc-font-body);">Future
+                            models move to restrictive license</p>
+                    </div>
+                    <div><span class="risk-level risk-med"><span class="risk-dot"></span>Medium</span></div>
+                    <div>
+                        <ul class="card-bullets">
+                            <li>Current Apache 2.0 weights cannot be retroactively relicensed — archive them immediately
+                            </li>
+                            <li>Dataset in model-agnostic ChatML format — re-train on any future EU open model</li>
+                            <li>Fine-tuned weights exportable from managed platform to EU S3</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="risk-item">
+                    <div>
+                        <div
+                            style="font-family:var(--lc-font-heading);font-weight:700;font-size:14px;margin-bottom:4px;">
+                            Copyright infringement via training data</div>
+                        <p style="font-size:12px;color:var(--lc-text-muted);font-family:var(--lc-font-body);">Using
+                            copyrighted nursing textbooks without license in training data</p>
+                    </div>
+                    <div><span class="risk-level risk-med"><span class="risk-dot"></span>Medium</span></div>
+                    <div>
+                        <ul class="card-bullets">
+                            <li>Prioritise Lingocare-original content and public-domain government nursing standards
+                            </li>
+                            <li>LoRA adaptation reduces verbatim memorisation risk structurally</li>
+                            <li>Maintain training data provenance log — document source and license for every example
+                            </li>
+                            <li>Legal review before using any third-party copyrighted material</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="risk-item">
+                    <div>
+                        <div
+                            style="font-family:var(--lc-font-heading);font-weight:700;font-size:14px;margin-bottom:4px;">
+                            Managed API pricing increase by Mistral</div>
+                        <p style="font-size:12px;color:var(--lc-text-muted);font-family:var(--lc-font-body);">$4/M
+                            training or $0.10/$0.30 inference pricing changes</p>
+                    </div>
+                    <div><span class="risk-level risk-low"><span class="risk-dot"></span>Low</span></div>
+                    <div>
+                        <ul class="card-bullets">
+                            <li>Weights are exportable — self-hosted vLLM migration removes managed API dependency
+                                entirely</li>
+                            <li>At scale (8K+ students/day), self-hosting is already cheaper — pricing risk doesn't
+                                accumulate</li>
+                            <li>Keep archived base model + adapter weights in EU S3 as permanent fallback</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="risk-item">
+                    <div>
+                        <div
+                            style="font-family:var(--lc-font-heading);font-weight:700;font-size:14px;margin-bottom:4px;">
+                            Key person dependency — ML Engineering</div>
+                        <p style="font-size:12px;color:var(--lc-text-muted);font-family:var(--lc-font-body);">LLM
+                            fine-tuning and vLLM infrastructure skills not embedded in team</p>
+                    </div>
+                    <div><span class="risk-level risk-med"><span class="risk-dot"></span>Medium</span></div>
+                    <div>
+                        <ul class="card-bullets">
+                            <li>Priority hire: 1× ML Engineer at Revyn Tech India in first cohort</li>
+                            <li>Managed API path dramatically reduces required ML engineering expertise for Phase 2
+                                Early</li>
+                            <li>Document all pipeline steps in runbooks — reduce single-person dependency</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECOMMENDATIONS -->
+        <section class="section" id="recommendations">
+            <div class="section-eyebrow">Next Steps</div>
+            <h2 class="section-title"><span class="accent">Recommendations</span> &amp; Immediate Actions</h2>
+
+            <div class="grid-2" style="margin-bottom: 32px;">
+                <div>
+                    <div class="sub-heading-sm">Next 30 Days — Do These Now</div>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div class="card" style="display:flex;gap:14px;align-items:flex-start;padding:16px 20px;">
+                            <div class="phase-badge" style="width:32px;height:32px;font-size:13px;flex-shrink:0;">1
+                            </div>
+                            <div>
+                                <div
+                                    style="font-family:var(--lc-font-heading);font-weight:700;font-size:14px;margin-bottom:4px;">
+                                    Switch Phase 1 API to Mistral Small 3.2</div>
+                                <p style="font-size:12px;color:var(--lc-text-muted);font-family:var(--lc-font-body);">
+                                    Immediate cost reduction vs any current provider. Activate Zero Data Retention on
+                                    account. Owner: Arslaan. Time: 1 day.</p>
+                            </div>
+                        </div>
+                        <div class="card" style="display:flex;gap:14px;align-items:flex-start;padding:16px 20px;">
+                            <div class="phase-badge" style="width:32px;height:32px;font-size:13px;flex-shrink:0;">2
+                            </div>
+                            <div>
+                                <div
+                                    style="font-family:var(--lc-font-heading);font-weight:700;font-size:14px;margin-bottom:4px;">
+                                    Export Phase 1 pilot interaction data</div>
+                                <p style="font-size:12px;color:var(--lc-text-muted);font-family:var(--lc-font-body);">
+                                    Extract all student-AI logs from 5 pilots. Format to ChatML JSONL. Owner: Arslaan +
+                                    Revyn Tech. Time: 1 week.</p>
+                            </div>
+                        </div>
+                        <div class="card" style="display:flex;gap:14px;align-items:flex-start;padding:16px 20px;">
+                            <div class="phase-badge" style="width:32px;height:32px;font-size:13px;flex-shrink:0;">3
+                            </div>
+                            <div>
+                                <div
+                                    style="font-family:var(--lc-font-heading);font-weight:700;font-size:14px;margin-bottom:4px;">
+                                    Draft Pflegeschule Data Processing Agreement</div>
+                                <p style="font-size:12px;color:var(--lc-text-muted);font-family:var(--lc-font-body);">
+                                    GDPR Article 28 compliant DPA template. Lingocare as processor, school as
+                                    controller. Owner: Legal counsel. Time: 2 weeks.</p>
+                            </div>
+                        </div>
+                        <div class="card" style="display:flex;gap:14px;align-items:flex-start;padding:16px 20px;">
+                            <div class="phase-badge" style="width:32px;height:32px;font-size:13px;flex-shrink:0;">4
+                            </div>
+                            <div>
+                                <div
+                                    style="font-family:var(--lc-font-heading);font-weight:700;font-size:14px;margin-bottom:4px;">
+                                    Run first managed API fine-tune</div>
+                                <p style="font-size:12px;color:var(--lc-text-muted);font-family:var(--lc-font-body);">
+                                    Use 500 seed examples on Mistral's managed platform. Cost: ~$0.40. Validate pipeline
+                                    end-to-end. Owner: ML Engineer / Arslaan. Time: 3 weeks.</p>
+                            </div>
+                        </div>
+                        <div class="card" style="display:flex;gap:14px;align-items:flex-start;padding:16px 20px;">
+                            <div class="phase-badge" style="width:32px;height:32px;font-size:13px;flex-shrink:0;">5
+                            </div>
+                            <div>
+                                <div
+                                    style="font-family:var(--lc-font-heading);font-weight:700;font-size:14px;margin-bottom:4px;">
+                                    Recruit ML Engineer — Revyn Tech India</div>
+                                <p style="font-size:12px;color:var(--lc-text-muted);font-family:var(--lc-font-body);">
+                                    Priority hire with LLM fine-tuning + vLLM experience. Owner: Arslaan. Target: offer
+                                    within 30 days.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="sub-heading-sm">Strategic Decisions Required</div>
+                    <div class="card">
+                        <ul class="card-bullets">
+                            <li><strong>Confirm managed API as Phase 2 training path</strong> — $4/M tokens, $2/month
+                                storage vs GPU rental. Managed API recommended until 8K students/day.</li>
+                            <li><strong>Confirm Zero Data Retention activation</strong> — this needs to be a team-level
+                                decision and documented in your GDPR records. Ask Mistral for the ZDR API tier details
+                                for your account.</li>
+                            <li><strong>Set the quality gate metric</strong> — define "equal to Phase 1 Mistral base
+                                model" concretely: recommend teacher blind-scoring on 100 benchmark examples, threshold
+                                ≥80%.</li>
+                            <li><strong>Define training data provenance policy</strong> — every training example needs a
+                                documented source and license before it goes into the dataset. Set this as a hard rule
+                                from day one.</li>
+                            <li><strong>Allocate Phase 2 budget</strong> — minimum viable: €5,000 (covers data review
+                                expert time, managed API fine-tuning, compliance drafting). Recommended: €15,000 (adds
+                                ML Engineer 3-month contract via Revyn Tech).</li>
+                            <li><strong>Decide on synthetic data approach</strong> — use Claude Haiku 3.5 for seed data
+                                amplification (highest quality) then switch entirely to Mistral for student-facing and
+                                ongoing operations.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rec-box">
+                <div class="rec-label">Final Recommendation — Updated</div>
+                <h3>Mistral Small 3.2 across <span>both phases</span>. Managed API now. vLLM at scale.</h3>
+                <p>The updated architecture is simpler and cheaper than v1. Mistral Small 3.2 is the Phase 1 API
+                    (replace whatever you are using today — the cost saving is immediate). The managed fine-tuning API
+                    makes Phase 2 accessible without a GPU engineer: a complete 5,000-example fine-tune costs $16 and
+                    runs without any infrastructure management. The Apache 2.0 license and exportable weights mean you
+                    are never locked in — when student volumes justify it, the same fine-tuned model migrates to
+                    self-hosted vLLM in a day.</p>
+                <p>The compliance architecture is now explicit: Zero Data Retention on from day one, EU-region hosting,
+                    GDPR-compliant DPAs with every school, training data provenance log maintained from the first
+                    example. These are not expensive requirements — they are configuration choices and documentation
+                    habits. Set them correctly now and they compound into a significant trust advantage with German
+                    healthcare institutions.</p>
+                <p>The total R&amp;D infrastructure cost for the full 12-month Phase 2 build is under $100. The main
+                    investment is human expertise: nursing educators reviewing training data, and one ML Engineer at
+                    Revyn Tech keeping the pipeline running. Build that team. The model will follow.</p>
+                <p><strong style="color: var(--lc-orange);">The dataset is the moat. The model is the engine. The
+                        compliance is the trust. All three are now within reach.</strong></p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="report-footer">
+            <div>
+                <div class="footer-brand">Lingo<span>care</span></div>
+                <p
+                    style="color:rgba(255,255,255,0.4);font-size:12px;font-family:var(--lc-font-body);margin-top:4px;text-align:left;">
+                    Where AI, Healthcare &amp; Social Impact meet · v2 · May 2025</p>
+            </div>
+            <div>
+                <p style="text-align:right;line-height:1.6;">Lingocare GmbH · www.lingocare.ai ·
+                    hello@lingocare.ai<br>Confidential — Internal Use Only</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.sidebar nav a');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+                    });
+                }
+            });
+        }, { rootMargin: '-20% 0px -70% 0px' });
+        sections.forEach(s => observer.observe(s));
+    </script>
+</body>
+
+</html>
