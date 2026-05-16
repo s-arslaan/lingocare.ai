@@ -1136,13 +1136,440 @@
             background: rgba(237, 125, 0, 0.4);
             border-radius: 999px;
         }
+
+        /* ── MOBILE TOP BAR ───────────────────────────── */
+        .mobile-topbar {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background: var(--lc-text);
+            z-index: 200;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 18px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .mobile-topbar-brand {
+            font-family: var(--lc-font-heading);
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--lc-orange);
+        }
+
+        .mobile-topbar-brand span {
+            color: var(--lc-white);
+        }
+
+        .hamburger {
+            width: 36px;
+            height: 36px;
+            background: rgba(237, 125, 0, 0.15);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--lc-orange);
+            border-radius: 2px;
+            transition: all 0.25s;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Overlay when drawer open */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 149;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* ── RESPONSIVE BREAKPOINTS ───────────────────── */
+
+        /* Tablet — 1024px */
+        @media (max-width: 1024px) {
+            :root {
+                --sidebar-w: 240px;
+            }
+
+            .hero {
+                padding: 64px 40px 56px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .section {
+                padding: 52px 40px;
+            }
+
+            .report-footer {
+                padding: 32px 40px;
+            }
+
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .two-col-aside {
+                grid-template-columns: 1fr;
+            }
+
+            .provider-pricing {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Mobile — 768px */
+        @media (max-width: 768px) {
+
+            /* Show mobile topbar, hide desktop sidebar */
+            .mobile-topbar {
+                display: flex;
+            }
+
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 280px;
+                height: 100vh;
+                transform: translateX(-100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 150;
+                padding-top: 56px;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+                padding-top: 56px;
+            }
+
+            /* Hero */
+            .hero {
+                padding: 36px 20px 40px;
+            }
+
+            .hero::before,
+            .hero::after {
+                display: none;
+            }
+
+            .hero-eyebrow {
+                font-size: 9px;
+                margin-bottom: 14px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+                line-height: 1.15;
+                margin-bottom: 12px;
+            }
+
+            .hero-subtitle {
+                font-size: 15px;
+                margin-bottom: 28px;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .hero-meta-item .value {
+                font-size: 13px;
+            }
+
+            /* Sections */
+            .section {
+                padding: 40px 20px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .section-title br {
+                display: none;
+            }
+
+            .section-intro {
+                font-size: 14px;
+                margin-bottom: 28px;
+            }
+
+            .sub-heading {
+                font-size: 18px;
+                margin: 28px 0 12px;
+            }
+
+            /* All grids → single column */
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            /* Two col layouts → stacked */
+            .two-col,
+            .two-col-aside {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            /* Cards */
+            .card {
+                padding: 20px 18px;
+            }
+
+            .card-stat {
+                font-size: 48px;
+            }
+
+            /* Tables — horizontal scroll */
+            .lc-table-wrap {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .lc-table {
+                min-width: 560px;
+                font-size: 12px;
+            }
+
+            .lc-table th {
+                padding: 10px 12px;
+                font-size: 10px;
+            }
+
+            .lc-table td {
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+
+            /* Provider cards */
+            .provider-header {
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 16px 18px;
+            }
+
+            .provider-body {
+                padding: 16px 18px;
+            }
+
+            .provider-pricing {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            /* Risk items */
+            .risk-item {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            /* Cost rows */
+            .cost-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .cost-amount {
+                text-align: left;
+                min-width: auto;
+            }
+
+            /* Roadmap */
+            .roadmap-timeline {
+                padding-left: 28px;
+            }
+
+            .roadmap-item::before {
+                left: -24px;
+                width: 12px;
+                height: 12px;
+            }
+
+            .roadmap-title {
+                font-size: 17px;
+            }
+
+            /* Rec box */
+            .rec-box {
+                padding: 24px 20px;
+            }
+
+            .rec-box h3 {
+                font-size: 20px;
+            }
+
+            /* Footer */
+            .report-footer {
+                padding: 28px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .report-footer p {
+                text-align: left;
+            }
+
+            /* Chips wrap — allow scrolling row on mobile */
+            .chips-wrap {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 4px;
+            }
+
+            /* Callout */
+            .callout,
+            .callout-red,
+            .callout-dark {
+                padding: 16px 18px;
+            }
+
+            .callout p {
+                font-size: 13px;
+            }
+
+            /* Body text */
+            .body-text {
+                font-size: 14px;
+            }
+
+            /* Verdict */
+            .verdict-banner {
+                padding: 16px 18px;
+            }
+
+            .verdict-banner .vb-text {
+                font-size: 15px;
+            }
+
+            /* Migration steps */
+            .migration-step {
+                gap: 12px;
+            }
+
+            .step-desc {
+                font-size: 12px;
+            }
+
+            /* Compliance items */
+            .compliance-item {
+                padding-left: 14px;
+            }
+
+            .compliance-title {
+                font-size: 15px;
+            }
+
+            /* Phase badge smaller */
+            .phase-badge {
+                width: 38px;
+                height: 38px;
+                font-size: 15px;
+            }
+
+            /* Phase card in cards */
+            .phase-card {
+                gap: 14px;
+            }
+
+            .phase-card-title {
+                font-size: 15px;
+            }
+
+            /* Hide position sticky on mobile */
+            [style*="position: sticky"] {
+                position: static !important;
+            }
+        }
+
+        /* Small mobile — 480px */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 21px;
+            }
+
+            .card-stat {
+                font-size: 40px;
+            }
+
+            .provider-pricing {
+                grid-template-columns: 1fr;
+            }
+
+            .price-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .price-item .price-value {
+                font-size: 20px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
+    <!-- MOBILE TOPBAR -->
+    <div class="mobile-topbar">
+        <div class="mobile-topbar-brand">Lingo<span>care</span></div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
         <div class="sidebar-logo">
             <div class="brand">Lingo<span>care</span></div>
             <div class="doc-label">LLM Strategy Report</div>
@@ -1559,147 +1986,151 @@
             </div>
 
             <div style="overflow-x: auto; margin-bottom: 32px;">
-                <table class="lc-table">
-                    <thead>
-                        <tr>
-                            <th>Scale</th>
-                            <th>Tokens/Month</th>
-                            <th>Mistral Small 3.2 ⭐</th>
-                            <th>GPT-4o mini</th>
-                            <th>Claude Haiku 3.5</th>
-                            <th>Mistral vs Haiku Saving</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>50 students/day</strong> (Pilot)</td>
-                            <td>22.5M total</td>
-                            <td><span class="tag-yes">~$3.70/mo</span></td>
-                            <td>~$7.43/mo</td>
-                            <td style="color:var(--lc-red);">~$43/mo</td>
-                            <td><strong style="color:var(--lc-orange);">$39 saved/mo</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>200 students/day</strong> (Early)</td>
-                            <td>90M total</td>
-                            <td><span class="tag-yes">~$14.70/mo</span></td>
-                            <td>~$29.7/mo</td>
-                            <td style="color:var(--lc-red);">~$171/mo</td>
-                            <td><strong style="color:var(--lc-orange);">$156 saved/mo</strong></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>500 students/day</strong> (Target)</td>
-                            <td>225M total</td>
-                            <td><span class="tag-yes">~$36.75/mo</span></td>
-                            <td>~$74.25/mo</td>
-                            <td style="color:var(--lc-red);">~$427.50/mo</td>
-                            <td><strong style="color:var(--lc-orange);">$390 saved/mo</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>2,000 students/day</strong> (Scale)</td>
-                            <td>900M total</td>
-                            <td><span class="tag-yes">~$147/mo</span></td>
-                            <td>~$297/mo</td>
-                            <td style="color:var(--lc-red);">~$1,710/mo</td>
-                            <td><strong style="color:var(--lc-orange);">$1,563 saved/mo</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>5,000 students/day</strong> (Growth)</td>
-                            <td>2,250M total</td>
-                            <td><span class="tag-yes">~$368/mo</span></td>
-                            <td>~$742/mo</td>
-                            <td style="color:var(--lc-red);">~$4,275/mo</td>
-                            <td><strong style="color:var(--lc-orange);">$3,907 saved/mo</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="lc-table-wrap">
+                    <table class="lc-table">
+                        <thead>
+                            <tr>
+                                <th>Scale</th>
+                                <th>Tokens/Month</th>
+                                <th>Mistral Small 3.2 ⭐</th>
+                                <th>GPT-4o mini</th>
+                                <th>Claude Haiku 3.5</th>
+                                <th>Mistral vs Haiku Saving</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>50 students/day</strong> (Pilot)</td>
+                                <td>22.5M total</td>
+                                <td><span class="tag-yes">~$3.70/mo</span></td>
+                                <td>~$7.43/mo</td>
+                                <td style="color:var(--lc-red);">~$43/mo</td>
+                                <td><strong style="color:var(--lc-orange);">$39 saved/mo</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>200 students/day</strong> (Early)</td>
+                                <td>90M total</td>
+                                <td><span class="tag-yes">~$14.70/mo</span></td>
+                                <td>~$29.7/mo</td>
+                                <td style="color:var(--lc-red);">~$171/mo</td>
+                                <td><strong style="color:var(--lc-orange);">$156 saved/mo</strong></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>500 students/day</strong> (Target)</td>
+                                <td>225M total</td>
+                                <td><span class="tag-yes">~$36.75/mo</span></td>
+                                <td>~$74.25/mo</td>
+                                <td style="color:var(--lc-red);">~$427.50/mo</td>
+                                <td><strong style="color:var(--lc-orange);">$390 saved/mo</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>2,000 students/day</strong> (Scale)</td>
+                                <td>900M total</td>
+                                <td><span class="tag-yes">~$147/mo</span></td>
+                                <td>~$297/mo</td>
+                                <td style="color:var(--lc-red);">~$1,710/mo</td>
+                                <td><strong style="color:var(--lc-orange);">$1,563 saved/mo</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>5,000 students/day</strong> (Growth)</td>
+                                <td>2,250M total</td>
+                                <td><span class="tag-yes">~$368/mo</span></td>
+                                <td>~$742/mo</td>
+                                <td style="color:var(--lc-red);">~$4,275/mo</td>
+                                <td><strong style="color:var(--lc-orange);">$3,907 saved/mo</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div style="overflow-x: auto;">
-                <table class="lc-table">
-                    <thead>
-                        <tr>
-                            <th>Criterion</th>
-                            <th>Mistral Small 3.2 ⭐</th>
-                            <th>GPT-4o mini</th>
-                            <th>Claude Haiku 3.5</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="winner-row">
-                            <td><strong>Input cost / M tokens</strong></td>
-                            <td><span class="tag-yes">$0.10</span></td>
-                            <td>$0.15 (1.5× more)</td>
-                            <td style="color:var(--lc-red);">$0.80 (8× more)</td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Output cost / M tokens</strong></td>
-                            <td><span class="tag-yes">$0.30</span></td>
-                            <td>$0.60 (2× more)</td>
-                            <td style="color:var(--lc-red);">$4.00 (13× more)</td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>German language quality</strong></td>
-                            <td><span class="tag-yes">Excellent (EU-native)</span></td>
-                            <td><span class="tag-yes">Very Good</span></td>
-                            <td><span class="tag-partial">Good</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>EU/GDPR posture</strong></td>
-                            <td><span class="tag-yes">Best (FR company)</span></td>
-                            <td><span class="tag-partial">Moderate (US, SCCs)</span></td>
-                            <td><span class="tag-partial">Moderate (US, SCCs)</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Zero Data Retention</strong></td>
-                            <td><span class="tag-yes">Available</span></td>
-                            <td><span class="tag-partial">Enterprise only</span></td>
-                            <td><span class="tag-partial">Enterprise only</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Fine-tuning available</strong></td>
-                            <td><span class="tag-yes">Yes — $4/M tokens</span></td>
-                            <td><span class="tag-partial">Limited program</span></td>
-                            <td><span class="tag-no">No</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Weights ownership</strong></td>
-                            <td><span class="tag-yes">Apache 2.0 ✓</span></td>
-                            <td><span class="tag-no">No (closed)</span></td>
-                            <td><span class="tag-no">No (closed)</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Self-hostable (Phase 2)</strong></td>
-                            <td><span class="tag-yes">Yes — vLLM</span></td>
-                            <td><span class="tag-no">No</span></td>
-                            <td><span class="tag-no">No</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Phase 2 model continuity</strong></td>
-                            <td><span class="tag-yes">Same family — zero migration</span></td>
-                            <td><span class="tag-no">Different model needed</span></td>
-                            <td><span class="tag-no">No Phase 2 path</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Multimodal (images)</strong></td>
-                            <td><span class="tag-yes">Yes</span></td>
-                            <td><span class="tag-yes">Yes</span></td>
-                            <td><span class="tag-yes">Yes</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Synthetic data generation quality</strong></td>
-                            <td><span class="tag-partial">Good</span></td>
-                            <td><span class="tag-partial">Good</span></td>
-                            <td><span class="tag-yes">Excellent (use for seed data)</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Overall Phase 1 score</strong></td>
-                            <td><strong style="color:var(--lc-orange);">9.4 / 10</strong></td>
-                            <td><strong>6.8 / 10</strong></td>
-                            <td><strong style="color:var(--lc-red);">4.2 / 10</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="lc-table-wrap">
+                    <table class="lc-table">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>Mistral Small 3.2 ⭐</th>
+                                <th>GPT-4o mini</th>
+                                <th>Claude Haiku 3.5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="winner-row">
+                                <td><strong>Input cost / M tokens</strong></td>
+                                <td><span class="tag-yes">$0.10</span></td>
+                                <td>$0.15 (1.5× more)</td>
+                                <td style="color:var(--lc-red);">$0.80 (8× more)</td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Output cost / M tokens</strong></td>
+                                <td><span class="tag-yes">$0.30</span></td>
+                                <td>$0.60 (2× more)</td>
+                                <td style="color:var(--lc-red);">$4.00 (13× more)</td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>German language quality</strong></td>
+                                <td><span class="tag-yes">Excellent (EU-native)</span></td>
+                                <td><span class="tag-yes">Very Good</span></td>
+                                <td><span class="tag-partial">Good</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>EU/GDPR posture</strong></td>
+                                <td><span class="tag-yes">Best (FR company)</span></td>
+                                <td><span class="tag-partial">Moderate (US, SCCs)</span></td>
+                                <td><span class="tag-partial">Moderate (US, SCCs)</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Zero Data Retention</strong></td>
+                                <td><span class="tag-yes">Available</span></td>
+                                <td><span class="tag-partial">Enterprise only</span></td>
+                                <td><span class="tag-partial">Enterprise only</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Fine-tuning available</strong></td>
+                                <td><span class="tag-yes">Yes — $4/M tokens</span></td>
+                                <td><span class="tag-partial">Limited program</span></td>
+                                <td><span class="tag-no">No</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Weights ownership</strong></td>
+                                <td><span class="tag-yes">Apache 2.0 ✓</span></td>
+                                <td><span class="tag-no">No (closed)</span></td>
+                                <td><span class="tag-no">No (closed)</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Self-hostable (Phase 2)</strong></td>
+                                <td><span class="tag-yes">Yes — vLLM</span></td>
+                                <td><span class="tag-no">No</span></td>
+                                <td><span class="tag-no">No</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Phase 2 model continuity</strong></td>
+                                <td><span class="tag-yes">Same family — zero migration</span></td>
+                                <td><span class="tag-no">Different model needed</span></td>
+                                <td><span class="tag-no">No Phase 2 path</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Multimodal (images)</strong></td>
+                                <td><span class="tag-yes">Yes</span></td>
+                                <td><span class="tag-yes">Yes</span></td>
+                                <td><span class="tag-yes">Yes</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Synthetic data generation quality</strong></td>
+                                <td><span class="tag-partial">Good</span></td>
+                                <td><span class="tag-partial">Good</span></td>
+                                <td><span class="tag-yes">Excellent (use for seed data)</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Overall Phase 1 score</strong></td>
+                                <td><strong style="color:var(--lc-orange);">9.4 / 10</strong></td>
+                                <td><strong>6.8 / 10</strong></td>
+                                <td><strong style="color:var(--lc-red);">4.2 / 10</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="verdict-banner" style="margin-top: 24px;">
@@ -1842,108 +2273,110 @@
                 specific requirements.</p>
 
             <div style="overflow-x: auto;">
-                <table class="lc-table">
-                    <thead>
-                        <tr>
-                            <th>Criterion</th>
-                            <th>Mistral Small 3.2 ⭐</th>
-                            <th>Mistral Nemo 12B</th>
-                            <th>Llama 3.3 70B</th>
-                            <th>Gemma 3 27B</th>
-                            <th>GPT-4o (API)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="winner-row">
-                            <td><strong>German Language Quality</strong></td>
-                            <td><span class="tag-yes">SOTA</span></td>
-                            <td><span class="tag-yes">Excellent</span></td>
-                            <td><span class="tag-yes">Very Good</span></td>
-                            <td><span class="tag-partial">Good</span></td>
-                            <td><span class="tag-yes">Excellent</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Medical Domain Priming</strong></td>
-                            <td><span class="tag-yes">Good</span></td>
-                            <td><span class="tag-partial">Moderate</span></td>
-                            <td><span class="tag-yes">Good</span></td>
-                            <td><span class="tag-partial">Moderate</span></td>
-                            <td><span class="tag-yes">Excellent</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>EU/GDPR Compliance</strong></td>
-                            <td><span class="tag-yes">Best (FR 🇫🇷)</span></td>
-                            <td><span class="tag-yes">Best (FR 🇫🇷)</span></td>
-                            <td><span class="tag-partial">Moderate (US, Meta)</span></td>
-                            <td><span class="tag-partial">Moderate (US, Google)</span></td>
-                            <td><span class="tag-no">Complex (US)</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>License</strong></td>
-                            <td><span class="tag-yes">Apache 2.0 ✓</span></td>
-                            <td><span class="tag-yes">Apache 2.0 ✓</span></td>
-                            <td><span class="tag-partial">Llama Community</span></td>
-                            <td><span class="tag-partial">Gemma TOS</span></td>
-                            <td><span class="tag-no">Closed</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Managed Fine-Tune API</strong></td>
-                            <td><span class="tag-yes">$4/M tokens ✓</span></td>
-                            <td><span class="tag-no">No</span></td>
-                            <td><span class="tag-no">No</span></td>
-                            <td><span class="tag-no">No</span></td>
-                            <td><span class="tag-no">N/A</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Multimodal</strong></td>
-                            <td><span class="tag-yes">Yes 👁️</span></td>
-                            <td><span class="tag-no">No</span></td>
-                            <td><span class="tag-partial">Text only</span></td>
-                            <td><span class="tag-yes">Yes</span></td>
-                            <td><span class="tag-yes">Yes</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Agentic / Tool Use</strong></td>
-                            <td><span class="tag-yes">Native 🤖</span></td>
-                            <td><span class="tag-partial">Basic</span></td>
-                            <td><span class="tag-yes">Yes</span></td>
-                            <td><span class="tag-partial">Basic</span></td>
-                            <td><span class="tag-yes">Yes</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Self-Hostable via vLLM</strong></td>
-                            <td><span class="tag-yes">Yes</span></td>
-                            <td><span class="tag-yes">Yes</span></td>
-                            <td><span class="tag-yes">Yes</span></td>
-                            <td><span class="tag-yes">Yes</span></td>
-                            <td><span class="tag-no">No</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Phase 1 → 2 Continuity</strong></td>
-                            <td><span class="tag-yes">Same model ✓</span></td>
-                            <td><span class="tag-partial">Switch needed</span></td>
-                            <td><span class="tag-no">Full switch</span></td>
-                            <td><span class="tag-no">Full switch</span></td>
-                            <td><span class="tag-no">No path</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Multilingual (FR, IT, ES)</strong></td>
-                            <td><span class="tag-yes">SOTA</span></td>
-                            <td><span class="tag-yes">Excellent</span></td>
-                            <td><span class="tag-yes">Good</span></td>
-                            <td><span class="tag-partial">Moderate</span></td>
-                            <td><span class="tag-yes">Excellent</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td><strong>Overall Score for Lingocare</strong></td>
-                            <td><strong style="color:var(--lc-orange);">9.6 / 10</strong></td>
-                            <td><strong>8.2 / 10</strong></td>
-                            <td><strong>6.0 / 10</strong></td>
-                            <td><strong>5.8 / 10</strong></td>
-                            <td><strong style="color:var(--lc-red);">3.8 / 10</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="lc-table-wrap">
+                    <table class="lc-table">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>Mistral Small 3.2 ⭐</th>
+                                <th>Mistral Nemo 12B</th>
+                                <th>Llama 3.3 70B</th>
+                                <th>Gemma 3 27B</th>
+                                <th>GPT-4o (API)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="winner-row">
+                                <td><strong>German Language Quality</strong></td>
+                                <td><span class="tag-yes">SOTA</span></td>
+                                <td><span class="tag-yes">Excellent</span></td>
+                                <td><span class="tag-yes">Very Good</span></td>
+                                <td><span class="tag-partial">Good</span></td>
+                                <td><span class="tag-yes">Excellent</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Medical Domain Priming</strong></td>
+                                <td><span class="tag-yes">Good</span></td>
+                                <td><span class="tag-partial">Moderate</span></td>
+                                <td><span class="tag-yes">Good</span></td>
+                                <td><span class="tag-partial">Moderate</span></td>
+                                <td><span class="tag-yes">Excellent</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>EU/GDPR Compliance</strong></td>
+                                <td><span class="tag-yes">Best (FR 🇫🇷)</span></td>
+                                <td><span class="tag-yes">Best (FR 🇫🇷)</span></td>
+                                <td><span class="tag-partial">Moderate (US, Meta)</span></td>
+                                <td><span class="tag-partial">Moderate (US, Google)</span></td>
+                                <td><span class="tag-no">Complex (US)</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>License</strong></td>
+                                <td><span class="tag-yes">Apache 2.0 ✓</span></td>
+                                <td><span class="tag-yes">Apache 2.0 ✓</span></td>
+                                <td><span class="tag-partial">Llama Community</span></td>
+                                <td><span class="tag-partial">Gemma TOS</span></td>
+                                <td><span class="tag-no">Closed</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Managed Fine-Tune API</strong></td>
+                                <td><span class="tag-yes">$4/M tokens ✓</span></td>
+                                <td><span class="tag-no">No</span></td>
+                                <td><span class="tag-no">No</span></td>
+                                <td><span class="tag-no">No</span></td>
+                                <td><span class="tag-no">N/A</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Multimodal</strong></td>
+                                <td><span class="tag-yes">Yes 👁️</span></td>
+                                <td><span class="tag-no">No</span></td>
+                                <td><span class="tag-partial">Text only</span></td>
+                                <td><span class="tag-yes">Yes</span></td>
+                                <td><span class="tag-yes">Yes</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Agentic / Tool Use</strong></td>
+                                <td><span class="tag-yes">Native 🤖</span></td>
+                                <td><span class="tag-partial">Basic</span></td>
+                                <td><span class="tag-yes">Yes</span></td>
+                                <td><span class="tag-partial">Basic</span></td>
+                                <td><span class="tag-yes">Yes</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Self-Hostable via vLLM</strong></td>
+                                <td><span class="tag-yes">Yes</span></td>
+                                <td><span class="tag-yes">Yes</span></td>
+                                <td><span class="tag-yes">Yes</span></td>
+                                <td><span class="tag-yes">Yes</span></td>
+                                <td><span class="tag-no">No</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Phase 1 → 2 Continuity</strong></td>
+                                <td><span class="tag-yes">Same model ✓</span></td>
+                                <td><span class="tag-partial">Switch needed</span></td>
+                                <td><span class="tag-no">Full switch</span></td>
+                                <td><span class="tag-no">Full switch</span></td>
+                                <td><span class="tag-no">No path</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Multilingual (FR, IT, ES)</strong></td>
+                                <td><span class="tag-yes">SOTA</span></td>
+                                <td><span class="tag-yes">Excellent</span></td>
+                                <td><span class="tag-yes">Good</span></td>
+                                <td><span class="tag-partial">Moderate</span></td>
+                                <td><span class="tag-yes">Excellent</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td><strong>Overall Score for Lingocare</strong></td>
+                                <td><strong style="color:var(--lc-orange);">9.6 / 10</strong></td>
+                                <td><strong>8.2 / 10</strong></td>
+                                <td><strong>6.0 / 10</strong></td>
+                                <td><strong>5.8 / 10</strong></td>
+                                <td><strong style="color:var(--lc-red);">3.8 / 10</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
 
@@ -2154,7 +2587,8 @@
                             <strong>Phase 2 Early:</strong> Mistral Managed API endpoint (zero DevOps). <strong>Phase 2
                                 Scale:</strong> vLLM on EU-region GPU servers — OpenAI-compatible API endpoint,
                             continuous batching, PagedAttention. The Lingocare product layer uses the same API spec in
-                            both cases — switching is a config change, not a code rewrite.</p>
+                            both cases — switching is a config change, not a code rewrite.
+                        </p>
                         <ul class="card-bullets">
                             <li>vLLM for production self-hosted inference (OpenAI-compatible)</li>
                             <li>GGUF quantization (Q4_K_M) for on-premises school deployment</li>
@@ -2224,48 +2658,50 @@
                 </div>
             </div>
 
-            <table class="lc-table">
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Share</th>
-                        <th>Description</th>
-                        <th>Validation Required</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>German Nursing Protocols</strong></td>
-                        <td><span class="tag-yes">55%</span></td>
-                        <td>Expertenstandards in der Pflege, Hessen curriculum, care procedures</td>
-                        <td>Expert nursing educator review — mandatory</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Clinical Scenarios / Role-Play</strong></td>
-                        <td><span class="tag-yes">20%</span></td>
-                        <td>Patient dialogues, triage simulations, handover communications</td>
-                        <td>Expert review — mandatory for any numerical data</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Language Instruction</strong></td>
-                        <td><span class="tag-partial">15%</span></td>
-                        <td>Clinical vocabulary drills, grammar correction, Fachsprache exercises</td>
-                        <td>Linguistic review</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Safety &amp; Refusal Examples</strong></td>
-                        <td><span class="tag-partial">5%</span></td>
-                        <td>Model correctly declines to diagnose, flags urgency, refers to physician</td>
-                        <td>Legal + clinical review</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Multilingual Alignment Seeds</strong></td>
-                        <td><span class="tag-partial">5%</span></td>
-                        <td>DE↔FR, DE↔IT concept mappings for future expansion</td>
-                        <td>Bilingual expert review</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="lc-table-wrap">
+                <table class="lc-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Share</th>
+                            <th>Description</th>
+                            <th>Validation Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>German Nursing Protocols</strong></td>
+                            <td><span class="tag-yes">55%</span></td>
+                            <td>Expertenstandards in der Pflege, Hessen curriculum, care procedures</td>
+                            <td>Expert nursing educator review — mandatory</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Clinical Scenarios / Role-Play</strong></td>
+                            <td><span class="tag-yes">20%</span></td>
+                            <td>Patient dialogues, triage simulations, handover communications</td>
+                            <td>Expert review — mandatory for any numerical data</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Language Instruction</strong></td>
+                            <td><span class="tag-partial">15%</span></td>
+                            <td>Clinical vocabulary drills, grammar correction, Fachsprache exercises</td>
+                            <td>Linguistic review</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Safety &amp; Refusal Examples</strong></td>
+                            <td><span class="tag-partial">5%</span></td>
+                            <td>Model correctly declines to diagnose, flags urgency, refers to physician</td>
+                            <td>Legal + clinical review</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Multilingual Alignment Seeds</strong></td>
+                            <td><span class="tag-partial">5%</span></td>
+                            <td>DE↔FR, DE↔IT concept mappings for future expansion</td>
+                            <td>Bilingual expert review</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <!-- REGULATORY COMPLIANCE -->
@@ -2700,42 +3136,44 @@
                         German. It needs only to learn the linguistic mapping to French (escarre) or Italian (piaga da
                         decubito). Direct Preference Optimization with Cross-Lingual Pairs (DPO-XL) achieves this with
                         200–500 expert-validated concept pairs per language.</p>
-                    <table class="lc-table">
-                        <thead>
-                            <tr>
-                                <th>Language</th>
-                                <th>Phase</th>
-                                <th>Pairs Needed</th>
-                                <th>Est. Training Cost</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>German 🇩🇪</strong></td>
-                                <td><span class="tag-yes">Phase 1-LLM</span></td>
-                                <td>3,000–5,000</td>
-                                <td>~$16 per full run</td>
-                            </tr>
-                            <tr>
-                                <td><strong>French 🇫🇷</strong></td>
-                                <td><span class="tag-partial">Phase 3–4</span></td>
-                                <td>300–500 alignment pairs</td>
-                                <td>~$2–3 per DPO run</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Italian 🇮🇹</strong></td>
-                                <td><span class="tag-partial">Phase 4–5</span></td>
-                                <td>200–400 pairs</td>
-                                <td>~$2–3 per DPO run</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Spanish 🇪🇸</strong></td>
-                                <td><span class="tag-partial">Phase 5+</span></td>
-                                <td>200–400 pairs</td>
-                                <td>~$2–3 per DPO run</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="lc-table-wrap">
+                        <table class="lc-table">
+                            <thead>
+                                <tr>
+                                    <th>Language</th>
+                                    <th>Phase</th>
+                                    <th>Pairs Needed</th>
+                                    <th>Est. Training Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>German 🇩🇪</strong></td>
+                                    <td><span class="tag-yes">Phase 1-LLM</span></td>
+                                    <td>3,000–5,000</td>
+                                    <td>~$16 per full run</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>French 🇫🇷</strong></td>
+                                    <td><span class="tag-partial">Phase 3–4</span></td>
+                                    <td>300–500 alignment pairs</td>
+                                    <td>~$2–3 per DPO run</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Italian 🇮🇹</strong></td>
+                                    <td><span class="tag-partial">Phase 4–5</span></td>
+                                    <td>200–400 pairs</td>
+                                    <td>~$2–3 per DPO run</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Spanish 🇪🇸</strong></td>
+                                    <td><span class="tag-partial">Phase 5+</span></td>
+                                    <td>200–400 pairs</td>
+                                    <td>~$2–3 per DPO run</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="callout" style="height: fit-content; margin: 0;">
                     <div class="callout-label">Why Mistral Small 3.2 Excels Here</div>
@@ -2999,66 +3437,68 @@
 
             <div class="sub-heading">5-Year Projection — All Phases</div>
             <div style="overflow-x: auto;">
-                <table class="lc-table">
-                    <thead>
-                        <tr>
-                            <th>Year</th>
-                            <th>Students/Day</th>
-                            <th>Phase</th>
-                            <th>Claude Haiku (old)</th>
-                            <th>Mistral API (now)</th>
-                            <th>vLLM Self-Hosted</th>
-                            <th>Annual Saving vs Haiku</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Year 1 (Pilots)</td>
-                            <td>50–200</td>
-                            <td>Phase 1 API</td>
-                            <td style="color:var(--lc-red);">€170–1,500/mo</td>
-                            <td><strong>€3–14/mo</strong></td>
-                            <td>N/A (below breakeven)</td>
-                            <td><span class="tag-yes">~€2K–18K</span></td>
-                        </tr>
-                        <tr class="winner-row">
-                            <td>Year 2 (Early Scale)</td>
-                            <td>500–1,500</td>
-                            <td>Phase 2 Managed</td>
-                            <td style="color:var(--lc-red);">€4K–12K/mo</td>
-                            <td><strong>€37–147/mo</strong></td>
-                            <td>N/A (below breakeven)</td>
-                            <td><span class="tag-yes">~€47K–142K</span></td>
-                        </tr>
-                        <tr>
-                            <td>Year 3 (Growth)</td>
-                            <td>2,000–5,000</td>
-                            <td>Phase 2 → 3</td>
-                            <td style="color:var(--lc-red);">€16K–40K/mo</td>
-                            <td><strong>€147–368/mo</strong></td>
-                            <td>€700–1,200/mo (at 5K+)</td>
-                            <td><span class="tag-yes">~€185K–470K</span></td>
-                        </tr>
-                        <tr>
-                            <td>Year 4 (Scale)</td>
-                            <td>5,000–15,000</td>
-                            <td>Phase 3 Self-Host</td>
-                            <td style="color:var(--lc-red);">€40K–120K/mo</td>
-                            <td>€368–1,100/mo</td>
-                            <td><strong>€700–1,800/mo</strong></td>
-                            <td><span class="tag-yes">~€470K–1.4M</span></td>
-                        </tr>
-                        <tr>
-                            <td>Year 5 (National)</td>
-                            <td>15,000–50,000</td>
-                            <td>Phase 3 Self-Host</td>
-                            <td style="color:var(--lc-red);">€120K–400K/mo</td>
-                            <td>€1.1K–3.7K/mo</td>
-                            <td><strong>€1,800–5,000/mo</strong></td>
-                            <td><span class="tag-yes">~€1.4M–4.7M</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="lc-table-wrap">
+                    <table class="lc-table">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Students/Day</th>
+                                <th>Phase</th>
+                                <th>Claude Haiku (old)</th>
+                                <th>Mistral API (now)</th>
+                                <th>vLLM Self-Hosted</th>
+                                <th>Annual Saving vs Haiku</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Year 1 (Pilots)</td>
+                                <td>50–200</td>
+                                <td>Phase 1 API</td>
+                                <td style="color:var(--lc-red);">€170–1,500/mo</td>
+                                <td><strong>€3–14/mo</strong></td>
+                                <td>N/A (below breakeven)</td>
+                                <td><span class="tag-yes">~€2K–18K</span></td>
+                            </tr>
+                            <tr class="winner-row">
+                                <td>Year 2 (Early Scale)</td>
+                                <td>500–1,500</td>
+                                <td>Phase 2 Managed</td>
+                                <td style="color:var(--lc-red);">€4K–12K/mo</td>
+                                <td><strong>€37–147/mo</strong></td>
+                                <td>N/A (below breakeven)</td>
+                                <td><span class="tag-yes">~€47K–142K</span></td>
+                            </tr>
+                            <tr>
+                                <td>Year 3 (Growth)</td>
+                                <td>2,000–5,000</td>
+                                <td>Phase 2 → 3</td>
+                                <td style="color:var(--lc-red);">€16K–40K/mo</td>
+                                <td><strong>€147–368/mo</strong></td>
+                                <td>€700–1,200/mo (at 5K+)</td>
+                                <td><span class="tag-yes">~€185K–470K</span></td>
+                            </tr>
+                            <tr>
+                                <td>Year 4 (Scale)</td>
+                                <td>5,000–15,000</td>
+                                <td>Phase 3 Self-Host</td>
+                                <td style="color:var(--lc-red);">€40K–120K/mo</td>
+                                <td>€368–1,100/mo</td>
+                                <td><strong>€700–1,800/mo</strong></td>
+                                <td><span class="tag-yes">~€470K–1.4M</span></td>
+                            </tr>
+                            <tr>
+                                <td>Year 5 (National)</td>
+                                <td>15,000–50,000</td>
+                                <td>Phase 3 Self-Host</td>
+                                <td style="color:var(--lc-red);">€120K–400K/mo</td>
+                                <td>€1.1K–3.7K/mo</td>
+                                <td><strong>€1,800–5,000/mo</strong></td>
+                                <td><span class="tag-yes">~€1.4M–4.7M</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <p
                 style="font-size: 12px; color: var(--lc-text-muted); font-family: var(--lc-font-body); margin-top: 10px;">
@@ -3339,6 +3779,7 @@
     </main>
 
     <script>
+        // Sidebar scroll-spy
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.sidebar nav a');
         const observer = new IntersectionObserver((entries) => {
@@ -3351,6 +3792,36 @@
             });
         }, { rootMargin: '-20% 0px -70% 0px' });
         sections.forEach(s => observer.observe(s));
+
+        // Mobile hamburger
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        function openSidebar() {
+            sidebar.classList.add('open');
+            overlay.classList.add('active');
+            hamburger.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            hamburger.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+        });
+        overlay.addEventListener('click', closeSidebar);
+
+        // Close sidebar when nav link is tapped on mobile
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) closeSidebar();
+            });
+        });
     </script>
 </body>
 
