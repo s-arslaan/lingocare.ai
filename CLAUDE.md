@@ -15,18 +15,26 @@ python3 -m http.server 8080
 
 This is a **pure HTML/CSS/JS** project — no frameworks, no bundler, no npm. Every page is a single self-contained `.html` file with all styles in a `<style>` block and all logic in `<script>` tags. There are no shared CSS or JS files between pages.
 
-### Pages
+### File structure
 
-| File | Purpose |
-|------|---------|
-| `index.html` | Site index / hub — links to all pages |
-| `landing-page-lc.html` | Primary marketing landing page (DE/EN) |
-| `exercise-components.html` | Exercise type UI component atlas |
-| `lingocareai2.html` | Proprietary LLM strategy & build report v2 (latest) |
-| `lingocareai.html` | LLM strategy report v1 |
-| `mvp_dashboard.html` | MVP progress dashboard |
-| `mvp-plan.html` | Internal MVP build plan |
-| `landing-page-lc-old.html` / `component-atlas-old.html` | Archived previous versions |
+```
+/
+├── index.html                        # Site index / hub
+├── assets/
+│   ├── Icon.svg
+│   └── Lingocare_logo_transparent.png
+├── fonts/                            # Local Montserrat + Sora (unused — Google Fonts is active source)
+├── pages/                            # Active pages
+│   ├── landing-page-lc.html          # Primary marketing landing page (DE/EN)
+│   ├── exercise-components.html      # Exercise type UI component atlas
+│   ├── lingocareai2.html             # Proprietary LLM strategy & build report v2 (latest)
+│   ├── mvp_dashboard.html            # MVP progress dashboard
+│   └── mvp-plan.html                 # Internal MVP build plan
+└── archive/                          # Superseded versions
+    ├── lingocareai.html              # LLM strategy report v1
+    ├── landing-page-lc-old.html
+    └── component-atlas-old.html
+```
 
 ### Design system (replicate in every new page)
 
@@ -54,11 +62,11 @@ Google Fonts import (always include both):
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 ```
 
-Local fonts (Montserrat + Sora) are available in `Montserrat,Sora/` but are not currently used in any page — Google Fonts is the active source.
+Local fonts (Montserrat + Sora) are available in `fonts/` but are not currently used in any page — Google Fonts is the active source.
 
 ### i18n (landing page)
 
-`landing-page-lc.html` has a bilingual DE/EN system:
+`pages/landing-page-lc.html` has a bilingual DE/EN system:
 - All user-visible text lives in `const T = { de: {...}, en: {...} }` at the top of the `<script>` block (around line 358).
 - HTML elements that need translation carry `data-t="key"` attributes — no text is hardcoded in the markup.
 - `applyLang()` sets `innerHTML` of every `[data-t]` element from `T[lang]`.
@@ -82,5 +90,5 @@ Add `.rev` class to any element; pair with `.d1`–`.d5` for staggered delays.
 
 ### Logo assets
 
-- `Icon.svg` — full wordmark SVG (56×32). Dark-brown text paths use `#47280A`; brand mark paths use `#EC8600`. When placing on a dark background, override text path fills to `rgba(250,247,242,0.8)`.
-- `Lingocare_logo_transparent.png` — raster version for contexts where SVG isn't suitable.
+- `assets/Icon.svg` — full wordmark SVG (56×32). Dark-brown text paths use `#47280A`; brand mark paths use `#EC8600`. When placing on a dark background, override text path fills to `rgba(250,247,242,0.8)`.
+- `assets/Lingocare_logo_transparent.png` — raster version for contexts where SVG isn't suitable.
