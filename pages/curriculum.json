@@ -1,0 +1,1613 @@
+{
+    "curriculum": {
+        "title": "Lingocare — Blockweise Curriculum-Architektur",
+        "subtitle": "Pflegefachassistenz · Hessen · Kombinierte KGK & PBR Kompetenzcluster",
+        "tagline": "Love to Learn — Where AI, Healthcare & Social Impact meet",
+        "start_date": "07. Juli 2026",
+        "end_date": "25. Februar 2028",
+        "total_blocks": 14,
+        "content_blocks": 7,
+        "practical_blocks": 7,
+        "competence_clusters": {
+            "AD": "Arbeiten & Durchführen",
+            "KI": "Kommunizieren & Interagieren",
+            "BD": "Beobachten & Dokumentieren",
+            "LP": "Lernen & Professionalisieren"
+        },
+        "blocks": [
+            {
+                "block_id": 1,
+                "block_number": "Block 1",
+                "theme": "Grundlagen des menschlichen Körpers & Berufseinstieg",
+                "period": "07. Juli – 14. August 2026",
+                "months": "Juli – August 2026",
+                "duration": "6 Wochen",
+                "total_hours": 56,
+                "topic": {
+                    "title": "Körperliche Grundlagen, Hygiene, Prophylaxen & professionelle Identität",
+                    "description": "Einführung in die anatomisch-physiologischen Grundlagen der menschlichen Zelle und Gewebe. Aufbau und Schutzfunktion der Haut als erstes klinisch relevantes Organ. Grundlagen der Keimübertragung, Infektionskette und Hygienestandards. Das Prinzip der pflegerischen Prophylaxe. Anatomische Fachsprache als Kommunikationswerkzeug. Parallel dazu: Einführung in das Berufsbild Pflegefachassistenz, Pflegeberufegesetz und Einstieg in das professionelle Selbstverständnis.",
+                    "lessons": [
+                        {
+                            "lesson_id": "1.1",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 1 & 2",
+                            "title": "Zell- und Gewebelehre & Grundlagen des Erlebens",
+                            "dates": "07.–18. Juli 2026",
+                            "weeks": "Woche 1–2",
+                            "hours": 10,
+                            "instructor": "Dr. Sabine Hoffmann",
+                            "competences": [
+                                "BD",
+                                "LP"
+                            ],
+                            "description": "Einführung in den zellulären Aufbau des menschlichen Körpers. Lernende erkunden die vier Grundgewebetypen (Epithel, Binde-, Muskel-, Nervengewebe) und verstehen deren pflegerische Relevanz. Ergänzt durch Grundlagen der Identitätsentwicklung, Emotionspsychologie und Coping-Strategien als Basis für personenzentriertes Handeln.",
+                            "practice_focuses": {
+                                "PF1": "Zellbestandteile benennen und Funktion zuordnen",
+                                "PF2": "Vier Gewebearten mikroskopisch unterscheiden und pflegerisch einordnen",
+                                "PF3": "Emotionsregulation in Pflegesituationen reflektieren",
+                                "PF4": "Fallbeispiel — Gewebereaktion bei Wundheilung beschreiben"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK1_Zellenlehre.pdf",
+                                "Foliensatz_KGK1_Gewebe.pptx",
+                                "Arbeitsblatt_Gewebetypen.docx",
+                                "Video_Zellaufbau_Einführung.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "1.2",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 3",
+                            "title": "Anatomie und Physiologie der Haut",
+                            "dates": "21.–25. Juli 2026",
+                            "weeks": "Woche 3",
+                            "hours": 8,
+                            "instructor": "Dr. Felix Wagner",
+                            "competences": [
+                                "BD",
+                                "AD"
+                            ],
+                            "description": "Schichtaufbau der Haut (Epidermis, Dermis, Subkutis), Schutz- und Sinnesfunktionen sowie Alterungsprozesse. Wundheilung als physiologischer Prozess in vier Phasen. Direkte Grundlage für Dekubitus- und Intertrigoprophylaxe im Pflegealltag.",
+                            "practice_focuses": {
+                                "PF1": "Hautschichten benennen und deren Funktionen erklären",
+                                "PF2": "Wundheilungsphasen chronologisch einordnen",
+                                "PF3": "Altersbedingte Hautveränderungen am Fallbeispiel dokumentieren",
+                                "PF4": "Dekubitusstadien anhand von Fallfotos einschätzen und zuordnen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK3_Hautanatomie.pdf",
+                                "Foliensatz_Wundheilung.pptx",
+                                "Dekubitus_Stadien_Poster.pdf",
+                                "Video_Wundheilung_Zeitraffer.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "1.3",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 4",
+                            "title": "Hygiene und Infektionsschutz",
+                            "dates": "28. Juli – 01. August 2026",
+                            "weeks": "Woche 4",
+                            "hours": 10,
+                            "instructor": "Dr. Felix Wagner",
+                            "competences": [
+                                "AD",
+                                "BD"
+                            ],
+                            "description": "Grundlagen der Keimübertragung und Infektionskette. Hygienemaßnahmen von der Händedesinfektion nach WHO-Schema bis zur Isolierung bei MRSA und Noroviren. Persönliche Schutzausrüstung, aseptisches Arbeiten und Umgebungshygiene im Pflegezimmer.",
+                            "practice_focuses": {
+                                "PF1": "Infektionskette an einem Fallbeispiel unterbrechen",
+                                "PF2": "Indikationen der Händedesinfektion sicher benennen",
+                                "PF3": "Isolierungsmaßnahmen nach Übertragungsweg zuordnen",
+                                "PF4": "An- und Ablegereihenfolge der PSA korrekt benennen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK4_Hygiene.pdf",
+                                "RKI_Händedesinfektion_Anleitung.pdf",
+                                "MRSA_Isolierung_Protokoll.docx",
+                                "Video_PSA_Anlegen_Korrekt.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "1.4",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 5, 6 & 7",
+                            "title": "Prophylaxen, Lebensphasen & Anatomische Fachsprache",
+                            "dates": "04.–14. August 2026",
+                            "weeks": "Woche 5–6",
+                            "hours": 12,
+                            "instructor": "Prof. Anna Schreiber",
+                            "competences": [
+                                "AD",
+                                "BD",
+                                "KI",
+                                "LP"
+                            ],
+                            "description": "Das übergeordnete Prinzip der pflegerischen Prophylaxe und Mikrobiologie als Verständnisgrundlage. Entwicklungsaufgaben über die Lebensspanne nach Erikson als Grundlage für altersgerechte Pflege. Anatomische Lage- und Richtungsbezeichnungen, Körperebenen und anatomische Grundposition als Werkzeuge präziser Pflegedokumentation und professioneller Kommunikation.",
+                            "practice_focuses": {
+                                "PF1": "Prophylaxeprinzip auf konkrete Pflegesituationen übertragen",
+                                "PF2": "Entwicklungsaufgaben nach Erikson Lebensphasen zuordnen",
+                                "PF3": "Anatomische Lagebezeichnungen am Körpermodell korrekt anwenden",
+                                "PF4": "Fachbegriffe in einen Pflegebericht einbauen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK5_Prophylaxen.pdf",
+                                "Lebensphasen_Erikson_Übersicht.pdf",
+                                "Anatomische_Fachsprache_Karte.pdf",
+                                "Übungsaufgaben_Terminologie.docx"
+                            ]
+                        },
+                        {
+                            "lesson_id": "1.5",
+                            "cluster": "PBR",
+                            "curriculum_code": "PBR 2",
+                            "title": "Berufsbild & Professionalisierung — Identität, Rolle & Pflegeberufegesetz",
+                            "dates": "11.–14. August 2026",
+                            "weeks": "Woche 6",
+                            "hours": 6,
+                            "instructor": "Prof. Julia Fischer",
+                            "competences": [
+                                "LP",
+                                "KI"
+                            ],
+                            "description": "Historische Entwicklung der Pflege und aktuelles Berufsprofil der Pflegefachassistenz. DQR-Einordnung und Pflegeberufegesetz (PflBG): vorbehaltene Aufgaben nach § 4. Rollenklärung Assistenz vs. Fachkraft im interprofessionellen Team. Karrierepfade und Weiterbildungssystem im deutschen Pflegesystem.",
+                            "practice_focuses": {
+                                "PF1": "Eigene Berufsrolle von der Pflegefachkraft klar abgrenzen",
+                                "PF2": "Vorbehaltene Aufgaben nach § 4 PflBG benennen",
+                                "PF3": "Interprofessionelles Team beschreiben und eigene Position verorten",
+                                "PF4": "Persönlichen Karrierepfad Pflegefachassistenz entwickeln"
+                            },
+                            "uploaded_materials": [
+                                "Skript_PBR2_Berufsbild.pdf",
+                                "PflBG_Auszüge_Erläutert.pdf",
+                                "DQR_Übersicht_Pflege.pdf",
+                                "Foliensatz_Pflegegeschichte.pptx"
+                            ]
+                        }
+                    ]
+                },
+                "practical": {
+                    "block_id": "1P",
+                    "block_number": "Block 1P",
+                    "title": "Praktikum — Körperliche Grundlagen: Hygiene, Hautbeurteilung & Kompetenznachweis",
+                    "period": "17. August – 25. September 2026",
+                    "months": "August – September 2026",
+                    "duration": "6 Wochen",
+                    "total_hours": 120,
+                    "sessions": [
+                        {
+                            "session_id": "1P.1",
+                            "code": "PRAKT 1A",
+                            "title": "Hygienische Grundfertigkeiten — Laborsetting",
+                            "dates": "17.–28. August 2026",
+                            "weeks": "Woche 1–2",
+                            "hours": 40,
+                            "instructor": "Dr. Felix Wagner",
+                            "competences": [
+                                "AD"
+                            ],
+                            "description": "Hands-on-Training aller hygienischen Grundfertigkeiten: Händedesinfektion nach WHO-Schritten, korrekte An- und Ablage der PSA, aseptisches Arbeiten an Simulationsmodellen. Fehleranalyse mit Fluoreszenzmittel-Technik im Peer-Feedback.",
+                            "practice_focuses": {
+                                "PF1": "Händedesinfektion nach WHO-Standard 6 Schritte demonstrieren",
+                                "PF2": "PSA vollständig und korrekt anlegen und ablegen",
+                                "PF3": "Aseptische Tätigkeiten am Übungsmodell durchführen",
+                                "PF4": "Eigene Fehler im Peer-Feedback analysieren und korrigieren"
+                            },
+                            "uploaded_materials": [
+                                "Checkliste_Hygienetraining.pdf",
+                                "Beobachtungsbogen_Händedesinfektion.docx",
+                                "Video_Fluoreszenzmittel_Test.mp4",
+                                "Laborplan_Block1P.pdf"
+                            ]
+                        },
+                        {
+                            "session_id": "1P.2",
+                            "code": "PRAKT 1B",
+                            "title": "Hautbeurteilung & Dekubitusprophylaxe am Pflegemodell",
+                            "dates": "01.–12. September 2026",
+                            "weeks": "Woche 3–4",
+                            "hours": 40,
+                            "instructor": "Dr. Sabine Hoffmann",
+                            "competences": [
+                                "BD",
+                                "AD"
+                            ],
+                            "description": "Systematische Hautinspektion am Phantommodell mit Dokumentation. Einschätzung mit der Braden-Skala. Lagerungsübungen zur Dekubitusprophylaxe und rückenschonendes Arbeiten.",
+                            "practice_focuses": {
+                                "PF1": "Hautstatus systematisch erheben und dokumentieren",
+                                "PF2": "Braden-Skala anwenden und Risiko einschätzen",
+                                "PF3": "Lagerungsposition rückenschonend durchführen",
+                                "PF4": "Pflegebericht zu Hautbefund fachlich korrekt formulieren"
+                            },
+                            "uploaded_materials": [
+                                "Braden_Skala_Formular.pdf",
+                                "Lagerungsprotokoll_Vorlage.docx",
+                                "Beobachtungsbogen_Haut.pdf",
+                                "Video_Lagerungstechnik.mp4"
+                            ]
+                        },
+                        {
+                            "session_id": "1P.3",
+                            "code": "PRAKT 1C",
+                            "title": "Kompetenznachweis Block 1 & Reflexionsgespräch",
+                            "dates": "15.–25. September 2026",
+                            "weeks": "Woche 5–6",
+                            "hours": 20,
+                            "instructor": "Prof. Julia Fischer",
+                            "competences": [
+                                "BD",
+                                "LP"
+                            ],
+                            "description": "Praktische Prüfungsstation: Hygienedurchführung, Hautbeurteilung und Dokumentation unter Beobachtungsbedingungen. Anschließend strukturiertes Reflexionsgespräch und Lernzieldefinition für Block 2.",
+                            "practice_focuses": {
+                                "PF1": "Prüfungsstation Hygiene erfolgreich absolvieren",
+                                "PF2": "Hautbeobachtung und Dokumentation demonstrieren",
+                                "PF3": "Selbstreflexion — Stärken und Entwicklungsfelder benennen",
+                                "PF4": "Lernziele für Block 2 schriftlich formulieren"
+                            },
+                            "uploaded_materials": [
+                                "Bewertungsbogen_Block1P.pdf",
+                                "Reflexionsleitfaden_Lernportfolio.docx",
+                                "Portfolio_Vorlage_Block1.docx",
+                                "Rückmeldebogen_Kursleitung.pdf"
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "block_id": 2,
+                "block_number": "Block 2",
+                "theme": "Vitalfunktionen, Schmerzmanagement & Professionelle Kommunikation",
+                "period": "28. September – 06. November 2026",
+                "months": "Oktober – November 2026",
+                "duration": "6 Wochen",
+                "total_hours": 54,
+                "topic": {
+                    "title": "Herz, Kreislauf, Atmung, Schmerz, Thermoregulation & Gesprächsführung",
+                    "description": "Vertiefte Auseinandersetzung mit den vier Vitalfunktionen: Kardiovaskuläres System, Atemsystem, Schmerzphysiologie und Thermoregulation. Normwerte, Messtechniken und Beobachtungskriterien für die tägliche Pflegepraxis. Parallel dazu Grundlagen der professionellen Gesprächsführung: verbale, nonverbale und paraverbale Kommunikation als Kernkompetenz in der Pflegebeziehung.",
+                    "lessons": [
+                        {
+                            "lesson_id": "2.1",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 8",
+                            "title": "Herz-Kreislauf-System — Anatomie, Physiologie & Beobachtung",
+                            "dates": "28. September – 09. Oktober 2026",
+                            "weeks": "Woche 1–2",
+                            "hours": 12,
+                            "instructor": "Dr. Stefan Bauer",
+                            "competences": [
+                                "BD",
+                                "AD"
+                            ],
+                            "description": "Anatomie des Herzens, Blutkreislauf und Druckregulation. Normwerte für Puls und Blutdruck, Messtechniken und häufige Abweichungen (Tachykardie, Hypertonie, Hypotonie). Grundlage für korrekte Messung, Dokumentation und strukturierte Meldung von Auffälligkeiten nach SBAR-Schema.",
+                            "practice_focuses": {
+                                "PF1": "Kreislaufschema vollständig beschriften und erklären",
+                                "PF2": "Normwerte Puls und Blutdruck sicher benennen",
+                                "PF3": "Abweichungen (Hyper- und Hypotonie) fallbezogen einordnen",
+                                "PF4": "Simulation — RR messen, dokumentieren und Abweichung nach SBAR melden"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK8_Herz_Kreislauf.pdf",
+                                "Normwerte_Vitalzeichen_Tabelle.pdf",
+                                "Foliensatz_Kreislaufsystem.pptx",
+                                "Video_Blutdruckmessung_Technik.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "2.2",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 9",
+                            "title": "Das Atemsystem — Physiologie und pflegerische Beobachtung",
+                            "dates": "12.–23. Oktober 2026",
+                            "weeks": "Woche 3–4",
+                            "hours": 10,
+                            "instructor": "Dr. Stefan Bauer",
+                            "competences": [
+                                "BD",
+                                "AD"
+                            ],
+                            "description": "Anatomie der Atemwege und Lunge, Atemmechanik und Gasaustausch. Beobachtungskriterien der Atmung: Frequenz, Tiefe, Rhythmus und Geräusche. Erkennen von Warnzeichen wie Dyspnoe, Zyanose und atypischen Hustenformen. Pneumonieprophylaxe als Aufgabe der Pflege.",
+                            "practice_focuses": {
+                                "PF1": "Atemwege und Lunge beschriften und Funktion erklären",
+                                "PF2": "Beobachtungskriterien der Atmung systematisch erfassen",
+                                "PF3": "Warnzeichen Dyspnoe und Zyanose frühzeitig erkennen",
+                                "PF4": "Fallstudie — Atembeobachtung dokumentieren und nächste Schritte planen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK9_Atemsystem.pdf",
+                                "Foliensatz_Atembeobachtung.pptx",
+                                "Checkliste_Atemwarnzeichen.pdf",
+                                "Video_Atembeobachtung_Pflege.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "2.3",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 10",
+                            "title": "Schmerzphysiologie — Entstehung, Weiterleitung & Einschätzung",
+                            "dates": "26.–30. Oktober 2026",
+                            "weeks": "Woche 5",
+                            "hours": 8,
+                            "instructor": "Dr. Sabine Hoffmann",
+                            "competences": [
+                                "BD",
+                                "KI"
+                            ],
+                            "description": "Neurophysiologische Grundlagen der Schmerzentstehung und -weiterleitung. Unterscheidung akuter vs. chronischer Schmerz. Schmerzskalen (VAS, Smiley, BESD) und verbale sowie nonverbale Schmerzäußerungen erkennen. Besondere Herausforderung: Schmerzbeurteilung bei Patienten mit Demenz.",
+                            "practice_focuses": {
+                                "PF1": "Schmerzweiterleitung vereinfacht erklären",
+                                "PF2": "Drei Schmerzskalen anwenden und Unterschiede benennen",
+                                "PF3": "Nonverbale Schmerzzeichen bei Patienten mit Demenz erkennen",
+                                "PF4": "Schmerzdokumentation nach BESD-Skala an Fallbeispiel durchführen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK10_Schmerzphysiologie.pdf",
+                                "VAS_BESD_Smiley_Skalen.pdf",
+                                "Arbeitsblatt_Schmerzbeobachtung.docx",
+                                "Video_Schmerzkommunikation_Demenz.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "2.4",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 11",
+                            "title": "Thermoregulation — Körpertemperatur, Fieber & Hitzeschutz",
+                            "dates": "02.–04. November 2026",
+                            "weeks": "Woche 6",
+                            "hours": 6,
+                            "instructor": "Prof. Julia Fischer",
+                            "competences": [
+                                "BD",
+                                "AD"
+                            ],
+                            "description": "Physiologie der Körpertemperatur, Wärmeproduktion und -abgabe. Fiebertypen, -phasen und -symptome. Unterschiedliche Messmethoden und deren Genauigkeit. Thermische Notfälle (Hitzestress) als pflegerisches Risiko bei vulnerablen Gruppen.",
+                            "practice_focuses": {
+                                "PF1": "Körpertemperatur-Normwerte und Messmethoden benennen",
+                                "PF2": "Fiebertypen und Fieberverlauf unterscheiden",
+                                "PF3": "Wärmeregulation bei älteren Patienten kritisch einschätzen",
+                                "PF4": "Hitzeschutzplan für stationäre Einrichtung skizzieren"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK11_Thermoregulation.pdf",
+                                "Fieber_Messmethoden_Vergleich.pdf",
+                                "Hitzeschutz_Leitfaden_RKI.pdf",
+                                "Quiz_Vitalzeichen_Abschlusstest.pdf"
+                            ]
+                        },
+                        {
+                            "lesson_id": "2.5",
+                            "cluster": "PBR",
+                            "curriculum_code": "PBR 1",
+                            "title": "Grundlagen der Gesprächsführung & professionellen Kommunikation",
+                            "dates": "05.–06. November 2026",
+                            "weeks": "Woche 6",
+                            "hours": 6,
+                            "instructor": "Dr. Lena Braun",
+                            "competences": [
+                                "KI"
+                            ],
+                            "description": "Verbale, nonverbale und paraverbale Kommunikation. Aktives Zuhören und Fragetechniken. Ich-Botschaften und das Vier-Seiten-Modell nach Schulz von Thun. Nähe-Distanz-Regulation in der Pflegebeziehung. Gewaltfreie Kommunikation (NVC) nach Rosenberg als Grundlage für respektvolle Pflegegespräche.",
+                            "practice_focuses": {
+                                "PF1": "Vier Kommunikationskanäle nach Schulz von Thun auf Fallbeispiele anwenden",
+                                "PF2": "Ich-Botschaften statt Du-Botschaften formulieren",
+                                "PF3": "Aktives Zuhören in simuliertem Gespräch demonstrieren",
+                                "PF4": "Nähe-Distanz-Balance im Pflegegespräch reflektieren"
+                            },
+                            "uploaded_materials": [
+                                "Skript_PBR1_Gesprächsführung.pdf",
+                                "Vier_Seiten_Modell_Übung.docx",
+                                "Aktives_Zuhören_Checkliste.pdf",
+                                "Foliensatz_Professionelle_Kommunikation.pptx"
+                            ]
+                        }
+                    ]
+                },
+                "practical": {
+                    "block_id": "2P",
+                    "block_number": "Block 2P",
+                    "title": "Praktikum — Vitalzeichen messen, dokumentieren & Schmerzkommunikation",
+                    "period": "09. November – 18. Dezember 2026",
+                    "months": "November – Dezember 2026",
+                    "duration": "6 Wochen",
+                    "total_hours": 120,
+                    "sessions": [
+                        {
+                            "session_id": "2P.1",
+                            "code": "PRAKT 2A",
+                            "title": "Vitalzeichenmessung — Technik & Dokumentation",
+                            "dates": "09.–20. November 2026",
+                            "weeks": "Woche 1–2",
+                            "hours": 40,
+                            "instructor": "Dr. Stefan Bauer",
+                            "competences": [
+                                "AD",
+                                "BD"
+                            ],
+                            "description": "Praxistraining aller Vitalzeichen an Simulationsmodellen und unter Peer-Bedingungen. Korrekte Messtechnik, Dokumentation in Pflegekurven und strukturierte Weitergabe auffälliger Werte nach SBAR-Schema.",
+                            "practice_focuses": {
+                                "PF1": "RR-Messung nach Riva-Rocci korrekt und sicher durchführen",
+                                "PF2": "Pulsqualitäten erfassen und beschreiben",
+                                "PF3": "Atemfrequenz und -qualität beobachten und dokumentieren",
+                                "PF4": "Auffällige Vitalwerte nach SBAR-Schema strukturiert melden"
+                            },
+                            "uploaded_materials": [
+                                "Pflegekurve_Vorlage.pdf",
+                                "SBAR_Meldeschema_Karte.pdf",
+                                "Checkliste_Vitalzeichen_Messung.docx",
+                                "Video_RR_Messung_Peer.mp4"
+                            ]
+                        },
+                        {
+                            "session_id": "2P.2",
+                            "code": "PRAKT 2B",
+                            "title": "Schmerzerfassung & pneumonieprophylaktische Atemübungen",
+                            "dates": "23. November – 04. Dezember 2026",
+                            "weeks": "Woche 3–4",
+                            "hours": 40,
+                            "instructor": "Dr. Sabine Hoffmann",
+                            "competences": [
+                                "KI",
+                                "BD",
+                                "AD"
+                            ],
+                            "description": "Schmerzerfassung mit unterschiedlichen Skalen in simulierten Pflegesituationen (Patient mit und ohne Demenz). Pneumonieprophylaktische Atemübungen (ASE) durchführen und anleiten. Schmerzkommunikation einfühlsam gestalten.",
+                            "practice_focuses": {
+                                "PF1": "BESD-Skala an simuliertem Demenzpatienten anwenden",
+                                "PF2": "Schmerzdokumentation vollständig und präzise ausfüllen",
+                                "PF3": "Atemübung (ASE) anleiten und durchführen",
+                                "PF4": "Einfühlsames Schmerzkommunikationsgespräch führen"
+                            },
+                            "uploaded_materials": [
+                                "BESD_Skala_Übungsformular.pdf",
+                                "Atemübungen_Anleitung_Pflege.pdf",
+                                "Simulationsszenario_Schmerzpatient.docx",
+                                "Beobachtungsbogen_Schmerz.pdf"
+                            ]
+                        },
+                        {
+                            "session_id": "2P.3",
+                            "code": "PRAKT 2C",
+                            "title": "Kompetenznachweis Block 2 & Kommunikationsreflexion",
+                            "dates": "07.–18. Dezember 2026",
+                            "weeks": "Woche 5–6",
+                            "hours": 20,
+                            "instructor": "Prof. Julia Fischer",
+                            "competences": [
+                                "BD",
+                                "LP"
+                            ],
+                            "description": "OSCE-ähnliche Prüfungsstation: Vitalzeichenmessung, Schmerzerfassung, Dokumentation und Meldung. Selbst- und Fremdbewertung im Peer-Kreis. Portfolioeintrag Block 2.",
+                            "practice_focuses": {
+                                "PF1": "Prüfungsstation Vitalzeichen und Schmerz absolvieren",
+                                "PF2": "Eigene Messtechnik auf Basis Feedbacks optimieren",
+                                "PF3": "Portfolioeintrag Block 2 vollständig ausformulieren",
+                                "PF4": "Lernziele für Block 3 auf Basis Reflexion definieren"
+                            },
+                            "uploaded_materials": [
+                                "OSCE_Bewertungsbogen_Block2.pdf",
+                                "Portfolio_Block2_Vorlage.docx",
+                                "Feedback_Formular_Peer.pdf",
+                                "Selbstbewertungsbogen_Kompetenzen.pdf"
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "block_id": 3,
+                "block_number": "Block 3",
+                "theme": "Ernährung, Ausscheidung, Pflegeprozess & Ethik",
+                "period": "04. Januar – 12. Februar 2027",
+                "months": "Januar – Februar 2027",
+                "duration": "6 Wochen",
+                "total_hours": 58,
+                "topic": {
+                    "title": "Metabolismus, Schlucken, Ausscheidung, Pflegemethodik & ethisches Handeln",
+                    "description": "Physiologie der Ernährung und des Schluckens als Basis für Aspirationsprophylaxe und Ernährungsmanagement. Häufige Ernährungsrisiken (Dysphagie, Mangelernährung) und Ausscheidungsphysiologie mit Hilfsmitteln. Parallel dazu: Einführung in die systematische Pflegemethodik — der Pflegeprozess als Arbeitswerkzeug — sowie die ethischen Prinzipien als Grundlage professionellen Handelns.",
+                    "lessons": [
+                        {
+                            "lesson_id": "3.1",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 12 & 14",
+                            "title": "Ernährung — Grundbegriffe, Schlucken & Mundpflege",
+                            "dates": "04.–15. Januar 2027",
+                            "weeks": "Woche 1–2",
+                            "hours": 10,
+                            "instructor": "Dr. Ursula Koch",
+                            "competences": [
+                                "AD",
+                                "BD"
+                            ],
+                            "description": "Metabolismus, BMI und Flüssigkeitsbilanzierung. Physiologie des Schluckens in vier Phasen als Basis für Aspirationsprophylaxe. Anatomie der Mundhöhle als Grundlage für professionelle Mundpflege im Pflegealltag.",
+                            "practice_focuses": {
+                                "PF1": "Grundbegriffe Metabolismus, BMI und Energiebedarf erklären",
+                                "PF2": "Vier Schluckphasen beschreiben und Risikopunkte benennen",
+                                "PF3": "Mundhöhlenanatomie für die Mundpflege anwenden",
+                                "PF4": "Fallbeispiel — Ernährungsanamnese strukturiert erheben"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK12_Ernährung.pdf",
+                                "Schluckphasen_Grafik.pdf",
+                                "BMI_Rechner_Übungsaufgaben.docx",
+                                "Video_Schluckakt_Physiologie.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "3.2",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 13",
+                            "title": "Ernährungsrisiken — Dysphagie, Aspiration & Mangelernährung",
+                            "dates": "18.–29. Januar 2027",
+                            "weeks": "Woche 3–4",
+                            "hours": 12,
+                            "instructor": "Dr. Ursula Koch",
+                            "competences": [
+                                "BD",
+                                "AD",
+                                "KI"
+                            ],
+                            "description": "Störungen des Ernährungsprozesses: Dysphagieformen, Aspirationsrisiken und deren Folgen. Dehydratation und Mangelernährung als häufige Pflegeprobleme. Erkennungsmerkmale und kommunikative Ansätze bei Nahrungsablehnung.",
+                            "practice_focuses": {
+                                "PF1": "Dysphagieformen benennen und Risiken beschreiben",
+                                "PF2": "Aspirationszeichen frühzeitig erkennen",
+                                "PF3": "Mangelernährung anhand von Fallmerkmalen identifizieren",
+                                "PF4": "Kommunikatives Vorgehen bei Nahrungsablehnung beschreiben"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK13_Ernährungsrisiken.pdf",
+                                "Dysphagie_Erkennung_Leitfaden.pdf",
+                                "Dehydratations_Checkliste.docx",
+                                "Foliensatz_Aspiration_Prävention.pptx"
+                            ]
+                        },
+                        {
+                            "lesson_id": "3.3",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 15 & 16",
+                            "title": "Ausscheidung — Grundlagen, Beobachtung & Hilfsmittel",
+                            "dates": "01.–07. Februar 2027",
+                            "weeks": "Woche 5",
+                            "hours": 8,
+                            "instructor": "Prof. Thomas Richter",
+                            "competences": [
+                                "BD",
+                                "AD",
+                                "KI"
+                            ],
+                            "description": "Physiologie von Miktion und Defäkation. Beobachtungskriterien für Urin und Stuhl. Inkontinenzformen und Kathetersysteme im Überblick. Professioneller Umgang mit Scham und Ekel als pflegerische Haltungsaufgabe.",
+                            "practice_focuses": {
+                                "PF1": "Beobachtungskriterien Urin und Stuhl sicher anwenden",
+                                "PF2": "Inkontinenzformen unterscheiden und Hilfsmittel zuordnen",
+                                "PF3": "Schamwahrung in der Ausscheidungspflege kommunikativ gestalten",
+                                "PF4": "Flüssigkeitsbilanz vollständig dokumentieren"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK15_Ausscheidung.pdf",
+                                "Urin_Stuhl_Beobachtungskarte.pdf",
+                                "Inkontinenz_Hilfsmittel_Übersicht.pdf",
+                                "Arbeitsblatt_Flüssigkeitsbilanz.docx"
+                            ]
+                        },
+                        {
+                            "lesson_id": "3.4",
+                            "cluster": "PBR",
+                            "curriculum_code": "PBR 4 & 5",
+                            "title": "Der Pflegeprozess & Pflegetheorien — Systematisch handeln",
+                            "dates": "08.–10. Februar 2027",
+                            "weeks": "Woche 6",
+                            "hours": 8,
+                            "instructor": "Prof. Julia Fischer",
+                            "competences": [
+                                "BD",
+                                "AD",
+                                "LP"
+                            ],
+                            "description": "Das 4- und 6-stufige Pflegeprozessmodell als Arbeitsgrundlage. Informationssammlung, Assessment, Pflegediagnosen formulieren, SMART-Ziele, Maßnahmenplanung, Dokumentation und Evaluation. Pflegetheorien als Orientierung: AEDL-Modell nach Krohwinkel und Strukturmodell SIS als Dokumentationsgrundlage.",
+                            "practice_focuses": {
+                                "PF1": "Pflegeprozess-Phasen in Kreislaufdarstellung erklären",
+                                "PF2": "Pflegediagnose zu Fallbeispiel formulieren",
+                                "PF3": "Pflegeziele SMART formulieren",
+                                "PF4": "AEDL-Modell zur Pflegeplanung praktisch anwenden"
+                            },
+                            "uploaded_materials": [
+                                "Skript_PBR4_Pflegeprozess.pdf",
+                                "AEDL_Krohwinkel_Übersicht.pdf",
+                                "SIS_Dokumentationsvorlage.pdf",
+                                "Pflegediagnosen_Übungsaufgaben.docx"
+                            ]
+                        },
+                        {
+                            "lesson_id": "3.5",
+                            "cluster": "PBR",
+                            "curriculum_code": "PBR 3",
+                            "title": "Ethik in der Pflege — Prinzipien, Dilemmata & Würde",
+                            "dates": "11.–12. Februar 2027",
+                            "weeks": "Woche 6",
+                            "hours": 4,
+                            "instructor": "Dr. Eva Zimmermann",
+                            "competences": [
+                                "LP",
+                                "KI"
+                            ],
+                            "description": "Die vier ethischen Prinzipien (Autonomie, Fürsorge, Nicht-Schaden, Gerechtigkeit) nach Beauchamp und Childress. ICN-Ethikkodex. Salutogenese nach Antonovsky. Umgang mit ethischen Dilemmata (Schutz vs. Freiheit) in der Pflegepraxis.",
+                            "practice_focuses": {
+                                "PF1": "Vier ethische Prinzipien auf ein Pflegedilemma anwenden",
+                                "PF2": "ICN-Ethikkodex als Handlungsrahmen nutzen",
+                                "PF3": "Ethisches Dilemma in strukturierter Fallbesprechung diskutieren",
+                                "PF4": "Patientenverfügung und ACP-Grundlagen erläutern"
+                            },
+                            "uploaded_materials": [
+                                "Skript_PBR3_Ethik.pdf",
+                                "ICN_Ethikkodex_DE.pdf",
+                                "Fallbesprechungsprotokoll_Ethik.docx",
+                                "Foliensatz_Ethische_Prinzipien.pptx"
+                            ]
+                        }
+                    ]
+                },
+                "practical": {
+                    "block_id": "3P",
+                    "block_number": "Block 3P",
+                    "title": "Praktikum — Ernährungsunterstützung, Ausscheidungspflege & Pflegeprozessanwendung",
+                    "period": "15. Februar – 26. März 2027",
+                    "months": "Februar – März 2027",
+                    "duration": "6 Wochen",
+                    "total_hours": 120,
+                    "sessions": [
+                        {
+                            "session_id": "3P.1",
+                            "code": "PRAKT 3A",
+                            "title": "Essensanreichen & Aspirationsprophylaxe am Pflegebett",
+                            "dates": "15.–26. Februar 2027",
+                            "weeks": "Woche 1–2",
+                            "hours": 40,
+                            "instructor": "Dr. Ursula Koch",
+                            "competences": [
+                                "AD",
+                                "KI"
+                            ],
+                            "description": "Praxistraining: Essensanreichen in verschiedenen Lagerungspositionen, Anpassung der Konsistenz nach IDDSI-Schema, Aspirationsprophylaxe. Simulation einer Schluckstörung mit gezielter Kommunikation und Anpassungsstrategien.",
+                            "practice_focuses": {
+                                "PF1": "Korrekte Lagerung beim Essensanreichen durchführen",
+                                "PF2": "Aspirationszeichen erkennen und korrekt reagieren",
+                                "PF3": "Konsistenzanpassung nach IDDSI fallbezogen begründen",
+                                "PF4": "Begleitende Kommunikation beim Essen personenzentriert gestalten"
+                            },
+                            "uploaded_materials": [
+                                "Checkliste_Essensanreichen.pdf",
+                                "Konsistenzgrade_IDDSI.pdf",
+                                "Simulationsszenario_Dysphagie.docx",
+                                "Video_Aspirationsprophylaxe.mp4"
+                            ]
+                        },
+                        {
+                            "session_id": "3P.2",
+                            "code": "PRAKT 3B",
+                            "title": "Inkontinenzversorgung & Ausscheidungspflege mit Würde",
+                            "dates": "01.–12. März 2027",
+                            "weeks": "Woche 3–4",
+                            "hours": 40,
+                            "instructor": "Prof. Thomas Richter",
+                            "competences": [
+                                "AD",
+                                "KI",
+                                "BD"
+                            ],
+                            "description": "Fachgerechter Wechsel von Inkontinenzmaterialien, Pflege und Entleerung von Kathetersystemen. Schamwahrende Kommunikation und Intimsphärenschutz in der Ausscheidungspflege.",
+                            "practice_focuses": {
+                                "PF1": "Inkontinenzmaterial fachgerecht wechseln",
+                                "PF2": "Urinbeutel hygienisch entleeren und Messung dokumentieren",
+                                "PF3": "Schamwahrende Kommunikation in der Intimpflege anwenden",
+                                "PF4": "Stuhlobservation fachlich korrekt dokumentieren"
+                            },
+                            "uploaded_materials": [
+                                "Checkliste_Inkontinenzversorgung.pdf",
+                                "Beobachtungsbogen_Ausscheidung.docx",
+                                "Kommunikationsleitfaden_Intimpflege.pdf",
+                                "Video_Kathetermessung.mp4"
+                            ]
+                        },
+                        {
+                            "session_id": "3P.3",
+                            "code": "PRAKT 3C",
+                            "title": "Pflegeprozess vollständig anwenden & Kompetenznachweis Block 3",
+                            "dates": "15.–26. März 2027",
+                            "weeks": "Woche 5–6",
+                            "hours": 20,
+                            "instructor": "Prof. Julia Fischer",
+                            "competences": [
+                                "BD",
+                                "LP"
+                            ],
+                            "description": "Fallbasiertes Training: vollständige Pflegeanamnese, Pflegediagnosen formulieren, Pflegeplan erstellen und evaluieren. Abschlusskompetenznachweis Block 3 und Portfolio.",
+                            "practice_focuses": {
+                                "PF1": "Vollständige Pflegeanamnese an Simulationspatient erheben",
+                                "PF2": "Pflegediagnose formulieren und SMART-Ziel ableiten",
+                                "PF3": "Pflegemaßnahme durchführen und dokumentieren",
+                                "PF4": "Portfolio Block 3 abschließen"
+                            },
+                            "uploaded_materials": [
+                                "Pflegeanamnese_Formular.pdf",
+                                "Pflegediagnosen_Übungsaufgaben.docx",
+                                "Bewertungsbogen_Block3P.pdf",
+                                "Portfolio_Block3_Vorlage.docx"
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "block_id": 4,
+                "block_number": "Block 4",
+                "theme": "Bewegen, Wahrnehmen, Sinne & Rechtliche Grundlagen",
+                "period": "29. März – 07. Mai 2027",
+                "months": "März – Mai 2027",
+                "duration": "6 Wochen",
+                "total_hours": 54,
+                "topic": {
+                    "title": "Bewegungsapparat, Nervensystem, Sinnesorgane, Delegation & Recht",
+                    "description": "Anatomisch-physiologische Grundlagen des Bewegens und Wahrnehmens als Basis für Mobilitätspflege, Sturzprophylaxe und Kommunikation bei Sinneseinschränkungen. Parallel dazu rechtliche Orientierung: Schweigepflicht, Patientenrechte, Haftungsrecht und Delegation als unverzichtbare Rahmenbedingungen pflegerischen Handelns.",
+                    "lessons": [
+                        {
+                            "lesson_id": "4.1",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 17",
+                            "title": "Bewegungsapparat — Skelett, Gelenke & Muskulatur",
+                            "dates": "29. März – 09. April 2027",
+                            "weeks": "Woche 1–2",
+                            "hours": 10,
+                            "instructor": "Prof. Klaus Müller",
+                            "competences": [
+                                "BD",
+                                "AD"
+                            ],
+                            "description": "Passiver (Skelett, Gelenke) und aktiver (Muskulatur) Bewegungsapparat als Grundlage für Mobilitätspflege. Körperhaltung und Motorik. Alterungsbedingte Veränderungen wie Osteoporoserisiko und deren pflegerische Konsequenzen.",
+                            "practice_focuses": {
+                                "PF1": "Passiven und aktiven Bewegungsapparat unterscheiden und erklären",
+                                "PF2": "Häufige Gelenke und ihre Bewegungsrichtungen benennen",
+                                "PF3": "Osteoporose-Risikofaktoren bei älteren Patienten erkennen",
+                                "PF4": "Fallstudie — Mobilitätsstatus systematisch einschätzen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK17_Bewegungsapparat.pdf",
+                                "Skelett_Anatomie_Poster.pdf",
+                                "Foliensatz_Muskulatur.pptx",
+                                "Video_Gelenkmobilität_Pflege.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "4.2",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 18",
+                            "title": "Nervensystem — Reizleitung, Reflexe & Sensomotorik",
+                            "dates": "12.–23. April 2027",
+                            "weeks": "Woche 3–4",
+                            "hours": 10,
+                            "instructor": "Dr. Sabine Hoffmann",
+                            "competences": [
+                                "BD"
+                            ],
+                            "description": "Aufbau von ZNS und PNS, Grundlagen der Nervenzelle. Sensomotorik und Propriozeption als Grundlage für Sturzprävention. Reizleitung und Reflexe als Beobachtungsparameter in der Pflege.",
+                            "practice_focuses": {
+                                "PF1": "ZNS und PNS in ihrer Funktion unterscheiden",
+                                "PF2": "Propriozeption und Gleichgewicht für Sturzrisiko einordnen",
+                                "PF3": "Neurologische Auffälligkeiten beschreiben und melden",
+                                "PF4": "Fallstudie — Sturzrisiko neurophysiologisch begründen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK18_Nervensystem.pdf",
+                                "ZNS_PNS_Übersichtsgrafik.pdf",
+                                "Sturzrisiko_Neurologie_Lernkarte.docx",
+                                "Video_Sturzprophylaxe.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "4.3",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 19",
+                            "title": "Sinnesorgane — Sehen, Hören & Alterungsprozesse",
+                            "dates": "26. April – 02. Mai 2027",
+                            "weeks": "Woche 5",
+                            "hours": 8,
+                            "instructor": "Prof. Klaus Müller",
+                            "competences": [
+                                "BD",
+                                "KI"
+                            ],
+                            "description": "Anatomie und Physiologie von Auge und Ohr. Alters- und krankheitsbedingte Veränderungen (Katarakt, Presbyakusis). Umgang mit Seh- und Hörhilfen. Kommunikationsstrategien bei Sinneseinschränkungen.",
+                            "practice_focuses": {
+                                "PF1": "Häufige Seheinschränkungen im Alter beschreiben",
+                                "PF2": "Hörhilfen fachgerecht einsetzen und pflegen",
+                                "PF3": "Kommunikationsstrategien bei Sinneseinschränkungen anwenden",
+                                "PF4": "Fallstudie — Pflegemaßnahmen bei kombinierter Sehschwäche und Schwerhörigkeit"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK19_Sinnesorgane.pdf",
+                                "Sehbehinderung_Pflege_Leitfaden.pdf",
+                                "Hörhilfen_Pflege_Anleitung.docx",
+                                "Video_Kommunikation_Sinneseinschränkungen.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "4.4",
+                            "cluster": "PBR",
+                            "curriculum_code": "PBR 7 & 8",
+                            "title": "Rechtliche Grundlagen, Delegation & Verantwortung",
+                            "dates": "03.–07. Mai 2027",
+                            "weeks": "Woche 6",
+                            "hours": 8,
+                            "instructor": "Dr. Eva Zimmermann",
+                            "competences": [
+                                "LP",
+                                "AD"
+                            ],
+                            "description": "Schweigepflicht und DSGVO im Pflegealltag. Patientenrechte und Recht auf Selbstbestimmung. Haftungsrecht: Garantenstellung und Konsequenzen. Anordnungs-, Übernahme- und Durchführungsverantwortung klar unterscheiden. Remonstrationsrecht und Delegation als Abgrenzung zur Fachkraft.",
+                            "practice_focuses": {
+                                "PF1": "Schweigepflicht auf Fallbeispiele anwenden",
+                                "PF2": "Drei Verantwortungsebenen auf konkrete Situationen anwenden",
+                                "PF3": "Remonstrationsrecht situationsgerecht einsetzen",
+                                "PF4": "Delegation ablehnen und Begründung professionell kommunizieren"
+                            },
+                            "uploaded_materials": [
+                                "Skript_PBR7_Recht_Pflege.pdf",
+                                "DSGVO_Pflege_Kurzübersicht.pdf",
+                                "Verantwortungsebenen_Grafik.pdf",
+                                "Remonstration_Fallbeispiele.docx"
+                            ]
+                        }
+                    ]
+                },
+                "practical": {
+                    "block_id": "4P",
+                    "block_number": "Block 4P",
+                    "title": "Praktikum — Mobilisation, Transfer, Gehhilfen & Rechtssimulation",
+                    "period": "10. Mai – 18. Juni 2027",
+                    "months": "Mai – Juni 2027",
+                    "duration": "6 Wochen",
+                    "total_hours": 120,
+                    "sessions": [
+                        {
+                            "session_id": "4P.1",
+                            "code": "PRAKT 4A",
+                            "title": "Rückengerechtes Arbeiten & kinästhetische Grundprinzipien",
+                            "dates": "10.–21. Mai 2027",
+                            "weeks": "Woche 1–2",
+                            "hours": 40,
+                            "instructor": "Prof. Klaus Müller",
+                            "competences": [
+                                "AD",
+                                "LP"
+                            ],
+                            "description": "Ergonomische Arbeitshaltung und kinästhetische Grundprinzipien. Positionswechsel im Bett rückenschonend. Einsatz von Hilfsmitteln (Rutschbrett, Drehscheibe). Transfer Bett–Rollstuhl.",
+                            "practice_focuses": {
+                                "PF1": "Eigene Körperhaltung beim Transfer ergonomisch optimieren",
+                                "PF2": "Positionswechsel im Bett rückenschonend durchführen",
+                                "PF3": "Hilfsmittel für Transfer korrekt einsetzen",
+                                "PF4": "Transfer Bett-Rollstuhl sicher und strukturiert durchführen"
+                            },
+                            "uploaded_materials": [
+                                "Kinaesthetik_Grundprinzipien.pdf",
+                                "Transfertechniken_Übersicht.pdf",
+                                "Checkliste_Ergonomie.docx",
+                                "Video_Bett_Rollstuhl_Transfer.mp4"
+                            ]
+                        },
+                        {
+                            "session_id": "4P.2",
+                            "code": "PRAKT 4B",
+                            "title": "Gehtraining, Gehhilfen & Sturzprophylaxe",
+                            "dates": "24. Mai – 04. Juni 2027",
+                            "weeks": "Woche 3–4",
+                            "hours": 40,
+                            "instructor": "Prof. Klaus Müller",
+                            "competences": [
+                                "AD",
+                                "BD"
+                            ],
+                            "description": "Praktische Begleitung beim Gehtraining mit verschiedenen Gehhilfen (Rollator, Gehstock, Unterarmgehstütze). Umgebungsgestaltung zur Sturzprophylaxe. Gangsicherheitseinschätzung und Dokumentation.",
+                            "practice_focuses": {
+                                "PF1": "Gehhilfen korrekt einstellen und einweisen",
+                                "PF2": "Gangmuster und -sicherheit strukturiert beobachten",
+                                "PF3": "Sturzgefährdete Umgebung erkennen und optimieren",
+                                "PF4": "Sturzrisiko-Assessment durchführen und dokumentieren"
+                            },
+                            "uploaded_materials": [
+                                "Checkliste_Gehhilfen.pdf",
+                                "Sturzassessment_Formular.pdf",
+                                "Gangsicherheit_Beobachtungsbogen.docx",
+                                "Video_Rollator_Einweisung.mp4"
+                            ]
+                        },
+                        {
+                            "session_id": "4P.3",
+                            "code": "PRAKT 4C",
+                            "title": "Kompetenznachweis Block 4, Rechtssimulation & Reflexion",
+                            "dates": "07.–18. Juni 2027",
+                            "weeks": "Woche 5–6",
+                            "hours": 20,
+                            "instructor": "Dr. Eva Zimmermann",
+                            "competences": [
+                                "LP",
+                                "AD"
+                            ],
+                            "description": "Prüfungsstationen Transfer und Gehtraining. Zusätzlich: kurze Rechtssimulation zu Delegation und Remonstration. Portfolio Block 4.",
+                            "practice_focuses": {
+                                "PF1": "Prüfungsstation Transfer absolvieren",
+                                "PF2": "Gehtraining-Begleitung unter Beobachtung demonstrieren",
+                                "PF3": "Rechtssimulation Delegation und Remonstration durchführen",
+                                "PF4": "Portfolio Block 4 abschließen und einreichen"
+                            },
+                            "uploaded_materials": [
+                                "Bewertungsbogen_Block4P.pdf",
+                                "Rechtssimulation_Fallkarten.pdf",
+                                "Portfolio_Block4_Vorlage.docx",
+                                "OSCE_Szenarien_Block4.pdf"
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "block_id": 5,
+                "block_number": "Block 5",
+                "theme": "Psyche, Demenz, Verhalten & Sozial-/Gesundheitssystem",
+                "period": "21. Juni – 30. Juli 2027",
+                "months": "Juni – Juli 2027",
+                "duration": "6 Wochen",
+                "total_hours": 52,
+                "topic": {
+                    "title": "Kognition, Demenz, psychische Erkrankungen, Krisenintervention & Systemkenntnisse",
+                    "description": "Kognitive Beeinträchtigungen und Demenz als häufigste Pflegephänomene in der stationären Altenpflege. Herausforderndes Verhalten verstehen und personenzentriert darauf reagieren. Häufige psychische Erkrankungen und Krisenintervention als pflegerische Kernkompetenz. Parallel dazu: Überblick über das deutsche Sozial- und Gesundheitssystem als Orientierung für den Pflegealltag.",
+                    "lessons": [
+                        {
+                            "lesson_id": "5.1",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 20",
+                            "title": "Kognitive Beeinträchtigungen & Demenz",
+                            "dates": "21. Juni – 02. Juli 2027",
+                            "weeks": "Woche 1–2",
+                            "hours": 14,
+                            "instructor": "Dr. Lena Braun",
+                            "competences": [
+                                "KI",
+                                "BD"
+                            ],
+                            "description": "Kognitive Störungen als Pflegephänomen. Dementielle Erkrankungen (Formen, Verlauf, Stadien), Abgrenzung Demenz vs. Delir. Herausforderndes Verhalten verstehen und personenzentriert darauf reagieren. Validationstechniken nach Feil.",
+                            "practice_focuses": {
+                                "PF1": "Demenzformen und ihre Unterschiede benennen",
+                                "PF2": "Demenz und Delir anhand von Fallbeispielen unterscheiden",
+                                "PF3": "Herausforderndes Verhalten ursachenbezogen interpretieren",
+                                "PF4": "Personenzentrierte Kommunikationsstrategie für Demenzsituationen entwickeln"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK20_Demenz.pdf",
+                                "Demenz_Delir_Unterschied_Karte.pdf",
+                                "Foliensatz_Demenzformen.pptx",
+                                "Video_Validation_nach_Feil.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "5.2",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 21",
+                            "title": "Psychische Gesundheit & häufige Erkrankungen",
+                            "dates": "05.–16. Juli 2027",
+                            "weeks": "Woche 3–4",
+                            "hours": 12,
+                            "instructor": "Dr. Lena Braun",
+                            "competences": [
+                                "KI",
+                                "BD"
+                            ],
+                            "description": "Begriffe Psychologie, Psychiatrie und Psychotherapie abgrenzen. Affektive Störungen (Depression, Manie), Angststörungen, Suchterkrankungen und PTBS als häufige Komorbiditäten in der Pflegepraxis. Krisenintervention: deeskalierend kommunizieren und geeignete Maßnahmen einleiten.",
+                            "practice_focuses": {
+                                "PF1": "Symptome einer Depression im Pflegealltag erkennen",
+                                "PF2": "Angststörung vs. normaler Stress abgrenzen",
+                                "PF3": "Suchtverhalten professionell einschätzen ohne zu werten",
+                                "PF4": "Deeskalationsschritte in akuter Krisensituation beschreiben"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK21_Psych_Gesundheit.pdf",
+                                "Affektive_Störungen_Merkmale.pdf",
+                                "Krisenintervention_Leitfaden.pdf",
+                                "Deeskalationsstrategien_Karte.pdf"
+                            ]
+                        },
+                        {
+                            "lesson_id": "5.3",
+                            "cluster": "PBR",
+                            "curriculum_code": "PBR 9",
+                            "title": "Das Sozial- und Gesundheitssystem — Finanzierung & Versorgungsformen",
+                            "dates": "19.–23. Juli 2027",
+                            "weeks": "Woche 5",
+                            "hours": 8,
+                            "instructor": "Prof. Anna Schreiber",
+                            "competences": [
+                                "LP"
+                            ],
+                            "description": "Die fünf Säulen der Sozialversicherung. SGB V (Krankenversicherung) und SGB XI (Pflegeversicherung) abgrenzen. Pflegebedürftigkeit und Pflegegradfeststellung durch den Medizinischen Dienst. Versorgungsformen und relevante Akteure im deutschen Gesundheitswesen.",
+                            "practice_focuses": {
+                                "PF1": "Fünf Sozialversicherungszweige benennen und unterscheiden",
+                                "PF2": "SGB V vs. SGB XI Leistungen klar abgrenzen",
+                                "PF3": "Pflegegradkriteriensystem erklären",
+                                "PF4": "Versorgungsweg eines Patienten im System vollständig nachzeichnen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_PBR9_Sozialsystem.pdf",
+                                "SGB_V_XI_Übersicht.pdf",
+                                "Pflegegrad_NBA_Erläuterung.pdf",
+                                "Foliensatz_Gesundheitssystem.pptx"
+                            ]
+                        },
+                        {
+                            "lesson_id": "5.4",
+                            "cluster": "PBR",
+                            "curriculum_code": "PBR 6",
+                            "title": "Klinisches Denken & Evidenzbasierte Pflege (EBN)",
+                            "dates": "24.–30. Juli 2027",
+                            "weeks": "Woche 6",
+                            "hours": 6,
+                            "instructor": "Prof. Julia Fischer",
+                            "competences": [
+                                "LP",
+                                "BD"
+                            ],
+                            "description": "Clinical Reasoning als Grundlage für pflegliche Entscheidungsfindung. Evidenzbasierte Pflege (EBN): wissenschaftliche Belege finden und bewerten. Expertenstandards des DNQP als Werkzeug. Shared Decision Making und kritische Reflexivität im Pflegealltag.",
+                            "practice_focuses": {
+                                "PF1": "Clinical Reasoning-Prozess an Fallbeispiel demonstrieren",
+                                "PF2": "Pflegerelevante Literatur nach Evidenzlevel bewerten",
+                                "PF3": "DNQP-Expertenstandard auf ein Thema anwenden",
+                                "PF4": "Routinehandlung kritisch hinterfragen und evidenzbasiert begründen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_PBR6_Clinical_Reasoning.pdf",
+                                "EBN_Basics_Lernkarte.pdf",
+                                "DNQP_Expertenstandards_Übersicht.pdf",
+                                "Fallstudie_Shared_Decision.docx"
+                            ]
+                        }
+                    ]
+                },
+                "practical": {
+                    "block_id": "5P",
+                    "block_number": "Block 5P",
+                    "title": "Praktikum — Personenzentrierte Kommunikation bei Demenz & Krisenintervention",
+                    "period": "02. August – 10. September 2027",
+                    "months": "August – September 2027",
+                    "duration": "6 Wochen",
+                    "total_hours": 120,
+                    "sessions": [
+                        {
+                            "session_id": "5P.1",
+                            "code": "PRAKT 5A",
+                            "title": "Personenzentrierte Kommunikation bei Demenz — Videosimulation",
+                            "dates": "02.–13. August 2027",
+                            "weeks": "Woche 1–2",
+                            "hours": 40,
+                            "instructor": "Dr. Lena Braun",
+                            "competences": [
+                                "KI"
+                            ],
+                            "description": "Simulierte Pflegegespräche mit demenzkranken Patienten. Validationstechniken nach Feil, Orientierungshilfe und nonverbale Kommunikation. Videogestützte Reflexion mit Feedbackgespräch im Kleinteam.",
+                            "practice_focuses": {
+                                "PF1": "Validationstechnik in simuliertem Demenzsetting anwenden",
+                                "PF2": "Nonverbale Kommunikation gezielt einsetzen",
+                                "PF3": "Orientierungshilfen geben ohne zu korrigieren",
+                                "PF4": "Video-Feedback zur eigenen Gesprächsführung annehmen und reflektieren"
+                            },
+                            "uploaded_materials": [
+                                "Validationstechniken_Lernkarte.pdf",
+                                "Beobachtungsbogen_Kommunikation.pdf",
+                                "Gesprächsleitfaden_Demenz.docx",
+                                "Video_Fallbeispiel_Demenz.mp4"
+                            ]
+                        },
+                        {
+                            "session_id": "5P.2",
+                            "code": "PRAKT 5B",
+                            "title": "Deeskalation & Krisenintervention am Simulator",
+                            "dates": "16.–27. August 2027",
+                            "weeks": "Woche 3–4",
+                            "hours": 40,
+                            "instructor": "Prof. Thomas Richter",
+                            "competences": [
+                                "KI",
+                                "LP"
+                            ],
+                            "description": "Praxistraining an eskalierenden Szenarien (agitierter Patient, akute Angst). Deeskalationsschritte unter Zeitdruck. Teamkommunikation in kritischen Situationen und strukturierte Nachbesprechung.",
+                            "practice_focuses": {
+                                "PF1": "Verbale Deeskalationstechniken unter Druck anwenden",
+                                "PF2": "Teamkommunikation bei Krise strukturiert gestalten",
+                                "PF3": "Eigene Grenzen erkennen und professionell kommunizieren",
+                                "PF4": "Post-Krisen-Reflexion im Peer-Gespräch strukturiert führen"
+                            },
+                            "uploaded_materials": [
+                                "Deeskalation_Schritt-für-Schritt.pdf",
+                                "Teamkommunikation_Krisenprotokoll.pdf",
+                                "Simulationsszenario_Krisenintervention.docx",
+                                "Peer_Feedback_Formular.pdf"
+                            ]
+                        },
+                        {
+                            "session_id": "5P.3",
+                            "code": "PRAKT 5C",
+                            "title": "Kompetenznachweis Block 5 & Fallbesprechung",
+                            "dates": "30. August – 10. September 2027",
+                            "weeks": "Woche 5–6",
+                            "hours": 20,
+                            "instructor": "Prof. Julia Fischer",
+                            "competences": [
+                                "KI",
+                                "LP"
+                            ],
+                            "description": "Abschlussbewertung kommunikativer Kompetenzen in Demenz- und Krisenszenarien. Strukturierte Fallbesprechung im Lernteam. Portfolio Block 5.",
+                            "practice_focuses": {
+                                "PF1": "Kommunikationsprüfung Demenz-Setting absolvieren",
+                                "PF2": "Krisenintervention-Prüfung absolvieren",
+                                "PF3": "Fallbesprechung im Team strukturiert moderieren",
+                                "PF4": "Portfolio Block 5 abschließen"
+                            },
+                            "uploaded_materials": [
+                                "Bewertungsbogen_Block5P.pdf",
+                                "Fallbesprechungsprotokoll.docx",
+                                "Portfolio_Block5_Vorlage.docx",
+                                "Kommunikationskompetenzen_Rubric.pdf"
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "block_id": 6,
+                "block_number": "Block 6",
+                "theme": "Weitere Organsysteme, Qualitätsmanagement & Sicherheitskultur",
+                "period": "13. September – 22. Oktober 2027",
+                "months": "September – Oktober 2027",
+                "duration": "6 Wochen",
+                "total_hours": 54,
+                "topic": {
+                    "title": "Immunsystem, Hormone, Diabetes, Sexualität & Qualitätssicherung in der Pflege",
+                    "description": "Weiterführende Organsysteme: Blut- und Immunabwehr, endokrines System mit Schwerpunkt Diabetes mellitus als häufige Langzeitpflegediagnose sowie Sexualität im Alter als sensibles Pflegethema. Parallel dazu: Qualitätsmanagement, Fehlerkultur, CIRS und Beschwerdemanagement als Instrumente einer sicheren Pflegekultur.",
+                    "lessons": [
+                        {
+                            "lesson_id": "6.1",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 22",
+                            "title": "Blut- und Immunsystem — Abwehr und Entzündung",
+                            "dates": "13.–24. September 2027",
+                            "weeks": "Woche 1–2",
+                            "hours": 10,
+                            "instructor": "Dr. Marcus Weber",
+                            "competences": [
+                                "BD"
+                            ],
+                            "description": "Blutbestandteile und deren Funktion. Immunsystem: angeborene und erworbene Immunität. Lymphatisches System. Fünf Entzündungszeichen (Rubor, Calor, Tumor, Dolor, Functio laesa) als klinische Beobachtungsparameter.",
+                            "practice_focuses": {
+                                "PF1": "Blutbestandteile und ihre Aufgaben beschreiben",
+                                "PF2": "Fünf Entzündungszeichen am Fallbeispiel identifizieren",
+                                "PF3": "Immunreaktion vereinfacht für Patienten erklären",
+                                "PF4": "Fallstudie — Infektionszeichen frühzeitig dokumentieren"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK22_Immunsystem.pdf",
+                                "Entzündungszeichen_Lernkarte.pdf",
+                                "Foliensatz_Blut_Abwehr.pptx",
+                                "Video_Immunreaktion_Animiert.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "6.2",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 23",
+                            "title": "Hormonsystem — Pankreas, Schilddrüse & Diabetes mellitus",
+                            "dates": "27. September – 08. Oktober 2027",
+                            "weeks": "Woche 3–4",
+                            "hours": 10,
+                            "instructor": "Dr. Marcus Weber",
+                            "competences": [
+                                "BD",
+                                "AD"
+                            ],
+                            "description": "Prinzip der hormonellen Steuerung. Pankreas und Blutzuckerregulation. Schilddrüse und Stoffwechsel. Diabetes mellitus Typ 2 als häufige Langzeitpflegediagnose — Symptome, Folgeerkrankungen und pflegerische Konsequenzen.",
+                            "practice_focuses": {
+                                "PF1": "Hormonelle Steuerung am Beispiel Insulin erklären",
+                                "PF2": "Diabetes mellitus Typ 2 Symptome beschreiben",
+                                "PF3": "Hypoglykämie-Zeichen erkennen und korrekt reagieren",
+                                "PF4": "Fallstudie — Diabetesmonitoring im Pflegealltag gestalten"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK23_Hormonsystem.pdf",
+                                "Diabetes_Pflege_Leitfaden.pdf",
+                                "Blutzuckermessung_Protokoll.docx",
+                                "Video_Hypoglykämie_Erkennung.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "6.3",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 24",
+                            "title": "Geschlechtsorgane, Fortpflanzung & Sexualität im Alter",
+                            "dates": "11.–15. Oktober 2027",
+                            "weeks": "Woche 5",
+                            "hours": 6,
+                            "instructor": "Prof. Thomas Richter",
+                            "competences": [
+                                "KI",
+                                "BD"
+                            ],
+                            "description": "Anatomie der Geschlechtsorgane, Grundlagen der Fortpflanzung. Sexualität und Intimität im Alter als sensibles Pflegethema. Professionelle Haltung und kommunikativer Umgang mit Intimität in der stationären Pflege.",
+                            "practice_focuses": {
+                                "PF1": "Anatomie Geschlechtsorgane für die Pflege erläutern",
+                                "PF2": "Sexualität im Alter professionell und wertfrei thematisieren",
+                                "PF3": "Kommunikationsstrategie für Intimzonen-Situationen entwickeln",
+                                "PF4": "Fallstudie — Würdevoller Umgang in der Intimpflege"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK24_Sexualität_Alter.pdf",
+                                "Kommunikationsleitfaden_Intimität.pdf",
+                                "Foliensatz_Geschlechtsorgane.pptx",
+                                "Fallstudie_Sexualität_Pflege.docx"
+                            ]
+                        },
+                        {
+                            "lesson_id": "6.4",
+                            "cluster": "PBR",
+                            "curriculum_code": "PBR 10, 11, 12 & 13",
+                            "title": "Qualitätsmanagement, Fehlerkultur, CIRS & Beschwerdemanagement",
+                            "dates": "16.–22. Oktober 2027",
+                            "weeks": "Woche 6",
+                            "hours": 10,
+                            "instructor": "Prof. Julia Fischer",
+                            "competences": [
+                                "LP",
+                                "BD",
+                                "AD",
+                                "KI"
+                            ],
+                            "description": "Grundlagen QM: Struktur-, Prozess- und Ergebnisqualität. Qualitätsindikatoren, Expertenstandards DNQP. Fehlerkultur: vom Blame- zum Lernansatz, CIRS als Instrument der Sicherheitskultur. Beschwerdemanagement als Qualitätsfaktor.",
+                            "practice_focuses": {
+                                "PF1": "Struktur-, Prozess- und Ergebnisqualität an Beispielen erläutern",
+                                "PF2": "CIRS-Meldung zu einem Beinahe-Fehler verfassen",
+                                "PF3": "Fehleranalyse ohne Schuldzuweisung durchführen",
+                                "PF4": "Beschwerdegespräch deeskalierend führen und Protokoll ausfüllen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_PBR11_Qualitätsmanagement.pdf",
+                                "CIRS_Meldebogen.pdf",
+                                "Qualitätsindikatoren_Pflege.pdf",
+                                "Beschwerdeprotokoll_Vorlage.pdf"
+                            ]
+                        }
+                    ]
+                },
+                "practical": {
+                    "block_id": "6P",
+                    "block_number": "Block 6P",
+                    "title": "Praktikum — Blutzuckermessung, Wundbeobachtung, CIRS & QM-Audit",
+                    "period": "25. Oktober – 03. Dezember 2027",
+                    "months": "Oktober – Dezember 2027",
+                    "duration": "6 Wochen",
+                    "total_hours": 120,
+                    "sessions": [
+                        {
+                            "session_id": "6P.1",
+                            "code": "PRAKT 6A",
+                            "title": "Blutzuckermessung & Wundbeobachtung",
+                            "dates": "25. Oktober – 05. November 2027",
+                            "weeks": "Woche 1–2",
+                            "hours": 40,
+                            "instructor": "Dr. Marcus Weber",
+                            "competences": [
+                                "AD",
+                                "BD"
+                            ],
+                            "description": "Kapilläre Blutentnahme am Phantomfinger. Blutzuckermessung mit Dokumentation und Warnwert-Erkennung. Systematische Wundbeobachtung mit Dokumentationstraining. Entzündungszeichen in Fallfotos erkennen.",
+                            "practice_focuses": {
+                                "PF1": "Kapilläre Blutentnahme korrekt und sicher durchführen",
+                                "PF2": "Blutzuckerwert messen, dokumentieren und einordnen",
+                                "PF3": "Wundstatus systematisch beschreiben und dokumentieren",
+                                "PF4": "Fünf Entzündungszeichen an Fallfotos identifizieren"
+                            },
+                            "uploaded_materials": [
+                                "Checkliste_Blutzuckermessung.pdf",
+                                "Warnwerte_Blutzucker_Karte.pdf",
+                                "Wundbeobachtung_Checkliste.pdf",
+                                "Video_Blutzucker_Technik.mp4"
+                            ]
+                        },
+                        {
+                            "session_id": "6P.2",
+                            "code": "PRAKT 6B",
+                            "title": "CIRS-Meldungen, Fehleranalyse & QM-Audit im Lernteam",
+                            "dates": "08.–19. November 2027",
+                            "weeks": "Woche 3–4",
+                            "hours": 40,
+                            "instructor": "Prof. Julia Fischer",
+                            "competences": [
+                                "LP",
+                                "KI"
+                            ],
+                            "description": "Fallbasiertes Training zu Beinahfehlern. CIRS-Meldungen verfassen und Fehleranalyse im Team durchführen. Simuliertes QM-Audit in der Lerngruppe.",
+                            "practice_focuses": {
+                                "PF1": "CIRS-Meldung vollständig und korrekt verfassen",
+                                "PF2": "Fehleranalyse strukturiert moderieren",
+                                "PF3": "QM-Audit-Checkliste anwenden und Abweichungen dokumentieren",
+                                "PF4": "Verbesserungsvorschlag im Team entwickeln und präsentieren"
+                            },
+                            "uploaded_materials": [
+                                "CIRS_Übungsformulare.pdf",
+                                "Fehleranalyse_Moderationsleitfaden.pdf",
+                                "QM_Audit_Checkliste.pdf",
+                                "Verbesserungsvorschlag_Formular.pdf"
+                            ]
+                        },
+                        {
+                            "session_id": "6P.3",
+                            "code": "PRAKT 6C",
+                            "title": "Kompetenznachweis Block 6 & kombiniertes Fallmanagement",
+                            "dates": "22. November – 03. Dezember 2027",
+                            "weeks": "Woche 5–6",
+                            "hours": 20,
+                            "instructor": "Prof. Julia Fischer",
+                            "competences": [
+                                "LP",
+                                "BD"
+                            ],
+                            "description": "Kombinierte Abschlussstation: Blutzucker, Wundbeobachtung und CIRS-Kompetenz. Vollständiges Fallmanagement eigenverantwortlich durchlaufen. Portfolio Block 6.",
+                            "practice_focuses": {
+                                "PF1": "Kombinierte Prüfungsstation Blutzucker und Wundbeobachtung",
+                                "PF2": "CIRS-Meldung unter Beobachtung korrekt verfassen",
+                                "PF3": "Vollständiges Fallmanagement selbstständig durchführen",
+                                "PF4": "Portfolio Block 6 abschließen"
+                            },
+                            "uploaded_materials": [
+                                "Bewertungsbogen_Block6P.pdf",
+                                "Fallmanagement_Szenario.docx",
+                                "Portfolio_Block6_Vorlage.docx",
+                                "Kompetenzbewertung_Rubric.pdf"
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "block_id": 7,
+                "block_number": "Block 7",
+                "theme": "Herausfordernde Situationen & Professionelle Entwicklung",
+                "period": "06. Dezember 2027 – 14. Januar 2028",
+                "months": "Dezember 2027 – Januar 2028",
+                "duration": "6 Wochen",
+                "total_hours": 62,
+                "topic": {
+                    "title": "Onkologie, Palliation, Notfallmanagement, Pharmakologie & digitale Zukunft der Pflege",
+                    "description": "Herausfordernde Pflegesituationen in Theorie und Kontext: onkologische Erkrankungen, palliative Versorgung und Sterbebegleitung, akute Notfälle und Pharmakologiegrundlagen. Abschluss mit Zukunftsperspektiven: digitaler Pflegealltag, Nachhaltigkeit und gesellschaftlicher Wandel als Herausforderungen der Pflegepraxis.",
+                    "lessons": [
+                        {
+                            "lesson_id": "7.1",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 25",
+                            "title": "Onkologische Situationen — Grundlagen der Tumorlehre",
+                            "dates": "06.–10. Dezember 2027",
+                            "weeks": "Woche 1",
+                            "hours": 8,
+                            "instructor": "Dr. Christian Neumann",
+                            "competences": [
+                                "BD",
+                                "KI"
+                            ],
+                            "description": "Grundlagen benigner vs. maligner Tumore und Metastasierung. Leben mit Krebs: Fatigue-Syndrom, verändertes Körperbild und psychosoziale Auswirkungen. Pflegerische Haltung im Umgang mit onkologisch erkrankten Menschen.",
+                            "practice_focuses": {
+                                "PF1": "Benigne und maligne Tumore unterscheiden und erklären",
+                                "PF2": "Fatigue-Syndrom bei Krebserkrankten erkennen",
+                                "PF3": "Körperbild-Veränderungen empathisch und professionell ansprechen",
+                                "PF4": "Fallstudie — Pflegebedarf bei Krebserkranktem einschätzen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK25_Onkologie.pdf",
+                                "Fatigue_Syndrom_Leitfaden.pdf",
+                                "Foliensatz_Tumorlehre.pptx",
+                                "Fallstudie_Onkologische_Pflege.docx"
+                            ]
+                        },
+                        {
+                            "lesson_id": "7.2",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 26",
+                            "title": "Palliative Care & Sterben — Physiologie, Konzepte & Begleitung",
+                            "dates": "13.–24. Dezember 2027",
+                            "weeks": "Woche 2–3",
+                            "hours": 12,
+                            "instructor": "Dr. Christian Neumann",
+                            "competences": [
+                                "KI",
+                                "AD",
+                                "BD"
+                            ],
+                            "description": "Physiologische Phasen des Sterbens. Konzepte der Palliativversorgung: Symptomkontrolle, Lebensqualität, Hospizbewegung. Spezielle Mundpflege, lindernde Maßnahmen und würdevolle Versorgung Verstorbener.",
+                            "practice_focuses": {
+                                "PF1": "Physiologische Sterbephasen beschreiben",
+                                "PF2": "Palliative Maßnahmen zur Symptomkontrolle benennen",
+                                "PF3": "Kommunikation mit Sterbenden und Angehörigen empathisch gestalten",
+                                "PF4": "Fallstudie — Würdevolle terminale Pflege planen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK26_Palliative_Care.pdf",
+                                "Sterbephasen_Grafik.pdf",
+                                "Kommunikationsleitfaden_Sterbebegleitung.pdf",
+                                "Video_Hospizarbeit_Einblick.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "7.3",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 27",
+                            "title": "Akute Notfälle — Schock, Reanimation & Erste Hilfe",
+                            "dates": "07.–10. Januar 2028",
+                            "weeks": "Woche 4–5",
+                            "hours": 10,
+                            "instructor": "Prof. Thomas Richter",
+                            "competences": [
+                                "AD"
+                            ],
+                            "description": "Notfallbilder im Überblick (Schock, Bewusstlosigkeit, akute Atemnot, Herzkreislaufversagen). Lebensrettende Sofortmaßnahmen, Reanimation nach BLS-Schema. Notruf absetzen nach Meldeschema. Erste Hilfe bei Sturz und Blutung.",
+                            "practice_focuses": {
+                                "PF1": "Notruf strukturiert absetzen (Meldeschema)",
+                                "PF2": "Bewusstlose Person korrekt lagern",
+                                "PF3": "BLS-Reanimationsschema beschreiben",
+                                "PF4": "Erste Hilfe Sturz und Blutung fallbezogen durchführen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK27_Notfallmanagement.pdf",
+                                "BLS_Reanimation_Karte.pdf",
+                                "Notruf_Meldeschema.pdf",
+                                "Video_Reanimation_BLS.mp4"
+                            ]
+                        },
+                        {
+                            "lesson_id": "7.4",
+                            "cluster": "KGK",
+                            "curriculum_code": "KGK 28",
+                            "title": "Pharmakologie — Grundlagen der Arzneimittelgabe",
+                            "dates": "11.–12. Januar 2028",
+                            "weeks": "Woche 5",
+                            "hours": 6,
+                            "instructor": "Dr. Marcus Weber",
+                            "competences": [
+                                "AD",
+                                "BD"
+                            ],
+                            "description": "Grundlagen der Arzneimittellehre: Applikationswege, Wirkungsmechanismen und Ausscheidung. Überblick über häufige Arzneimittelgruppen und typische Neben- und Wechselwirkungen in der Langzeitpflege. 6-R-Regel zur Patientensicherheit.",
+                            "practice_focuses": {
+                                "PF1": "Applikationswege Medikamente sicher benennen",
+                                "PF2": "6-R-Regel zur Patientensicherheit anwenden",
+                                "PF3": "Häufige Nebenwirkungen Arzneimittelgruppen zuordnen",
+                                "PF4": "Fallstudie — Medikamentengabe auf Auffälligkeiten prüfen"
+                            },
+                            "uploaded_materials": [
+                                "Skript_KGK28_Pharmakologie.pdf",
+                                "6R_Regel_Karte.pdf",
+                                "Arzneimittelgruppen_Übersicht.pdf",
+                                "Fallstudie_Medikamentenfehler.docx"
+                            ]
+                        },
+                        {
+                            "lesson_id": "7.5",
+                            "cluster": "PBR",
+                            "curriculum_code": "PBR 14, 15 & 16",
+                            "title": "Digitaler Pflegealltag, EBN & Nachhaltigkeit",
+                            "dates": "13.–14. Januar 2028",
+                            "weeks": "Woche 6",
+                            "hours": 8,
+                            "instructor": "Prof. Anna Schreiber",
+                            "competences": [
+                                "LP",
+                                "BD"
+                            ],
+                            "description": "Digitale Pflegedokumentation und DSGVO-konforme Datensicherheit. Assistive Technologien in der Praxis. Wissensbasiertes Handeln: EBN und Expertenstandards als Werkzeuge. Ressourcenschutz und Abfallmanagement als pflegerische Aufgabe. Demografischer Wandel und Zukunft der Pflegeversorgung in Deutschland.",
+                            "practice_focuses": {
+                                "PF1": "Digitale Pflegedokumentation DSGVO-konform anwenden",
+                                "PF2": "Pflegepraxis mit Verweis auf Expertenstandard begründen",
+                                "PF3": "Hitzeschutzmaßnahmen für vulnerable Gruppen planen",
+                                "PF4": "Persönliche Lernreise im Gesamtcurriculum reflektieren"
+                            },
+                            "uploaded_materials": [
+                                "Skript_PBR15_Digitaler_Pflegealltag.pdf",
+                                "DNQP_Expertenstandards_Übersicht.pdf",
+                                "Hitzeschutzplan_Vorlage.pdf",
+                                "Abschlussreflexion_Curriculum.docx"
+                            ]
+                        }
+                    ]
+                },
+                "practical": {
+                    "block_id": "7P",
+                    "block_number": "Block 7P",
+                    "title": "Praktikum — BLS-Reanimation, Palliative Pflege & Gesamtabschluss",
+                    "period": "17. Januar – 25. Februar 2028",
+                    "months": "Januar – Februar 2028",
+                    "duration": "6 Wochen",
+                    "total_hours": 120,
+                    "sessions": [
+                        {
+                            "session_id": "7P.1",
+                            "code": "PRAKT 7A",
+                            "title": "BLS-Reanimationstraining — Zertifizierung",
+                            "dates": "17.–28. Januar 2028",
+                            "weeks": "Woche 1–2",
+                            "hours": 40,
+                            "instructor": "Prof. Thomas Richter",
+                            "competences": [
+                                "AD"
+                            ],
+                            "description": "Zertifiziertes BLS-Training (Basic Life Support) am Reanimationsmodell. Notruf nach Schema, Bewusstsein prüfen, Atemwege freimachen, Thoraxkompressionen und AED-Anwendung im Teamtraining.",
+                            "practice_focuses": {
+                                "PF1": "BLS-Algorithmus vollständig und korrekt durchführen",
+                                "PF2": "AED-Gerät vorbereiten und korrekt einsetzen",
+                                "PF3": "Teamreanimation strukturiert koordinieren",
+                                "PF4": "Notruf unter Zeitdruck korrekt absetzen"
+                            },
+                            "uploaded_materials": [
+                                "BLS_Zertifizierungskarte.pdf",
+                                "Reanimationsprotokoll.docx",
+                                "AED_Bedienungsanleitung.pdf",
+                                "Video_BLS_Teamreanimation.mp4"
+                            ]
+                        },
+                        {
+                            "session_id": "7P.2",
+                            "code": "PRAKT 7B",
+                            "title": "Palliative Pflegesimulation & Sterbebegleitung",
+                            "dates": "31. Januar – 11. Februar 2028",
+                            "weeks": "Woche 3–4",
+                            "hours": 40,
+                            "instructor": "Dr. Christian Neumann",
+                            "competences": [
+                                "KI",
+                                "AD"
+                            ],
+                            "description": "Simulation palliativer Pflegesituationen: Spezielle Mundpflege, Lagerung, Schmerzkontrolle und Gesprächsbegleitung in der Sterbephase. Nachbesprechung und emotionale Verarbeitung der Simulation.",
+                            "practice_focuses": {
+                                "PF1": "Spezielle Mundpflege bei Sterbenden durchführen",
+                                "PF2": "Lindernde Lagerungsmaßnahmen anwenden",
+                                "PF3": "Empathisches Gespräch mit Angehörigen in der Sterbephase führen",
+                                "PF4": "Eigene emotionale Reaktion in der Nachbesprechung reflektieren"
+                            },
+                            "uploaded_materials": [
+                                "Palliative_Mundpflege_Anleitung.pdf",
+                                "Angehörigenbegleitung_Leitfaden.pdf",
+                                "Simulationsszenario_Sterbebegleitung.docx",
+                                "Reflexionsleitfaden_Palliativ.pdf"
+                            ]
+                        },
+                        {
+                            "session_id": "7P.3",
+                            "code": "PRAKT 7C",
+                            "title": "Curriculum-Gesamtabschluss & Portfolioverteidigung",
+                            "dates": "14.–25. Februar 2028",
+                            "weeks": "Woche 5–6",
+                            "hours": 20,
+                            "instructor": "Prof. Julia Fischer",
+                            "competences": [
+                                "LP"
+                            ],
+                            "description": "Abschlussprüfung des gesamten Curriculums mit kombinierten Szenarien aus KGK und PBR. Übergabe des Gesamtportfolios und Abschlussreflexionsgespräch. Verleihung des Curriculum-Zertifikats.",
+                            "practice_focuses": {
+                                "PF1": "Gesamtabschlussprüfung KGK und PBR erfolgreich absolvieren",
+                                "PF2": "Wissen aus allen 7 Blöcken vernetzt anwenden",
+                                "PF3": "Gesamtportfolio einreichen und mündlich verteidigen",
+                                "PF4": "Persönliche Lernentwicklung über das gesamte Curriculum präsentieren"
+                            },
+                            "uploaded_materials": [
+                                "Gesamtabschluss_Szenario_KGK_PBR.pdf",
+                                "Gesamtportfolio_Vorlage.docx",
+                                "Bewertungsrubric_Curriculum_Gesamt.pdf",
+                                "Zertifikat_Curriculum_Vorlage.pdf"
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
