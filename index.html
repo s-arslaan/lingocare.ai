@@ -184,6 +184,13 @@ main {
   background: rgba(237,125,0,0.22);
 }
 
+/* ── ARCHIVE DIVIDER ── */
+.archive-divider {
+  margin-top: 16px;
+  padding-top: 48px;
+  border-top: 2px solid rgba(237,125,0,0.14);
+}
+
 /* ── GRIDS ── */
 .grid       { display: grid; gap: 16px; }
 .grid-2     { grid-template-columns: repeat(2, 1fr); }
@@ -196,7 +203,7 @@ main {
   background: var(--card);
   border: 1.5px solid var(--border);
   border-radius: 12px;
-  padding: 28px;
+  padding: 20px;
   text-decoration: none;
   display: flex;
   flex-direction: column;
@@ -240,7 +247,7 @@ main {
   flex-direction: row;
   align-items: center;
   gap: 36px;
-  padding: 34px 40px;
+  padding: 30px 36px;
 }
 .card.featured .card-body { flex: 1; min-width: 0; }
 .card.featured .card-visual {
@@ -262,7 +269,7 @@ main {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .card-tag {
@@ -301,7 +308,7 @@ main {
 
 .card-title {
   font-family: var(--fh);
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 700;
   line-height: 1.2;
   color: var(--text);
@@ -310,12 +317,12 @@ main {
 
 .card-desc {
   font-family: var(--fb);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--mid);
   line-height: 1.68;
   flex: 1;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .card-meta {
@@ -323,10 +330,10 @@ main {
   align-items: center;
   gap: 8px;
   font-family: var(--fb);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 400;
   color: var(--mid);
-  padding-top: 14px;
+  padding-top: 10px;
   border-top: 1px solid rgba(237,125,0,0.13);
   margin-top: auto;
   flex-wrap: wrap;
@@ -407,9 +414,9 @@ footer {
   <h1>Alle Seiten.<br><span class="accent">Ein Ort.</span></h1>
   <p class="hero-sub">Navigate every page in the Lingocare workspace — from the live platform demo to internal strategy documents.</p>
   <div class="hero-stats">
-    <div class="stat-item"><strong>9</strong>&nbsp;Seiten</div>
+    <div class="stat-item"><strong>11</strong>&nbsp;Seiten</div>
     <div class="stat-sep"></div>
-    <div class="stat-item"><strong>3</strong>&nbsp;Kategorien</div>
+    <div class="stat-item"><strong>5</strong>&nbsp;Kategorien</div>
     <div class="stat-sep"></div>
     <div class="stat-item"><strong>Montserrat</strong>&nbsp;+&nbsp;Roboto</div>
   </div>
@@ -475,24 +482,6 @@ footer {
         <div class="card-visual">🏥</div>
       </a>
 
-      <!-- Archive: Landing Page v1 -->
-      <a href="archive/landing-page-lc-old.html" class="card archive rev d3">
-        <div class="card-top">
-          <span class="card-tag muted">Archiv</span>
-          <div class="card-arrow">
-            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-              <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="#6B6460" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </div>
-        <h2 class="card-title">Landing Page <span style="font-weight:500;color:var(--mid);font-size:15px;">v1</span></h2>
-        <p class="card-desc">Previous version of the main landing page. Kept for reference and rollback comparison.</p>
-        <div class="card-meta">
-          <span>archive/landing-page-lc-old.html</span>
-          <div class="meta-dot"></div>
-          <span>Legacy</span>
-        </div>
-      </a>
 
     </div>
   </section>
@@ -524,24 +513,6 @@ footer {
         </div>
       </a>
 
-      <a href="archive/component-atlas-old.html" class="card archive rev d2">
-        <div class="card-top">
-          <span class="card-tag muted">Archiv</span>
-          <div class="card-arrow">
-            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-              <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="#6B6460" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </div>
-        <h2 class="card-title">Interaction Component Atlas</h2>
-        <p class="card-desc">Previous iteration of the component atlas documenting interactive UI patterns and Lingocare design tokens.</p>
-        <div class="card-meta">
-          <span>archive/component-atlas-old.html</span>
-          <div class="meta-dot"></div>
-          <span>Legacy</span>
-        </div>
-      </a>
-
     </div>
   </section>
 
@@ -552,7 +523,7 @@ footer {
       <div class="section-line"></div>
     </div>
 
-    <div class="grid grid-4">
+    <div class="grid grid-3">
 
       <a href="pages/lingocareai2.html" class="card rev d1">
         <div class="card-top">
@@ -572,25 +543,8 @@ footer {
         </div>
       </a>
 
-      <a href="archive/lingocareai.html" class="card archive rev d2">
-        <div class="card-top">
-          <span class="card-tag muted">v1</span>
-          <div class="card-arrow">
-            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-              <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="#6B6460" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </div>
-        <h2 class="card-title">AI Build Report <span style="font-weight:500;color:var(--mid);font-size:15px;">v1</span></h2>
-        <p class="card-desc">Original Lingocare proprietary LLM strategy document. First draft of the AI system design and integration plan.</p>
-        <div class="card-meta">
-          <span>archive/lingocareai.html</span>
-          <div class="meta-dot"></div>
-          <span>Legacy</span>
-        </div>
-      </a>
 
-      <a href="pages/mvp_dashboard.html" class="card rev d3">
+      <a href="pages/mvp_dashboard.html" class="card rev d2">
         <div class="card-top">
           <span class="card-tag">Dashboard</span>
           <div class="card-arrow">
@@ -608,7 +562,7 @@ footer {
         </div>
       </a>
 
-      <a href="pages/mvp-plan.html" class="card rev d4">
+      <a href="pages/mvp-plan.html" class="card rev d3">
         <div class="card-top">
           <span class="card-tag">Planning</span>
           <div class="card-arrow">
@@ -623,6 +577,124 @@ footer {
           <span>pages/mvp-plan.html</span>
           <div class="meta-dot"></div>
           <span>Internal</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- DOCS -->
+  <section class="section">
+    <div class="section-header rev">
+      <span class="section-label">Docs</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="grid grid-2">
+
+      <a href="pages/doc-viewer.html?file=lingocare_app_vision.md" class="card rev d1">
+        <div class="card-top">
+          <span class="card-tag">Vision</span>
+          <div class="card-arrow">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+              <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="#6B6460" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <h2 class="card-title">Application Vision</h2>
+        <p class="card-desc">The complete Lingocare product vision — from problem to platform. Covers all seven roles, content architecture, AI layer, and platform features.</p>
+        <div class="card-meta">
+          <span>docs/lingocare_app_vision.md</span>
+          <div class="meta-dot"></div>
+          <span>Strategy</span>
+          <div class="meta-dot"></div>
+          <span>v2.0</span>
+        </div>
+      </a>
+
+      <a href="pages/doc-viewer.html?file=lingocare_learner_deepdive.md" class="card rev d2">
+        <div class="card-top">
+          <span class="card-tag">UX</span>
+          <div class="card-arrow">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+              <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="#6B6460" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <h2 class="card-title">Learner Deep-Dive</h2>
+        <p class="card-desc">In-depth exploration of the Learner experience — navigation, page anatomy, Lingo characters, connected workflows, and the cross-surface principle.</p>
+        <div class="card-meta">
+          <span>docs/lingocare_learner_deepdive.md</span>
+          <div class="meta-dot"></div>
+          <span>UX Design</span>
+          <div class="meta-dot"></div>
+          <span>v2.0</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ARCHIVE -->
+  <section class="section archive-divider">
+    <div class="section-header rev">
+      <span class="section-label">Archiv</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="grid grid-3">
+
+      <a href="archive/landing-page-lc-old.html" class="card archive rev d1">
+        <div class="card-top">
+          <span class="card-tag muted">Archiv</span>
+          <div class="card-arrow">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+              <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="#6B6460" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <h2 class="card-title">Landing Page <span style="font-weight:500;color:var(--mid);font-size:14px;">v1</span></h2>
+        <p class="card-desc">Previous version of the main landing page. Kept for reference and rollback comparison.</p>
+        <div class="card-meta">
+          <span>archive/landing-page-lc-old.html</span>
+          <div class="meta-dot"></div>
+          <span>Legacy</span>
+        </div>
+      </a>
+
+      <a href="archive/component-atlas-old.html" class="card archive rev d2">
+        <div class="card-top">
+          <span class="card-tag muted">Archiv</span>
+          <div class="card-arrow">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+              <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="#6B6460" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <h2 class="card-title">Interaction Component Atlas</h2>
+        <p class="card-desc">Previous iteration of the component atlas documenting interactive UI patterns and Lingocare design tokens.</p>
+        <div class="card-meta">
+          <span>archive/component-atlas-old.html</span>
+          <div class="meta-dot"></div>
+          <span>Legacy</span>
+        </div>
+      </a>
+
+      <a href="archive/lingocareai.html" class="card archive rev d3">
+        <div class="card-top">
+          <span class="card-tag muted">Archiv</span>
+          <div class="card-arrow">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+              <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="#6B6460" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <h2 class="card-title">AI Build Report <span style="font-weight:500;color:var(--mid);font-size:14px;">v1</span></h2>
+        <p class="card-desc">Original Lingocare proprietary LLM strategy document. First draft of the AI system design and integration plan.</p>
+        <div class="card-meta">
+          <span>archive/lingocareai.html</span>
+          <div class="meta-dot"></div>
+          <span>Legacy</span>
         </div>
       </a>
 

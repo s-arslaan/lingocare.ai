@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lingocare — Document</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange:       #ED7D00;
+  --red:          #BE211C;
+  --bg:           #FAF7F2;
+  --tint:         #FFF3E0;
+  --card:         #FFFFFF;
+  --text:         #282725;
+  --mid:          #6B6460;
+  --dark:         #1A1208;
+  --border:       rgba(237,125,0,0.28);
+  --fh: 'Montserrat', 'Arial Black', sans-serif;
+  --fb: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--fb);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+.doc-header {
+  background: var(--dark);
+  height: 56px;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04);
+  flex-shrink: 0;
+}
+.doc-header a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: rgba(250,247,242,0.7);
+  font-family: var(--fh);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color .18s;
+}
+.doc-header a:hover { color: #fff; }
+.doc-header .back-arrow {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.doc-header img {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+.doc-header .sep {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,0.15);
+  margin: 0 4px;
+}
+.doc-header .doc-title {
+  font-family: var(--fh);
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(250,247,242,0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.doc-header .toc-toggle {
+  display: none;
+  margin-left: auto;
+  background: none;
+  border: 1.5px solid rgba(255,255,255,0.18);
+  border-radius: 6px;
+  color: rgba(250,247,242,0.7);
+  cursor: pointer;
+  padding: 4px 10px;
+  font-family: var(--fh);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: border-color .18s, color .18s;
+}
+.doc-header .toc-toggle:hover {
+  border-color: rgba(255,255,255,0.4);
+  color: #fff;
+}
+
+/* ── LAYOUT ── */
+.doc-layout {
+  display: flex;
+  flex: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+
+/* ── SIDEBAR ── */
+.doc-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+  padding: 24px 0 40px 28px;
+  border-right: 1px solid rgba(237,125,0,0.12);
+  background: rgba(250,247,242,0.5);
+  backdrop-filter: blur(8px);
+}
+.doc-sidebar h4 {
+  font-family: var(--fh);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 14px;
+}
+.doc-sidebar nav { display: flex; flex-direction: column; gap: 2px; }
+.doc-sidebar a {
+  display: block;
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--mid);
+  text-decoration: none;
+  padding: 5px 10px 5px 12px;
+  border-radius: 6px;
+  border-left: 2px solid transparent;
+  transition: all .16s;
+  line-height: 1.4;
+}
+.doc-sidebar a:hover {
+  color: var(--text);
+  background: rgba(237,125,0,0.06);
+}
+.doc-sidebar a.active {
+  color: var(--orange);
+  border-left-color: var(--orange);
+  background: rgba(237,125,0,0.06);
+  font-weight: 600;
+}
+.doc-sidebar a.toc-h3 {
+  padding-left: 28px;
+  font-size: 12px;
+}
+
+/* ── MAIN CONTENT ── */
+.doc-main {
+  flex: 1;
+  min-width: 0;
+  padding: 40px 52px 80px;
+  max-width: 820px;
+}
+.doc-main h1 {
+  font-family: var(--fh);
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.doc-main h2 {
+  font-family: var(--fh);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text);
+  margin-top: 48px;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1.5px solid rgba(237,125,0,0.16);
+}
+.doc-main h3 {
+  font-family: var(--fh);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+  margin-top: 32px;
+  margin-bottom: 10px;
+}
+.doc-main h4 {
+  font-family: var(--fh);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text);
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+.doc-main p {
+  font-size: 15px;
+  line-height: 1.78;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.doc-main strong {
+  font-weight: 700;
+  color: var(--text);
+}
+.doc-main a {
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(237,125,0,0.25);
+  transition: border-color .16s;
+}
+.doc-main a:hover { border-bottom-color: var(--orange); }
+.doc-main ul, .doc-main ol {
+  margin-bottom: 16px;
+  padding-left: 24px;
+}
+.doc-main li {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.doc-main blockquote {
+  background: rgba(237,125,0,0.05);
+  border-left: 3px solid var(--orange);
+  padding: 14px 20px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--mid);
+}
+.doc-main blockquote p { margin-bottom: 8px; }
+.doc-main blockquote p:last-child { margin-bottom: 0; }
+.doc-main code {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  background: rgba(237,125,0,0.07);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--red);
+}
+.doc-main pre {
+  background: #1A1208;
+  color: #FAF7F2;
+  padding: 18px 22px;
+  border-radius: 10px;
+  overflow-x: auto;
+  margin: 20px 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.doc-main pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+.doc-main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(237,125,0,0.16);
+}
+.doc-main th {
+  background: rgba(237,125,0,0.08);
+  font-family: var(--fh);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 1.5px solid rgba(237,125,0,0.18);
+}
+.doc-main td {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(237,125,0,0.08);
+  color: var(--text);
+  vertical-align: top;
+}
+.doc-main tr:last-child td { border-bottom: none; }
+.doc-main hr {
+  border: none;
+  height: 1px;
+  background: rgba(237,125,0,0.16);
+  margin: 40px 0;
+}
+.doc-main img { max-width: 100%; border-radius: 8px; }
+
+/* ── LOADING / ERROR ── */
+.doc-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  font-family: var(--fh);
+  font-size: 15px;
+  color: var(--mid);
+  gap: 10px;
+}
+.doc-loading .spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(237,125,0,0.2);
+  border-top-color: var(--orange);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.doc-error {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--red);
+  font-family: var(--fh);
+  font-size: 16px;
+}
+
+/* ── FOOTER ── */
+.doc-footer {
+  background: var(--dark);
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.doc-footer img { height: 20px; width: auto; }
+.doc-footer span {
+  font-family: var(--fb);
+  font-size: 11px;
+  color: rgba(250,247,242,0.38);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .doc-layout { flex-direction: column; }
+  .doc-sidebar {
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    width: 100%;
+    height: auto;
+    padding: 16px 20px 32px;
+    border-right: none;
+    border-bottom: 1px solid rgba(237,125,0,0.16);
+    background: var(--bg);
+  }
+  .doc-sidebar.open { display: block; }
+  .doc-header .toc-toggle { display: block; }
+  .doc-main { padding: 28px 20px 60px; }
+  .doc-main h1 { font-size: 26px; }
+  .doc-main h2 { font-size: 19px; margin-top: 36px; }
+  .doc-main h3 { font-size: 15px; }
+  .doc-main p, .doc-main li { font-size: 14px; }
+  .doc-sidebar a { font-size: 14px; padding: 7px 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="doc-header">
+  <a href="../index.html">
+    <svg class="back-arrow" viewBox="0 0 18 18" fill="none">
+      <path d="M11 4L6 9L11 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Index</span>
+  </a>
+  <div class="sep"></div>
+  <img src="../assets/lingolight.png" alt="Lingocare">
+  <span class="doc-title" id="headerTitle">Document</span>
+  <button class="toc-toggle" id="tocToggle" onclick="toggleSidebar()">Inhalt</button>
+</header>
+
+<!-- ── BODY ── -->
+<div class="doc-layout">
+  <aside class="doc-sidebar" id="sidebar">
+    <h4>Contents</h4>
+    <nav id="tocNav"></nav>
+  </aside>
+  <main class="doc-main" id="content">
+    <div class="doc-loading">
+      <div class="spinner"></div>
+      Loading document…
+    </div>
+  </main>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="doc-footer">
+  <img src="../assets/lingolight.png" alt="Lingocare">
+  <span>Lingocare.ai — Document</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const file = params.get('file');
+const contentEl = document.getElementById('content');
+const tocNav = document.getElementById('tocNav');
+const headerTitle = document.getElementById('headerTitle');
+const sidebar = document.getElementById('sidebar');
+
+if (!file) {
+  contentEl.innerHTML = '<div class="doc-error">No document specified. Add ?file=name.md to the URL.</div>';
+} else {
+  headerTitle.textContent = file.replace(/\.md$/, '').replace(/_/g, ' ');
+  document.title = 'Lingocare — ' + file.replace(/\.md$/, '').replace(/_/g, ' ');
+
+  fetch('../docs/' + file)
+    .then(r => {
+      if (!r.ok) throw new Error('Document not found');
+      return r.text();
+    })
+    .then(md => {
+      const raw = marked.parse(md);
+      contentEl.innerHTML = raw;
+      buildTOC();
+      highlightActiveLink();
+    })
+    .catch(err => {
+      contentEl.innerHTML = '<div class="doc-error">Failed to load document: ' + err.message + '</div>';
+    });
+}
+
+function buildTOC() {
+  const headings = contentEl.querySelectorAll('h2, h3');
+  tocNav.innerHTML = '';
+  headings.forEach((h, i) => {
+    const id = h.id || 'section-' + i;
+    h.id = id;
+    const a = document.createElement('a');
+    a.href = '#' + id;
+    a.textContent = h.textContent;
+    a.className = h.tagName === 'H3' ? 'toc-h3' : '';
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (window.innerWidth <= 860) sidebar.classList.remove('open');
+      history.pushState(null, '', '#' + id);
+    });
+    tocNav.appendChild(a);
+  });
+}
+
+function highlightActiveLink() {
+  const headings = contentEl.querySelectorAll('h2, h3');
+  const links = tocNav.querySelectorAll('a');
+  if (!headings.length || !links.length) return;
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const id = e.target.id;
+        const match = tocNav.querySelector('a[href="#' + CSS.escape(id) + '"]');
+        if (match) match.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+  headings.forEach(h => observer.observe(h));
+}
+
+function toggleSidebar() {
+  sidebar.classList.toggle('open');
+}
+</script>
+</body>
+</html>
