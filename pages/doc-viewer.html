@@ -485,12 +485,65 @@ if (!file) {
       rawMd = md;
       const raw = marked.parse(md);
       contentEl.innerHTML = raw;
+      generateHeadingIDs();
+      setupAnchorClicks();
       buildTOC();
       highlightActiveLink();
     })
     .catch(err => {
       contentEl.innerHTML = '<div class="doc-error">Failed to load document: ' + err.message + '</div>';
     });
+}
+
+
+// Generate GFM-style heading IDs so in-content TOC links work.
+// Marked v8+ removed headerIds; the CDN loads latest, so we do it ourselves.
+function generateHeadingIDs() {
+  const seen = {};
+  contentEl.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(h => {
+    // GFM slug: lowercase, strip punctuation, collapse whitespace to hyphens.
+    // Em dash (U+2014) is covered by the general punctuation range; the space
+    // on each side becomes double-hyphen like GFM: "Foo — Bar" → "foo--bar".
+    // En dash (U+2013) and smart quotes are likewise covered.
+    let id = h.textContent
+      .toLowerCase()
+      .replace(/[\u2000-\u206F\u2E00-\u2E7F'!"#$%&()*+,./:;<=>?@[\\\]^`{|}~]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    // Deduplicate
+    if (seen[id] !== undefined) {
+      seen[id]++;
+      id = id + '-' + seen[id];
+    } else {
+      seen[id] = 0;
+    }
+    h.id = id;
+  });
+}
+
+// Delegate click handler: any anchor link inside the content scrolls smoothly.
+// This catches both the markdown TOC links and any cross-reference links.
+function setupAnchorClicks() {
+  contentEl.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const raw = a.getAttribute('href');
+    if (!raw || raw === '#') return;
+    const id = raw.slice(1);
+    const target = document.getElementById(id);
+    if (!target) {
+      // If the target element doesn't exist, try finding by decoded ID
+      // (browsers decode %XX in href, but getElementById is case-sensitive)
+      const decoded = decodeURIComponent(id);
+      const alt = document.getElementById(decoded);
+      if (alt) return void alt.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return; // silently ignore — target doesn't exist
+    }
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    history.pushState(null, '', '#' + id);
+  });
 }
 
 function buildTOC() {
