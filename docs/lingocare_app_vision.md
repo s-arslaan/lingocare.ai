@@ -24,7 +24,7 @@
 
 ## 1. What Lingocare Is
 
-Lingocare is an **AI-native, content-ready** learning platform for nursing schools in Germany. It is the only platform built specifically to train care workers in both nursing knowledge and clinical German — simultaneously, in context, and adapted to each learner.
+Lingocare is a **personalized education platform** that simultaneously relieves and empowers teachers while providing every trainee with a personalized AI tutor — one that meets them exactly where they are. It is designed for **everyone in Germany who wants to become a care worker**: international nursing trainees and domestic training programmes alike, regardless of background or country of origin. As a platform, Lingocare is **AI-native and content-ready** — the only system built specifically to train care workers in both nursing knowledge and clinical German simultaneously, in context, and adapted to each learner.
 
 **AI-native** means the intelligence is not a feature layer added to an existing LMS. It is the foundation. Content adapts to each learner's language level. Exercises are evaluated by AI. The teaching assistant knows the curriculum, the class, and the individual learner. The platform learns from every cohort to improve for the next one.
 
@@ -34,7 +34,7 @@ The **Content Studio** allows schools to go beyond the pre-built content. Instru
 
 It is not a language app with nursing content bolted on. It is not an LMS that happens to have some German exercises. It is one integrated system where language and professional knowledge are inseparable — because in real clinical practice they are.
 
-**The one-sentence version:** Lingocare helps international nursing trainees in Germany finish their training and become qualified nurses — by making clinical German learnable through care itself, while giving their school the visibility and tools to support them at every step.
+**The one-sentence version:** Lingocare helps nursing trainees in Germany — international and domestic alike — finish their training and become qualified care workers, by making clinical German learnable through care itself and providing a personalized AI tutor at every step, while giving their school the visibility and tools to support the journey.
 
 **What makes it different from everything else:**
 
@@ -51,6 +51,8 @@ It is not a language app with nursing content bolted on. It is not an LMS that h
 
 ### The Numbers
 
+Across Europe, more than **4 million healthcare specialists** are currently missing — a structural and growing deficit. Germany's share of this crisis:
+
 Germany needs approximately **500,000 more nurses by 2030**. The existing training pipeline cannot fill this gap:
 
 - Roughly **57,000** trainees begin nursing programmes each year across approximately **1,500 Pflegeschulen**
@@ -61,8 +63,7 @@ Germany needs approximately **500,000 more nurses by 2030**. The existing traini
 
 ### Why Trainees Drop Out
 
-Dropout has three root causes:
-
+Dropout has four root causes:
 **1. Language barriers, especially among international trainees**
 Between 30–50% of trainees at many Pflegeschulen are international students, many arriving with A2–B1 German proficiency. Clinical nursing requires B2+ — precise, context-specific language for patient communication, documentation, and team coordination. No tool teaches care German in the way it is actually used: embedded in clinical situations, not in a textbook exercise.
 
@@ -72,12 +73,17 @@ Most Pflegeschulen use printed materials and generic lessons that were not writt
 **3. No real-time support or visibility**
 Trainees hit a wall — in a clinical placement, in a difficult topic, in a moment of language confusion — and there is no one to help. Teachers do not know who is struggling until it is too late. Directors discover a class is behind by weeks only after the term has moved on.
 
+**4. Generic AI tools filling the gap — without pedagogical purpose**
+More than three-quarters of nursing trainees already use AI in their studies. But the tools they reach for are generic large language models — not trained as educators, not specialised for nursing, not designed for professional language development. They give answers. They do not teach. The problem is not that trainees use AI; the problem is that the AI available to them has no pedagogical foundation, no nursing specialisation, and no accountability for learning outcomes.
+
 ### Why Schools Struggle
 
 - Teachers spend 60%+ of preparation time creating materials from scratch, without AI support
 - Small Pflegeschulen lack the digital infrastructure of large hospital-affiliated schools
 - Curriculum compliance is managed manually — spreadsheets, paper calendars, email
 - There is no dashboard that tells a director at a glance which classes are on track, which teachers are overloaded, and which students are about to leave
+
+- Many nursing instructors are themselves early in their teaching careers — young educators still developing their own practice who need professional support and mentoring alongside their students
 
 ---
 
@@ -87,7 +93,7 @@ Trainees hit a wall — in a clinical placement, in a difficult topic, in a mome
 
 The learner is the centre of everything. Every other role exists to serve their learning outcome.
 
-**Who they are:** Nursing trainees (Pflegefachassistenz), often international. Age range typically 18–35. Many with A2–B1 German when they start. High motivation to qualify, but facing a genuinely hard challenge: learning a technically demanding profession in a second or third language, often far from home.
+**Who they are:** Nursing trainees (Pflegefachassistenz) — both international and domestic. A representative learner: **Lena**, 25, who has recently started her nursing training and wants to pass her theoretical and practical exams while building the confidence to communicate safely and effectively in clinical German every day. Age range typically 18–35. Many international trainees arrive with A2–B1 German. High motivation to qualify, but facing a genuinely hard challenge: learning a technically demanding profession in a second or third language, often far from home.
 
 | Job | Current reality without Lingocare |
 |---|---|
@@ -107,6 +113,8 @@ The learner is the centre of everything. Every other role exists to serve their 
 
 **Who they are:** Nursing educators at a Pflegeschule. Deeply experienced in care, operating without digital tools, without AI support, and without time. They carry their class in their head and their schedule in a paper planner. They care deeply about their students — but they are stretched.
 
+When a colleague is absent, instructors step in at short notice — adding an unplanned layer of work on top of their own preparation. Fatigue accumulates. The backlog of grading and correction grows. There is no buffer and no relief.
+
 | Job | Current reality without Lingocare |
 |---|---|
 | I need to prepare materials that match today's topic and my class's level | 2–3 hours of manual research and formatting per lesson, every week |
@@ -116,12 +124,15 @@ The learner is the centre of everything. Every other role exists to serve their 
 | I need to support different German levels in the same class | Same materials for everyone. No differentiated support built in. |
 | I need an AI assistant that knows my curriculum, class, and schedule | No AI tool specific to nursing education in Germany exists |
 | I need to run a simulation exercise without building it from scratch | Complex exercise types require hours to design manually |
+| I need to manage when a colleague is absent without losing my own preparation | When someone is absent I step in at short notice — my own classes fall behind, grading accumulates, and fatigue builds with no recovery buffer. |
 
 ---
 
 ### 3.3 The School Admin (School Director)
 
 **Who they are:** Usually a senior nurse who has moved into school management. Their primary concern is that training runs to schedule, students graduate, and the school stays compliant with state authority requirements.
+
+A core part of the director's daily role is managing teacher absence — finding cover, reorganising class schedules, and ensuring that neither students nor the remaining teaching team are left unsupported. The director must have oversight of everything at once.
 
 | Job | Current reality without Lingocare |
 |---|---|
@@ -130,6 +141,7 @@ The learner is the centre of everything. Every other role exists to serve their 
 | I need to see which students are at risk of dropping out | No system flags this. Directors hear about it from teachers, informally. |
 | I need to onboard new students quickly | Manual process. Long lead time before new students can access materials. |
 | I need to know that the platform has the right content ready for my curriculum | Starting from scratch on every topic would take months of content work. |
+| I need to fill staffing gaps and manage teacher absence without disrupting the class schedule | Managed by phone and informal negotiation. No single view of who is available to cover or which classes are affected. |
 
 ---
 
@@ -157,6 +169,12 @@ Operates across multiple schools — for example, a hospital group running three
 ---
 
 ## 4. How Lingocare AI Solves Each Problem
+
+Each user — learner, instructor, or director — receives their own **personalized Lingocare AI assistant**, purpose-built for their role and context. Across every dashboard, Lingocare AI:
+- Takes over **cognitive load** so each user can focus on what matters most
+- **Proactively prepares** each user for what lies ahead — that day, that week, that block
+- Supports daily work in the moment — not just when asked, but anticipating needs before they arise
+- **Learns over time**: because Lingocare AI operates within the full system context — curriculum, content, individual history — it becomes more tailored and useful the longer it is used
 
 ### 4.1 For the Learner
 
@@ -262,6 +280,20 @@ LINGOCARE INTERNAL              TENANT SIDE (Client-Facing)
 **Adaptive, not uniform.** The same topic looks different depending on who is reading it and at what language level. The platform knows who you are before you tell it anything today.
 
 **AI everywhere, invisibly.** Ask Lingo is not a feature the user navigates to — it is present on every dashboard. The adaptive referral is not a pop-up flow — it is a quiet suggestion in the right moment. AI is the infrastructure, not the interface.
+
+### How Lingocare AI Communicates
+
+These principles govern every AI-generated message, proactive nudge, dashboard suggestion, and adaptive referral — across all user types and dashboards:
+
+**Proactive, not reactive.** Lingocare AI takes initiative. It does not wait to be asked. It anticipates what each user needs based on curriculum state, the calendar, and individual history — and surfaces it before the user has to search for it.
+
+**Strength-oriented, not deficit-focused.** Lingocare AI always builds from what is present and what is working. It never points out what is missing, what has not been done, or what has been neglected. Every interaction starts from strength and builds forward from there.
+
+**Human language, not AI language.** In every dashboard interaction and proactive message, Lingocare AI speaks like a warm, encouraging human colleague — not a chatbot. Phrases such as "You haven't logged in for X days" or any reference to gaps, absences, or inactivity are strictly prohibited. What is said matters. How it is said matters equally.
+
+**Motivating and supportive.** Every AI-generated message should feel like a quiet, confident voice that says: *you've got this, and here's what's next.* The tone is never urgent, never nagging, never clinical — always forward-looking and affirming.
+
+---
 
 ### The Four Experiences
 

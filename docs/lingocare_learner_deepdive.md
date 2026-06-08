@@ -13,7 +13,7 @@
 2. [Who the Learner Actually Is](#2-who-the-learner-actually-is)
 3. [This Is Your Platform — Not the School's](#3-this-is-your-platform--not-the-schools)
 4. [The Navigation Sidebar](#4-the-navigation-sidebar)
-5. [Lingo — Characters, Emotions, and Presence](#5-lingo--characters-emotions-and-presence)
+5. [Lingo — Moods, Emotions, and Presence](#5-lingo--moods-emotions-and-presence)
 6. [Page Anatomy — What Each Screen Contains](#6-page-anatomy--what-each-screen-contains)
 7. [How Everything Connects — The Workflows](#7-how-everything-connects--the-workflows)
 8. [The Cross-Surface Principle](#8-the-cross-surface-principle)
@@ -21,6 +21,25 @@
 ---
 
 ## 1. The Learner's Real Problems — JTBD
+
+
+### The Two Core Jobs
+
+Before the scenario-based jobs: research with nursing trainees consistently surfaces two primary needs that Lingocare must deliver on.
+
+**Primary Job — Exam readiness:**
+> *"Prepare me for my practical and theoretical exams. I want to pass and be ready for my profession."*
+
+This is what trainees name first when asked what matters most. The majority answer: *"I want to be well prepared for the exam."* Everything in the platform — every LU, PF, KBB, and Language Practice exercise — must feel like it is moving the learner toward that goal. Exam readiness is the primary signal.
+
+**Secondary Job — Language confidence:**
+> *"Help me feel safe and confident in German — so I can self-regulate, stay calm, and not feel anxious in professional situations."*
+
+This is not just about language skills. It is about psychological safety and day-to-day readiness on the floor. For learners with a language barrier, this job is as important as exam prep — because without it, performance in clinical situations and exams both suffer.
+
+The following scenario-based jobs describe how these two core needs manifest in real learner situations.
+
+---
 
 ### Job 1: Understand what I just learned in clinical practice
 
@@ -58,7 +77,7 @@
 
 **The problem:** The first six months are full of novelty. Months seven through twelve are where dropout happens — not because students stop caring, but because there is no visible momentum and no sense that today's learning session matters.
 
-**What Lingocare does:** XP, streaks, level progression, and the class leaderboard make progress visible. But more than that — Lingo is present throughout, not as a notification system but as a character that reacts, challenges, and cheers. When the learner has not practised AD-cluster German in five days, Lingo appears as a nurse character, a little concerned, asking "Sollen wir kurz üben?"
+**What Lingocare does:** XP, streaks, level progression, and the class leaderboard make progress visible. But more than that — Lingo is present throughout, not as a notification system but as a character that reacts, challenges, and cheers. Lingo notices what is going well and builds from it — when it is time to revisit an exercise cluster, Lingo shows up warm and direct: "Sollen wir kurz üben?"
 
 ---
 
@@ -80,13 +99,13 @@
 
 ## 2. Who the Learner Actually Is
 
-**Leila, 23, from Tunisia.** B2 Arabic, B1 French, A2 German. Arrived in Germany 14 months ago. She is at L1 in Lingocare. Most evenings she spends 15–20 minutes in Language Practice — usually the KI cluster Wortschatz exercises, which help her with empathetic speaking. She rarely uses My Programme on her own initiative; she follows the class schedule. But she loves the Knowledge Garden for looking up things she encountered during placement.
+**Lena, 23, from Tunisia.** B2 Arabic, B1 French, A2 German. Arrived in Germany 14 months ago. Her language slider is set to Einfach. Most evenings she spends 15–20 minutes in Language Practice — usually the KI cluster Wortschatz exercises, which help her with empathetic speaking. She rarely uses My Programme on her own initiative; she follows the class schedule. But she loves the Knowledge Garden for looking up things she encountered during placement.
 
-**Marcus, 31, from Germany.** Native German speaker, retrained from car sales. Strong language, weak clinical knowledge. He spends most of his time in Knowledge Garden and goes straight to PF2 on most LUs because PF1 feels too easy. He uses Lingo as a doctor character when it shows up in Knowledge Building Blocks — and he takes it seriously.
+**Marcus, 31, from Germany.** Native German speaker, retrained from car sales. Strong language, weak clinical knowledge. He spends most of his time in Knowledge Garden and goes straight to PF2 on most LUs because PF1 feels too easy. He engages seriously with Lingo's Knowledge Garden explanations — the studious, glasses-and-book mood is exactly his style.
 
 **Priya, 27, from India.** B2 German, confident in conversation, challenged by clinical documentation. L2 in Lingocare. Her main struggle is PF4 — professional reflection in German. She asks Lingo to help her structure her written responses before she submits them.
 
-**Dmitri, 19, from Ukraine.** The youngest in his class. The leaderboard is his primary motivation. Checks his rank before opening anything else. He has already found that Knowledge Garden KBBs give him XP he can use to stay ahead of Leila on the board.
+**Dmitri, 19, from Ukraine.** The youngest in his class. The leaderboard is his primary motivation. Checks his rank before opening anything else. He has already found that Knowledge Garden KBBs give him XP he can use to stay ahead of Lena on the board.
 
 ---
 
@@ -105,7 +124,7 @@ This distinction has to be real, not just rhetorical. The school sets the curric
 - Dashboard — the learner's personal home screen, not a school report card
 - Achievements — the learner's own progress history
 
-The sidebar reflects this split visibly. My Programme sits under a section divider separate from Knowledge Garden and Language Practice. The learner's personal spaces are not mixed in with the curriculum view.
+The sidebar reflects this split visibly. My Programme (the school's curriculum) sits in its own section. The learner's two personal learning tracks — **Pflege** (care knowledge) and **Sprache** (language practice) — are clearly grouped as their own space, separate from the school's view.
 
 Lingo holds both sides together. In a scheduled class session (school side), Lingo is aware of the teacher's context and the class. In Knowledge Garden at 10pm on a Sunday (personal side), Lingo is just the learner's companion — no teacher present, no curriculum obligation.
 
@@ -113,12 +132,12 @@ Lingo holds both sides together. In a scheduled class session (school side), Lin
 
 ## 4. The Navigation Sidebar
 
-Fixed left sidebar on desktop. Bottom navigation bar on mobile. The learner's name, language level tag, and streak are always visible at the top. Lingo floats as a persistent button — not a sidebar item — in the bottom-right corner of every screen.
+Fixed left sidebar on desktop. Bottom navigation bar on mobile. The learner's name and streak are always visible at the top. Lingo floats as a persistent button — not a sidebar item — in the bottom-right corner of every screen.
 
 ```
 ────────────────────────────────────────────
-  🦦  Hi Leila                             
-      L1 · 🔥 12 days · 2,840 XP
+  🦦  Hi Lena
+      🔥 12 days · 2,840 XP
 ────────────────────────────────────────────
 
   🏠  Home
@@ -128,11 +147,13 @@ Fixed left sidebar on desktop. Bottom navigation bar on mobile. The learner's na
   ─── MY CLASS ──────────────────────────────
   📚  My Programme
 
-  ─── MY LEARNING ───────────────────────────
+  ─── PFLEGE ─────────────────────────────────
   🌿  Knowledge Garden
+
+  ─── SPRACHE ────────────────────────────────
   🗣️  Language Practice
 
-  ─── MY PROGRESS ───────────────────────────
+  ─── MY PROGRESS ────────────────────────────
   🏆  Achievements
   👤  Profile
 
@@ -142,98 +163,92 @@ Fixed left sidebar on desktop. Bottom navigation bar on mobile. The learner's na
   🦦  Lingo  ← tap to open floating chat
 ```
 
-**What each sidebar item is:**
+**What each section and item is:**
 
-`Home` — The learner's daily starting point. Not a school dashboard. Not a progress report. Just what is happening today, and Lingo.
+`Home` — The learner's daily starting point. Not a school dashboard. Not a progress report. What is happening today, and Lingo — with two clear entry points into Pflege or Sprache.
 
 `Calendar` — Their personal schedule. Class sessions the school has scheduled, personal deadlines, nothing else.
 
 `My Programme` — The curriculum, read-only, simplified. What the class is working through and where the learner stands.
 
-`Knowledge Garden` — Self-directed nursing knowledge. Browse KBBs by topic and cluster, any time, without being in a class context.
+**Pflege — Care Learning:**
+`Knowledge Garden` — Self-directed nursing knowledge. Browse KBBs by topic and cluster, any time, without being in a class context. Exam-relevant content is visible throughout.
 
-`Language Practice` — Clinical German practice. Exercises organised by speech act and cluster — including Grammar, Vocabulary, Listening, and Production.
+**Sprache — Language Practice:**
+`Language Practice` — Clinical German practice. Exercises organised by speech act and cluster — Grammar, Vocabulary, Listening, and Production.
 
 `Achievements` — XP totals, level, class leaderboard, badges, streak history.
 
-`Profile` — Language level (L1/L2/L3), mother tongue, Language Practice settings, notifications.
+`Profile` — Language settings, mother tongue, notifications.
 
 **The floating Lingo button:** Present on every screen without exception. Tapping it opens a floating chat panel without navigating away from the current screen. Context-aware — Lingo knows what screen and what content the learner is looking at.
 
 ---
 
-## 5. Lingo — Characters, Emotions, and Presence
+## 5. Lingo — Moods, Emotions, and Presence
 
-Lingo is not a notification system. It is a character — several characters, depending on context — that makes the platform feel alive and personally responsive.
+Lingo is not a notification system. Lingo is **one character** — the otter — that makes the platform feel alive and personally responsive. Lingo is always the otter: the learner's companion, peer, and guide. Unambiguously fictional. Never a healthcare professional — no scrubs, no doctor coat, no patient framing. Always an otter.
 
-### The Five Characters
+What changes across contexts is not who Lingo is — it is **how Lingo feels in this moment**. Lingo has moods that shift to match what the learner is doing.
 
-**🦦 Lingo (Otter — default)**
-Casual, warm, occasionally cheeky. The everyday face of the platform. Shows up on the home screen, during achievements, on streaks, and when the learner has not been around for a few days.
+### Lingo's Five Moods
 
-Typical appearance: "Hey Leila! You haven't been here since Thursday. Your KI plants are starting to wilt. Worth a quick visit?"
+**🦦 Casual & Warm — the everyday Lingo**
+Relaxed posture, open expression, no accessories. The default state. Home screen, daily greetings, streak updates, general encouragement. The Lingo the learner encounters most.
 
----
+**🦦 Curious & Studious — glasses on, book nearby**
+Reading glasses on, a book open nearby or in hand, leaning forward slightly. Appears in Knowledge Garden — when Lingo introduces a KBB topic or frames a concept that deserves genuine curiosity. "Let's explore this together."
 
-**👩‍⚕️ Lingo as Nurse**
-Appears in: AD-cluster content (hygiene procedures, body care, aseptic work), practical PF exercises, Lab session reminders.
+**🦦 Focused — steady and attentive**
+Glasses on, posture upright, expression composed. Before a PF3 Decision Simulation or Expert Mode — when the exercise demands concentration. Lingo goes quieter here: fewer words, steadier presence.
 
-Tone: Colleague energy. Practical, calm under pressure, knows the procedures cold. The nurse character models the professional the learner is becoming.
+**🦦 Celebratory — paws up, full energy**
+Arms wide, expression open and joyful. Achievement unlocked, streak milestone, level-up, first PF3 complete. Lingo celebrates with the learner fully — not a polite "well done," but genuine shared energy.
 
-Emotion examples:
-- Confident (when the learner is doing well): "That's the right PPE sequence. Exactly how we do it."
-- Focused (before a PF3 simulation): "This one's tricky. Take your time. You've got the background."
-- Concerned (when a weak area is flagged): "You've missed the hand disinfection steps in two exercises now. Soll ich einen kurzen Test starten?"
-
----
-
-**🧑‍⚕️ Lingo as Doctor**
-Appears in: Knowledge Garden KBBs (especially Level 1 theoretical content), clinical reasoning explanations, before complex Analysis exercises (PF2).
-
-Tone: Precise, slightly formal, but never condescending. Explains the "why" behind nursing rules. Brings scientific grounding without a lecture.
-
-Emotion examples:
-- Explaining a concept: "The reason disinfection always comes before washing is about transient flora. Let me show you."
-- Challenging the learner: "What happens to blood pressure and pulse simultaneously in haemorrhagic shock? Think about it before you tap."
-- Satisfied with a correct answer: "Exactly right. That cluster thinking is exactly what clinical practice requires."
+**🦦 Thoughtful — slower and reflective**
+A paw resting on the chin, softer expression, slower pace. PF4 reflection exercises, professional identity topics, error reflection. No right answers here — Lingo is thinking alongside the learner, not above them.
 
 ---
 
-**👴 Lingo as Patient**
-Appears in: KI-cluster content (communication, empathy, person-centred care), PF1/PF2 exercises in Communication & Interaction, Mini-Produktion exercises in Language Practice.
+### How Lingo Speaks — The Tone Rules
 
-Tone: Personal, vulnerable in a dignified way, often reflecting back what the learner's care actually feels like from the other side. The patient character is the most emotionally complex — it shows the human stakes of nursing communication.
+Lingo always speaks as the learner's companion: warm, forward-looking, never clinical. These rules apply across every mood, every screen, every message.
 
-Emotion examples:
-- Setting up an exercise: "I'm Herr Müller. I've been in this bed for four days and nobody's asked me what I want. You're here for morning care. How will you greet me?"
-- Reacting to a learner's response: "That felt... fast. I didn't have time to answer your first question before you moved to the next one."
-- Warmly confirming good communication: "Thank you. You explained that step by step and you waited for me. That matters more than you know."
+**What Lingo never says:**
+- "You haven't been here in X days."
+- "Your [skill] is getting weaker."
+- "You're falling behind on [topic]."
+- Anything that implies absence, failure, or deficit.
 
----
+**What Lingo says instead:**
+- "Welcome back — really good to see you."
+- "Ready to pick up where we left off?"
+- "I've been looking forward to this topic with you."
+- "You've got more in you today. Let's go."
 
-**🧑‍🎓 Lingo as Student**
-Appears in: PF4 Reflection exercises, professional identity topics, error reflection, before a learner's first Expert Mode scenario.
+**In knowledge moments** (Curious & Studious):
+> 🦦 📚 *"Pathogens travel a chain from source to host. Every hygiene measure interrupts one link. This KBB walks through all five — five minutes and the whole picture clicks."*
 
-Tone: Thoughtful, self-questioning, models the kind of reflective thinking PF4 requires. Not authoritative — this character is learning alongside the learner, processing together.
+**Before a challenge** (Focused):
+> 🦦 🎯 *"This simulation is layered. Take your time. You've been building up to it all block."*
 
-Emotion examples:
-- Before a PF4 exercise: "There's no clean right answer here. That's the point. What do you actually think?"
-- After a hard reflection exercise: "That was a genuinely difficult situation. Don't worry if your answer felt messy. Nursing ethics is messy."
-- Encouraging a first Expert Mode: "This is the big one. Four hours. But you've been building up to it for five blocks. You know this."
+**After a completion** (Celebratory):
+> 🦦 🎉 *"PF3 done. That decision sequence was exactly right. This is what the practice has been building toward."*
+
+**In reflection** (Thoughtful):
+> 🦦 💭 *"There's no clean right answer here. That's the point. What do you actually think happened in that situation?"*
 
 ---
 
 ### Proactive Challenge Offers
 
-Any character can turn to the learner with a direct challenge:
+Lingo turns to the learner with direct, forward-looking invitations — always an offer, never a judgment:
 
-> *"You've struggled with Wortschatz in the KI cluster twice this week. Sollen wir eine kurze Übung machen? [5 min] [Später]"*
+> 🦦 *"Wortschatz in KI is where your communication really comes alive. Sollen wir eine kurze Übung machen? [5 min] [Später]"*
 
-> *"You've done PF1 on all three AD2 LUs but haven't tried PF2 once. Want to test yourself? [Try PF2 — AD2-LU1] [Not yet]"*
+> 🦦 *"You've done PF1 on all three AD2 LUs. PF2 is a real step up from there — want to try it? [Try PF2 — AD2-LU1] [Not yet]"*
 
-> *"Your streak is at 11 days. One more today and you unlock the 12-Day badge. [Start something now] [Skip]"*
-
-The character shown for each challenge matches the context: the nurse character for AD2, the otter for streak challenges, the doctor for KBB suggestions.
+> 🦦 *"One more session today and your streak hits 12 days. That's a badge. [Start something] [Skip today]"*
 
 ---
 
@@ -241,7 +256,7 @@ The character shown for each challenge matches the context: the nurse character 
 
 The floating Lingo button (🦦 icon, bottom-right corner, every screen) opens a compact floating chat panel — not a full-page navigation. The panel appears over whatever screen the learner is on, and closes to return to exactly where they were.
 
-Inside a PF exercise, the chat is aware of the current exercise. Inside Knowledge Garden, the chat knows which KBB the learner is reading. The character shown in the floating chat header matches the context — the doctor character inside a KBB, the nurse during a PF, the otter by default.
+Inside a PF exercise, the chat is aware of the current exercise. Inside Knowledge Garden, the chat knows which KBB the learner is reading. Lingo's mood in the floating chat header shifts with context — studious when exploring a KBB, focused before a simulation, warm and casual by default.
 
 The learner types freely. They do not need to choose a query category or navigate to an "Ask Lingo" page.
 
@@ -255,12 +270,11 @@ The Dashboard is the learner's daily orientation card. It does not try to show e
 
 ```
 ────────────────────────────────────────────────────────────
-  [Lingo greeting — character varies by time and context]
+  [Lingo greeting — warm, forward-looking, context-aware]
 
-  Morning, Leila 👋
-  Lingo as Nurse: "You have a class starting in 40 minutes.
-  Belinda is teaching KI1 · PF2. You did PF1 last week —
-  you're ready for this."
+  Morning, Lena 👋
+  Lingo 🦦: "Block 2 is moving well. PF1 on hand disinfection
+  is almost done — let's close that out today."
 
   ┌────────────────────────────────────────────────────┐
   │  📣  CLASS STARTING IN 39 MIN                      │
@@ -268,31 +282,41 @@ The Dashboard is the learner's daily orientation card. It does not try to show e
   │  [Join Class]                                      │
   └────────────────────────────────────────────────────┘
 
-  ─── For you today ──────────────────────────────────
+  ─── Start learning now ──────────────────────────────
+
+  ┌──────────────────────────┐  ┌──────────────────────────┐
+  │ 🌿 Pflege                │  │ 🗣️ Sprache                │
+  │ Care knowledge —         │  │ Language practice        │
+  │ pick up where I left off │  │ for today →              │
+  │ →                        │  └──────────────────────────┘
+  └──────────────────────────┘
+
+  ─── For you today ───────────────────────────────────
   Continue:  AD1-LU2 — Hand disinfection technique
              PF1 ● PF2 ○ PF3 ○ PF4 ○  · ~12 min
              [Continue →]
 
   Explore:   KBB — Isolation Procedure (AD)  · 4 min
-             Lingo 🧑‍⚕️: "This connects to what you saw in
+             Lingo 🦦: "This connects to what you saw in
              placement last week."
              [Open →]
 
-  ─── Quick status ───────────────────────────────────
+  ─── Quick status ────────────────────────────────────
   🔥 12 days   ·   2,840 XP   ·   3rd in class
 
   ─────────────────────────────────────────────────────
-  [Lingo AI — ask anything]
+  [Lingo — ask anything]
   > What should I focus on today?
   ─────────────────────────────────────────────────────
 ```
 
 **What is on the Dashboard:**
-- Lingo character greeting — personalised based on time of day, what is happening today, and recent activity
-- Join Class card — appears only when a class is scheduled within the next hour or is currently live (shown prominently, cannot be missed)
-- "For you today" — maximum two items: one continuation of the most recent LU, and one self-directed suggestion (KBB or Language Practice). Not a full today's plan. Two picks.
-- Quick status strip — streak, XP, class rank. Three numbers. That is all.
-- Ask Lingo bar — prominent, always ready
+- Lingo greeting — warm, mood set by time of day and context. Always forward-looking, never noting what has been missed or how long the learner has been away.
+- Join Class card — appears only when a class is scheduled within the next hour or is currently live. Shown prominently, cannot be missed.
+- "Start learning now" — two large entry points: **Pflege** (care learning) and **Sprache** (language practice). One tap from the home screen into either track without navigating elsewhere. The clearest answer to "where do I click right now?"
+- "For you today" — maximum two items: one continuation of the most recent LU and one self-directed suggestion (KBB or Language Practice). Two picks, not a full plan.
+- Quick status strip — streak, XP, class rank. Three numbers.
+- Ask Lingo bar — prominent, always ready.
 
 **What is NOT on the Dashboard:**
 - Full list of upcoming deadlines (that is the Calendar)
@@ -317,7 +341,7 @@ The learner's schedule. Driven by what the school and instructor have set up, pl
 
 *🔵 LU Deadline* — a date by which a specific LU or PF should be completed. Set by the instructor. Shows completion status. Overdue events shown in red.
 
-*🟢 Language Practice reminder* — auto-generated when a cluster's Language Practice has not been visited in several days. Tappable to open that cluster's exercises directly.
+*🟢 Language Practice nudge* — a proactive Lingo suggestion to visit a cluster's Language Practice, generated when it would be timely based on upcoming topics or current exam preparation focus. Tappable to open that cluster's exercises directly.
 
 **Tapping a Class Session event:**
 Opens a focused card showing:
@@ -394,18 +418,20 @@ When a learner taps "Start" or "Continue" on any LU, they enter the LU experienc
 **Inside a Practice Focus**
 The exercise experience has three persistent elements that never go away regardless of which PF or which exercise type is active:
 
-*1. Language level toggle — always visible*
-```
-[ L1 · Einfach ] [ L2 · Mittel ] [ L3 · Fortgeschritten ]
-```
-The learner can tap this at any point during the exercise to switch their language level. Content adjusts immediately — next exercise item or explanation shows in the new level. Switching mid-exercise does not reset progress. This is not in settings. It is directly in the exercise header.
+*1. Language level slider — always visible, always adjustable*
+
+A gentle slider sits unobtrusively in the exercise header, showing three positions:
+
+  Einfach ——●———————————— Mittel ——————————————— Fortgeschritten
+
+The learner can move it at any point during an exercise. Content adjusts on the next item — no interruption to the current flow, no progress reset. There are no codes or numeric labels. It is simply: *where do you want the language right now?* The current position is softly indicated. Moving it feels like turning a dial, not selecting a fixed category.
 
 *2. Lingo floating button — always in the corner*
-The 🦦 floating button is present in every exercise. The character shown in the button matches the context:
-- Nurse character: in AD-cluster PF exercises (procedures, hygiene)
-- Doctor character: when a Knowledge Building Block explanation would be helpful
-- Patient character: in KI-cluster PF exercises (communication, empathy)
-- Otter: in PF4 reflection exercises, general use
+The 🦦 floating button is present in every exercise. Lingo's mood in the button matches the context:
+- Curious & Studious: when a KBB explanation would help
+- Focused: in PF3 simulation exercises
+- Thoughtful: in PF4 reflection exercises
+- Warm & Casual: general support, any time
 
 Tapping opens the floating chat without leaving the exercise. The chat knows which exercise item the learner is looking at.
 
@@ -424,7 +450,7 @@ Tapping opens the floating chat without leaving the exercise. The chat knows whi
 **PF closing screen**
 After completing all exercises in a PF:
 - XP earned shown prominently
-- Lingo character reaction (character matches the cluster/PF)
+- Lingo reaction in the appropriate mood — celebratory for completions, thoughtful for PF4 reflection
 - Optional Knowledge Building Block links (collapsible): "Want to understand the theory behind what you just practised?" — 1–3 relevant KBBs from Knowledge Garden shown with one-tap access
 - "Next: PF2" button if they are doing a sequence, or "Back to LU" to choose a different PF
 
@@ -447,7 +473,7 @@ Tapping [Join] → enters the PF in Live Class Mode
 ```
 
 **Inside Live Class Mode:**
-The PF looks and works exactly the same as in solo mode — same exercises, same Lingo button, same language level toggle. The only differences are:
+The PF looks and works exactly the same as in solo mode — same exercises, same Lingo button, same language level slider. The only differences are:
 
 - A thin orange banner at the top: "Live Class · KI1 PF2 · 12 students joined"
 - A small "classmates present" counter — how many classmates are currently in this session
@@ -464,8 +490,8 @@ The teacher closes the live session from their end. The learner sees:
 Class session ended · 54 minutes
 KI1 · PF2 complete · +150 XP
 
-Lingo 👩‍⚕️: "Good session. Belinda will share the debrief in the next class.
-In the meantime — the Communication KBB covers what came up in exercise 3."
+Lingo 🦦 (warm): "Good session. Belinda will share the debrief in the next class.
+The Communication KBB covers what came up in exercise 3."
 [Open KBB →]
 ```
 
@@ -479,8 +505,8 @@ In the meantime — the Communication KBB covers what came up in exercise 3."
 
 Three clusters: AD · KI · BD. Each shown as a distinct zone with a visual completion bar — not percentage-based, but showing how many KBBs the learner has read vs total available.
 
-Lingo appears as the Doctor character on entry, with a short personalised note:
-> 🧑‍⚕️ *"You've read 4 of the 8 AD KBBs. The ones on isolation measures and aseptic procedures are worth having before Block 3 starts."*
+Lingo appears in Curious & Studious mood on entry — glasses on, book nearby — with a short personalised note:
+> 🦦 📚 *"You've read 4 of the 8 AD KBBs. The isolation measures and aseptic procedure ones are really worth having before Block 3."*
 
 **Inside a cluster's KBB section:**
 
@@ -498,7 +524,7 @@ Each KBB card shows:
 ```
 Knowledge Garden · AD · Infection Chain Basics
 ─────────────────────────────────────────────────────
-Lingo 🧑‍⚕️: "Pathogens travel a chain from source to host.
+Lingo 🦦 📚: "Pathogens travel a chain from source to host.
 Every hygiene measure interrupts one link in that chain."
 
 Card 1 of 5 — Was ist eine Infektionskette?
@@ -517,14 +543,14 @@ Welche Aussage ist korrekt?
 ─────────────────────────────────────────────────────
 ```
 
-- Language level shown at top: learner can tap to change level, content adjusts immediately on the next card
-- Lingo (doctor character) frames each card opening with a short contextual statement — never just the clinical text cold
+- Language slider at top: the learner moves it to adjust language level; content adjusts on the next card
+- Lingo (Curious & Studious) frames each card opening with a short contextual statement — never just the clinical text cold
 - Progress bar: "Card 3 of 5"
 - Immediate quiz feedback after each card — no end-of-block quiz, question comes right after the relevant card
 
 **On completion:**
 - XP earned
-- Lingo doctor: reaction tied to what was in the KBB
+- Lingo (Celebratory or Curious depending on content): reaction tied to what was in the KBB
 - "This KBB is used in these LUs" — list of LUs in My Programme that reference this KBB, with one-tap access to each
 - "Related KBBs" — 2–3 suggestions for what to read next in the same cluster
 
@@ -551,7 +577,7 @@ Three clusters: AD · KI · BD. Each shown with four practice "plants" — one p
 
 Lingo Otter appears on entry with a personalised summary:
 
-> 🦦 *"Your AD Grammatik plant is at Level 3 — strong. Wortschatz for KI is Level 1. That's where your communication exercises keep running into trouble. Start there?"* [Yes, go there] [Browse myself]
+> 🦦 *"Your AD Grammatik is solid. KI Wortschatz is where your communication gets really interesting — and it's worth some time today. Want to start there?"* [Yes, go there] [Browse myself]
 
 **Inside a micro-skill area:**
 
@@ -570,7 +596,7 @@ Each Grammatik area has:
 - 3–5 exercises applying that rule in care contexts: fill-in, word order correction, sentence completion
 - Each exercise uses a clinical scenario — the grammar is never decontextualised
 
-Lingo as Doctor appears in grammar explanations. As Patient in KI grammar exercises (because KI grammar involves speaking to patients).
+Lingo appears in Curious & Studious mood in grammar explanations — glasses on, engaged. In KI grammar exercises that involve patient-facing communication scenarios, Lingo's tone shifts warmer to match the relational nature of the content.
 
 **SG exercise format types:**
 Listen & Identify · Listen & Sequence · Listen & Select · Dictation-Light · Listen & Repeat · Verbal Sequencing
@@ -615,13 +641,13 @@ PFs completed · KBBs read · Language Practice sessions · Live classes joined 
 
 ### 6.9 Profile
 
-Language level (L1 / L2 / L3) — editable at any time. Changes immediately update how all content across the platform is displayed — KBBs, PF exercises, Language Practice, Lingo explanations.
+Language level — shown as a simple slider: Einfach · Mittel · Fortgeschritten. Adjustable here as an account-wide default, but can always be changed in-exercise at any moment without returning to Profile. Changes take effect on the next piece of content.
 
-Mother tongue — affects how Lingo frames explanations. Changes can be made without any consequence to progress.
+Mother tongue — affects how Lingo frames explanations and contextualises examples. Can be changed without any consequence to progress.
 
-Language Practice toggle — relevant for L3 learners who want to opt in to dedicated language exercises.
+Language Practice toggle — enables or de-emphasises dedicated language exercises independently of care content.
 
-Lingo character preferences — the learner can note preferred character interactions (though the system still uses context to determine which character appears where — this is a preference, not a full override).
+Lingo mood preferences — the learner can note a general preference for Lingo's communication style (e.g., more celebratory and playful, or quieter and focused). Context still drives which mood Lingo shows — this is a preference, not a full override.
 
 Notification settings — class start reminders (timing: 1h before, 30min before, 5min before), deadline reminders (N days before), streak warning, achievement unlocked, Lingo challenges.
 
@@ -638,8 +664,8 @@ School, class, and instructor info — read-only. Set by the school.
 ```
 Open app → Home (Dashboard)
   │
-  Lingo 👩‍⚕️ (Nurse): "Good morning, Leila. Block 2 is moving well.
-  You're 12 minutes away from finishing PF1 on hand disinfection.
+  Lingo 🦦 (warm): "Good morning, Lena. Block 2 is moving well.
+  PF1 on hand disinfection is almost done — about 12 minutes to finish it.
   Sollen wir das heute abschließen?"
   │
   "For you today":  AD1-LU2 — Hand disinfection technique · PF1 in progress
@@ -651,8 +677,8 @@ Enter LU · AD1-LU2
   Read case text (already read — skipped automatically if completed)
   │
   PF1 active · Exercise 3 of 4
-  ├─ Language level: L1  (always visible, tap to change)
-  ├─ 🦦 Lingo button: floating (nurse character)
+  ├─ Language slider: Einfach  (always visible, slide to adjust)
+  ├─ 🦦 Lingo button: floating (focused mood)
   │
   Exercise 3: Sequence Reconstruction
   (Put the 6 PPE removal steps in the correct order)
@@ -661,14 +687,14 @@ Enter LU · AD1-LU2
   +120 XP
   │
   Closing screen:
-  Lingo 👩‍⚕️: "Perfect sequence. This is exactly what protects you and the patient.
+  Lingo 🦦 (celebratory): "Perfect sequence — exactly right. This is what protects you and the patient.
   Want to understand the science behind it?"
   [Optional KBB: Infection Chain Basics · 4 min]
   │
   [Open KBB] → Knowledge Garden · KBB viewer
     Card 1 → Quiz 1 → Card 2 → Quiz 2 → Card 3 → Complete
     +80 XP · "First KBB Complete" achievement unlocked
-    Lingo 🧑‍⚕️: "Good. You now know the why behind the sequence."
+    Lingo 🦦 (studious): "Good. Now you know the why behind the sequence."
   │
   ↓
 Back to Dashboard · streak: 🔥 13 days · XP: 3,040
@@ -689,9 +715,9 @@ Home (Dashboard) · Tuesday 08:20
   │  [Join] (activates at 08:55)                           │
   └────────────────────────────────────────────────────────┘
   │
-  Lingo 👴 (Patient): "I'm Herr Müller. In today's session,
-  you will practise identifying and responding to my needs.
-  PF2 here — you'll be analysing responses, not just understanding them."
+  Lingo 🦦 (focused): "Today's PF2 is about analysing responses — not just understanding them.
+  You'll work through patient communication scenarios and examine the 'why' behind each choice.
+  This is where your KI instincts really get tested."
   │
   [Prepare with Lingo]: "What should I review before PF2 on KI1?"
   Lingo: "PF1 on KI1 was about making first contact. PF2 asks you to analyse
@@ -699,7 +725,7 @@ Home (Dashboard) · Tuesday 08:20
   The KBB on Communication Fundamentals is worth a 4-min read now."
   [Open KBB →] or [I'm ready]
   │
-  08:55 → [Join] activates · Leila taps
+  08:55 → [Join] activates · Lena taps
   │
   ↓
 Live Class Mode · KI1 · PF2
@@ -711,20 +737,19 @@ Live Class Mode · KI1 · PF2
   (Categorise the nurse's response choices:
   Personenbezogen / Situationsbezogen / Professionsethisch)
   │
-  Leila submits her answers → sent to teacher dashboard in real time
-  Teacher sees: "Leila Hassan — submitted · 2/3 correct"
+  Lena submits her answers → sent to teacher dashboard in real time
+  Teacher sees: "Lena Hassan — submitted · 2/3 correct"
   │
   Exercise 2: Annotated Error Analysis (paired view)
-  Leila and classmate see each other's categorisations side-by-side
+  Lena and classmate see each other's categorisations side-by-side
   → Paarweise Antworten visible to teacher in real time
   │
   Class session ends (teacher closes from their side)
   ↓
   Session summary:
   KI1 · PF2 complete · +150 XP
-  Lingo 👴: "Good listening today. Belinda will review the paired
-  responses in the next class. The Communication KBB has
-  more on the distinction that came up in exercise 1."
+  Lingo 🦦 (warm): "Good session. Belinda will share the debrief in the next class.
+  The Communication KBB has more on the distinction that came up in exercise 1."
   [Open KBB →]
 ```
 
@@ -748,8 +773,8 @@ Calendar → Week view → Tap Lesson: "Block 1 · Hygiene & Infection Control"
   └── Lab Session 🧪  (Practical — no exercises)
   │
   "Prepare with Lingo" →
-    Lingo 🧑‍⚕️: "Isolation and aseptic procedures both follow the
-    same logic: if situation X → measure Y → according to rule Z.
+    Lingo 🦦 (studious): "Isolation and aseptic procedures follow the
+    same logic: situation X → measure Y → rule Z.
     The KBBs on Isolation Procedure and Aseptic Basics cover both."
     [Open Isolation Procedure KBB →]
     [Open Aseptic Basics KBB →]
@@ -766,9 +791,9 @@ In LU: KI1 — Active Listening · PF2
   Learner selects wrong answer 3 times on the same type of question
   │
   Adaptive referral fires:
-  Lingo 👴 (Patient): "Sollen wir kurz üben? These two categories
-  are the core vocabulary of KI. 5 minutes in Language Practice
-  would sort this out."
+  Lingo 🦦 (curious): "These two categories are the heart of KI vocabulary — let's make them click.
+  Sollen wir kurz üben? 5 minutes in Language Practice
+  would really help here."
   [Yes, take me there] [Skip, I'll keep trying]
   │
   [Yes] → Language Practice · KI · Wortschatz & Redemittel
@@ -797,10 +822,10 @@ No curriculum context. Learner is curious about something encountered during pla
 Home → Ask Lingo: "We had a patient with a Druckgeschwür today.
 What is that and what causes it?"
   │
-  Lingo 🧑‍⚕️: "A Druckgeschwür (pressure ulcer) develops when sustained
+  Lingo 🦦 (studious): "A Druckgeschwür (pressure ulcer) develops when sustained
   pressure cuts off blood supply to skin tissue, usually over a bony
-  area. Risk factors are immobility, moisture, friction, poor nutrition.
-  
+  area. Risk factors: immobility, moisture, friction, poor nutrition.
+
   There is a KBB on this in the AD cluster — Skin Protection & Self-Care.
   It covers risk assessment and prevention directly."
   [Open KBB in Knowledge Garden →]
@@ -809,7 +834,7 @@ What is that and what causes it?"
   Card 1 → Quiz 1 → ... → Card 4 → Complete
   +80 XP
   │
-  Lingo 🧑‍⚕️: "This also connects to your AD2 LU on Body Care & Dressing.
+  Lingo 🦦 (curious): "This also connects to your AD2 LU on Body Care & Dressing.
   That LU's PF2 includes an exercise on spotting skin changes."
   [See AD2 in My Programme →]
 ```
@@ -822,7 +847,7 @@ What is that and what causes it?"
 My Programme → Block 3 · AD1 · Isolation Measures
   LU: Isolation Measures (e.g., MRSA, Norovirus) · PF3 · [Start Simulation]
   │
-  Lingo 👩‍⚕️ (Nurse, focused expression): "This one matters.
+  Lingo 🦦 (focused): "This one matters.
   MRSA decisions in real practice have real consequences.
   You know the infection chain. Apply it here."
   │
@@ -842,7 +867,7 @@ My Programme → Block 3 · AD1 · Isolation Measures
   D. Continue with Herr Müller
 
   Risk Bar: holds steady (correct prioritisation)
-  Lingo 👩‍⚕️: "Your protection first. Always."
+  Lingo 🦦: "Your protection first. Always."
 
   ... Decisions 2–6 ...
   ─────────────────────────────────────────────────────────────
@@ -865,14 +890,14 @@ My Programme → Block 3 · AD1 · Isolation Measures
 Calendar → Month view → Tap Expert Mode block:
 "Block 6 · Night Shift Decision — Jun 12, 09:00–13:00"
   │
-  Lingo 🧑‍🎓 (Student, thoughtful): "This is the big one. Four hours.
+  Lingo 🦦 (thoughtful): "This is the big one. Four hours.
   Three patients, one shift, decisions across AD + KI + BD.
   You've been building up to this all year."
   │
   "Ask Lingo to brief me":
     "What should I review before the Night Shift Expert Mode?"
     
-    Lingo 🧑‍⚕️: "Based on your completion data:
+    Lingo 🦦 (focused): "Based on where you are:
     - AD1: PF3 done — solid
     - AD2: PF3 not done — worth 20 minutes today
     - BD1: PF2 done, PF3 not done — important for the observation decisions
@@ -883,7 +908,7 @@ Calendar → Month view → Tap Expert Mode block:
   │
   Day of Expert Mode:
   Dashboard notification: "Expert Mode today — 09:00. 4 hours.
-  Lingo 🧑‍🎓: This is what you trained for."
+  Lingo 🦦 (thoughtful): "This is what you trained for."
   [Join Expert Mode →]
 ```
 
@@ -907,8 +932,8 @@ One rule behind all the navigation design: any meaningful piece of content is re
 - My Programme (the scheduled date on the relevant LU)
 - Ask Lingo: "When is my next class?" "What class do I have today?"
 
-**The in-PF language level toggle means:**
-No learner ever has to leave an exercise to change how content is displayed. It is there. It changes things immediately. They do not go to Profile. They do not go to settings. The control is in the exercise itself.
+**The in-PF language level slider means:**
+No learner ever has to leave an exercise to change how content is displayed. The slider is there, unobtrusively, in the exercise header. They move it. Content adjusts on the next item. No going to Profile. No going to settings. No feeling of changing a fixed category. Just turning a dial.
 
 **The floating Lingo button means:**
 No learner ever navigates away to ask a question. The question happens where they are. The answer lands where they are. Then they keep going.
