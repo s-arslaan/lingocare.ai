@@ -82,6 +82,8 @@ body {
   font-family: var(--fh);
   font-size: 13px;
   font-weight: 600;
+  flex: 1;
+  min-width: 0;
   color: rgba(250,247,242,0.9);
   white-space: nowrap;
   overflow: hidden;
@@ -89,7 +91,6 @@ body {
 }
 .doc-header .toc-toggle {
   display: none;
-  margin-left: auto;
   background: none;
   border: 1.5px solid rgba(255,255,255,0.18);
   border-radius: 6px;
@@ -107,6 +108,35 @@ body {
   border-color: rgba(255,255,255,0.4);
   color: #fff;
 }
+.doc-header .download-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: 1.5px solid rgba(255,255,255,0.18);
+  border-radius: 6px;
+  color: rgba(250,247,242,0.7);
+  cursor: pointer;
+  padding: 4px 10px;
+  font-family: var(--fh);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: border-color .18s, color .18s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.doc-header .download-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+.doc-header .download-btn svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
 
 /* ── LAYOUT ── */
 .doc-layout {
@@ -400,6 +430,12 @@ body {
   <div class="sep"></div>
   <img src="../assets/lingolight.png" alt="Lingocare">
   <span class="doc-title" id="headerTitle">Document</span>
+  <button class="download-btn" id="downloadBtn" onclick="downloadMd()" title="Download .md">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 2v7M5 6.5L8 9.5l3-3M3 13h10"/>
+    </svg>
+    Download
+  </button>
   <button class="toc-toggle" id="tocToggle" onclick="toggleSidebar()">Inhalt</button>
 </header>
 
@@ -430,9 +466,11 @@ const file = params.get('file');
 const contentEl = document.getElementById('content');
 const tocNav = document.getElementById('tocNav');
 const headerTitle = document.getElementById('headerTitle');
+let rawMd = null;
 const sidebar = document.getElementById('sidebar');
 
 if (!file) {
+  document.getElementById('downloadBtn').style.display = 'none';
   contentEl.innerHTML = '<div class="doc-error">No document specified. Add ?file=name.md to the URL.</div>';
 } else {
   headerTitle.textContent = file.replace(/\.md$/, '').replace(/_/g, ' ');
@@ -444,6 +482,7 @@ if (!file) {
       return r.text();
     })
     .then(md => {
+      rawMd = md;
       const raw = marked.parse(md);
       contentEl.innerHTML = raw;
       buildTOC();
@@ -493,6 +532,16 @@ function highlightActiveLink() {
 
 function toggleSidebar() {
   sidebar.classList.toggle('open');
+}
+
+function downloadMd() {
+  if (!rawMd || !file) return;
+  const blob = new Blob([rawMd], { type: 'text/markdown; charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = file;
+  a.click();
+  URL.revokeObjectURL(a.href);
 }
 </script>
 </body>
