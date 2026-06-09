@@ -25,6 +25,21 @@
 
 ## 1. The Instructor's Real Problems — JTBD
 
+Lingocare's single most important promise to the instructor: **it noticeably and meaningfully relieves them — before, during, and after every lesson.**
+
+- **Before class:** Lesson preparation is faster, more targeted, and never starts from zero. Lingocare generates or surfaces materials so the instructor enters the room knowing exactly what to teach and who needs attention.
+- **During class:** The instructor focuses on teaching and human connection. Lingocare handles the real-time tracking, the confusion detection, and the discussion prompts — so the teacher does not constantly diagnose and adapt alone.
+- **After class:** Follow-up, correction, and documentation burden is reduced. The post-session summary flags what matters, not everything. There is less administrative tail after each lesson.
+
+Relief is not a background benefit. It is the core design principle behind every screen, every workflow, and every AI interaction described in this document.
+
+---
+
+This relief is particularly critical because of a structural reality in nursing education: **classrooms are highly heterogeneous.** Students come with different German proficiency levels, different prior clinical knowledge, and different learning speeds. Instructors cannot teach to the middle without leaving faster learners under-stimulated and struggling learners behind. No one is truly served well.
+
+**Lingocare AI's personalization is the direct answer to classroom heterogeneity.** Because the platform works with each trainee individually — at their exact level, in their language, at their pace — it absorbs the differentiation that would otherwise land on the instructor. The instructor no longer has to try to be five different teachers at once.
+
+
 ### Job 1: Prepare for today's class without losing 2–3 hours every time
 
 **The problem:** Every lesson requires researching the topic, writing exercises, formatting, and uploading. For an instructor with three classes and four sessions per week, that adds up to 12+ hours of preparation — before any actual teaching happens.
@@ -116,6 +131,17 @@ Lingocare is not a collection of features sitting next to each other. For an ins
 All of this connects through Ask Lingo. The question "who in 8A needs attention?" is not a database query — it is a question Lingo answers by checking 8A's current block, each learner's PF completion rates, inactivity signals, language level against exercise difficulty, and recent submission quality. The answer is specific: names, signals, and a suggested action.
 
 The instructor does not carry all of this in their head. Lingocare does. The instructor's job is to teach.
+
+
+### Not a Replacement — A Complementary Partner
+
+**Lingocare AI is not a replacement for teachers. It is a complementary partner.**
+
+Teachers bring everything that AI fundamentally cannot: human presence, empathy, professional judgment, real relationship, and lived clinical experience. What they do in the classroom — and the moments before and after — is irreplaceable.
+
+Lingocare AI handles the **scalable, repetitive, and cognitively heavy** layer: personalized content delivery, language scaffolding, progress tracking, and preparation support. This frees the instructor to focus fully on the human part of teaching — the part only they can do.
+
+> *Lingocare AI does what scales. The instructor does what matters.*
 
 ### This Is Your Teaching Environment — Not an Admin Console
 
@@ -303,18 +329,37 @@ The daily orientation screen. Not a management console. A morning brief that get
   3 active classes  ·  82 learners  ·  2 require action
 
   ─────────────────────────────────────────────────────────
-  [Ask Lingo — the centrepiece]
-  > Prepare me for Klasse 9B
-  > Who in 8A needs attention?
-  > Generate a warmup quiz for today
+  [🦦 Ask Lingo — the centrepiece]
+  Was möchtest du heute tun?        ▾
+  ┌──────────────────────────────────────────────────────┐
+  │  ○ Stunde vorbereiten         (Prepare a lesson)     │
+  │  ● Live-Unterricht starten    (Start live class)     │
+  │  ○ Klassendetails ansehen     (View class details)   │
+  │  ○ Einzelne Lernende ansehen  (View learners)       │
+  │  ─────────────────────────────────────────────────── │
+  │  Oder frei eingeben...              [➤]             │
+  └──────────────────────────────────────────────────────┘
   ─────────────────────────────────────────────────────────
 ```
 
-The `Prepare` button is the single most important action on the home screen — described in full in Workflow 1.
 
-**Dashboard customisation:**
-Instructors configure which widgets appear on Startseite from Einstellungen: default layout (Next Class card, Alerts ×3, Quick Stats, Lingo), optional additions (mini class progress bars, pinned class spotlight, content draft reminders). Widget order is drag-to-rearrange.
+**The guided dropdown** is the primary entry point. All four options represent the core instructor actions. The free-text field is visible at all times — it is the escape hatch for power users and for questions that don't fit the presets. This interaction pattern is consistent across every area of the dashboard.
 
+**Class cards (cross-class overview):** Below the Lingo panel, one lean card per assigned class. The Startseite is the only cross-class view in the entire dashboard — everything else drills into a selected class.
+
+| Element on card | Description |
+|---|---|
+| Class name + last activity | e.g. "Klasse 9B · zuletzt aktiv: heute" |
+| Curriculum status (traffic light) | 🟢 Im Plan / 🟡 Leicht hinterher / 🔴 Deutlich hinterher |
+| One warning signal (if present) | e.g. "2 Lernende mit Rückstand" or "PF2 in LU3 macht Schwierigkeiten" |
+| Next recommended action (AI-generated) | e.g. "Klasse B sollte diese Woche AD1.3 abschließen" |
+
+**Deliberately NOT on the class cards:** individual scores, competency area (KB) breakdowns, or table-style detail data. These are visible only after drilling into a specific class.
+
+When the instructor taps a class card, the view shifts to that class's detail — a persistent class selector appears in the top bar, and the remaining three areas (Lesson Prep, Class Details, Individual Learners) become modes within this selected-class context. The sidebar reflects the current class: *Lehrplan*, *Auswertungen*, and *Lernende* all scope to the selected class.
+
+
+**Dashboard customisation:** Instructors configure which widgets appear on Startseite from *Einstellungen*: default layout (Lingo panel, class cards, alerts), optional additions (mini class progress bars, pinned class spotlight, content draft reminders). Widget order is drag-to-rearrange. The `Prepare` button and the Next Class card are always visible — they cannot be removed.
 ---
 
 ### 5.2 Kalender (Calendar)
@@ -603,6 +648,16 @@ Colour-coded status: 🟢 On track · 🟡 Needs attention · 🔴 At risk
 
 *Communication:* Message history with this learner through the platform. "Send message" input. Private instructor notes (not visible to the learner).
 
+
+**Three viewing modes** when browsing learners:
+
+*Mode 1 — Learners needing support (early warning system):* System-flagged automatically. Skipped tasks, low scores, low activity. Goal: no learner gets lost before it's too late. The instructor sees named alerts with specific reasons — not a spreadsheet, but actionable signals.
+
+*Mode 2 — High-performing learners:* Also system-flagged. Consistently high scores (near 100%), fast completion across all PFs. Goal: targeted differentiation, avoiding under-challenge. This mode surfaces learners who may be ready for PF3 ahead of schedule or who would benefit from extension material — the system actively surfaces opportunity, not just risk.
+
+*Mode 3 — Look up an individual learner:* Instructor manually selects a specific learner by name — e.g. before a 1:1 meeting or feedback conversation. Shows strengths (by KB and topic), development areas, activity pattern, and the learner's AI conversation profile.
+
+**AI conversation profile:** A short AI-generated summary (1–2 sentences) to help the instructor prepare a conversation in a targeted way. e.g. *"Amara zeigt besondere Stärken in AD und KI, hat aber PF2 in BD bisher kaum bearbeitet. Ein guter Gesprächseinstieg wäre, ihre Stärken zu benennen und gemeinsam zu überlegen, was sie in BD noch erkunden möchte."* (Amara shows particular strengths in AD and KI, but has so far barely worked on PF2 in BD. A good conversation opener would be to name her strengths and explore together what she would still like to discover in BD.)
 ---
 
 ### 5.7 Live Class Mode — The Real-Time Teacher Dashboard
@@ -646,6 +701,30 @@ When exercises involve paired or group work, all pairs are shown side-by-side. T
 **Materials Panel during live class:**
 A collapsible sidebar accessible during the session (tap panel icon → slides in without covering the dashboard): all materials attached to this lesson in *Lehrplan* (files, KBBs, links, notes). Add on the fly during class — materials appear on the learner's side immediately. Private instructor notes are visible only to the instructor in this panel.
 
+
+### Phase 2 — Debrief (After a PF Is Complete)
+
+When enough learners have finished a PF, the instructor transitions directly into debrief mode. All debrief screens are designed to be **shared via screen share** with the class — large text, minimal UI chrome, optimised for classroom projection.
+
+**Debrief screens** (instructor chooses which to show):
+
+| Screen | Description |
+|---|---|
+| **Heat map** | Which tasks did the class struggle with most? Visual overview of error distribution across all tasks. e.g. "Aufgabe 3 · 68% Fehler" |
+| **Word cloud / answer distribution** | For open or sorting tasks — what answers did the class give? Where were they split? e.g. Grauzonenkarten-Verteilung |
+| **Discussion prompts (AI-generated)** | Ready-made discussion starters the instructor can use directly. e.g. "Hier haben 60% anders entschieden — warum?" · "Ergänzt das mit eurer Praxiserfahrung." |
+| **Content fixpoints** | Pedagogically significant moments set by the content author — shown regardless of class performance. e.g. "Amara handelt aus Empathie — und gefährdet dabei die Asepsis. Diskussion: Wie kann man Herrn Jansen beruhigen, ohne das sterile Feld zu gefährden?" |
+| **Praxistransfer prompt** | If flagged by the content author: a reminder to practise the physical action in the room. e.g. "Nehmen Sie sich jetzt 5–10 Minuten: Führen Sie die Händedesinfektion gemeinsam durch." — always shown last, as a closing physical action |
+
+**Fixed display order in debrief:**
+1. Word cloud / answer distribution (if present) — start with what the class actually did
+2. Grey zone / answer distribution flags (sorted by % "unsure", descending)
+3. Low-accuracy flags (sorted by error rate, descending)
+4. Content fixpoints (always shown)
+5. Free discussion prompt (if present)
+6. Praxistransfer prompt (if set) — always last
+
+**Deliberate omission during live monitoring:** Individual scores are NOT visible in real time. This avoids a competitive atmosphere during the exercise. Scores and detailed breakdowns appear only after the session ends, in the debrief.
 ---
 
 ### 5.8 Studio (Content Studio) — AI-First, Full-Screen
