@@ -236,6 +236,7 @@ Every screen has the floating 🦦 icon in the bottom-right corner. Tapping it o
 - Viewing a learner profile: *"Want me to draft a check-in message for Amir based on what you are seeing?"*
 
 Ask Lingo is not buried in the sidebar — it is the primary panel on Startseite and a persistent floating colleague on every other screen.
+
 ---
 
 ## 4. The Navigation Sidebar
@@ -360,6 +361,7 @@ When the instructor taps a class card, the view shifts to that class's detail �
 
 
 **Dashboard customisation:** Instructors configure which widgets appear on Startseite from *Einstellungen*: default layout (Lingo panel, class cards, alerts), optional additions (mini class progress bars, pinned class spotlight, content draft reminders). Widget order is drag-to-rearrange. The `Prepare` button and the Next Class card are always visible — they cannot be removed.
+
 ---
 
 ### 5.2 Kalender (Calendar)
@@ -658,6 +660,7 @@ Colour-coded status: 🟢 On track · 🟡 Needs attention · 🔴 At risk
 *Mode 3 — Look up an individual learner:* Instructor manually selects a specific learner by name — e.g. before a 1:1 meeting or feedback conversation. Shows strengths (by KB and topic), development areas, activity pattern, and the learner's AI conversation profile.
 
 **AI conversation profile:** A short AI-generated summary (1–2 sentences) to help the instructor prepare a conversation in a targeted way. e.g. *"Amara zeigt besondere Stärken in AD und KI, hat aber PF2 in BD bisher kaum bearbeitet. Ein guter Gesprächseinstieg wäre, ihre Stärken zu benennen und gemeinsam zu überlegen, was sie in BD noch erkunden möchte."* (Amara shows particular strengths in AD and KI, but has so far barely worked on PF2 in BD. A good conversation opener would be to name her strengths and explore together what she would still like to discover in BD.)
+
 ---
 
 ### 5.7 Live Class Mode — The Real-Time Teacher Dashboard
@@ -725,6 +728,7 @@ When enough learners have finished a PF, the instructor transitions directly int
 6. Praxistransfer prompt (if set) — always last
 
 **Deliberate omission during live monitoring:** Individual scores are NOT visible in real time. This avoids a competitive atmosphere during the exercise. Scores and detailed breakdowns appear only after the session ends, in the debrief.
+
 ---
 
 ### 5.8 Studio (Content Studio) — AI-First, Full-Screen
