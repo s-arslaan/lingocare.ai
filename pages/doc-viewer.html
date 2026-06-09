@@ -198,6 +198,58 @@ body {
   font-size: 12px;
 }
 
+/* TOC collapse groups */
+.toc-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.toc-row {
+  display: flex;
+  align-items: center;
+}
+.toc-row .toc-h2-link {
+  flex: 1;
+  min-width: 0;
+}
+.toc-toggle {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--mid);
+  padding: 0;
+  margin-right: 2px;
+  border-radius: 4px;
+  opacity: 0.55;
+  transition: opacity .16s, transform .2s;
+}
+.toc-toggle:hover {
+  opacity: 1;
+  color: var(--orange);
+}
+.toc-toggle svg {
+  width: 10px;
+  height: 10px;
+  transition: transform .2s;
+}
+.toc-group.collapsed .toc-toggle svg {
+  transform: rotate(-90deg);
+}
+.toc-children {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.toc-group.collapsed .toc-children {
+  display: none;
+}
+
 /* ── MAIN CONTENT ── */
 .doc-main {
   flex: 1;
@@ -549,20 +601,76 @@ function setupAnchorClicks() {
 function buildTOC() {
   const headings = contentEl.querySelectorAll('h2, h3');
   tocNav.innerHTML = '';
+
+  let currentChildren = null;
+
   headings.forEach((h, i) => {
     const id = h.id || 'section-' + i;
     h.id = id;
-    const a = document.createElement('a');
-    a.href = '#' + id;
-    a.textContent = h.textContent;
-    a.className = h.tagName === 'H3' ? 'toc-h3' : '';
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      h.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (window.innerWidth <= 860) sidebar.classList.remove('open');
-      history.pushState(null, '', '#' + id);
-    });
-    tocNav.appendChild(a);
+
+    if (h.tagName === 'H2') {
+      const group = document.createElement('div');
+      group.className = 'toc-group';
+
+      const row = document.createElement('div');
+      row.className = 'toc-row';
+
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = h.textContent;
+      a.className = 'toc-h2-link';
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (window.innerWidth <= 860) sidebar.classList.remove('open');
+        history.pushState(null, '', '#' + id);
+        group.classList.remove('collapsed');
+      });
+
+      const toggle = document.createElement('button');
+      toggle.className = 'toc-toggle';
+      toggle.title = 'Toggle section';
+      toggle.innerHTML = '<svg viewBox="0 0 10 6" fill="none"><path d="M1 0.5L5 4.5L9 0.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      toggle.addEventListener('click', e => {
+        e.stopPropagation();
+        group.classList.toggle('collapsed');
+      });
+
+      row.appendChild(a);
+      row.appendChild(toggle);
+      group.appendChild(row);
+
+      currentChildren = document.createElement('div');
+      currentChildren.className = 'toc-children';
+      group.appendChild(currentChildren);
+      tocNav.appendChild(group);
+    } else if (h.tagName === 'H3') {
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = h.textContent;
+      a.className = 'toc-h3';
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (window.innerWidth <= 860) sidebar.classList.remove('open');
+        history.pushState(null, '', '#' + id);
+      });
+
+      if (currentChildren) {
+        currentChildren.appendChild(a);
+      } else {
+        tocNav.appendChild(a);
+      }
+    }
+  });
+
+  // Hide toggles for groups with no h3 children
+  tocNav.querySelectorAll('.toc-group').forEach(group => {
+    const children = group.querySelector('.toc-children');
+    if (!children || children.children.length === 0) {
+      const toggle = group.querySelector('.toc-toggle');
+      if (toggle) toggle.style.display = 'none';
+    }
   });
 }
 
@@ -576,13 +684,19 @@ function highlightActiveLink() {
         links.forEach(l => l.classList.remove('active'));
         const id = e.target.id;
         const match = tocNav.querySelector('a[href="#' + CSS.escape(id) + '"]');
-        if (match) match.classList.add('active');
+        if (match) {
+          match.classList.add('active');
+          // Expand parent group if an h3 inside a collapsed group becomes active
+          if (e.target.tagName === 'H3') {
+            const group = match.closest('.toc-group');
+            if (group) group.classList.remove('collapsed');
+          }
+        }
       }
     });
   }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
   headings.forEach(h => observer.observe(h));
 }
-
 function toggleSidebar() {
   sidebar.classList.toggle('open');
 }
