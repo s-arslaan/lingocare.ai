@@ -6,6 +6,7 @@
 **Related files:** App Vision v2 · Learner Deep-Dive v2 · Instructor Deep-Dive v2  
 **This document covers:** The School Admin — what they see, where they go, how everything connects  
 **Language note:** Document in English. App UI in German. German curriculum and nursing terms preserved throughout (*Themenfeld, Unterrichtseinheit, Lehrplan, Pflegefachassistenz*, etc.).
+
 ---
 
 ## Contents
