@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Everywhere — Lingocare Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --lc-orange: #ED7D00;
+      --lc-orange-light: #FFF3E0;
+      --lc-orange-mid: #FFE0A0;
+      --lc-red: #BE211C;
+      --lc-bg: #FAF7F2;
+      --lc-bg-gradient: linear-gradient(135deg, #FAF7F2 0%, #FFF3E0 55%, #FFE5C0 100%);
+      --lc-text: #282725;
+      --lc-white: #FFFFFF;
+      --lc-muted: #6B6460;
+      --lc-card-shadow: 0 2px 16px rgba(237, 125, 0, 0.10);
+      --lc-card-shadow-hover: 0 8px 32px rgba(237, 125, 0, 0.18);
+      --lc-font-heading: 'Montserrat', sans-serif;
+      --lc-font-body: 'Roboto', sans-serif;
+      --lc-radius: 14px;
+      --lc-radius-pill: 9999px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--lc-font-body);
+      background: var(--lc-bg);
+      color: var(--lc-text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(237, 125, 0, 0.15);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      height: 32px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--lc-font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--lc-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--lc-orange); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--lc-bg-gradient);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(237,125,0,0.07) 0%, transparent 70%);
+      top: -200px; right: -200px;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(237,125,0,0.05) 0%, transparent 70%);
+      bottom: -100px; left: -100px;
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: var(--lc-font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--lc-orange);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: var(--lc-font-heading);
+      font-size: clamp(44px, 6vw, 76px);
+      font-weight: 900;
+      line-height: 1.06;
+      color: var(--lc-text);
+      max-width: 900px;
+      margin-bottom: 24px;
+    }
+    .hero h1 span { color: var(--lc-orange); }
+    .hero-sub {
+      font-family: var(--lc-font-body);
+      font-size: 20px;
+      font-weight: 400;
+      color: #4A4340;
+      max-width: 640px;
+      line-height: 1.65;
+      margin-bottom: 48px;
+    }
+    .hero-cta-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 80px;
+    }
+    .btn-primary {
+      background: var(--lc-orange);
+      color: #fff;
+      font-family: var(--lc-font-heading);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: var(--lc-radius-pill);
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--lc-orange);
+      border: 2px solid var(--lc-orange);
+      font-family: var(--lc-font-heading);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 12px 30px;
+      border-radius: var(--lc-radius-pill);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: var(--lc-orange); color: #fff; }
+
+    /* Hero two-mode illustration */
+    .hero-modes {
+      display: flex;
+      gap: 24px;
+      align-items: stretch;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+      max-width: 820px;
+    }
+    .mode-card {
+      flex: 1;
+      min-width: 280px;
+      max-width: 380px;
+      background: #fff;
+      border: 1.5px solid rgba(237,125,0,0.3);
+      border-radius: var(--lc-radius);
+      padding: 28px 24px;
+      text-align: left;
+      box-shadow: var(--lc-card-shadow);
+    }
+    .mode-badge {
+      display: inline-block;
+      font-family: var(--lc-font-heading);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--lc-orange);
+      background: var(--lc-orange-light);
+      border-radius: 6px;
+      padding: 4px 10px;
+      margin-bottom: 14px;
+    }
+    .mode-card h3 {
+      font-family: var(--lc-font-heading);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--lc-text);
+      margin-bottom: 10px;
+    }
+    .mode-card p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .mode-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 96px 40px;
+    }
+    .section-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-family: var(--lc-font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--lc-orange);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: var(--lc-font-heading);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      color: var(--lc-text);
+      margin-bottom: 20px;
+      line-height: 1.12;
+    }
+    .section-title span { color: var(--lc-orange); }
+    .section-lead {
+      font-size: 18px;
+      color: #4A4340;
+      max-width: 680px;
+      line-height: 1.7;
+      margin-bottom: 56px;
+    }
+
+    /* ── ASK LINGO — CHAT UI SECTION ── */
+    #ask-lingo {
+      background: var(--lc-bg-gradient);
+    }
+    .ask-lingo-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .ask-lingo-copy {}
+    .ask-lingo-copy .section-lead { margin-bottom: 32px; }
+
+    .role-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .role-tab {
+      font-family: var(--lc-font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: var(--lc-radius-pill);
+      border: 1.5px solid rgba(237,125,0,0.35);
+      background: transparent;
+      color: var(--lc-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+    .role-tab.active, .role-tab:hover {
+      background: var(--lc-orange);
+      border-color: var(--lc-orange);
+      color: #fff;
+    }
+
+    .context-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .context-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--lc-font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--lc-orange);
+      background: var(--lc-orange-light);
+      border-radius: 20px;
+      padding: 5px 12px;
+    }
+    .context-pill::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--lc-orange);
+      flex-shrink: 0;
+    }
+
+    /* Chat window */
+    .chat-window {
+      background: #fff;
+      border: 1.5px solid rgba(237,125,0,0.25);
+      border-radius: var(--lc-radius);
+      box-shadow: var(--lc-card-shadow-hover);
+      overflow: hidden;
+      position: sticky;
+      top: 80px;
+    }
+    .chat-header {
+      background: var(--lc-orange);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .chat-avatar {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .chat-header-text h4 {
+      font-family: var(--lc-font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .chat-header-text span {
+      font-size: 11px;
+      color: rgba(255,255,255,0.75);
+      font-family: var(--lc-font-body);
+    }
+    .chat-status {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--lc-font-body);
+      font-size: 11px;
+      color: rgba(255,255,255,0.85);
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      background: #5EE873;
+      border-radius: 50%;
+    }
+
+    .chat-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 360px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .chat-msg {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .chat-msg.user {
+      flex-direction: row-reverse;
+    }
+    .chat-msg .bubble {
+      max-width: 78%;
+      padding: 11px 15px;
+      border-radius: 14px;
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+    .chat-msg.ai .bubble {
+      background: var(--lc-orange-light);
+      color: var(--lc-text);
+      border-radius: 4px 14px 14px 14px;
+    }
+    .chat-msg.user .bubble {
+      background: var(--lc-orange);
+      color: #fff;
+      border-radius: 14px 4px 14px 14px;
+    }
+    .msg-ava {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .msg-ava.ai { background: var(--lc-orange); color: #fff; }
+    .msg-ava.user { background: var(--lc-text); color: #fff; }
+
+    .chat-footer {
+      border-top: 1px solid rgba(237,125,0,0.15);
+      padding: 14px 16px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .chat-input {
+      flex: 1;
+      background: var(--lc-orange-light);
+      border: none;
+      border-radius: var(--lc-radius-pill);
+      padding: 10px 16px;
+      font-family: var(--lc-font-body);
+      font-size: 13px;
+      color: var(--lc-text);
+      outline: none;
+    }
+    .chat-send {
+      width: 36px; height: 36px;
+      background: var(--lc-orange);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* role-specific chat examples, toggled by JS */
+    .chat-example { display: none; }
+    .chat-example.active { display: flex; flex-direction: column; gap: 14px; }
+
+    /* ── SMALL MOMENTS SECTION ── */
+    #small-moments {
+      background: #fff;
+    }
+
+    .role-section {
+      margin-bottom: 72px;
+    }
+    .role-section:last-child { margin-bottom: 0; }
+
+    .role-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .role-icon-badge {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .role-icon-badge.learner { background: #FFF3E0; }
+    .role-icon-badge.instructor { background: #E8F4FD; }
+    .role-icon-badge.admin { background: #F0FFF4; }
+    .role-icon-badge.tenant { background: #FDF0FF; }
+
+    .role-label {
+      font-family: var(--lc-font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--lc-muted);
+      margin-bottom: 4px;
+    }
+    .role-name {
+      font-family: var(--lc-font-heading);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--lc-text);
+    }
+
+    .moments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .moment-card {
+      background: #fff;
+      border: 1.5px solid rgba(237,125,0,0.22);
+      border-radius: var(--lc-radius);
+      padding: 24px;
+      box-shadow: var(--lc-card-shadow);
+      transition: box-shadow 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .moment-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--lc-orange);
+      opacity: 0.6;
+    }
+    .moment-card:hover {
+      box-shadow: var(--lc-card-shadow-hover);
+      transform: translateY(-2px);
+    }
+    .moment-card.instructor-card::before { background: #3B9FE0; }
+    .moment-card.admin-card::before { background: #2DB66A; }
+    .moment-card.tenant-card::before { background: #9B50D4; }
+
+    .moment-trigger {
+      font-family: var(--lc-font-heading);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--lc-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .trigger-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--lc-orange);
+      flex-shrink: 0;
+    }
+    .instructor-card .trigger-dot { background: #3B9FE0; }
+    .admin-card .trigger-dot { background: #2DB66A; }
+    .tenant-card .trigger-dot { background: #9B50D4; }
+
+    .moment-card h4 {
+      font-family: var(--lc-font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--lc-text);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .moment-card p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.65;
+    }
+
+    /* ── ALWAYS ON TAG ── */
+    .tag {
+      display: inline-block;
+      font-family: var(--lc-font-heading);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 5px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .tag-always { background: #E8F5E9; color: #2E7D32; }
+    .tag-silent { background: #EDE7F6; color: #5E35B1; }
+    .tag-onask { background: #FFF3E0; color: #E65100; }
+
+    /* ── ARCHITECTURE SECTION ── */
+    #architecture {
+      background: var(--lc-bg-gradient);
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .arch-phase {
+      background: #fff;
+      border: 1.5px solid rgba(237,125,0,0.25);
+      border-radius: var(--lc-radius);
+      padding: 32px;
+      box-shadow: var(--lc-card-shadow);
+    }
+    .phase-number {
+      display: inline-flex;
+      width: 44px; height: 44px;
+      background: var(--lc-orange);
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--lc-font-heading);
+      font-weight: 900;
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .arch-phase h3 {
+      font-family: var(--lc-font-heading);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--lc-text);
+      margin-bottom: 10px;
+    }
+    .arch-phase .status-tag {
+      display: inline-block;
+      font-family: var(--lc-font-heading);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+    .status-live { background: #E8F5E9; color: #2E7D32; }
+    .status-dev { background: #FFF3E0; color: #E65100; }
+    .arch-phase p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.65;
+    }
+
+    .arch-full {
+      grid-column: 1 / -1;
+    }
+
+    .guardrails-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .guardrail-item {
+      background: #fff;
+      border: 1.5px solid rgba(237,125,0,0.2);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .guardrail-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .guardrail-item h5 {
+      font-family: var(--lc-font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--lc-text);
+      margin-bottom: 6px;
+    }
+    .guardrail-item p {
+      font-size: 12.5px;
+      color: #666;
+      line-height: 1.55;
+    }
+
+    /* ── FLOW DIAGRAM ── */
+    .flow-diagram {
+      background: #fff;
+      border: 1.5px solid rgba(237,125,0,0.2);
+      border-radius: var(--lc-radius);
+      padding: 36px;
+      box-shadow: var(--lc-card-shadow);
+      grid-column: 1 / -1;
+    }
+    .flow-diagram h3 {
+      font-family: var(--lc-font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--lc-text);
+      margin-bottom: 28px;
+    }
+    .flow-steps {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .flow-step {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+      position: relative;
+    }
+    .flow-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: var(--lc-orange);
+      font-weight: 700;
+    }
+    .flow-box {
+      background: var(--lc-orange-light);
+      border: 1.5px solid rgba(237,125,0,0.35);
+      border-radius: 10px;
+      padding: 14px 10px;
+      margin: 0 20px;
+    }
+    .flow-emoji { font-size: 22px; margin-bottom: 6px; }
+    .flow-label {
+      font-family: var(--lc-font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--lc-text);
+    }
+    .flow-sub {
+      font-size: 11px;
+      color: var(--lc-muted);
+      margin-top: 3px;
+    }
+
+    /* ── PRINCIPLES SECTION ── */
+    #principles {
+      background: #fff;
+    }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .principle-card {
+      background: var(--lc-bg-gradient);
+      border: 1.5px solid rgba(237,125,0,0.2);
+      border-radius: var(--lc-radius);
+      padding: 32px 28px;
+    }
+    .principle-number {
+      font-family: var(--lc-font-heading);
+      font-size: 48px;
+      font-weight: 900;
+      color: rgba(237,125,0,0.18);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .principle-card h3 {
+      font-family: var(--lc-font-heading);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--lc-text);
+      margin-bottom: 12px;
+    }
+    .principle-card p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    /* ── QUICK REF TABLE ── */
+    #quick-ref {
+      background: var(--lc-bg-gradient);
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: var(--lc-radius);
+      box-shadow: var(--lc-card-shadow);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      font-size: 14px;
+    }
+    thead tr {
+      background: var(--lc-orange);
+    }
+    thead th {
+      font-family: var(--lc-font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 14px 20px;
+      text-align: left;
+    }
+    tbody tr {
+      border-bottom: 1px solid rgba(237,125,0,0.10);
+      transition: background 0.15s;
+    }
+    tbody tr:hover { background: var(--lc-orange-light); }
+    tbody tr:nth-child(even) { background: #FAFAFA; }
+    tbody tr:nth-child(even):hover { background: var(--lc-orange-light); }
+    tbody td {
+      padding: 12px 20px;
+      color: var(--lc-text);
+      vertical-align: middle;
+    }
+    .badge-role {
+      display: inline-block;
+      font-family: var(--lc-font-heading);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 5px;
+      letter-spacing: 0.08em;
+    }
+    .badge-learner { background: #FFF3E0; color: #E65100; }
+    .badge-instructor { background: #E3F2FD; color: #1565C0; }
+    .badge-admin { background: #E8F5E9; color: #2E7D32; }
+    .badge-tenant { background: #F3E5F5; color: #6A1B9A; }
+    .badge-all { background: var(--lc-orange-light); color: var(--lc-orange); }
+
+    .badge-big {
+      display: inline-block;
+      font-family: var(--lc-font-heading);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+      background: #282725;
+      color: #fff;
+    }
+    .badge-small {
+      display: inline-block;
+      font-family: var(--lc-font-heading);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+      background: var(--lc-orange-light);
+      color: var(--lc-orange);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--lc-text);
+      padding: 48px 40px;
+      text-align: center;
+    }
+    footer img { height: 32px; margin-bottom: 16px; }
+    footer p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      font-family: var(--lc-font-body);
+    }
+    footer a {
+      color: var(--lc-orange);
+      text-decoration: none;
+    }
+
+    /* ── UTILITIES ── */
+    .orange { color: var(--lc-orange); }
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(237,125,0,0.18);
+      margin: 72px 0;
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      section { padding: 64px 20px; }
+      .ask-lingo-layout { grid-template-columns: 1fr; }
+      .arch-grid { grid-template-columns: 1fr; }
+      .chat-window { position: static; }
+      .flow-steps { gap: 12px; flex-direction: column; }
+      .flow-step:not(:last-child)::after { content: '↓'; right: auto; top: auto; position: static; font-size: 18px; }
+      .hero { padding: 100px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="../assets/Lingocarelogowhitebg.png" alt="Lingocare" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#ask-lingo">Ask Lingo</a></li>
+    <li><a href="#small-moments">Small Moments</a></li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#principles">Principles</a></li>
+    <li><a href="#quick-ref">All Touchpoints</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <p class="hero-eyebrow">Lingocare Intelligence · AI Everywhere</p>
+  <h1>Not a feature.<br/><span>The foundation.</span></h1>
+  <p class="hero-sub">
+    Most platforms add a chat widget and call it AI. Lingocare is built the other way.
+    Intelligence is the infrastructure. Every screen, every exercise, every alert —
+    shaped by what the system already knows about you.
+  </p>
+  <div class="hero-cta-group">
+    <a href="#ask-lingo" class="btn-primary">The Big Room →</a>
+    <a href="#small-moments" class="btn-outline">All Small Moments</a>
+  </div>
+
+  <div class="hero-modes">
+    <div class="mode-card">
+      <span class="mode-badge">The Big Room</span>
+      <span class="mode-icon">💬</span>
+      <h3>Ask Lingo</h3>
+      <p>A full conversational AI on every dashboard. Knows the curriculum, the class, the calendar, the content. Ask it anything. It answers from your actual world — not the internet.</p>
+    </div>
+    <div class="mode-card">
+      <span class="mode-badge">The Small Moments</span>
+      <span class="mode-icon">✨</span>
+      <h3>AI in the seams</h3>
+      <p>22+ touchpoints where AI acts without being asked. Content that adapts to your language level. Referrals that appear at exactly the right moment. Alerts before something goes wrong.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ASK LINGO — THE BIG ROOM -->
+<section id="ask-lingo">
+  <div class="section-inner">
+    <div class="ask-lingo-layout">
+
+      <!-- Left copy -->
+      <div class="ask-lingo-copy">
+        <p class="section-eyebrow">The Big Room</p>
+        <h2 class="section-title">Ask Lingo — on <span>every dashboard</span></h2>
+        <p class="section-lead">
+          Ask Lingo is present on all four client dashboards: Tenant Director, School Admin, Instructor, and Learner. It is not a generic AI. It has access to the curriculum, the class roster, the calendar, the content library — scoped to your exact role and organisation.
+        </p>
+
+        <p class="section-eyebrow" style="margin-bottom: 12px;">See it by role</p>
+        <div class="role-tabs">
+          <button class="role-tab active" onclick="switchRole('learner', this)">🎓 Learner</button>
+          <button class="role-tab" onclick="switchRole('instructor', this)">👩‍🏫 Instructor</button>
+          <button class="role-tab" onclick="switchRole('admin', this)">🏫 School Admin</button>
+          <button class="role-tab" onclick="switchRole('tenant', this)">🏢 Tenant Director</button>
+        </div>
+
+        <p style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lc-muted); margin-bottom: 10px;">What Lingo knows for this role</p>
+        <div class="context-pills" id="context-pills">
+          <span class="context-pill">Personal learning history</span>
+          <span class="context-pill">Current LU &amp; language level</span>
+          <span class="context-pill">Language Garden progress</span>
+          <span class="context-pill">Upcoming schedule</span>
+          <span class="context-pill">Achievements &amp; streaks</span>
+        </div>
+
+        <p style="font-size: 14px; color: #555; line-height: 1.7; margin-top: 16px;">
+          Ask Lingo does not answer in the abstract. "Who needs attention?" returns <em>specific names with specific signals</em> — not a framework for identifying struggling students. The grounding architecture: every query is processed against live curriculum data, class analytics, and learner activity records. If nothing relevant is found, Lingo refuses to guess.
+        </p>
+      </div>
+
+      <!-- Right chat window -->
+      <div>
+        <div class="chat-window">
+          <div class="chat-header">
+            <div class="chat-avatar">🦦</div>
+            <div class="chat-header-text">
+              <h4>Ask Lingo</h4>
+              <span id="chat-role-label">Learner Dashboard</span>
+            </div>
+            <div class="chat-status">
+              <span class="status-dot"></span>
+              Context-aware
+            </div>
+          </div>
+          <div class="chat-body" id="chat-body">
+
+            <!-- LEARNER -->
+            <div class="chat-example active" id="chat-learner">
+              <div class="chat-msg user">
+                <div class="msg-ava user">L</div>
+                <div class="bubble">What should I do today?</div>
+              </div>
+              <div class="chat-msg ai">
+                <div class="msg-ava ai">🦦</div>
+                <div class="bubble">You're in Block 2, Topic 3 — Wound Care. Your AD Language Garden Grammatik plant hasn't been watered this week and the PF2 for LU 7 is open. That's a solid 35-minute session. Want me to open it?</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="msg-ava user">L</div>
+                <div class="bubble">I keep getting confused by the infection chain questions.</div>
+              </div>
+              <div class="chat-msg ai">
+                <div class="msg-ava ai">🦦</div>
+                <div class="bubble">Makes sense — the terminology there is dense. There's a KBB called <em>Infektionskette &amp; Hygieneregeln</em> (5 min, card+quiz) that breaks it down step by step. I'd do that before PF2 today. Want to open it?</div>
+              </div>
+            </div>
+
+            <!-- INSTRUCTOR -->
+            <div class="chat-example" id="chat-instructor">
+              <div class="chat-msg user">
+                <div class="msg-ava user">I</div>
+                <div class="bubble">Who in class 8A needs my attention today?</div>
+              </div>
+              <div class="chat-msg ai">
+                <div class="msg-ava ai">🦦</div>
+                <div class="bubble">Three students stand out: <strong>Mirela</strong> hasn't submitted LU 6 PF1 (4 days overdue), <strong>Yusuf</strong> scored below 40% on the last two PF2 tasks, and <strong>Sara</strong> has broken her 8-day streak. I can draft a check-in message for any of them.</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="msg-ava user">I</div>
+                <div class="bubble">Draft a check-in for Mirela please.</div>
+              </div>
+              <div class="chat-msg ai">
+                <div class="msg-ava ai">🦦</div>
+                <div class="bubble">Here's a draft: <em>"Hi Mirela, just thinking of you — you've been building some great momentum in Block 2. Block 2, LU 6 is ready and waiting whenever you have a moment this week. Let me know if anything is getting in the way."</em> — Send as-is or edit first?</div>
+              </div>
+            </div>
+
+            <!-- ADMIN -->
+            <div class="chat-example" id="chat-admin">
+              <div class="chat-msg user">
+                <div class="msg-ava user">A</div>
+                <div class="bubble">Which classes are at risk this week?</div>
+              </div>
+              <div class="chat-msg ai">
+                <div class="msg-ava ai">🦦</div>
+                <div class="bubble">Two classes flagged: <strong>APH 2024-B</strong> is 6 days behind on Block 3 Topic 2 — the LUs were scheduled but only 38% submitted. <strong>PFA 2025-A</strong> has a teacher coverage gap from Thursday — no instructor assigned to Friday's Wound Care session.</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="msg-ava user">A</div>
+                <div class="bubble">Who can cover Friday?</div>
+              </div>
+              <div class="chat-msg ai">
+                <div class="msg-ava ai">🦦</div>
+                <div class="bubble">Frau Okonkwo has no scheduled classes on Friday and has taught Wound Care content before (Block 2, last term). She's the natural cover. Want me to flag her?</div>
+              </div>
+            </div>
+
+            <!-- TENANT -->
+            <div class="chat-example" id="chat-tenant">
+              <div class="chat-msg user">
+                <div class="msg-ava user">T</div>
+                <div class="bubble">Which of my schools is furthest behind right now?</div>
+              </div>
+              <div class="chat-msg ai">
+                <div class="msg-ava ai">🦦</div>
+                <div class="bubble"><strong>Pflegeschule Datteln-Nord</strong> is the most at-risk: 3 of 4 active classes are amber or red on the Block 3 Gantt. The common issue is the KI Mega Cluster — low completion rates on the Communication &amp; Interaction units across all three.</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="msg-ava user">T</div>
+                <div class="bubble">Is that pattern appearing in my other schools too?</div>
+              </div>
+              <div class="chat-msg ai">
+                <div class="msg-ava ai">🦦</div>
+                <div class="bubble">Yes — KI unit completion is lower than AD and BD across all three schools. It's a systemic signal, not a school-specific one. This may point to a content gap or scheduling pattern worth reviewing at the tenant level.</div>
+              </div>
+            </div>
+
+          </div>
+          <div class="chat-footer">
+            <input class="chat-input" type="text" placeholder="Ask anything about your school, class, or learning..." readonly />
+            <button class="chat-send">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SMALL MOMENTS -->
+<section id="small-moments">
+  <div class="section-inner">
+    <p class="section-eyebrow">The Small Moments</p>
+    <h2 class="section-title">AI in the <span>seams</span></h2>
+    <p class="section-lead">
+      These are the moments where AI acts without being summoned. Content that adapts. Patterns that get noticed. Resources that surface at exactly the right time. This is where most of the value lives.
+    </p>
+
+    <!-- LEARNER -->
+    <div class="role-section">
+      <div class="role-header">
+        <div class="role-icon-badge learner">🎓</div>
+        <div>
+          <p class="role-label">Role</p>
+          <h3 class="role-name">The Learner</h3>
+        </div>
+      </div>
+      <div class="moments-grid">
+
+        <div class="moment-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Always active <span class="tag tag-always">Always On</span></div>
+          <h4>Language level adaptation</h4>
+          <p>Every case text, instruction, hint, and feedback message is displayed at the learner's chosen level (L1 / L2 / L3). Set once at onboarding. Always on. A learner at L1 sees simplified clinical German with glossed vocabulary. An L3 learner sees full clinical register. No toggle needed — the content just fits.</p>
+        </div>
+
+        <div class="moment-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Tap on any word <span class="tag tag-onask">On Demand</span></div>
+          <h4>Inline glossary &amp; translation</h4>
+          <p>Inside case texts and exercises, any clinical German term is tappable. Tap → instant contextual translation, nursing-specific definition, and pronunciation. Not a dictionary — vocabulary in context, at the moment of confusion, built from the same clinical content the learner is studying.</p>
+        </div>
+
+        <div class="moment-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> During a Lesson <span class="tag tag-silent">Silent</span></div>
+          <h4>Language-to-content connections</h4>
+          <p>While working through a Learning Unit, the platform surfaces quiet notes alongside specific elements: "This step connects to your AD Language Garden." Not a redirect, not a pop-up — a small, non-interrupting pointer to where deeper practice lives. The learner stays in the exercise flow.</p>
+        </div>
+
+        <div class="moment-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Task failure pattern <span class="tag tag-silent">Silent</span></div>
+          <h4>Adaptive Referral — Language Garden</h4>
+          <p>Fails 2+ tasks of the same type → system checks if Language Garden has relevant content → Lingo Otter suggests it in warm conversational language. Never mandatory, never flagging. The learner feels supported, not watched.</p>
+        </div>
+
+        <div class="moment-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> First entry, L1 or L2 <span class="tag tag-silent">Silent</span></div>
+          <h4>Adaptive Referral — Mega Cluster entry</h4>
+          <p>When an L1 or L2 learner enters a new Mega Cluster for the first time, the Language Garden is proactively recommended. The system knows they need the language infrastructure before they can fully engage with the content — and it says so without the learner having to figure this out.</p>
+        </div>
+
+        <div class="moment-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Repeated concept struggle <span class="tag tag-silent">Silent</span></div>
+          <h4>Adaptive Referral — KBB suggestion</h4>
+          <p>Learner keeps stumbling on the same concept → the relevant Knowledge Building Block surfaces. "Here's the theory behind why that step matters." The platform watches for the pattern silently. The learner sees a warm suggestion from Lingo Otter, not a diagnostic label.</p>
+        </div>
+
+        <div class="moment-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Language Garden entry</div>
+          <h4>Personalized Lingo Otter greeting</h4>
+          <p>When a learner opens the Language Garden, Lingo Otter greets them with a progress summary specific to what they've been studying: "You've been on Wound Care this week. Your BD Wortschatz plant could use some watering." Not generic motivation — specific, contextual, grounded in their recent LU activity.</p>
+        </div>
+
+        <div class="moment-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> PF2 / PF4 submission</div>
+          <h4>Free-text AI evaluation</h4>
+          <p>BB-08 exercises (open-ended writing — clinical reasoning, professional reflection, ethical positioning) are AI-evaluated against the exercise's defined criteria: completeness, clinical relevance, professional register. Structured feedback appears immediately. No waiting for the instructor to read and respond.</p>
+        </div>
+
+        <div class="moment-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Simulation completion</div>
+          <h4>PF3 Debriefing Report</h4>
+          <p>After completing the 6-node Decision Simulation with its persistent risk bar, the system generates a personalised debriefing: decision path mapped, consequence of each choice explained, turning points identified, learning connected back to relevant KBBs. Generated fresh for every attempt — not a static rubric.</p>
+        </div>
+
+        <div class="moment-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Home screen load <span class="tag tag-always">Always On</span></div>
+          <h4>Daily learning plan</h4>
+          <p>"What should I do today?" is answered before the learner asks. The home screen assembles a personalised daily plan from the curriculum schedule, current LU status, outstanding Language Garden recommendations, and upcoming deadlines. First login, mid-term Tuesday, end-of-block sprint — always current, always theirs.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- INSTRUCTOR -->
+    <div class="role-section">
+      <div class="role-header">
+        <div class="role-icon-badge instructor">👩‍🏫</div>
+        <div>
+          <p class="role-label">Role</p>
+          <h3 class="role-name">The Instructor</h3>
+        </div>
+      </div>
+      <div class="moments-grid">
+
+        <div class="moment-card instructor-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Content Studio prompt <span class="tag tag-onask">On Demand</span></div>
+          <h4>Magic Write — content from a description</h4>
+          <p>Describe the exercise. Select the format recipe. Magic Write generates a complete, clinically-grounded first draft in seconds — pre-formatted for the selected building block, at the requested language level, grounded in uploaded school documents. A 2-hour content task becomes a 15-minute review. The instructor is the editor, not the author starting from blank.</p>
+        </div>
+
+        <div class="moment-card instructor-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Class analytics view <span class="tag tag-silent">Silent</span></div>
+          <h4>Answer Distribution flags</h4>
+          <p>When reviewing class performance on a task, the system flags: "Confusion between student answers detected" when there's no dominant correct-answer cluster. "Need Class Discussion" when competing wrong answers appear in volume. These appear as AI recommendations directly in the analytics view — the instructor knows exactly which task to spend class time on, without hunting for it.</p>
+        </div>
+
+        <div class="moment-card instructor-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Background monitoring <span class="tag tag-silent">Silent</span></div>
+          <h4>At-risk student alerts</h4>
+          <p>The system surfaces named students automatically: inactive for N days, consistently below threshold, not submitted on required tasks. Not a general warning — specific names, specific signals, one-click drill-in to the detail. One more click drafts a check-in message through the platform. The instructor knows about problems before the student disappears.</p>
+        </div>
+
+        <div class="moment-card instructor-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Alert → action</div>
+          <h4>Check-in message drafting</h4>
+          <p>When an instructor flags a student for a check-in, the system drafts the message — incorporating what it knows: recent activity, language level, last LU, what they were working on — framed in warm, strength-oriented language. The instructor edits and sends. The student receives a message that feels personal because it's grounded in their actual experience, not a template.</p>
+        </div>
+
+        <div class="moment-card instructor-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Uploaded documents</div>
+          <h4>RAG-grounded content generation</h4>
+          <p>Instructors upload textbooks, regional curriculum documents, school-specific materials. The RAG pipeline ingests, chunks, and embeds them. Magic Write and Ask Lingo then generate content grounded in those specific materials. The school's own handbook becomes the AI's source material. Nothing is fabricated from general knowledge when the school's source is there.</p>
+        </div>
+
+        <div class="moment-card instructor-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Ask Lingo prompt <span class="tag tag-onask">On Demand</span></div>
+          <h4>AI class preparation briefing</h4>
+          <p>"Prepare me for class 9B this afternoon." Ask Lingo assembles: which LU is scheduled, who has submitted and who hasn't, what the answer distribution showed last time, which students triggered recent alerts, what content is available. The instructor walks in prepared without spending an hour reviewing — the system did it.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- SCHOOL ADMIN -->
+    <div class="role-section">
+      <div class="role-header">
+        <div class="role-icon-badge admin">🏫</div>
+        <div>
+          <p class="role-label">Role</p>
+          <h3 class="role-name">The School Admin</h3>
+        </div>
+      </div>
+      <div class="moments-grid">
+
+        <div class="moment-card admin-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Background monitoring <span class="tag tag-always">Always On</span></div>
+          <h4>Risk &amp; Alerts — auto-generated</h4>
+          <p>The Director Dashboard Risk &amp; Alerts panel is not built from reports submitted by instructors. It's auto-generated from the live state of the platform: curriculum delays relative to the Gantt schedule, learner inactivity thresholds, teacher workload calculations, LU completion rates. The director does not wait for someone to tell them something is wrong. The system tells them.</p>
+        </div>
+
+        <div class="moment-card admin-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Learner activity <span class="tag tag-always">Always On</span></div>
+          <h4>Curriculum Gantt auto-update</h4>
+          <p>The Gantt-style curriculum schedule updates in real time from learner activity. Progress bars advance as students submit. Colour states change automatically: on track (green), at risk (amber), delayed (red). The director sees the current state of the entire school's curriculum delivery without asking anyone, without running a report, without waiting for the weekly meeting.</p>
+        </div>
+
+        <div class="moment-card admin-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Background monitoring <span class="tag tag-silent">Silent</span></div>
+          <h4>Teacher workload signals</h4>
+          <p>The system calculates instructor workload from assigned classes, scheduled LUs, grading queues, and alert volumes. When a teacher is approaching overload — especially visible when covering an absent colleague — the system flags it in the Admin dashboard. The director knows which staff member needs support before they burn out or before their class falls behind.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- TENANT DIRECTOR -->
+    <div class="role-section">
+      <div class="role-header">
+        <div class="role-icon-badge tenant">🏢</div>
+        <div>
+          <p class="role-label">Role</p>
+          <h3 class="role-name">The Tenant Director</h3>
+        </div>
+      </div>
+      <div class="moments-grid">
+
+        <div class="moment-card tenant-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Aggregate analysis <span class="tag tag-silent">Silent</span></div>
+          <h4>Cross-school systemic signals</h4>
+          <p>Patterns invisible at the school level become visible at the tenant level. When three schools are all behind on the same Mega Cluster in the same block, that's a systemic signal — possibly a content gap, a scheduling pattern, or a shared challenge among international trainees. Individual school admins would never see this. The tenant director does.</p>
+        </div>
+
+        <div class="moment-card tenant-card">
+          <div class="moment-trigger"><span class="trigger-dot"></span> Portfolio health <span class="tag tag-always">Always On</span></div>
+          <h4>Portfolio view — no individual log-ins</h4>
+          <p>Completion rates across schools, engagement trends, curriculum schedule adherence, risk alert volumes — one view, no individual school log-ins required. Ask Lingo operates at the portfolio level: "Which school is furthest behind?" is a question only the tenant level can answer, and it can answer it instantly.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <div class="section-inner">
+    <p class="section-eyebrow">Under the Hood</p>
+    <h2 class="section-title">The infrastructure that <span>makes it safe</span></h2>
+    <p class="section-lead">
+      AI without guardrails is not safe in clinical education. Every generation, every response, every referral runs through the same safety architecture.
+    </p>
+
+    <!-- Flow diagram -->
+    <div class="flow-diagram">
+      <h3>How every AI response is built</h3>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-box">
+            <div class="flow-emoji">👤</div>
+            <div class="flow-label">User context</div>
+            <div class="flow-sub">Role, school, history, level</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-box">
+            <div class="flow-emoji">🔍</div>
+            <div class="flow-label">Grounding gate</div>
+            <div class="flow-sub">Source docs via vector search</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-box">
+            <div class="flow-emoji">🧱</div>
+            <div class="flow-label">Pedagogical frame</div>
+            <div class="flow-sub">PF structure, clinical safety rules</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-box">
+            <div class="flow-emoji">🤖</div>
+            <div class="flow-label">Claude (Haiku / Sonnet)</div>
+            <div class="flow-sub">AWS Bedrock · EU region</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-box">
+            <div class="flow-emoji">✅</div>
+            <div class="flow-label">Draft → Human review</div>
+            <div class="flow-sub">Publish only after approval</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 1 / Phase 2 -->
+    <div class="arch-grid" style="margin-top: 40px;">
+      <div class="arch-phase">
+        <div class="phase-number">1</div>
+        <h3>API-Orchestrated Intelligence</h3>
+        <span class="status-tag status-live">Live today</span>
+        <p>All AI intelligence runs through structured calls to AWS Bedrock (Claude Haiku and Claude Sonnet, EU region). A model router sends simple tasks to Claude Haiku and complex generation to Claude Sonnet — approximately 80/20. Every call carries structured context from Lingocare: pedagogical framework, curriculum data, learner history, class roster, content library. The AI does not answer in isolation.</p>
+      </div>
+      <div class="arch-phase">
+        <div class="phase-number" style="background: #282725;">2</div>
+        <h3>Proprietary Lingocare LLM</h3>
+        <span class="status-tag status-dev">In development</span>
+        <p>Every learner interaction in Phase 1 generates training signal for Phase 2: a proprietary Lingocare model fine-tuned on the full corpus of clinical German nursing content, pedagogical framework decisions, learner interaction patterns, and accumulated assessment data. The more schools use Lingocare, the better the model becomes for every school that follows. Phase 2 is not a future feature — it is a consequence of building Phase 1 well.</p>
+      </div>
+    </div>
+
+    <!-- Guardrails -->
+    <div style="margin-top: 48px;">
+      <p class="section-eyebrow" style="margin-bottom: 16px;">Safety &amp; Compliance Architecture</p>
+      <div class="guardrails-grid">
+        <div class="guardrail-item">
+          <span class="guardrail-icon">🚧</span>
+          <div>
+            <h5>Grounding gate</h5>
+            <p>Every clinical response must clear a similarity threshold against real source documents. If nothing relevant is found, the AI refuses — it does not hallucinate. Clinical safety before all else.</p>
+          </div>
+        </div>
+        <div class="guardrail-item">
+          <span class="guardrail-icon">📝</span>
+          <div>
+            <h5>Draft before publish</h5>
+            <p>Every AI-generated content item — exercises, KBBs, curriculum outlines — starts as a draft. Invisible to learners until a human explicitly publishes it. The human is always in the loop.</p>
+          </div>
+        </div>
+        <div class="guardrail-item">
+          <span class="guardrail-icon">🛡️</span>
+          <div>
+            <h5>Clinical safety rules</h5>
+            <p>Hardwired into every generation: no medical diagnoses, no interventions without consent framing, no invented diagnostic terminology, no leaving vulnerable patients unattended in scenario content.</p>
+          </div>
+        </div>
+        <div class="guardrail-item">
+          <span class="guardrail-icon">💙</span>
+          <div>
+            <h5>Distress detector</h5>
+            <p>Learner interactions are monitored for mental health signals. Crisis resources are surfaced immediately and a prohibited-term filter governs all user-facing AI output.</p>
+          </div>
+        </div>
+        <div class="guardrail-item">
+          <span class="guardrail-icon">🇪🇺</span>
+          <div>
+            <h5>EU data residency</h5>
+            <p>All AI inference (AWS Bedrock EU), all data storage (MongoDB Atlas EU), and error tracking (Sentry EU) run inside the EU. DSGVO compliance is architectural, not a checkbox.</p>
+          </div>
+        </div>
+        <div class="guardrail-item">
+          <span class="guardrail-icon">💳</span>
+          <div>
+            <h5>Credit wallet metering</h5>
+            <p>Every AI call records token counts and converts to credits against a wallet. Usage is visible at every level: learner, school, tenant. No unbounded spend.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section id="principles">
+  <div class="section-inner">
+    <p class="section-eyebrow">Design Principles</p>
+    <h2 class="section-title">How Lingocare AI <span>communicates</span></h2>
+    <p class="section-lead">
+      These principles govern every AI-generated message, suggestion, referral, and adaptive action — across all dashboards, all user types. Not guidelines. Hardcoded expectations.
+    </p>
+    <div class="principles-grid">
+      <div class="principle-card">
+        <div class="principle-number">01</div>
+        <h3>Proactive, not reactive</h3>
+        <p>Lingocare AI does not wait to be asked. It anticipates. It knows the curriculum state, the calendar, the learner's history, and the class dynamics — and it surfaces what matters before the user has to go looking for it.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-number">02</div>
+        <h3>Strength-oriented, not deficit-focused</h3>
+        <p>Every AI interaction builds from what is present and what is working. The system never says "you haven't done X" or "you're missing Y." It says "here's what's next" and "you're building toward Z." The framing is always forward.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-number">03</div>
+        <h3>Human language, not AI language</h3>
+        <p>AI-generated messages sound like a warm, thoughtful colleague — not a system alert, not a chatbot. Phrases like "you haven't logged in for X days" are prohibited. The AI communicates the way a good mentor does: direct, warm, never clinical.</p>
+      </div>
+      <div class="principle-card">
+        <div class="principle-number">04</div>
+        <h3>Invisible until needed</h3>
+        <p>The best AI interaction is the one the user does not notice. Content adaptation is always on. Referrals appear at the right moment, not constantly. Alerts surface when something matters, not when nothing does. The goal is not to demonstrate that AI is present — it is to make the experience work better because AI is present.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK REF TABLE -->
+<section id="quick-ref">
+  <div class="section-inner">
+    <p class="section-eyebrow">Complete Reference</p>
+    <h2 class="section-title">All <span>22 AI touchpoints</span></h2>
+    <p class="section-lead">Every place AI acts in the Lingocare platform — who it serves, what triggers it, and whether it's a Big Room moment or a Small Moment.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Touchpoint</th>
+            <th>Role</th>
+            <th>Trigger</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Ask Lingo — conversational chat</td><td><span class="badge-role badge-all">All roles</span></td><td>User initiates</td><td><span class="badge-big">Big Room</span></td></tr>
+          <tr><td>Language level adaptation (L1/L2/L3)</td><td><span class="badge-role badge-learner">Learner</span></td><td>Always on</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Inline glossary &amp; translation</td><td><span class="badge-role badge-learner">Learner</span></td><td>Tap on word</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Language-to-content connection pointer</td><td><span class="badge-role badge-learner">Learner</span></td><td>During LU exercise</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Adaptive Referral — Language Garden</td><td><span class="badge-role badge-learner">Learner</span></td><td>Task failure pattern</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Adaptive Referral — Mega Cluster entry</td><td><span class="badge-role badge-learner">Learner</span></td><td>First entry, L1/L2</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Adaptive Referral — KBB suggestion</td><td><span class="badge-role badge-learner">Learner</span></td><td>Repeated concept struggle</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Language Garden — Lingo Otter greeting</td><td><span class="badge-role badge-learner">Learner</span></td><td>Garden entry</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Free-text AI evaluation</td><td><span class="badge-role badge-learner">Learner</span></td><td>PF2 / PF4 submission</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>PF3 Debriefing Report</td><td><span class="badge-role badge-learner">Learner</span></td><td>Simulation completion</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Daily learning plan — home screen</td><td><span class="badge-role badge-learner">Learner</span></td><td>Home screen load</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>XP / achievement trigger</td><td><span class="badge-role badge-learner">Learner</span></td><td>Learning action</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Magic Write — content drafting</td><td><span class="badge-role badge-instructor">Instructor</span></td><td>Content Studio prompt</td><td><span class="badge-big">Big Room</span></td></tr>
+          <tr><td>Answer Distribution flags</td><td><span class="badge-role badge-instructor">Instructor</span></td><td>Class analytics view</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>At-risk student alerts (Schwache Leistung)</td><td><span class="badge-role badge-instructor">Instructor</span></td><td>Background monitoring</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Check-in message drafting</td><td><span class="badge-role badge-instructor">Instructor</span></td><td>Alert → action</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Class preparation briefing</td><td><span class="badge-role badge-instructor">Instructor</span></td><td>Ask Lingo prompt</td><td><span class="badge-big">Big Room</span></td></tr>
+          <tr><td>RAG-grounded content generation</td><td><span class="badge-role badge-instructor">Instructor</span></td><td>Uploaded documents</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Curriculum Gantt auto-update</td><td><span class="badge-role badge-admin">School Admin</span></td><td>Learner activity</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Risk &amp; Alerts auto-generation</td><td><span class="badge-role badge-admin">School Admin</span></td><td>Background monitoring</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Teacher workload signals</td><td><span class="badge-role badge-admin">School Admin</span></td><td>Background monitoring</td><td><span class="badge-small">Small Moment</span></td></tr>
+          <tr><td>Cross-school systemic signals</td><td><span class="badge-role badge-tenant">Tenant Director</span></td><td>Aggregate analysis</td><td><span class="badge-small">Small Moment</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="../assets/lingolight.png" alt="Lingocare" />
+  <p>Lingocare GmbH · Frankfurt, Hessen · <a href="mailto:hello@lingocare.ai">hello@lingocare.ai</a> · <a href="https://www.lingocare.ai">www.lingocare.ai</a></p>
+  <p style="margin-top: 8px; font-size: 11px;">Where AI, Healthcare &amp; Social Impact meet</p>
+</footer>
+
+<script>
+  const roleData = {
+    learner: {
+      label: 'Learner Dashboard',
+      context: ['Personal learning history', 'Current LU & language level', 'Language Garden progress', 'Upcoming schedule', 'Achievements & streaks']
+    },
+    instructor: {
+      label: 'Instructor Dashboard',
+      context: ['Assigned classes & roster', 'Submission status & scores', 'Student alerts & signals', 'Curriculum schedule', 'Content library']
+    },
+    admin: {
+      label: 'School Admin Dashboard',
+      context: ['All classes & Gantt status', 'Teacher schedules & workload', 'Learner activity signals', 'Risk & alert queue', 'Curriculum compliance']
+    },
+    tenant: {
+      label: 'Tenant Director Dashboard',
+      context: ['All schools in portfolio', 'Cross-school analytics', 'Engagement trends', 'Block progression data', 'Systemic risk signals']
+    }
+  };
+
+  function switchRole(role, btn) {
+    // Update button states
+    document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Update chat examples
+    document.querySelectorAll('.chat-example').forEach(e => e.classList.remove('active'));
+    document.getElementById('chat-' + role).classList.add('active');
+
+    // Update role label
+    document.getElementById('chat-role-label').textContent = roleData[role].label;
+
+    // Update context pills
+    const pillsEl = document.getElementById('context-pills');
+    pillsEl.innerHTML = roleData[role].context.map(c => `<span class="context-pill">${c}</span>`).join('');
+  }
+</script>
+
+</body>
+</html>
